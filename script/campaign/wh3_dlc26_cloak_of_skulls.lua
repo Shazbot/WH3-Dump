@@ -235,6 +235,12 @@ function cloak_of_skulls:add_champions_essence_post_battle(char_cqi, mf_cqi, sub
 		self:update_all_military_force_champions_essence()
 	end
 
+	-- Short victory reward
+	local resource_multiplier = cm:get_factions_bonus_value(self.faction_key, "wh3_dlc29_skulltaker_champions_essence_pr_multiplier")
+	if resource_multiplier then
+		resource_value = resource_value + resource_value * resource_multiplier/100
+	end
+
 	cm:pooled_resource_factor_transaction(cm:get_faction(self.faction_key):pooled_resource_manager():resource(self.faction_resource_key), "lords_defeated", resource_value)
 
 	return mf_cqi
@@ -332,7 +338,7 @@ function cloak_of_skulls:defeated_character_apply_bonuses(mf_cqis_defeated, skul
 
 	if cm:get_characters_bonus_value(winning_character, "cloak_of_skulls_colonise_ruins") > 0 and winning_character:has_region() then
 		for _, region in model_pairs(winning_character:region():province():regions()) do
-			if region:is_abandoned() and start_region:has_effect_bundle("wh3_main_book_of_khorne_block_occupation") == false then
+			if region:is_abandoned() and region:has_effect_bundle("wh3_main_book_of_khorne_block_occupation") == false then
 				cm:transfer_region_to_faction(region:name(), faction:name())
 			end
 		end
@@ -425,8 +431,10 @@ function cloak_of_skulls:update_military_forces_champions_essence(mf)
 	cm:callback(
 		function()
 			local general = cm:get_character_by_cqi(general_cqi)
+			if not general or not general:has_military_force() then return end
 
-			if not general then return end
+			local resource = general:military_force():pooled_resource_manager():resource(self.resource_key)
+			if resource:is_null_interface() then return end
 
 			local defeated_subtype = cm:get_saved_value("skulltaker_defeated_subtype_" .. general:character_subtype_key())
 

@@ -2913,22 +2913,43 @@ function prologue_first_siege_intervention()
 		function()
 			out("STARTING_FIRST_SIEGE_TOUR_ACTION_2")
 
-			local uic = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "mid", "battle_deployment", "regular_deployment", "list", "siege_information_panel", "icon_turns", "dy_turns")
+			-- Prologue keeps siege_immunity_disabled at 0, so C++ hides icon_turns on the pre-battle panel.
+			-- Force it visible for this tutorial step so the pointer has a target.
+			local uic_icon_turns = find_uicomponent(core:get_ui_root(), "popup_pre_battle", "mid", "battle_deployment", "regular_deployment", "list", "siege_information_panel", "icon_turns")
+			local uic = nil
+			if uic_icon_turns then
+				uic_icon_turns:SetVisible(true)
+				uic = find_uicomponent(uic_icon_turns, "dy_turns")
+			end
 
-			local text_pointer_test_first_siege = text_pointer:new_from_component(
-				"text_pointer_test_first_siege_2",
-				"bottom",
-				100,
-				uic,
-				0.5,
-				0.2
-			)
-			text_pointer_test_first_siege:add_component_text("text", "ui_text_replacements_localised_text_prologue_first_siege_2")
-			text_pointer_test_first_siege:set_style("semitransparent")
-			text_pointer_test_first_siege:set_topmost(true)
-			text_pointer_test_first_siege:set_highlight_close_button(0.5)
-			text_pointer_test_first_siege:set_close_button_callback(function() tour_test_first_siege:start("tour_test_first_siege_action_3") end)
-			text_pointer_test_first_siege:show()
+			if uic then
+				uic:SetVisible(true)
+				uic:SetStateText("10", "from script - prologue_first_siege_action_2")
+
+				local text_pointer_test_first_siege = text_pointer:new_from_component(
+					"text_pointer_test_first_siege_2",
+					"bottom",
+					100,
+					uic,
+					0.5,
+					0.2
+				)
+				text_pointer_test_first_siege:add_component_text("text", "ui_text_replacements_localised_text_prologue_first_siege_2")
+				text_pointer_test_first_siege:set_style("semitransparent")
+				text_pointer_test_first_siege:set_topmost(true)
+				text_pointer_test_first_siege:set_highlight_close_button(0.5)
+				text_pointer_test_first_siege:set_close_button_callback(
+					function()
+						if uic_icon_turns then
+							uic_icon_turns:SetVisible(false)
+						end
+						tour_test_first_siege:start("tour_test_first_siege_action_3")
+					end
+				)
+				text_pointer_test_first_siege:show()
+			else
+				tour_test_first_siege:start("tour_test_first_siege_action_3")
+			end
 		end,
 		0,
 		"tour_test_first_siege_action_2"

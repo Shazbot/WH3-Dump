@@ -89,22 +89,22 @@ ga_ai_skv_02.sunits:set_always_visible_no_hidden_no_leave_battle(true);
 -------------------------------------------------------------------------------------------------
 
 ga_ai_skv_01:rush_on_message("start");
-ga_ai_skv_01:message_on_rout_proportion("skv_01_weakened",0.25);
+ga_ai_skv_01:message_on_rout_proportion("deploy_nur_01",0.25);
 ga_ai_skv_01:message_on_rout_proportion("skv_01_defeated",0.95);
 ga_ai_skv_01:message_on_proximity_to_enemy("skv_01_threatened", 50);
 
 ga_ai_skv_02:rush_on_message("start");
-ga_ai_skv_02:message_on_rout_proportion("skv_02_weakened",0.25);
+ga_ai_skv_02:message_on_rout_proportion("deploy_nur_02",0.35);
 ga_ai_skv_02:message_on_rout_proportion("skv_02_defeated",0.95);
 
 ga_ai_nur_01:deploy_at_random_intervals_on_message(
-	"skv_01_weakened", 			-- message
+	"deploy_nur_01", 			-- message
 	1, 							-- min units
 	1, 							-- max units
 	5000, 						-- min period
 	5000, 						-- max period
 	"nur_boss_defeated", 		-- cancel message
-	nil,						-- spawn first wave immediately
+	true,						-- spawn first wave immediately
 	false,						-- allow respawning
 	nil,						-- survival battle wave index
 	nil,						-- is final survival wave
@@ -115,13 +115,13 @@ ga_ai_nur_01:message_on_any_deployed("nur_01_in");
 ga_ai_nur_01:rush_on_message("nur_01_in");
 
 ga_ai_nur_02:deploy_at_random_intervals_on_message(
-	"skv_02_weakened", 			-- message
+	"deploy_nur_02", 			-- message
 	1, 							-- min units
 	1, 							-- max units
 	15000, 						-- min period
 	15000, 						-- max period
 	"nur_boss_defeated",		-- cancel message
-	nil,						-- spawn first wave immediately
+	true,						-- spawn first wave immediately
 	true,						-- allow respawning
 	nil,						-- survival battle wave index
 	nil,						-- is final survival wave
@@ -150,15 +150,13 @@ gb:message_on_all_messages_received("skv_defeated", "skv_01_defeated", "skv_02_d
 gb:add_listener(
 	"nur_boss_defeated",
 	function()
-		if ga_ai_nur_01.sunits:are_any_active_on_battlefield() == true then
-			ga_ai_nur_01.sunits:kill_proportion_over_time(1.0, 10000, false);
-		end;
-		if ga_ai_nur_02.sunits:are_any_active_on_battlefield() == true then
-			ga_ai_nur_02.sunits:kill_proportion_over_time(1.0, 10000, false);
-		end;
+		ga_ai_nur_01.sunits:kill_proportion_over_time(1.0, 5000, false);
+		ga_ai_nur_02.sunits:kill_proportion_over_time(1.0, 5000, false);
+
 		if ga_ai_skv_01.sunits:are_any_active_on_battlefield() == true then
 			ga_ai_skv_01.sunits:rout_over_time(10000);
 		end;
+
 		if ga_ai_skv_02.sunits:are_any_active_on_battlefield() == true then
 			ga_ai_skv_02.sunits:rout_over_time(10000);
 		end;

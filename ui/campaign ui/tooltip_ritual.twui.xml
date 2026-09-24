@@ -26,6 +26,7 @@
 						</template_cost>
 						<template_toz_resource_cost this="E8ABCB60-7F9D-4AEB-B83C141BFDE8AD1A"/>
 					</resource_cost_list>
+					<template_development_point_cost this="6EB9DAE0-BF36-4497-90CE5CA0DF1EA081"/>
 					<kislev_ritual_penalty this="3BE249FA-E282-4D24-A89E897D1E139DEA"/>
 					<payload_base_resource_cost_list this="95F2AA02-727A-47AB-968B3CF3F51A9753">
 						<template_cost this="EEFD7688-ECFC-43C0-AC5DFE0C135933F5">
@@ -50,6 +51,7 @@
 					<cannot_confederate_human this="E7E902FE-A193-454A-B9EA759A0B123E14"/>
 					<cannot_confederate_already_confed this="C0AA5198-A5FB-439A-98F456126A9E4F8A"/>
 					<cannot_confederate_dead_faction this="0E56F210-FA4B-48A7-B895121E249B7657"/>
+					<dlc29_vmp_missions_not_fulfilled this="10B19382-0CE6-413C-861899FC2B3FB05F"/>
 					<confederate_faction_dead_only_lord this="2E623CBC-83A9-4E00-9FB5ED4BBE22FEFE"/>
 					<dy_target_criteria_text this="BD2785D2-8A4D-4A2B-8E453F9A2CAC2486"/>
 					<dy_target_invalid_text this="F0B5136E-97B3-4750-82FFF1F9411CBDF2"/>
@@ -325,7 +327,7 @@
 		<blood_ex_nihilo_restriction
 			this="080DAB0F-64F1-4E8B-9BF59AF12FE2088F"
 			id="blood_ex_nihilo_restriction"
-			offset="0.00,1109.00"
+			offset="0.00,1186.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -371,7 +373,7 @@
 		<cannot_confederate_already_confed
 			this="C0AA5198-A5FB-439A-98F456126A9E4F8A"
 			id="cannot_confederate_already_confed"
-			offset="0.00,579.00"
+			offset="0.00,609.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -394,7 +396,7 @@
 					interactive="true"
 					uniqueguid="B4346A8A-6393-4ED5-AF1122A328749A30">
 					<component_text
-						text="Cannot confederate – This faction was already confederated by another player."
+						text="Cannot confederate – This faction was already confederated"
 						textvalign="Center"
 						textxoffset="12.00,12.00"
 						textyoffset="4.00,0.00"
@@ -412,7 +414,7 @@
 		<cannot_confederate_dead_faction
 			this="0E56F210-FA4B-48A7-B895121E249B7657"
 			id="cannot_confederate_dead_faction"
-			offset="0.00,626.00"
+			offset="0.00,656.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -453,7 +455,7 @@
 		<cannot_confederate_human
 			this="E7E902FE-A193-454A-B9EA759A0B123E14"
 			id="cannot_confederate_human"
-			offset="0.00,532.00"
+			offset="0.00,562.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -630,7 +632,7 @@
 		<confederate_faction_dead_only_lord
 			this="2E623CBC-83A9-4E00-9FB5ED4BBE22FEFE"
 			id="confederate_faction_dead_only_lord"
-			offset="0.00,673.00"
+			offset="0.00,750.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -670,7 +672,7 @@
 		<copy_of_dy_target_invalid_text
 			this="F110B53A-02E8-42AE-A4F05C673167DAA2"
 			id="copy_of_dy_target_invalid_text"
-			offset="0.00,1273.00"
+			offset="0.00,1350.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -682,11 +684,11 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignRitual ritual"
-					context_function_id="ritual.InvalidReasonForRitualWithAnyValidTarget(SelectedCharacter)"/>
+					context_function_id="GetIfElse(&#10;  IsContextValid(SelectedSettlement) &amp;&amp; IsContextValid(self.ParentContext(&quot;ProvinceInfoPopup&quot;)),&#10;  ritual.InvalidTargetReason(SelectedSettlement),&#10;  ritual.InvalidReasonForRitualWithAnyValidTarget(SelectedCharacter)&#10;)"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual ritual"
-					context_function_id="ritual.CanPerformRitualWithAnyValidTarget(SelectedCharacter) == false &amp;&amp; ritual.IsOnCooldown == false"/>
+					context_function_id="GetIfElse(&#10;  IsContextValid(SelectedSettlement) &amp;&amp; IsContextValid(self.ParentContext(&quot;ProvinceInfoPopup&quot;)),&#10;  ritual.CanPerformRitual(SelectedSettlement) == false &amp;&amp; ritual.IsOnCooldown == false,&#10;  ritual.CanPerformRitualWithAnyValidTarget(SelectedCharacter) == false &amp;&amp; ritual.IsOnCooldown == false&#10;)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -714,7 +716,7 @@
 		<cp1_ability_locked
 			this="1C552301-74E9-499F-8E45CF31F07516B6"
 			id="cp1_ability_locked"
-			offset="0.00,429.00"
+			offset="0.00,459.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -761,10 +763,73 @@
 				</newstate>
 			</states>
 		</cp1_ability_locked>
+		<dlc29_vmp_missions_not_fulfilled
+			this="10B19382-0CE6-413C-861899FC2B3FB05F"
+			id="dlc29_vmp_missions_not_fulfilled"
+			offset="0.00,703.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="10B19382-0CE6-413C-861899FC2B3FB05F"
+			updatewhennotvisible="true"
+			currentstate="AB27D7B3-8DC8-43EF-95655C9C8BCCE8F8"
+			defaultstate="AB27D7B3-8DC8-43EF-95655C9C8BCCE8F8">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RitualContext.Category == &quot;VAMPIRE_RITUAL_LORDS&quot; &amp;&amp; ExConfederationRitual_CanPerform == false">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="MissionEnded"/>
+						<property
+							name="event1"
+							value="CampaignRitualLockStatusChanged"/>
+						<property
+							name="event2"
+							value="RitualComplete"/>
+						<property
+							name="event3"
+							value="CampaignTreasuryChanged"/>
+						<property
+							name="event4"
+							value="FactionJoinsConfederation"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoStaticObject"
+					context_function_id="PlayersFaction.CultureContext.Key != &quot;wh_main_vmp_vampire_counts&quot;"/>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="AB27D7B3-8DC8-43EF-95655C9C8BCCE8F8"
+					name="NewState"
+					width="386"
+					height="43"
+					interactive="true"
+					uniqueguid="AB27D7B3-8DC8-43EF-95655C9C8BCCE8F8">
+					<component_text
+						text="Fulfil all requirements to unlock confederation with this faction."
+						textvalign="Center"
+						textxoffset="12.00,12.00"
+						textyoffset="4.00,0.00"
+						texthbehaviour="Resize"
+						textlocalised="true"
+						textlabel="wh3_dlc27_hef_court_confederate_tooltip_warning_label"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</newstate>
+			</states>
+		</dlc29_vmp_missions_not_fulfilled>
 		<dy_cast_time
 			this="77472F33-7946-44AD-A6E6C3CA510B0BD6"
 			id="dy_cast_time"
-			offset="0.00,851.00"
+			offset="0.00,928.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -852,7 +917,7 @@
 		<dy_cooldown
 			this="25CA2571-61A8-4268-981EE2390F4B0CF8"
 			id="dy_cooldown"
-			offset="0.00,214.00"
+			offset="0.00,244.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -896,7 +961,7 @@
 		<dy_cooldown_on_activation
 			this="5047969C-1297-4E63-8532970652FA60D7"
 			id="dy_cooldown_on_activation"
-			offset="0.00,242.00"
+			offset="0.00,272.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -947,7 +1012,7 @@
 		<dy_cooldown_target_settlement
 			this="304C40A5-10BD-4690-8C2100FECD9677FA"
 			id="dy_cooldown_target_settlement"
-			offset="0.00,373.00"
+			offset="0.00,403.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1066,7 +1131,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="CanAfford(StoredContextFromParent(&quot;CcoCampaignFaction&quot;))"/>
+					context_function_id="CanAffordTreasuryCost(StoredContextFromParent(&quot;CcoCampaignFaction&quot;))"/>
 			</callbackwithcontextlist>
 			<states>
 				<active
@@ -1124,8 +1189,8 @@
 					context_function_id="AbsoluteValue"/>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignResourceTransaction"
-					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(this)"/>
+					context_object_id="CcoCampaignPooledResourceTransaction transaction, CcoCampaignRitual ritual"
+					context_function_id="ritual.CanAffordSpecificPooledResourceCost(transaction)"/>
 			</callbackwithcontextlist>
 			<states>
 				<active
@@ -1436,7 +1501,7 @@
 		<dy_desc
 			this="0F83601D-0385-4906-9E5EF4D4D19DB17F"
 			id="dy_desc"
-			offset="0.00,795.00"
+			offset="0.00,872.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1452,7 +1517,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="RitualContext.Description.IsEmpty == false"/>
+					context_function_id="RitualContext.Description.IsEmpty == false &amp;&amp;  RitualContext.Category != &quot;VAMPIRE_RITUAL_LORDS&quot;"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -1527,7 +1592,7 @@
 		<dy_force_target
 			this="01A07656-0AE1-4B49-BCE631B9E3C83A30"
 			id="dy_force_target"
-			offset="0.00,1165.00"
+			offset="0.00,1242.00"
 			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1567,7 +1632,7 @@
 		<dy_global_cooldown_on_activation
 			this="CEC93A80-D870-4648-AF12B12A53FCECAE"
 			id="dy_global_cooldown_on_activation"
-			offset="0.00,345.00"
+			offset="0.00,375.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1654,7 +1719,7 @@
 		<dy_locked_reason
 			this="70803457-B383-4F95-8F08506A136CC17B"
 			id="dy_locked_reason"
-			offset="0.00,1245.00"
+			offset="0.00,1322.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -1923,7 +1988,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="CanAfford"/>
+					context_function_id="CanAffordTreasuryCost"/>
 			</callbackwithcontextlist>
 			<states>
 				<active
@@ -1986,8 +2051,8 @@
 					context_function_id="Format(Loc(&quot;pooled_cost&quot;), Name)"/>
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
-					context_object_id="CcoCampaignResourceTransaction"
-					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(this)"/>
+					context_object_id="CcoCampaignPooledResourceTransaction transaction, CcoCampaignRitual ritual"
+					context_function_id="ritual.CanAffordSpecificPooledResourceCost(transaction)"/>
 			</callbackwithcontextlist>
 			<states>
 				<active
@@ -2034,7 +2099,7 @@
 		<dy_script_lock_cooldown
 			this="9833B21F-DD31-41E1-B4B29993E68BCBB8"
 			id="dy_script_lock_cooldown"
-			offset="0.00,186.00"
+			offset="0.00,216.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2078,7 +2143,7 @@
 		<dy_settlement_target
 			this="D07E70EC-F286-4783-8257035601B4604C"
 			id="dy_settlement_target"
-			offset="0.00,1205.00"
+			offset="0.00,1282.00"
 			allowverticalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2118,7 +2183,7 @@
 		<dy_spirit_essence_requirement
 			this="A4AEA048-18BB-4BBF-A0D3EE8BE2864F29"
 			id="dy_spirit_essence_requirement"
-			offset="0.00,1137.00"
+			offset="0.00,1214.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2162,7 +2227,7 @@
 		<dy_target_criteria_text
 			this="BD2785D2-8A4D-4A2B-8E453F9A2CAC2486"
 			id="dy_target_criteria_text"
-			offset="0.00,739.00"
+			offset="0.00,816.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2178,7 +2243,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) &amp;&amp; TargetCriteriaText.IsEmpty == false"/>
+					context_function_id="(CanUseUiFeature(&quot;TIGER_MERCENARIES&quot;) || CanUseUiFeature(&quot;LAND_OF_THE_DEAD&quot;))  &amp;&amp; TargetCriteriaText.IsEmpty == false"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -2206,7 +2271,7 @@
 		<dy_target_invalid_text
 			this="F0B5136E-97B3-4750-82FFF1F9411CBDF2"
 			id="dy_target_invalid_text"
-			offset="0.00,767.00"
+			offset="0.00,844.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2252,7 +2317,7 @@
 		<dy_turns_remaining
 			this="5759A40C-950C-4AC6-85F2EF1F69944F29"
 			id="dy_turns_remaining"
-			offset="0.00,823.00"
+			offset="0.00,900.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2297,7 +2362,7 @@
 		<effects_holder
 			this="B35E7E66-2600-466B-9550DA9FD49B99E8"
 			id="effects_holder"
-			offset="0.00,879.00"
+			offset="0.00,956.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="B35E7E66-2600-466B-9550DA9FD49B99E8"
@@ -2453,7 +2518,7 @@
 		<label_claimed_seat
 			this="2C1C1B97-5E1A-4DF2-BC0197E28F4353E0"
 			id="label_claimed_seat"
-			offset="0.00,504.00"
+			offset="0.00,534.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2496,8 +2561,9 @@
 		<label_not_enough_devotion
 			this="D8369730-D072-40C6-A291CC17CE72B0E1"
 			id="label_not_enough_devotion"
-			offset="0.00,270.00"
+			offset="7.00,300.00"
 			allowhorizontalresize="false"
+			dock_offset="7.00,0.00"
 			priority="255"
 			tooltipslocalised="true"
 			uniqueguid="D8369730-D072-40C6-A291CC17CE72B0E1"
@@ -2513,6 +2579,9 @@
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement settlement"
 					context_function_id="ScriptObjectContext(&quot;kislev_devotion_ui_required_amount&quot;).NumericValue &gt; settlement.ProvinceContext.LocalPlayerProvinceManagerContext.PublicOrderContext.Balance"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="!CanUseUiFeature(&quot;COURT_AND_ORTHODOXY&quot;)"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -2541,7 +2610,7 @@
 		<label_not_kislev_territory
 			this="C0A56687-1F30-472B-ABDF9A147A01FEDC"
 			id="label_not_kislev_territory"
-			offset="0.00,317.00"
+			offset="0.00,347.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2582,7 +2651,7 @@
 		<label_script_lock
 			this="4AABB66C-3FE7-4761-8FC41559EAB547B3"
 			id="label_script_lock"
-			offset="0.00,401.00"
+			offset="0.00,431.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2626,7 +2695,7 @@
 		<label_seat_usurped
 			this="7BEFC72E-AEC5-44FC-B03FDCDD285949EC"
 			id="label_seat_usurped"
-			offset="0.00,476.00"
+			offset="0.00,506.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2685,16 +2754,16 @@
 				<newstate
 					this="56606790-7623-46ED-A1F085F0E9E2B15D"
 					name="NewState"
-					width="386"
-					height="1301"
+					width="393"
+					height="1378"
 					uniqueguid="56606790-7623-46ED-A1F085F0E9E2B15D">
 					<imagemetrics>
 						<image
 							this="3655AFCC-A410-4480-B010FD3DDC8E676F"
 							uniqueguid="3655AFCC-A410-4480-B010FD3DDC8E676F"
 							componentimage="201E1334-8C23-417D-896543D910C578FC"
-							width="386"
-							height="1301"
+							width="393"
+							height="1378"
 							tile="true"
 							margin="16.00,20.00,16.00,20.00"/>
 					</imagemetrics>
@@ -2778,7 +2847,7 @@
 		<payload_base_resource_cost_list
 			this="95F2AA02-727A-47AB-968B3CF3F51A9753"
 			id="payload_base_resource_cost_list"
-			offset="0.00,156.00"
+			offset="0.00,186.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -2897,7 +2966,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="IsActive == false &amp;&amp; ResourceTransactionContext(GetIfElse(IsContextValid( StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), StoredContextFromParent(&quot;CcoCampaignFaction&quot;), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;) )).PooledResourceTransactionList.Filter(Value &lt; 0).Size &gt; 0 &amp;&amp; (IsAvailable || RitualContext.Category != &quot;ASCENSION_RITUAL&quot;) &amp;&amp; RitualContext.Category.StartsWith(&quot;GREAT_GAME&quot;) == false &amp;&amp; (RitualContext.Key.Contains(&quot;toz_slot_t4_&quot;) == false || IsSeatClaimed == false)">
+					context_function_id="IsActive == false &amp;&amp; ResourceTransactionContext(GetIfElse(IsContextValid( StoredContextFromParent(&quot;CcoCampaignFaction&quot;)), StoredContextFromParent(&quot;CcoCampaignFaction&quot;), StoredContextFromParent(&quot;CcoCampaignSettlement&quot;) )).PooledResourceTransactionList.Filter(Value &lt; 0).Size &gt; 0 &amp;&amp; (IsAvailable || RitualContext.Category != &quot;ASCENSION_RITUAL&quot;) &amp;&amp; RitualContext.Category != &quot;VAMPIRE_RITUAL_LORDS&quot; &amp;&amp; RitualContext.Category.StartsWith(&quot;GREAT_GAME&quot;) == false &amp;&amp; (RitualContext.Key.Contains(&quot;toz_slot_t4_&quot;) == false || IsSeatClaimed == false)">
 					<child_m_user_properties>
 						<property
 							name="object_store_events"
@@ -3361,6 +3430,73 @@
 				sizetocontent="true"
 				margins="10.00,0.00"/>
 		</template_cost>
+		<template_development_point_cost
+			this="6EB9DAE0-BF36-4497-90CE5CA0DF1EA081"
+			id="template_development_point_cost"
+			offset="0.00,156.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="6EB9DAE0-BF36-4497-90CE5CA0DF1EA081"
+			updatewhennotvisible="true"
+			currentstate="0CABF099-5584-44F7-82946A8F1598E500"
+			defaultstate="0CABF099-5584-44F7-82946A8F1598E500">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RitualContext.DevelopmentPointCost &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignRitual"
+					context_function_id="Format(Loc(&quot;wh3_dlc29_ritual_development_point_cost&quot;), RitualContext.DevelopmentPointCost)"/>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignRitual ritual"
+					context_function_id="SelectedSettlement.FactionProvinceManagerContext.DevelopmentPoints &gt;= ritual.RitualContext.DevelopmentPointCost"/>
+			</callbackwithcontextlist>
+			<states>
+				<active
+					this="0CABF099-5584-44F7-82946A8F1598E500"
+					name="active"
+					width="371"
+					height="26"
+					interactive="true"
+					uniqueguid="0CABF099-5584-44F7-82946A8F1598E500">
+					<component_text
+						text="dy_cost"
+						textvalign="Center"
+						textxoffset="12.00,5.00"
+						textyoffset="5.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_62149772"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</active>
+				<inactive
+					this="A98A6526-FA98-47B1-B25AEF293AFBB7C9"
+					name="inactive"
+					width="371"
+					height="26"
+					interactive="true"
+					uniqueguid="A98A6526-FA98-47B1-B25AEF293AFBB7C9">
+					<component_text
+						text="dy_cost"
+						textvalign="Center"
+						textxoffset="12.00,5.00"
+						textyoffset="5.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_7000c371"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="red"/>
+				</inactive>
+			</states>
+		</template_development_point_cost>
 		<template_effect
 			this="6D613D53-0A8F-4E5B-9A97B40C44B41CE3"
 			id="template_effect"
@@ -3730,8 +3866,8 @@
 				<newstate
 					this="CFDC406A-C9F6-42A8-A26C5C07A9D91A86"
 					name="NewState"
-					width="386"
-					height="1309"
+					width="393"
+					height="1386"
 					uniqueguid="CFDC406A-C9F6-42A8-A26C5C07A9D91A86">
 					<component_text
 						textxoffset="8.00,0.00"
@@ -3777,7 +3913,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).TreasuryTransactionList.Size &gt; 0"/>
+					context_function_id="ResourceTransactionContext(StoredContextFromParent(&quot;CcoCampaignFaction&quot;)).TreasuryTransactionList.Size &gt; 0 &amp;&amp;&#10; RitualContext.Category != &quot;VAMPIRE_RITUAL_LORDS&quot;"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -3900,7 +4036,7 @@
 		<unit_holder
 			this="28A2E511-8367-4B93-A2A1C63086C00419"
 			id="unit_holder"
-			offset="0.00,1023.00"
+			offset="0.00,1100.00"
 			allowhorizontalresize="false"
 			priority="255"
 			tooltipslocalised="true"
@@ -3962,7 +4098,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignRitual"
-					context_function_id="IsAvailable == false">
+					context_function_id="IsAvailable == false &amp;&amp;&#10; RitualContext.Category != &quot;VAMPIRE_RITUAL_LORDS&quot;">
 					<child_m_user_properties>
 						<property
 							name="object_store_events"

@@ -86,6 +86,7 @@ book_of_grudges = {
 		wh2_dlc09_tmb_tomb_kings = "medium",
 		wh2_dlc11_cst_vampire_coast = "medium",
 		wh_main_vmp_vampire_counts = "medium",
+		wh3_dlc29_nag_undead_legions = "medium",
 		wh3_main_dae_daemons = "medium",
 		wh3_main_kho_khorne = "medium",
 		wh3_main_nur_nurgle = "medium",

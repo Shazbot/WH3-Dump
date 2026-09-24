@@ -202,6 +202,11 @@
 												<button_expand_slot this="457F5E04-A2CA-4C20-A3DF63B872599B9D"/>
 											</frame_expand_slot>
 											<icon_duplicate this="43C5A427-BF20-4B3B-B656229D4511069A"/>
+											<unlocks_tech_icon this="55CE4150-A843-440D-A9082413E3D15DCE"/>
+											<dev_points this="19465A1F-77CD-4CB5-817C51E725EB0DC7">
+												<dy_growth_pts this="31B5D9F1-2CE2-4185-8C2A67F29460E507"/>
+												<dy_num_points_required this="EC38F9A3-2090-4414-8B7877D82FEA359D"/>
+											</dev_points>
 											<mouseover_parent this="1FA142BD-D336-4B81-99669CE938DB68D4">
 												<turns_corner this="8F0CEF25-C2A9-4C94-A09EC5A7B9204C96"/>
 												<upgrade_box this="2DC16B6B-DF02-44F6-9294D1BBEBAC6D57">
@@ -223,7 +228,6 @@
 													</template_agent_entry_parent>
 												</agent_list>
 											</units_list>
-											<unlocks_tech_icon this="55CE4150-A843-440D-A9082413E3D15DCE"/>
 											<pointer this="6F631B3A-3C06-4378-B8B7CF70E300C86C"/>
 											<upgradable this="2C2138F2-682C-414C-98E3884B49B34FD8">
 												<smoke_particle_emitter this="A27755BD-009A-4AE5-B9D1E77E262BFBCC">
@@ -232,10 +236,6 @@
 												<icon this="D84CC7A3-A3DC-4E39-B83E35EDBAF48879"/>
 												<glow this="3B6432E2-B92F-4A8E-A62E6D8D7D8497D9"/>
 											</upgradable>
-											<dev_points this="19465A1F-77CD-4CB5-817C51E725EB0DC7">
-												<dy_growth_pts this="31B5D9F1-2CE2-4185-8C2A67F29460E507"/>
-												<dy_num_points_required this="EC38F9A3-2090-4414-8B7877D82FEA359D"/>
-											</dev_points>
 											<mercenary_unit_list this="EB1107A5-8D8C-4DFC-9046D04751BB9684">
 												<template_merc_entry_parent this="A244018A-ADDC-4D9C-B5B2BA33888F5BBE">
 													<merc_context this="928EBEA2-D9E7-4F5B-8269CEA0E2A83834">
@@ -1999,6 +1999,9 @@
 						<property
 							name="event0"
 							value="CharacterCreatedAny"/>
+						<property
+							name="event1"
+							value="CampaignSelectionChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -11442,6 +11445,10 @@
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFactionInteraction"
 					context_function_id="CheapestTargetFavourPointsCost(&quot;OFFENSIVE&quot;) &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignFactionInteraction"
+					context_function_id="Loc(&quot;war_coord_set_attack_target_tooltip&quot;) + { this | CheapestTargetFavourPointsCost(&quot;OFFENSIVE&quot;) &gt; FavourPoints =&gt; Loc(&quot;war_coord_cannot_set_target_tooltip&quot;) | HasAnyValidTargetToPick(&quot;OFFENSIVE&quot;) == false =&gt; Loc(&quot;war_coord_no_target_available&quot;)}"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -11518,6 +11525,10 @@
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFactionInteraction"
 					context_function_id="CheapestTargetFavourPointsCost(&quot;DEFENSIVE&quot;) &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignFactionInteraction"
+					context_function_id="Loc(&quot;war_coord_set_defend_target_tooltip&quot;) + { this | CheapestTargetFavourPointsCost(&quot;DEFENSIVE&quot;) &gt; FavourPoints =&gt; Loc(&quot;war_coord_cannot_set_target_tooltip&quot;) | HasAnyValidTargetToPick(&quot;DEFENSIVE&quot;) == false =&gt; Loc(&quot;war_coord_no_target_available&quot;)}"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -11594,6 +11605,10 @@
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFactionInteraction"
 					context_function_id="CheapestTargetFavourPointsCost(&quot;OCCUPY&quot;) &gt; 0"/>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignFactionInteraction"
+					context_function_id="Loc(&quot;war_coord_set_occupy_target_tooltip&quot;) + {this | CheapestTargetFavourPointsCost(&quot;OCCUPY&quot;) &gt; FavourPoints =&gt; Loc(&quot;war_coord_cannot_set_target_tooltip&quot;) | HasAnyValidTargetToPick(&quot;OCCUPY&quot;) == false =&gt; Loc(&quot;war_coord_no_target_available&quot;) }"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property

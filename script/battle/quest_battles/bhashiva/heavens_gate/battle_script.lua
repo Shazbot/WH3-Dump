@@ -306,10 +306,6 @@ ogre_tribe_eshin = gb:get_army(gb:get_non_player_alliance_num(),"ogre_bodyguards
 ogre_tribe_maneatersgw = gb:get_army(gb:get_non_player_alliance_num(),"ogre_attackers_maneaters_gw");
 ogre_tribe_dualbulls = gb:get_army(gb:get_non_player_alliance_num(),"ogre_attackers_dualbull");
 
-ogre_tribe_gnoblars.sunits:prevent_rallying_if_routing(true, false, false) -- Prevents the unit from rallying
-ogre_tribe_pigback_riders.sunits:prevent_rallying_if_routing(true, false, false) -- Prevents the unit from rallying
-ogre_tribe_bull_attack.sunits:prevent_rallying_if_routing(true, false, false) -- Prevents the unit from rallying
-
 -- Dechunga The Wide One --
 
 dechunga_army = gb:get_army(gb:get_non_player_alliance_num(),"dechunga_main_army");
@@ -412,7 +408,33 @@ maneatergwwaypoint = v(-67.8, 44.4, 61.1)
 -- -------------------------------------------------------------------------------------------------
 -- ---------------------------------------- ORDERS -------------------------------------------------
 -- -------------------------------------------------------------------------------------------------
+local perpetual = true;
+local shattered_only = false;
+local permit_rampaging = true;
 
+gb:add_listener(
+	"start",
+	function()
+		ogre_tribe_hunter.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_bulls.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_bullsdual.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_maneaterfists.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_gnoblarslingers.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_leadbelchers.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_crushersfists.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_crushersgw.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_vultures.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_stonehorn.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_thundertusk.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_prison_guard.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_gnoblars.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_pigback_riders.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_bull_attack.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_eshin.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_maneatersgw.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+		ogre_tribe_dualbulls.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
+	end
+);
 
 -- Prison Guards for the secondary side objectives
 

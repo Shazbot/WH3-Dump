@@ -21,10 +21,7 @@ gb = generated_battle:new(
 );
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1);
@@ -38,11 +35,9 @@ gb:set_objective_on_message("deployment_started", "wh_dlc01_qb_chs_archaon_slaye
 
 gb:complete_objective_on_message("sorceror_dead", "wh_dlc01_qb_chs_archaon_slayer_of_kings_stage_3_secondary_objective");
 
-
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_dlc01_qb_chs_archaon_slayer_of_kings_stage_3_hint_objective");
 
-gb:play_sound_on_message("battle_started", Orc_Horn, nil, 3000);
 gb:queue_help_on_message("reinforce_1_message", "wh_dlc01_qb_chs_archaon_slayer_of_kings_stage_3_hint_reinforcements", 13000, 2000, 4000);
 
 gb:queue_help_on_message("sorceror_dead", "wh_dlc01_qb_chs_archaon_slayer_of_kings_stage_3_hint_enemy_general_killed", 13000, 2000, 4000);

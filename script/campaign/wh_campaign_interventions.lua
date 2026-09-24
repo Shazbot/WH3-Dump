@@ -158,6 +158,7 @@ function start_global_interventions()
 	end;
 	
 	in_post_battle_defeat_options:start();
+	in_plans_scroll:start()
 
 	-- end turn warnings
 	in_commandment_warning:start();
@@ -1818,10 +1819,20 @@ in_post_siege_battle_victory_options:add_advice_key_precondition("war.camp.advic
 in_post_siege_battle_victory_options:set_min_advice_level(ADVICE_LEVEL_LOW_HIGH);
 in_post_siege_battle_victory_options:set_player_turn_only(false);
 in_post_siege_battle_victory_options:set_wait_for_battle_complete(false);
+in_post_siege_battle_victory_options:add_cleanup_callback(
+    function()
+        common.set_advice_history_string_seen("post_siege_battle_victory_options")
+    end
+)
 
 in_post_siege_battle_victory_options:add_trigger_condition(
 	"PanelOpenedCampaign",
-	function(context) return context.string == "popup_battle_results" and cm:model():pending_battle():has_contested_garrison() and cm:pending_battle_cache_human_victory(); end
+	function(context)
+		if context.string == "popup_battle_results" and cm:model():pending_battle():has_contested_garrison() and cm:pending_battle_cache_human_victory() then
+			return true
+		end
+		return false
+	end
 );
 
 
@@ -14414,7 +14425,10 @@ in_imperial_authority_low_negative_authority:add_trigger_condition(
 	function(context)
 		local faction = context:faction();
 		local resource = context:resource();
-		if resource:key() == "emp_imperial_authority" and faction:name() == cm:get_local_faction_name() then
+		if faction 
+			and (not resource:is_null_interface())
+			and resource:key() == "emp_imperial_authority" and faction:name() == cm:get_local_faction_name()
+		then
 			if resource:value() <= -2 then
 				return true;
 			end
@@ -14454,7 +14468,11 @@ in_imperial_authority_high_negative_authority:add_trigger_condition(
 	function(context)
 		local faction = context:faction();
 		local resource = context:resource();
-		if resource:key() == "emp_imperial_authority" and faction:name() == cm:get_local_faction_name() then
+		if faction
+			and (not resource:is_null_interface())
+			and resource:key() == "emp_imperial_authority"
+			and faction:name() == cm:get_local_faction_name()
+		then
 			return resource:value() <= -10;
 		end;
 		return false;
@@ -21378,6 +21396,52 @@ function trigger_ataman_dilemma()
 		}
 	)
 end
+
+---------------------------------------------------------------
+--
+--	Chaotic Plans (Thanquol)
+--
+---------------------------------------------------------------
+-- intervention declaration
+in_plans_scroll = intervention:new(
+	"in_plans_scroll",					 											-- string name
+	60, 																			-- cost
+	function() in_plans_scroll_trigger() end,										-- trigger callback
+	BOOL_INTERVENTIONS_DEBUG	 													-- show debug output
+);
+
+in_plans_scroll:set_min_advice_level(ADVICE_LEVEL_LOW_HIGH)
+in_plans_scroll:set_wait_for_fullscreen_panel_dismissed(false)
+in_plans_scroll:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		local oakenhammer_region = cm:get_region("wh3_main_combi_region_oakenhammer")
+		local zhufbar_region = cm:get_region("wh3_dlc29_skv_thanquol_zhufbar")
+		local zhufbar_owned = zhufbar_region and not zhufbar_region:is_null_interface() and zhufbar_region:owning_faction():name() == thanquol_chaotic_plans_config.faction_key
+		local oakenhammer_owned = oakenhammer_region and not oakenhammer_region:is_null_interface() and oakenhammer_region:owning_faction():name() == thanquol_chaotic_plans_config.faction_key
+		if context.string == "new_plan_button" and oakenhammer_owned and not zhufbar_owned then
+			return true
+		end
+		return false
+	end
+)
+
+function in_plans_scroll_trigger()
+
+	local advice_key = "wh3_dlc29_skv_thanquol_zhufbar"
+	local infotext = {
+		"war.camp.advice.dlc29.thanquol.zhufbar_001",
+		"war.camp.advice.dlc29.thanquol.zhufbar_002",
+		"war.camp.advice.dlc29.thanquol.zhufbar_003",
+	}
+
+	in_plans_scroll:scroll_camera_to_settlement_for_intervention(
+		"wh3_main_combi_region_zhufbar",
+		advice_key,
+		infotext
+	)
+end
+
 
 ---------------------------------------------------------------
 --

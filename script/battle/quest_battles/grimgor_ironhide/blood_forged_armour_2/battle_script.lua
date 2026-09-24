@@ -22,7 +22,6 @@ gb = generated_battle:new(
 );
 
 gb:set_cutscene_during_deployment(true);
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 -- Stage 4: Grimgor vs reforming chaos invaders
 
@@ -49,5 +48,4 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_grn_grimgor_ironhi
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_grimgor_ironhide_blood_forged_armour_stage_4_hint_objective");
 
-gb:play_sound_on_message("battle_started", Orc_Horn, v(-430, 110, 112), 64000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_grimgor_ironhide_blood_forged_armour_stage_4_hint_reinforcements", 13000, 2000, 66000);

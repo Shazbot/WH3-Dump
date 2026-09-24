@@ -1,0 +1,10 @@
+CcoBattleArmy {
+	ExHasRyseAbility
+	{
+		FactionContext.Key == "wh3_dlc29_nag_host_of_nagash"
+	}
+	ExHasUnitWithAbility(String unit_ability_key)
+	{
+		UnitList.Filter(AbilityList.Filter(RecordKey == unit_ability_key).IsEmpty == false).IsEmpty == false
+	}
+}

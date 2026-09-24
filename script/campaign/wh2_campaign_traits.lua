@@ -3,7 +3,7 @@ campaign_traits = {
 	trait_exclusions = {
 		["culture"] = {
 			["wh2_main_trait_corrupted_chaos"] = {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh2_main_skv_skaven", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch", "wh3_dlc23_chd_chaos_dwarfs"},
-			["wh2_main_trait_corrupted_vampire"] = {"wh_main_vmp_vampire_counts", "wh2_dlc09_tmb_tomb_kings", "wh2_dlc11_cst_vampire_coast"},
+			["wh2_main_trait_corrupted_vampire"] = {"wh3_dlc29_nag_undead_legions", "wh_main_vmp_vampire_counts", "wh2_dlc09_tmb_tomb_kings", "wh2_dlc11_cst_vampire_coast"},
 			["wh2_main_trait_corrupted_skaven"] = {"wh2_main_skv_skaven", "wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_main_nur_nurgle", "wh3_main_sla_slaanesh", "wh3_main_tze_tzeentch", "wh3_dlc23_chd_chaos_dwarfs"},
 			["wh3_main_trait_corrupted_khorne"] = {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_kho_khorne", "wh3_dlc23_chd_chaos_dwarfs"},
 			["wh3_main_trait_corrupted_nurgle"] = {"wh_main_chs_chaos", "wh_dlc08_nor_norsca", "wh_dlc03_bst_beastmen", "wh3_main_dae_daemons", "wh3_main_nur_nurgle", "wh3_dlc23_chd_chaos_dwarfs"},
@@ -166,8 +166,16 @@ campaign_traits = {
 		["wh3_dlc27_sla_dechala"] 		= 			"wh3_dlc27_trait_defeated_dechala",						-- Dechala
 		["wh3_dlc27_sla_masque_of_slaanesh"] =	 	"wh3_dlc27_trait_defeated_the_masque",					-- The Masque
 		["wh3_dlc27_hef_aislinn"] =                 "wh3_dlc27_trait_defeated_aislinn",	                    -- Sea Lord Aislinn
+		["wh3_dlc27_nor_sayl_the_faithless"] 	  = "wh3_dlc27_trait_defeated_sayl", 						-- Sayl the Faithless
 		["wh3_dlc27_nor_sayl_the_faithless"] =		"wh3_dlc27_trait_defeated_sayl", 						-- Sayl the Faithless
 		["wh3_cp1_cth_bhashiva"] = 					"wh3_cp1_trait_defeated_bhashiva",						-- Bhashiva
+		["wh3_dlc27_nor_sayl_the_faithless"] 	  = "wh3_dlc27_trait_defeated_sayl", 						-- Sayl the Faithless
+		["wh_dlc03_emp_boris_todbringer"] = 		"wh3_dlc29_trait_defeated_boris", 						-- Boris Toddbringer
+		["wh3_dlc29_chs_glottkin"] = 				"wh3_dlc29_trait_defeated_glottkin", 					-- The Glottkin
+		["wh3_dlc29_skv_thanquol"] =                "wh3_dlc29_trait_defeated_thanquol",                    -- Thanquol
+		["wh3_dlc29_nag_nagash"] = 					"wh3_dlc29_trait_defeated_nagash",						-- Nagash
+		["wh3_dlc29_vmp_neferata"] = 				"wh3_dlc29_trait_defeated_neferata",					-- Neferata
+		["wh_dlc05_vmp_red_duke"] = 				"wh3_dlc29_trait_defeated_red_duke",					-- The Red Duke
 	},
 	subcultures_trait_keys = {
 		["wh_main_sc_chs_chaos"] = "chaos",
@@ -276,9 +284,10 @@ campaign_traits = {
 ------------------------------------------------------------------------------
 ---- Function: Gives points in a trait to a Lord, with an optional chance ----
 ------------------------------------------------------------------------------
-function campaign_traits:give_trait(character, trait, _points, _chance)
+function campaign_traits:give_trait(character, trait, _points, _chance, _show_event)
 	local chance = _chance or 100;
 	local points = _points or 1;
+	local show_event = _show_event or true;
 	
 	if character == nil then
 		out("TRAIT ERROR: Tried to give trait to a character that was not specified!");
@@ -298,7 +307,7 @@ function campaign_traits:give_trait(character, trait, _points, _chance)
 		return false;
 	end
 	
-	cm:force_add_trait("character_cqi:"..character:cqi(), trait, true, points);
+	cm:force_add_trait("character_cqi:"..character:cqi(), trait, show_event, points);
 	return true;
 end
 
@@ -357,7 +366,7 @@ end
 -------------------------------------------------------------------
 function campaign_traits:get_lord_record(character, stat_key)
 	if character:is_null_interface() == false then
-		local char_cqi = character:cqi();
+		local char_cqi = character:family_member():command_queue_index();
 		local val = self.lords_records[tostring(char_cqi).."_"..stat_key];
 		return val;
 	end
@@ -368,7 +377,7 @@ end
 -------------------------------------------------------------------------
 function campaign_traits:set_lord_record(character, stat_key, value)
 	if character:is_null_interface() == false then
-		local char_cqi = character:cqi();
+		local char_cqi = character:family_member():command_queue_index();
 		self.lords_records[tostring(char_cqi).."_"..stat_key] = value;
 	end
 end
@@ -392,6 +401,7 @@ function (context)
 				else
 					campaign_traits:give_trait(character, LL_trait);
 				end
+				core:trigger_event("ScriptEventCharacterDefeatedLegendaryLord", character, LL_enemies[i]);
 			elseif LL_enemies[i] == "surtha_ek" and character:character_subtype("wh2_dlc09_tmb_settra") then
 				campaign_traits:give_trait(character, "wh2_dlc09_trait_defeated_surtha_as_settra");
 			end
@@ -692,19 +702,18 @@ events.CharacterTurnStart[#events.CharacterTurnStart+1] =
 function (context)
 	local character = context:character();
 
-	if character:is_null_interface() == false and (wh_faction_is_horde(character:faction()) or character:faction():culture() == "wh_dlc03_bst_beastmen") and cm:char_is_general_with_army(character) and character:has_region() and not character:region():is_abandoned() then
-		if character:turns_in_enemy_regions() >= 20 then
-			if character:trait_points("wh2_main_trait_lone_wolf") == 2 then
-				campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
-			end
-		elseif character:turns_in_enemy_regions() >= 15 then
-			if character:trait_points("wh2_main_trait_lone_wolf") == 1 then
-				campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
-			end
-		elseif character:turns_in_enemy_regions() >= 10 then
-			if character:trait_points("wh2_main_trait_lone_wolf") == 0 then
-				campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf");
-			end
+	if character:is_null_interface() == false
+		and wh_faction_is_horde(character:faction()) == false
+		and character:faction():culture() ~= "wh_dlc03_bst_beastmen"
+		and cm:char_is_general_with_army(character)
+		and character:has_region()
+		and not character:region():is_abandoned()
+	then
+		if (character:turns_in_enemy_regions() >= 20 and character:trait_points("wh2_main_trait_lone_wolf") == 2) or
+			(character:turns_in_enemy_regions() >= 15 and character:trait_points("wh2_main_trait_lone_wolf") == 1) or
+			(character:turns_in_enemy_regions() >= 10 and character:trait_points("wh2_main_trait_lone_wolf") == 0)
+		then
+			campaign_traits:give_trait(character, "wh2_main_trait_lone_wolf")
 		end
 	end
 end
@@ -838,7 +847,14 @@ events.CharacterTurnStart[#events.CharacterTurnStart+1] =
 function (context)
 	local character = context:character();
 	
-	if character:faction():is_human() and character:has_region() and character:faction():is_allowed_to_capture_territory() and cm:char_is_general_with_army(character) and cm:model():campaign_name_key() ~= "wh3_main_prologue" then
+	if character:faction():is_human()
+		and character:has_region()
+		and character:faction():is_allowed_to_capture_territory()
+		and cm:char_is_general_with_army(character)
+		and cm:model():campaign_name_key() ~= "wh3_main_prologue"
+		and wh_faction_is_horde(character:faction()) == false
+		and character:faction():culture() ~= "wh_dlc03_bst_beastmen"
+	then
 		if character:in_settlement() and character:region():public_order() >= 90 and character:military_force():active_stance() ~= "MILITARY_FORCE_ACTIVE_STANCE_TYPE_MUSTER" then
 			local char_turns_being_lazy = campaign_traits:get_lord_record(character, "turns_lazy") or 0;
 			char_turns_being_lazy = char_turns_being_lazy + 1;
@@ -1102,11 +1118,96 @@ events.CharacterTurnStart[#events.CharacterTurnStart+1] =
 function (context)
 	local character = context:character();
 	
-	if character:has_trait("wh3_dlc27_nor_monster_hunts_wounded") then
-		campaign_traits:give_trait(character, "wh3_dlc27_nor_monster_hunts_wounded", -1, 5);
+	if character:has_trait("wh3_dlc27_nor_monster_hunts_wounded") and cm:model():random_percent(5) then
+		campaign_traits:remove_trait(character, "wh3_dlc27_nor_monster_hunts_wounded");
 	end
 end
 
+--------------------------
+----- WOUNDED TRAIT ------
+--------------------------
+-- CharacterConvalescedOrKilled can fire while returning from battle, before the campaign model is ready for script.
+local function is_campaign_model_ready()
+	local game_interface = cm.game_interface;
+	local model = game_interface and game_interface:model();
+	return model and model:is_ready_for_script_access();
+end
+
+local function apply_wounded_trait(character)
+	if not character or character:is_null_interface() then
+		return;
+	end
+
+	if cm:model():shared_states_manager():get_state_as_bool_value("campaign_wound_trait") == false then
+		return;
+	end
+
+	local faction = character:faction();
+	if faction:is_rebel() then
+		return;	-- We don't apply traits to rebel characters. Also, calling factions_met for the rebel faction causes a game crash.
+	end
+
+	local cause = character:convalesence_cause();
+	if cause == 3 or cause == 0 then -- Battle or Assassination
+		if cm:get_characters_bonus_value(character, "prevent_wounded_trait") > 0 then
+			return; -- Effect that prevents this trait is present
+		end
+
+		local should_apply = false;
+
+		if faction:is_human() == true then
+			should_apply = true;
+		else
+			for _, met_faction in model_pairs(faction:factions_met()) do
+				if met_faction:is_human() == true then
+					should_apply = true;
+					break;
+				end
+			end
+		end
+
+		if should_apply == true then
+			campaign_traits:give_trait(character, "wh3_main_trait_wounded", 1, false);
+			campaign_traits:set_lord_record(character, "wh3_main_trait_wounded", 10);
+		end
+	end
+end
+
+events.CharacterConvalescedOrKilled[#events.CharacterConvalescedOrKilled+1] =
+function (context)
+	local character = context:character();
+
+	if is_campaign_model_ready() then
+		apply_wounded_trait(character);
+		return;
+	end
+
+	if not character or character:is_null_interface() then
+		return;
+	end
+
+	local char_cqi = character:command_queue_index();
+	cm:add_pre_first_tick_callback(
+		function()
+			apply_wounded_trait(cm:get_character_by_cqi(char_cqi));
+		end
+	);
+end
+
+events.CharacterTurnStart[#events.CharacterTurnStart+1] =
+function (context)
+	local character = context:character();
+	
+	if character:is_wounded() == false and character:has_trait("wh3_main_trait_wounded") == true then
+		local wounded_timer = campaign_traits:get_lord_record(character, "wh3_main_trait_wounded") or 1;
+		wounded_timer = wounded_timer - 1;
+
+		if wounded_timer <= 0 then
+			campaign_traits:remove_trait(character, "wh3_main_trait_wounded");
+		end
+		campaign_traits:set_lord_record(character, "wh3_main_trait_wounded", wounded_timer);
+	end
+end
 
 --------------------------------------------------------------
 ----------------------- SAVING / LOADING ---------------------

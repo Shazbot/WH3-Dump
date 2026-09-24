@@ -263,7 +263,75 @@ faction_intro = {
 	-- The directory from which campaign-specific intro data will be loaded, where %s is replaced with the campaign name.
 	data_directory = "/script/campaign/%s/faction_intro/",
 	intro_data = {},
+	-- Set true to print FACTION_INTRO debug lines (setup, composite end, post-intro advice).
+	enable_debug_logging = false,
 }
+
+local function faction_intro_debug_logging_enabled()
+	return faction_intro.enable_debug_logging == true
+end
+
+local function faction_intro_flyover_advice_summary(campaign_config, cindy_scene_key)
+	if not is_string(cindy_scene_key) or not is_table(campaign_config.cindy_scene_advice) then
+		return "none"
+	end
+
+	local flyover_advice = campaign_config.cindy_scene_advice[cindy_scene_key]
+	if not is_table(flyover_advice) then
+		return "none"
+	end
+
+	local advice_keys = {}
+	for i = 1, #flyover_advice do
+		advice_keys[i] = tostring(flyover_advice[i].advice)
+	end
+	return table.concat(advice_keys, ", ")
+end
+
+local function faction_intro_advice_to_play_summary(intro_config)
+	if is_table(intro_config.advice_to_play) then
+		return table.concat(intro_config.advice_to_play, ", ")
+	end
+	if is_string(intro_config.advice_line) then
+		return intro_config.advice_line
+	end
+	return "none"
+end
+
+local function log_faction_intro_setup(campaign_config, faction_key, intro_config)
+	if not faction_intro_debug_logging_enabled() then
+		return
+	end
+
+	local local_faction_key = cm:get_local_faction_name(true)
+	out(string.format(
+		"FACTION_INTRO: perform_intro setup | intro_faction='%s' | local_faction='%s' | is_local=%s | cindy='%s' | flyover_advice=[%s] | advice_to_play=[%s] | has_end_callback=%s | has_cutscene_configurator=%s",
+		tostring(faction_key),
+		tostring(local_faction_key),
+		tostring(local_faction_key == faction_key),
+		tostring(intro_config.cindy_scene_key),
+		faction_intro_flyover_advice_summary(campaign_config, intro_config.cindy_scene_key),
+		faction_intro_advice_to_play_summary(intro_config),
+		tostring(is_function(intro_config.end_callback)),
+		tostring(is_function(intro_config.cutscene_configurator))
+	))
+end
+
+local function log_faction_intro_composite_end(faction_key, intro_config, skipped_post_intro)
+	if not faction_intro_debug_logging_enabled() then
+		return
+	end
+
+	local local_faction_key = cm:get_local_faction_name(true)
+	out(string.format(
+		"FACTION_INTRO: composite_end_callback | intro_faction='%s' | local_faction='%s' | cindy='%s' | run_post_intro=%s | has_end_callback=%s",
+		tostring(faction_key),
+		tostring(local_faction_key),
+		tostring(intro_config.cindy_scene_key),
+		tostring(not skipped_post_intro),
+		tostring(is_function(intro_config.end_callback))
+	))
+end
 
 --- @function perform_intro
 --- @desc Perform the start-of-campaign dressing for the specified faction within the specified campaign, playing advisor lines, cutscenes, etc.
@@ -301,7 +369,10 @@ function faction_intro:perform_intro(campaign_folder_name, faction_key)
 		error_signature = error_signature .. string.format(", variant '%s'", variant_key)
 	end
 
-	intro_config = campaign_config.faction_intros[faction_key]
+	-- Must be local: perform_intro is called for every human faction in MP, and composite_end_callback
+	-- closes over this table. A global would be overwritten by the last faction in the loop, so the
+	-- host would run the client's end_callback (post-intro advisor line) after its own intro.
+	local intro_config = campaign_config.faction_intros[faction_key]
 	if intro_config == nil then
 		script_error(string.format("ERROR: Couldn't run intro for %s. Faction key did not have an entry under this campaign. Please add it to script/campaign/" .. campaign_folder_name .. "/faction_intro/" .. campaign_folder_name .. "_faction_intro.lua", error_signature))
 		return
@@ -355,17 +426,28 @@ function faction_intro:perform_intro(campaign_folder_name, faction_key)
 	end
 
 	-- Allow various parameters to be bundled into an end-of-cutscene callback, in addition to the 'end_callback' cutscene provided by the config (which fires after all the others).
+	-- In multiplayer, intros are set up for every human faction on every machine for sync.
+	-- Missions and ScriptEventCampaignIntroComplete must run on all machines; post-intro advice is local-only.
+	log_faction_intro_setup(campaign_config, faction_key, intro_config)
+
 	local composite_end_callback = function()
+		local is_local_intro = cm:get_local_faction_name(true) == faction_key
+		log_faction_intro_composite_end(faction_key, intro_config, not is_local_intro)
+
 		intro_config.intro_missions = intro_config.intro_missions or {}
 		for m = 1, #intro_config.intro_missions do
 			intro_config.intro_missions[m]:start()
 		end
 
-		if intro_config.end_callback then
+		-- Post-intro advisor cutscene/VO is local-only. Running another player's end_callback here
+		-- made the host play the client's opening line (and vice versa).
+		if is_local_intro and intro_config.end_callback then
 			intro_config.end_callback()
 		end
 		
-		core:trigger_event("ScriptEventCampaignIntroComplete")
+		if faction_start == nil or faction_start.suppress_post_intro_event == false then
+			core:trigger_event("ScriptEventCampaignIntroComplete")
+		end
 	end
 
 	-- If no cindyscene is being provided, argue the duration as the cindyscene parameter instead.

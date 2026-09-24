@@ -23,11 +23,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -55,7 +51,6 @@ gb:add_listener(
 gb:set_objective_on_message("defend_phase", "wh_main_qb_vmp_heinrich_kemmler_chaos_tomb_blade_stage_4_second_objective");
 
 -------HINTS-------
-gb:play_sound_on_message("defend_phase", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_vmp_heinrich_kemmler_chaos_tomb_blade_stage_4_hint_objective", 4000, 2000, 1000);
 gb:queue_help_on_message("defend_phase", "wh_main_qb_vmp_heinrich_kemmler_chaos_tomb_blade_stage_4_hint_reinforcements_01", 1500, 1000, 500);
 gb:queue_help_on_message("defend_phase", "wh_main_qb_vmp_heinrich_kemmler_chaos_tomb_blade_stage_4_hint_reinforcements_02", 3500, 1000, 2000);

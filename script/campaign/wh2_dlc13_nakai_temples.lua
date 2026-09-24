@@ -207,6 +207,12 @@ function nakai_temples:add_nakai_temples_listeners()
 			local faction = context:faction()
 			local favour_amount = (self.temples.quetzl.count) + (self.temples.xholankha.count) + (self.temples.itzl.count)
 	
+			-- Short victory reward
+			local favour_multiplier = cm:get_factions_bonus_value(self.faction_key, "wh3_dlc29_nakai_temples_favour_multiplier")
+			if favour_multiplier then
+				favour_amount = favour_amount + favour_amount * favour_multiplier/100
+			end
+
 			cm:faction_add_pooled_resource(self.faction_key, "lzd_old_ones_favour", "defenders_of_the_great_plan", favour_amount * 2)
 
 			if faction:has_effect_bundle(self.ritual_keys.hunters_gaze) then
@@ -219,7 +225,8 @@ end
 
 function nakai_temples:create_region_temple(region, temple_key)
 	local settlement = region:settlement()
-	local slot, temple
+	local slot = nil
+	local temple = nil
 
 	if temple_key == nil then
 		local t = {"quetzl", "itzl", "xholankha"}
@@ -233,15 +240,17 @@ function nakai_temples:create_region_temple(region, temple_key)
 	if settlement:is_port() then
 		slot = settlement:port_slot()
 		temple = self.building_prefix.port .. temple_key
-	else
+	elseif settlement:active_secondary_slots():num_items() > 0 then
 		slot = settlement:active_secondary_slots():item_at(0)
 		temple = self.building_prefix.land .. temple_key
 	end
 
-	cm:region_slot_instantly_upgrade_building(slot, temple)
-	cm:callback(function() 
-		cm:heal_garrison(region:cqi()) 
-	end, 0.5)
+	if slot then
+		cm:region_slot_instantly_upgrade_building(slot, temple)
+		cm:callback(function() 
+			cm:heal_garrison(region:cqi()) 
+		end, 0.5)
+	end
 end
 
 function nakai_temples:count_defenders_temples()
@@ -334,6 +343,10 @@ function nakai_temples:count_defenders_temples()
 				cm:apply_effect_bundle("wh2_dlc13_nakai_temple_"..temple_type.."_"..suffix, self.faction_key, -1)
 			end
 		end
+
+		local total_temples = self.temples.quetzl.count + self.temples.xholankha.count + self.temples.itzl.count
+		core:trigger_event("ScriptEventNakaiTempleCountUpdate", total_temples)
+
 	end
 end
 

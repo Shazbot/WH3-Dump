@@ -26,11 +26,8 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 num_shamans_killed = 0;
 required_shaman_kills = 4;
-
 
 -------GENERALS SPEECH--------
 
@@ -46,7 +43,6 @@ ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1);
 ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), 2);
 ga_ai_03 = gb:get_army(gb:get_non_player_alliance_num(), 3);
 
-
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_vmp_mannfred_von_carstein_sword_of_unholy_power_stage_4_main_objective", 0, 0, 4);
 gb:set_objective_on_message("one_shaman_dead", "wh_main_qb_vmp_mannfred_von_carstein_sword_of_unholy_power_stage_4_main_objective", 0, 1, 4);
@@ -60,7 +56,6 @@ ga_ai_02:reinforce_on_message("battle_started");
 ga_ai_02:attack_on_message("battle_started");
 
 ga_ai_03:reinforce_on_message("battle_started", 2000);
-
 
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_vmp_mannfred_von_carstein_sword_of_unholy_power_stage_4_hint_objective");

@@ -196,6 +196,9 @@
 						<checkbox_allow_multi_lords this="6E67C48F-9E2E-48EB-BC54E267E6C7DF76">
 							<label_multi_lords this="C6ADDB25-81A1-46DD-AA0704CE171B7800"/>
 						</checkbox_allow_multi_lords>
+						<checkbox_allow_no_lord this="B4844DCA-0B2A-48F2-89BE9A6997D25072">
+							<label_no_lord this="FE54C0BF-69F1-4A6D-8ACD4E77929BA921"/>
+						</checkbox_allow_no_lord>
 					</checkbox_parent>
 				</settings_parent>
 			</custom_battle_map_settings>
@@ -2149,6 +2152,143 @@
 				<element value="ui/skins/default/checkbox_selected_hover.png"/>
 			</override_images>
 		</checkbox_allow_multi_lords>
+		<checkbox_allow_no_lord
+			this="B4844DCA-0B2A-48F2-89BE9A6997D25072"
+			id="checkbox_allow_no_lord"
+			template_id="checkbox_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="7F83FB2C-D99A-49C3-9E182FC5C1CDFF35"
+			uniqueguid="B4844DCA-0B2A-48F2-89BE9A6997D25072"
+			dimensions="34.00,32.00"
+			sound_category="UI_GBL_TMP_CheckBox">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="E68A245D-C92A-498D-8A61CEACB05333AF"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="7DE59F48-74E6-4C60-A555E1E8FB9BE253"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="AA6FB22A-1898-4A39-906168CA399D50B5"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="259F0BDA-21CB-4F40-AABA1A96983F4480"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="9EF2026B-33AF-4CE9-BE7668DD0FDC2417"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="85F9F24C-C3CD-4B27-95234075206C9BE7"/>
+				<state_uniqueguid
+					name="selected_down"
+					uniqueguid="CE606C1E-D6A4-41A7-9B72DBAEA651C56F"/>
+				<state_uniqueguid
+					name="selected_down_off"
+					uniqueguid="2C2F7A75-7251-430C-BDA9D49E5877509A"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="E55865CE-AAFC-479C-B47CFFF421DB326C"/>
+				<state_uniqueguid
+					name="selected_inactive"
+					uniqueguid="DF05D125-FFE0-4F83-9A5E578BB1ECA516"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_active.png"
+					uniqueguid="7A835A68-D4AB-41CD-975D3CFA15720E8A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_hover.png"
+					uniqueguid="39C7DFAC-A52C-49CA-837742562BB9FCCA"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected.png"
+					uniqueguid="07C2C10E-C8DB-4744-AEC62ABB45E3F8C1"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/checkbox_selected_hover.png"
+					uniqueguid="591E7350-491A-49AB-91F834C3087E8932"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCustomBattleSettings"
+					context_function_id="ToggleNoLords"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCustomBattleSettings">
+					<child_m_user_properties>
+						<property
+							name="0.selected_inactive"
+							value="CanChangeSettings == false &amp;&amp; IsNoLordsEnabled"/>
+						<property
+							name="1.inactive"
+							value="CanChangeSettings == false &amp;&amp; IsNoLordsEnabled == false"/>
+						<property
+							name="2.selected"
+							value="IsNoLordsEnabled"/>
+						<property
+							name="event0"
+							value="CustomBattleOnSettingChangedNoLordsEnabled"/>
+						<property
+							name="event1"
+							value="CustomBattleOnHostMigrated"/>
+						<property
+							name="event2"
+							value="CustomBattleOnSettingChangedBattleType"/>
+						<property
+							name="fallback_state"
+							value="active"/>
+						<property
+							name="handle_button_states"
+							value=""/>
+						<property
+							name="ordered_states"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ScriptTag"
+					context_function_id="&quot;fe_custom_battle_no_lords&quot;"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/checkbox_active.png"/>
+				<element value="ui/skins/default/checkbox_hover.png"/>
+				<element value="ui/skins/default/checkbox_selected.png"/>
+				<element value="ui/skins/default/checkbox_selected_hover.png"/>
+			</override_images>
+		</checkbox_allow_no_lord>
 		<checkbox_large_armies
 			this="802ED4FB-AE52-4569-A0C1CDD7954FE334"
 			id="checkbox_large_armies"
@@ -6966,6 +7106,58 @@
 				</newstate>
 			</states>
 		</label_multi_lords>
+		<label_no_lord
+			this="FE54C0BF-69F1-4A6D-8ACD4E77929BA921"
+			id="label_no_lord"
+			offset="34.00,-4.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center Right External"
+			component_anchor_point="-0.00,0.50"
+			tooltipslocalised="true"
+			componentleveltooltip="When checked, a battle can be started without a selected Lord."
+			tooltiplabel="wh3_dlc29_skirmish_map_setup_start_without_lord_option_tooltip"
+			uniqueguid="FE54C0BF-69F1-4A6D-8ACD4E77929BA921"
+			currentstate="2DCBCBCC-D910-4EA0-8EF92404CC87CE95">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="CallbackRedirector">
+					<child_m_user_properties>
+						<property
+							name="parent_id"
+							value="checkbox_allow_no_lord"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="checkbox_realism_mode"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="2DCBCBCC-D910-4EA0-8EF92404CC87CE95"
+					name="NewState"
+					width="164"
+					height="40"
+					focustype="Active"
+					interactive="true"
+					uniqueguid="2DCBCBCC-D910-4EA0-8EF92404CC87CE95">
+					<component_text
+						text="Start without a Lord"
+						textvalign="Center"
+						textlocalised="true"
+						textlabel="wh3_dlc29_skirmish_map_setup_start_without_lord_option_label"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</label_no_lord>
 		<label_realism_mode
 			this="73D2E5CC-C482-4715-AA32273A1428BF43"
 			id="label_realism_mode"

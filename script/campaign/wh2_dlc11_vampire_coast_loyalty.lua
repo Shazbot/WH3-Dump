@@ -220,8 +220,8 @@ core:add_listener(
 			out("loyalty decline declined by decline declining rite");
 		elseif character:region():is_null_interface() ~= true and character:region():get_active_edict_key() == "wh2_dlc11_edict_cst_share_the_spoils" then
 			out("loyalty decline declined by decline declining edict");
-		elseif character:has_skill("wh2_dlc11_skill_cst_loyal_lord") then 
-			out("loyalty decline declined by decline declining skill");
+		elseif cm:get_characters_bonus_value(character, "scripted_cst_loyal_lord") > 0 then
+			out("loyalty decline declined by decline declining bonus value");
 		elseif background_check_vampire_coast_player_techno_vikings(character) then
 			out("loyalty decline declined by decline declining subtype");
 		else

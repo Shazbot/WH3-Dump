@@ -320,4 +320,11 @@ gb:queue_help_on_message("skv_ally_01_in", "wh3_dlc24_tze_changeling_theatre_sch
 --------------------------------------------- VICTORY -------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-ga_player_01:force_victory_on_message("cth_dead", 5000);
+ga_player_01:force_victory_on_message("cth_dead", 2500);
+gb:message_on_time_offset("force_end",6000,"cth_dead")
+gb:add_listener(
+    "force_end",
+	function()
+		bm:force_battle_end(gb:get_player_alliance_num(), "scripted", true, true)
+	end
+)

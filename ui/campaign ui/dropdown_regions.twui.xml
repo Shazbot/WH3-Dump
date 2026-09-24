@@ -35,9 +35,11 @@
 												<wh2_dlc11_cst_vampire_coast this="478EC851-7636-4302-8BB29D1B5E91E40C"/>
 												<wh2_main_skv_skaven this="CCB39360-0EEC-4B9E-BD6D2D22342122B5"/>
 												<wh3_main_dae_cult this="A1866F0B-54D7-4CD3-8F9B77DB958E2433"/>
-												<discovered_icon this="F741334C-F7A4-4089-BCF9E56E3ABBEF45"/>
 												<wh3_dlc27_sayl_manipulation_slot this="1F4B6E28-37D9-4AD0-9912C713D4F571C1"/>
 												<wh3_dlc27_aislinn_foreign_slot this="62567ACE-FD26-400E-A7AFC945F9573007"/>
+												<wh3_dlc29_lair_slot this="44A632D8-7E9D-4B23-8DD59C8B736F5D16"/>
+												<wh3_dlc29_coven_slot this="57DF4FF2-C71E-4D47-8F26FFDEF3695DEB"/>
+												<discovered_icon this="F741334C-F7A4-4089-BCF9E56E3ABBEF45"/>
 											</foreign_slot_holder>
 										</outpost_and_foreign_slot_holder>
 										<icon_harmony this="1677FB64-1E8F-499E-A3015C42A7CBB7CA">
@@ -68,6 +70,8 @@
 												<wh3_main_dae_cult this="812B77C1-3A99-485D-B70B0164BCF7F225"/>
 												<wh3_dlc27_aislinn_foreign_slot this="8501DA73-AFA8-4449-B2A7338DB9313985"/>
 												<wh3_dlc27_sayl_manipulation_slot this="829DF303-3DA0-495F-BDE6104E4C7CC945"/>
+												<wh3_dlc29_lair_slot this="78F9B9AA-A384-47CA-B95082E8EEFF8AB3"/>
+												<wh3_dlc29_coven_slot this="30D4B733-695C-4491-84704FF0C253EF55"/>
 											</foreign_slot_holder>
 										</outpost_and_foreign_slot_holder>
 										<region_name this="B83DB510-3E08-48FC-B90874E2F7BE3677"/>
@@ -417,7 +421,7 @@
 		<discovered_icon
 			this="F741334C-F7A4-4089-BCF9E56E3ABBEF45"
 			id="discovered_icon"
-			offset="0.00,2.00"
+			offset="-21.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -562,9 +566,14 @@
 					uniqueguid="CA3F6E27-DAEF-4A6A-A3883CE7EEDB80D3"/>
 			</states>
 			<LayoutEngine
-				type="HorizontalList"
-				allow_overlap="true"
-				vertical_alignment="Center"/>
+				type="List"
+				spacing="-14.00,0.00"
+				itemsperrow="20"
+				horizontal_alignment="Right">
+				<columnwidths>
+					<column width="30"/>
+				</columnwidths>
+			</LayoutEngine>
 		</foreign_slot_holder>
 		<foreign_slot_holder
 			this="27D5C89E-1FFB-43D9-9B3118332615FAB7"
@@ -589,6 +598,15 @@
 						<property
 							name="event0"
 							value="CampaignBuildingStateChanged"/>
+						<property
+							name="event1"
+							value="ForeignSlotAdded"/>
+						<property
+							name="event2"
+							value="ForeignSlotRemoved"/>
+						<property
+							name="event3"
+							value="ForeignManagerCreated"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -602,9 +620,14 @@
 					uniqueguid="2DC1A573-A114-4D38-99ED49EE7171D847"/>
 			</states>
 			<LayoutEngine
-				type="HorizontalList"
-				spacing="-18.00,0.00"
-				vertical_alignment="Center"/>
+				type="List"
+				spacing="-14.00,0.00"
+				itemsperrow="20"
+				horizontal_alignment="Right">
+				<columnwidths>
+					<column width="30"/>
+				</columnwidths>
+			</LayoutEngine>
 		</foreign_slot_holder>
 		<frame_bottom
 			this="5234E936-80AE-4251-BB0B02ECACCA28FE"
@@ -5308,7 +5331,7 @@
 					this="9322AA6E-4F7B-4C48-84238054A6DBE9A5"
 					name="NewState"
 					width="31"
-					height="24"
+					height="26"
 					interactive="true"
 					uniqueguid="9322AA6E-4F7B-4C48-84238054A6DBE9A5">
 					<imagemetrics>
@@ -5316,8 +5339,11 @@
 							this="9A710F41-D950-49AB-8996166FB3F5FD26"
 							uniqueguid="9A710F41-D950-49AB-8996166FB3F5FD26"
 							componentimage="886C243C-F0BA-4F87-A09ABDE4AF37C8F9"
+							offset="0.00,2.00"
 							width="31"
-							height="24"/>
+							height="24"
+							canresizeheight="false"
+							canresizewidth="false"/>
 					</imagemetrics>
 				</newstate>
 			</states>
@@ -5369,7 +5395,7 @@
 		<wh2_main_skv_skaven
 			this="CCB39360-0EEC-4B9E-BD6D2D22342122B5"
 			id="wh2_main_skv_skaven"
-			offset="0.00,2.00"
+			offset="13.00,2.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -5551,7 +5577,7 @@
 		<wh3_dlc27_aislinn_foreign_slot
 			this="62567ACE-FD26-400E-A7AFC945F9573007"
 			id="wh3_dlc27_aislinn_foreign_slot"
-			offset="8.00,2.00"
+			offset="4.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
@@ -5566,7 +5592,6 @@
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignFaction"
 					context_function_id="FactionRecordContext.Key == &quot;wh3_dlc27_hef_aislinn&quot;"/>
-				<callback_with_context callback_id="ContextInitPlayerFaction"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoCampaignProvince">
@@ -5736,7 +5761,7 @@
 		<wh3_dlc27_sayl_manipulation_slot
 			this="829DF303-3DA0-495F-BDE6104E4C7CC945"
 			id="wh3_dlc27_sayl_manipulation_slot"
-			offset="0.00,2.00"
+			offset="4.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="10"
@@ -5823,9 +5848,10 @@
 		<wh3_dlc27_sayl_manipulation_slot
 			this="1F4B6E28-37D9-4AD0-9912C713D4F571C1"
 			id="wh3_dlc27_sayl_manipulation_slot"
-			offset="0.00,2.00"
+			offset="8.00,2.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			visible="false"
 			priority="10"
 			componentleveltooltip="{{tr:dropdown_regions_cult_tooltip_wh3_dlc27_nor_sayl}}"
 			tooltiplabel="ComponentTooltip_f5e14b10"
@@ -5906,6 +5932,466 @@
 				</owned_discovered>
 			</states>
 		</wh3_dlc27_sayl_manipulation_slot>
+		<wh3_dlc29_coven_slot
+			this="57DF4FF2-C71E-4D47-8F26FFDEF3695DEB"
+			id="wh3_dlc29_coven_slot"
+			offset="-13.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="10"
+			tooltipslocalised="true"
+			componentleveltooltip="You have a Coven in this province's capital."
+			tooltiplabel="wh3_dlc29_vmp_covens_availability_provinces_tooltip"
+			uniqueguid="57DF4FF2-C71E-4D47-8F26FFDEF3695DEB"
+			currentstate="84FAEBF8-081B-4357-9C71F29397DB72D3"
+			defaultstate="84FAEBF8-081B-4357-9C71F29397DB72D3">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignProvince"
+					context_function_id="CanUseUiFeature(&quot;WEB_OF_POWER&quot;) &amp;&amp; SettlementList.Any( (x) =&gt; ForeignSlotList.Filter(ForeignSlotSetKey == &quot;wh3_dlc29_slot_set_vampire_coven&quot;).IsEmpty == false )">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="event1"
+							value="ForeignSlotAdded"/>
+						<property
+							name="event2"
+							value="ForeignSlotRemoved"/>
+						<property
+							name="event3"
+							value="ForeignManagerCreated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="SettlementList.Any( (x) =&gt; HostileForeignSlotList(PlayersFaction, CcoSlotSetRecord(&quot;wh3_dlc29_slot_set_vampire_coven&quot;)).Any(ForeignSlotDiscoveredByFaction(x.FactionContext)) )"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C29B3CCA-AA12-4698-8DA6B7FC15B03BC2"
+					uniqueguid="C29B3CCA-AA12-4698-8DA6B7FC15B03BC2"
+					imagepath="ui/skins/default/icon_vmp_covens.png"/>
+				<component_image
+					this="8CB037BA-9F21-40FF-9266956975DD6232"
+					uniqueguid="8CB037BA-9F21-40FF-9266956975DD6232"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="84FAEBF8-081B-4357-9C71F29397DB72D3"
+					name="default"
+					width="31"
+					height="26"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="84FAEBF8-081B-4357-9C71F29397DB72D3">
+					<imagemetrics>
+						<image
+							this="86FE3B4C-C531-4DE7-AFE57500BC829F45"
+							uniqueguid="86FE3B4C-C531-4DE7-AFE57500BC829F45"
+							componentimage="C29B3CCA-AA12-4698-8DA6B7FC15B03BC2"
+							offset="6.00,1.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							dock_offset="2.00,-1.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="D40031E8-A48E-4101-B751481028ED1B12"
+					name="owned_discovered"
+					width="31"
+					height="26"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="D40031E8-A48E-4101-B751481028ED1B12">
+					<imagemetrics>
+						<image
+							this="8E27FB5A-6A41-4A06-9EA184F8F547E0EC"
+							uniqueguid="8E27FB5A-6A41-4A06-9EA184F8F547E0EC"
+							componentimage="C29B3CCA-AA12-4698-8DA6B7FC15B03BC2"
+							offset="6.00,1.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							dock_offset="2.00,-1.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="96FCCC50-3A25-4C88-8CEC95A5D57DE093"
+							uniqueguid="96FCCC50-3A25-4C88-8CEC95A5D57DE093"
+							componentimage="8CB037BA-9F21-40FF-9266956975DD6232"
+							offset="11.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="4.00,5.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc29_coven_slot>
+		<wh3_dlc29_coven_slot
+			this="30D4B733-695C-4491-84704FF0C253EF55"
+			id="wh3_dlc29_coven_slot"
+			offset="8.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="10"
+			tooltipslocalised="true"
+			componentleveltooltip="You have a Coven in this province's capital."
+			tooltiplabel="wh3_dlc29_vmp_covens_availability_provinces_tooltip"
+			uniqueguid="30D4B733-695C-4491-84704FF0C253EF55"
+			currentstate="71E20E24-5BA2-436B-A714D39F2227A8DB"
+			defaultstate="71E20E24-5BA2-436B-A714D39F2227A8DB">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignProvince"
+					context_function_id="CanUseUiFeature(&quot;WEB_OF_POWER&quot;) &amp;&amp; SettlementList.Any( (x) =&gt; ForeignSlotList.Filter(ForeignSlotSetKey == &quot;wh3_dlc29_slot_set_vampire_coven&quot;).IsEmpty == false )">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="event1"
+							value="ForeignSlotAdded"/>
+						<property
+							name="event2"
+							value="ForeignSlotRemoved"/>
+						<property
+							name="event3"
+							value="ForeignManagerCreated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="SettlementList.Any( (x) =&gt; HostileForeignSlotList(PlayersFaction, CcoSlotSetRecord(&quot;wh3_dlc29_slot_set_vampire_coven&quot;)).Any(ForeignSlotDiscoveredByFaction(x.FactionContext)) )"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="3A3322AC-A735-4997-B4BE4EEF9C6723F0"
+					uniqueguid="3A3322AC-A735-4997-B4BE4EEF9C6723F0"
+					imagepath="ui/skins/default/icon_vmp_covens.png"/>
+				<component_image
+					this="BC285D94-EEB8-427A-97A3A77AFFD3D649"
+					uniqueguid="BC285D94-EEB8-427A-97A3A77AFFD3D649"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="71E20E24-5BA2-436B-A714D39F2227A8DB"
+					name="default"
+					width="31"
+					height="26"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="71E20E24-5BA2-436B-A714D39F2227A8DB">
+					<imagemetrics>
+						<image
+							this="DD698BEA-79C1-4DE4-8989B62482ECB473"
+							uniqueguid="DD698BEA-79C1-4DE4-8989B62482ECB473"
+							componentimage="3A3322AC-A735-4997-B4BE4EEF9C6723F0"
+							offset="4.00,2.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="26EDE662-5EE1-47D9-B9B7D525EEDD4C0D"
+					name="owned_discovered"
+					width="31"
+					height="26"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="26EDE662-5EE1-47D9-B9B7D525EEDD4C0D">
+					<imagemetrics>
+						<image
+							this="9D90A945-4956-42E7-96416C97472BFE6A"
+							uniqueguid="9D90A945-4956-42E7-96416C97472BFE6A"
+							componentimage="3A3322AC-A735-4997-B4BE4EEF9C6723F0"
+							offset="4.00,2.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="0705F705-22ED-461E-952CC80EDFE2D971"
+							uniqueguid="0705F705-22ED-461E-952CC80EDFE2D971"
+							componentimage="BC285D94-EEB8-427A-97A3A77AFFD3D649"
+							offset="13.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="6.00,5.00"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc29_coven_slot>
+		<wh3_dlc29_lair_slot
+			this="44A632D8-7E9D-4B23-8DD59C8B736F5D16"
+			id="wh3_dlc29_lair_slot"
+			offset="4.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			priority="10"
+			tooltipslocalised="true"
+			componentleveltooltip="You have one or more Vampire Lairs in this province."
+			tooltiplabel="wh3_dlc29_vmp_lair_availability_provinces_tooltip"
+			uniqueguid="44A632D8-7E9D-4B23-8DD59C8B736F5D16"
+			currentstate="5F1D27DC-6F91-40AA-83F6CAADED259274"
+			defaultstate="5F1D27DC-6F91-40AA-83F6CAADED259274">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignProvince"
+					context_function_id="CanUseUiFeature(&quot;VAMPIRE_LAIRS&quot;) &amp;&amp; ExVampireLairs_AnyoneHasAnyVampireLair">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="event1"
+							value="ForeignSlotAdded"/>
+						<property
+							name="event2"
+							value="ForeignSlotRemoved"/>
+						<property
+							name="event3"
+							value="ForeignManagerCreated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="ExVampireLairs_HasAnyLairDiscoveredBySettlementOwner(PlayersFaction)"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="DA47DA23-354A-4D7A-BD1DDCC6FBE8F004"
+					uniqueguid="DA47DA23-354A-4D7A-BD1DDCC6FBE8F004"
+					imagepath="ui/skins/default/dlc29_vmp_legacy_update/icon_vmp_lair.png"/>
+				<component_image
+					this="A12A63CE-CED9-4C3C-B3002888E4576E2F"
+					uniqueguid="A12A63CE-CED9-4C3C-B3002888E4576E2F"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="5F1D27DC-6F91-40AA-83F6CAADED259274"
+					name="default"
+					width="26"
+					height="26"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="5F1D27DC-6F91-40AA-83F6CAADED259274">
+					<imagemetrics>
+						<image
+							this="98B0DB14-E198-460C-9BA276D29ACE210B"
+							uniqueguid="98B0DB14-E198-460C-9BA276D29ACE210B"
+							componentimage="DA47DA23-354A-4D7A-BD1DDCC6FBE8F004"
+							offset="7.00,2.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							dock_offset="5.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="B249DB0B-652B-44AF-B5DA2F00777C6CA8"
+					name="owned_discovered"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="B249DB0B-652B-44AF-B5DA2F00777C6CA8">
+					<imagemetrics>
+						<image
+							this="15D2E426-B5D0-41AA-98C38AF7F24FD270"
+							uniqueguid="15D2E426-B5D0-41AA-98C38AF7F24FD270"
+							componentimage="DA47DA23-354A-4D7A-BD1DDCC6FBE8F004"
+							offset="7.00,2.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							dock_offset="5.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="7463B313-98D7-4E17-8541970056912B38"
+							uniqueguid="7463B313-98D7-4E17-8541970056912B38"
+							componentimage="A12A63CE-CED9-4C3C-B3002888E4576E2F"
+							offset="12.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="10.00,5.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc29_lair_slot>
+		<wh3_dlc29_lair_slot
+			this="78F9B9AA-A384-47CA-B95082E8EEFF8AB3"
+			id="wh3_dlc29_lair_slot"
+			offset="8.00,2.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="10"
+			tooltipslocalised="true"
+			componentleveltooltip="You have one or more Vampire Lairs in this province."
+			tooltiplabel="wh3_dlc29_vmp_lair_availability_provinces_tooltip"
+			uniqueguid="78F9B9AA-A384-47CA-B95082E8EEFF8AB3"
+			currentstate="547E3BAA-C92D-423A-842E44751E08F084"
+			defaultstate="547E3BAA-C92D-423A-842E44751E08F084">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignProvince"
+					context_function_id="CanUseUiFeature(&quot;VAMPIRE_LAIRS&quot;) &amp;&amp; ExVampireLairs_AnyoneHasAnyVampireLair">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="event1"
+							value="ForeignSlotAdded"/>
+						<property
+							name="event2"
+							value="ForeignSlotRemoved"/>
+						<property
+							name="event3"
+							value="ForeignManagerCreated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoCampaignProvince">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignBuildingStateChanged"/>
+						<property
+							name="fallback_state"
+							value="default"/>
+						<property
+							name="owned_discovered"
+							value="ExVampireLairs_HasAnyLairDiscoveredBySettlementOwner(PlayersFaction)"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="87B991B9-971B-427A-A823F0648288A512"
+					uniqueguid="87B991B9-971B-427A-A823F0648288A512"
+					imagepath="ui/skins/default/dlc29_vmp_legacy_update/icon_vmp_lair.png"/>
+				<component_image
+					this="D977BC66-BDE9-45ED-B29501914B62CD6B"
+					uniqueguid="D977BC66-BDE9-45ED-B29501914B62CD6B"
+					imagepath="ui/skins/default/icon_status_alert_high_24px.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="547E3BAA-C92D-423A-842E44751E08F084"
+					name="default"
+					width="26"
+					height="26"
+					interactive="true"
+					pixelcollision="true"
+					uniqueguid="547E3BAA-C92D-423A-842E44751E08F084">
+					<imagemetrics>
+						<image
+							this="643BFFEE-053F-4E2D-A15AFB4C0E7425FD"
+							uniqueguid="643BFFEE-053F-4E2D-A15AFB4C0E7425FD"
+							componentimage="87B991B9-971B-427A-A823F0648288A512"
+							offset="2.00,2.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</default>
+				<owned_discovered
+					this="5FF4F08A-7B0D-44BD-9851271214077596"
+					name="owned_discovered"
+					width="26"
+					height="26"
+					interactive="true"
+					uniqueguid="5FF4F08A-7B0D-44BD-9851271214077596">
+					<imagemetrics>
+						<image
+							this="B9FAE6F1-FC82-4C67-942BEED89722028B"
+							uniqueguid="B9FAE6F1-FC82-4C67-942BEED89722028B"
+							componentimage="87B991B9-971B-427A-A823F0648288A512"
+							offset="2.00,2.00"
+							width="22"
+							height="22"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+						<image
+							this="0D52392C-8585-4E4B-BBFF4C191F8530EA"
+							uniqueguid="0D52392C-8585-4E4B-BBFF4C191F8530EA"
+							componentimage="D977BC66-BDE9-45ED-B29501914B62CD6B"
+							offset="8.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Bottom Right"
+							dock_offset="6.00,5.00"/>
+					</imagemetrics>
+				</owned_discovered>
+			</states>
+		</wh3_dlc29_lair_slot>
 		<wh3_main_dae_cult
 			this="812B77C1-3A99-485D-B70B0164BCF7F225"
 			id="wh3_main_dae_cult"
@@ -5995,11 +6481,10 @@
 		<wh3_main_dae_cult
 			this="A1866F0B-54D7-4CD3-8F9B77DB958E2433"
 			id="wh3_main_dae_cult"
-			offset="0.00,1.00"
+			offset="13.00,1.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			visible="false"
-			dock_offset="0.00,-1.00"
 			priority="10"
 			componentleveltooltip="{{tr:dropdown_regions_cult_tooltip}}"
 			tooltiplabel="ComponentTooltip_1e4584dd"

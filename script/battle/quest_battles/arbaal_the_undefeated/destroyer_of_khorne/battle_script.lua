@@ -50,7 +50,6 @@ local cutscene_intro = cutscene:new_from_cindyscene(
 	0																								-- blend out time (s)
 )
 
-local player_units_hidden = false;
 ga_ai_vmp_main.sunits:set_always_visible(true);
 
 -- set up subtitles
@@ -65,10 +64,6 @@ cutscene_intro:set_skippable(
 		local cam = bm:camera()
 		cam:fade(true, 0)
 		bm:stop_cindy_playback(true)
-
-		if player_units_hidden then
-			ga_player:set_enabled(true)
-		end;
 				
 		bm:callback(function() cam:fade(false, 0.5) end, 500)
 		bm:hide_subtitles()
@@ -80,8 +75,7 @@ cutscene_intro:action(function() cam:fade(false, 1) end, 1000)
 
 cutscene_intro:action(
 	function()
-		player_units_hidden = false;
-		ga_player:set_enabled(true) 
+		ga_player:set_enabled(false) 
 	end, 
 	200
 )
@@ -90,7 +84,6 @@ cutscene_intro:action(
 cutscene_intro:action(function() cam:fade(false, 1) end, 1000)
 
 	-- Voiceover and Subtitles --
-	
 	cutscene_intro:action(function() cutscene_intro:play_sound(sfx_cutscene_sweetener_intro) end, 0);
 	
 	cutscene_intro:add_cinematic_trigger_listener(
@@ -154,7 +147,6 @@ end
 
 function intro_cutscene_end()
 	play_sound_2D(sfx_cutscene_sweetener_intro_stop)
-	player_units_hidden = false;
 	ga_player:set_enabled(true) 
 	ga_ai_vmp_main.sunits:set_always_visible(false);
 	ga_ai_vmp_main.sunits:release_control()

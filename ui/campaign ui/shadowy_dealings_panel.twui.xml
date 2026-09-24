@@ -64,9 +64,11 @@
 													<cost_list this="718B2B7D-F421-493B-891AB55F140CA31C">
 														<dy_gold_cost this="0DB88AA7-75F1-409F-9753D80621BC810D"/>
 														<dy_slaves_cost this="4815CB34-4DB0-4195-93F65032E83A094A"/>
-														<dy_pooled_resource_cost this="DB81127A-2A64-4BE0-B5B53EBA346AE5E6">
-															<icon this="AF71A642-0404-4763-ACBDFD3AE9C5C7D4"/>
-														</dy_pooled_resource_cost>
+														<resources this="04E4A142-4CF3-4473-8FFDF7F6E85C0089">
+															<dy_pooled_resource_cost this="DB81127A-2A64-4BE0-B5B53EBA346AE5E6">
+																<icon this="AF71A642-0404-4763-ACBDFD3AE9C5C7D4"/>
+															</dy_pooled_resource_cost>
+														</resources>
 													</cost_list>
 												</mission_cost>
 												<mission_name this="017E6137-A183-4BF5-902B3BE116312E00"/>
@@ -83,9 +85,11 @@
 													<cost_list this="C09FA77D-8ED2-444F-8FF84FAF008C94F7">
 														<dy_gold_cost this="58DDE0FB-049C-43D3-84195506B42936E2"/>
 														<dy_slaves_cost this="7496A2A5-1033-4B6D-AA566BD7FC4C1B8B"/>
-														<dy_pooled_resource_cost this="CE371EC4-A38F-40EF-8C41688747A7E319">
-															<icon this="15936FC0-1BDF-4554-8144706C5C10BD34"/>
-														</dy_pooled_resource_cost>
+														<resources this="87ED0575-5F57-4542-AFFBEA505E977A45">
+															<dy_pooled_resource_cost this="CE371EC4-A38F-40EF-8C41688747A7E319">
+																<icon this="15936FC0-1BDF-4554-8144706C5C10BD34"/>
+															</dy_pooled_resource_cost>
+														</resources>
 													</cost_list>
 												</mission_cost>
 												<mission_name this="1397A2F9-609B-422A-B138480E34DC444C"/>
@@ -5971,6 +5975,7 @@
 			this="D2DDDCDF-0199-4AF8-B4EA743544C505A8"
 			id="clan_contracts_tab"
 			offset="0.00,-8.00"
+			visible="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
 			tooltipslocalised="true"
@@ -7639,6 +7644,11 @@
 			uniqueguid="718B2B7D-F421-493B-891AB55F140CA31C"
 			currentstate="FEAA8B35-7639-41B7-B1F4CC1032747FE0"
 			defaultstate="FEAA8B35-7639-41B7-B1F4CC1032747FE0">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="RitualCostCallback"
+					context_object_id="CcoRitualRecord"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="FEAA8B35-7639-41B7-B1F4CC1032747FE0"
@@ -7670,6 +7680,11 @@
 			uniqueguid="C09FA77D-8ED2-444F-8FF84FAF008C94F7"
 			currentstate="265A8F7F-D514-4BF3-9E2692B251F2EFB7"
 			defaultstate="265A8F7F-D514-4BF3-9E2692B251F2EFB7">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="RitualCostCallback"
+					context_object_id="CcoRitualRecord"/>
+			</callbackwithcontextlist>
 			<states>
 				<newstate
 					this="265A8F7F-D514-4BF3-9E2692B251F2EFB7"
@@ -7958,7 +7973,7 @@
 		<dy_pooled_resource_cost
 			this="CE371EC4-A38F-40EF-8C41688747A7E319"
 			id="dy_pooled_resource_cost"
-			offset="-9.00,50.00"
+			offset="-9.00,0.00"
 			allowverticalresize="false"
 			dock_offset="-9.00,0.00"
 			priority="60"
@@ -8046,7 +8061,7 @@
 		<dy_pooled_resource_cost
 			this="DB81127A-2A64-4BE0-B5B53EBA346AE5E6"
 			id="dy_pooled_resource_cost"
-			offset="-36.00,50.00"
+			offset="-36.00,0.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			dock_offset="-36.00,0.00"
@@ -15629,6 +15644,64 @@
 				</inactive>
 			</states>
 		</remove_selected_mission_button>
+		<resources
+			this="87ED0575-5F57-4542-AFFBEA505E977A45"
+			id="resources"
+			offset="-9.00,50.00"
+			allowhorizontalresize="false"
+			dock_offset="-9.00,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="87ED0575-5F57-4542-AFFBEA505E977A45"
+			currentstate="04C8338C-4FE9-4A3F-B5EE54C26C862D08"
+			defaultstate="04C8338C-4FE9-4A3F-B5EE54C26C862D08">
+			<states>
+				<newstate
+					this="04C8338C-4FE9-4A3F-B5EE54C26C862D08"
+					name="NewState"
+					width="78"
+					height="29"
+					interactive="true"
+					uniqueguid="04C8338C-4FE9-4A3F-B5EE54C26C862D08"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,-4.00"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="78"/>
+				</columnwidths>
+			</LayoutEngine>
+		</resources>
+		<resources
+			this="04E4A142-4CF3-4473-8FFDF7F6E85C0089"
+			id="resources"
+			offset="-36.00,50.00"
+			allowhorizontalresize="false"
+			dock_offset="-36.00,0.00"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="04E4A142-4CF3-4473-8FFDF7F6E85C0089"
+			currentstate="ECD7A4B3-19F9-4673-ABC3E5D7FC843B79"
+			defaultstate="ECD7A4B3-19F9-4673-ABC3E5D7FC843B79">
+			<states>
+				<newstate
+					this="ECD7A4B3-19F9-4673-ABC3E5D7FC843B79"
+					name="NewState"
+					width="78"
+					height="29"
+					interactive="true"
+					uniqueguid="ECD7A4B3-19F9-4673-ABC3E5D7FC843B79"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,-4.00"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="78"/>
+				</columnwidths>
+			</LayoutEngine>
+		</resources>
 		<reward_list
 			this="6A33FA1C-14FA-4A3F-823BD5B8980A3046"
 			id="reward_list"

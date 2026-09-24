@@ -26,6 +26,38 @@ Buildings
 	{
 		IsContextValid(self.ParentContext("discovered_views"))
 	}
+
+	IsSettlementDiscoveredSlotsButtonSelected
+	{
+		( button_discovered_view_component = self.ParentContext("settlement_view").ChildContext("button_discovered_view")) =>
+		{
+			IsContextValid(button_discovered_view_component) && button_discovered_view_component.IsVisible && button_discovered_view_component.IsSelected
+		}
+	}
+	
+	IsSettlementDefaultSlotsButtonSelected
+	{
+		( button_default_view_component = self.ParentContext("settlement_view").ChildContext("button_default_view")) =>
+		{
+			IsContextValid(button_default_view_component) && button_default_view_component.IsVisible && button_default_view_component.IsSelected
+		}
+	}
+	
+	IsSettlementPlayerForeignViewButtonSelected
+	{
+		( button_player_foreign_view = self.ParentContext("settlement_view").ChildContext("button_player_foreign_view")) =>
+		{
+			IsContextValid(button_player_foreign_view) && button_player_foreign_view.IsVisible && button_player_foreign_view.IsSelected
+		}
+	}
+	
+	IsSettlementVampireLairSlotsButtonSelected
+	{
+		( button_lair_view = self.ParentContext("settlement_view").ChildContext("button_lair_view")) =>
+		{
+			IsContextValid(button_lair_view) && button_lair_view.IsVisible && button_lair_view.IsSelected
+		}
+	}
 }
 
 CcoBuildingSetRecord
@@ -41,6 +73,28 @@ CcoBuildingChainRecord
 	ExBuildingBrowserSlotContext
 	{
 		GetIfElse(Buildings.IsHostileButtonSelected, BuildingBrowserSlotContext(Buildings.SelectedSettlementOrHordeContext, PlayersFaction), BuildingBrowserSlotContext(Buildings.SelectedSettlementOrHordeContext))
+	}
+
+	ExMaximumLevelBuiltInSlot(CcoCampaignBuildingSlot slot)
+	{
+		LevelsList.LastContext(IsBuiltInSlot(slot))
+	}
+
+	ExNextBuildingLevelInSlot(CcoCampaignBuildingSlot slot)
+	{
+		(built = ExMaximumLevelBuiltInSlot(slot)) =>
+		{
+			GetIf(IsContextValid(built), NextBuildingLevelInChain(built))
+		}
+	}
+
+	ExCanUpgradeInSlot(CcoCampaignBuildingSlot slot)
+	{
+		(built = ExMaximumLevelBuiltInSlot(slot),
+		 next = NextBuildingLevelInChain(built)) =>
+		{
+			IsContextValid(built) && IsContextValid(next) && next != built
+		}
 	}
 }
 
@@ -60,5 +114,40 @@ CcoCampaignBuildingSlot
 		{
 			GetIfElse(current_level > 1, current_level - 1, 1)
 		}
+	}
+	
+	ExInstantUpgradeAllowed
+	{
+		SettlementContext.IsPlayerOwned 
+			&& HasInstantUpgradeFeature 
+			&& IsDismantling == false 
+			&& GetIfElse(
+				FactionContext.CultureContext.Key == "wh3_main_nur_nurgle",
+				IsContextValid(LifecycleStateContext), 
+				(IsUpgrading || IsBuildingNew))
+			&& (FactionContext.FactionRecordContext.Key != "wh3_dlc29_chs_host_of_the_triplets")
+	}
+
+	ExIsPrimaryForeignSlot
+	{
+		IsForeignSlot && SlotTemplateKey.Contains("primary")
+	}
+
+	ExIsBusy
+	{
+		IsBuildingNew || IsRepairing || IsDismantling || IsUpgrading || IsConverting
+	}
+
+	ExCurrentBuiltOrUnderConstructionBuildingLevelRecordContext
+	{
+		GetIfElse(
+			IsContextValid(ConstructionItemContext),
+			ConstructionItemContext.BuildingLevelRecordContext,
+			GetIfElse(
+				IsContextValid(LifecycleStateContext),
+				LifecycleStateContext.NextBuildingLevelContext,
+				BuildingContext.BuildingLevelRecordContext
+			)
+		)
 	}
 }

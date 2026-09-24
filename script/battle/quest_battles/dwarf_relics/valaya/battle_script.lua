@@ -24,8 +24,28 @@ ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), "reinforcements");
 boss = ga_ai_boss.sunits:item(1);
 
 -------OBJECTIVES-------
-gb:set_objective_with_leader_on_message("destroy", "wh3_dlc23_chd_relic_of_valaya_00");
+-- gb:set_objective_with_leader_on_message("destroy", "wh3_dlc23_chd_relic_of_valaya_00");
+gb:set_locatable_objective_callback_on_message(
+    "destroy",
+    "wh3_dlc23_chd_relic_of_valaya_00",
+    0,
+    function()
+        local sunit = ga_ai_boss.sunits:get_general_sunit();
+        if sunit then
+            local cam_targ = sunit.unit:position();
+            local cam_pos = v_offset_by_bearing(
+                cam_targ,
+                get_bearing(cam_targ, bm:camera():position()),    -- horizontal bearing from camera target to current camera position
+                75,                                               -- distance from camera position to camera target
+                d_to_r(30)                                        -- vertical bearing from horizon to cam-targ/cam-pos line
+            );
+            return cam_pos, cam_targ;
+        end;
+    end,
+    2
+);
 gb:complete_objective_on_message("boss_dead", "wh3_dlc23_chd_relic_of_valaya_00");
+
 gb:set_objective_with_leader_on_message("battle_started", "wh3_dlc23_chd_relic_of_valaya_01");
 gb:complete_objective_on_message("all_dead", "wh3_dlc23_chd_relic_of_valaya_01");
 
@@ -35,9 +55,9 @@ gb:queue_help_on_message("start_ambush", "wh3_dlc23_chd_relic_of_valaya_03");
 -------ORDERS-------
 gb:message_on_time_offset("rush", 1000);
 gb:message_on_time_offset("move", 2000);
-gb:message_on_time_offset("destroy", 10000);
+gb:message_on_time_offset("destroy", 5000);
 gb:message_on_time_offset("stir", 60000);
-gb:message_on_time_offset("start_ambush", 135000);
+-- gb:message_on_time_offset("start_ambush", 135000);
 
 boss:set_stat_attribute("unbreakable", true);
 
@@ -56,8 +76,9 @@ ga_ai_02:reinforce_on_message("start_ambush");
 ga_ai_02:message_on_any_deployed("ambush_in");
 ga_ai_02:rush_on_message("ambush_in");
 
+ga_ai_01:message_on_casualties("start_ambush",0.5);
 ga_ai_01:message_on_casualties("01_dead",1);
 ga_ai_02:message_on_casualties("02_dead",1);
-ga_ai_boss:message_on_casualties("boss_dead",1);
+ga_ai_boss:message_on_commander_dead_or_routing("boss_dead");
 
 gb:message_on_all_messages_received("all_dead","01_dead","02_dead");

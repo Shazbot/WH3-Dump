@@ -965,7 +965,7 @@ local function slaanesh_seduction_narrative_loader(faction_key)
 				narrative.get(faction_key, name .. "_mission_text") or "wh3_main_narrative_mission_description_seduce_units",									-- key of mission objective text
 				narrative.get(faction_key, name .. "_event_listeners") or {																						-- event/condition listeners
 					{
-						event = "FactionBribesUnit",
+						event = "FactionPaidForBribingUnits",
 						condition =	function(context)
 							return context:faction():name() == faction_key;
 						end

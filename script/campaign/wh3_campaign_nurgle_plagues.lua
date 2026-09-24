@@ -27,11 +27,13 @@ nurgle_plagues = {
 	epidemius_pooled_resource = "nur_epidemius_tally_of_pestilence",
 	epidemius_pooled_resource_factor_forces = "plague_tally_forces",
 	epidemius_pooled_resource_factor_settlements = "plague_tally_settlements",
+	epidemius_pooled_resource_factor_hidden_bonus = "plague_tally_hidden_bonus",
 	festus_faction = "wh3_dlc20_chs_festus",
 	festus_symptom_key_replace = {"wh3_dlc25_nur_force_5", "wh3_dlc25_nur_settlement_3"},
 	festus_symptom_key_append = "_festus",
 
 	hidden_force_effect = "wh3_dlc25_nur_base_hidden_epidemius_force",
+	hidden_region_effect = "wh3_dlc25_nur_base_hidden_epidemius_region",
 
 	region_negative_bundle_list = {
 		"wh3_dlc25_nur_random_plague_1_settlement_negative",
@@ -167,11 +169,16 @@ function nurgle_plagues:plague_listeners()
 		"FactionTurnStart",
 		function(context)
 			local faction = context:faction()
-			return faction:is_contained_in_faction_set(self.nurgle_plague_faction_set) and faction:is_human()	
+			-- Restrict to plague-builder factions; plague_effect_set also includes Glottkin etc.
+			return self.plague_faction_info[faction:name()] ~= nil and faction:is_human()
 		end,
 		function(context)
-			local all_unlocked = true
 			local component_list = context:faction():plagues():plague_component_list()
+			if component_list:num_items() == 0 then
+				return
+			end
+
+			local all_unlocked = true
 			--loop through all components to see if any are locked
 			for i = 0, component_list:num_items() -1 do
 				local symptom = component_list:item_at(i)
@@ -353,7 +360,7 @@ function nurgle_plagues:plague_listeners()
 					local pbu = self.plague_button_unlock	
 					local unlock_info = pbu[faction:name()]
 					
-					return unlock_info.button_locked
+					return unlock_info and unlock_info.button_locked
 				end
 			end
 			return false
@@ -363,20 +370,21 @@ function nurgle_plagues:plague_listeners()
 			local pbu = self.plague_button_unlock	
 			local unlock_info = pbu[faction:name()]
 			local pr_changed = context:resource():key()
-			local pr = faction:pooled_resource_manager():resource(self.pr_key)
-			local amount = context:amount()
 			local factor = context:factor():key()
 
 			if pr_changed == self.pr_key then
 				local amount_changed = context:amount()
-				if amount_changed > 0 then
+				-- Factor "buildings" covers construction spend/refund AND building income
+				-- (wh3_main_effect_building_nur_infections). Ignore it here so cancel
+				-- refunds cannot inflate unlock progress. Regular building
+				-- income is END_OF_ROUND and is counted by Plagues_PooledResourceFactionTurnStart
+				-- via net pool delta vs infections_end_of_last_turn.
+				if amount_changed > 0 and factor ~= "buildings" then
 					unlock_info.infections_gained = unlock_info.infections_gained + amount_changed
 				end
 			end
 			if unlock_info.infections_gained >= self.pr_required_to_unlock then
-				if factor ~= "buildings" and amount == 200 then
-					self:toggle_plagues_button(faction, unlock_info, false, true)
-				end 				
+				self:toggle_plagues_button(faction, unlock_info, false, true)
 			end
 			common.set_context_value("unlock_plague_button_" .. faction:name(), unlock_info.infections_gained)
 		end,
@@ -393,7 +401,7 @@ function nurgle_plagues:plague_listeners()
 					local pbu = self.plague_button_unlock	
 					local unlock_info = pbu[faction:name()]
 					
-					return unlock_info.button_locked
+					return unlock_info and unlock_info.button_locked
 				end
 			end
 			return false
@@ -427,7 +435,7 @@ function nurgle_plagues:plague_listeners()
 					local pbu = self.plague_button_unlock	
 					local unlock_info = pbu[faction:name()]
 					
-					return unlock_info.button_locked
+					return unlock_info and unlock_info.button_locked
 				end
 			end
 			return false
@@ -537,8 +545,7 @@ function nurgle_plagues:count_plagues_on_non_nurgle_targets()
 				local region_garrison = region:garrison_residence()
 				local plague = region:get_plague_if_infected()
 				if not plague:is_null_interface() then
-					local has_effect_bundle = self:has_negative_region_bundle(region)
-					if has_effect_bundle and plague:creator_faction():name() == self.epidemius_faction then
+					if region:has_effect_bundle(self.hidden_region_effect) and plague:creator_faction():name() == self.epidemius_faction then
 						plague_count_settlements = plague_count_settlements + 1
 						table.insert(non_nurgle_forces_plagued, region_garrison:command_queue_index())
 					end
@@ -560,12 +567,18 @@ function nurgle_plagues:count_plagues_on_non_nurgle_targets()
 	end
 	local combined_plague_count = plague_count_armies + plague_count_settlements
 
+	-- Short Victory reward bonus caps minimum tally at tier 2
+	local minimum_tally = cm:get_factions_bonus_value(self.epidemius_faction, "wh3_dlc29_nur_epidemius_minimum_tally_of_pestilence") or 0
+
+	combined_plague_count = combined_plague_count + minimum_tally
+
 	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_forces, -99999)		
 	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_settlements, -99999)		
+	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_hidden_bonus, -99999)
 	self:apply_effect_bundles_to_non_nurgle_targets(combined_plague_count, non_nurgle_forces_plagued)		
 	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_forces, plague_count_armies)
 	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_settlements, plague_count_settlements)
-
+	cm:faction_add_pooled_resource(self.epidemius_faction, self.epidemius_pooled_resource, self.epidemius_pooled_resource_factor_hidden_bonus, minimum_tally)
 
 end
 
@@ -660,7 +673,10 @@ cm:add_loading_game_callback(
 			core:add_listener(
 				"Plauges_FirstTickAfterWorldCreated",
 				"FirstTickAfterWorldCreated",
-				true,
+				function(context)
+					local faction = cm:get_faction(nurgle_plagues.epidemius_faction)
+					return faction and not faction:is_null_interface()
+				end,
 				function()
 					nurgle_plagues:count_plagues_on_non_nurgle_targets()
 				end,

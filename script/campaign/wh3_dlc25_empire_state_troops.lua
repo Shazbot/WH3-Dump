@@ -1,6 +1,8 @@
 empire_state_troops = {
 	elspeth_key = "wh_main_emp_wissenland",
 	gelt_key = "wh2_dlc13_emp_golden_order",
+	boris_todbringer_key = "wh_main_emp_middenland",
+	volkmar_key = "wh3_main_emp_cult_of_sigmar",
 
 	unit_keys = {
 		"wh2_dlc13_emp_art_mortar_ror_0",
@@ -48,7 +50,38 @@ empire_state_troops = {
 			["wh2_dlc13_emp_inf_greatswords_ror_0"] = false,
 			["wh2_dlc13_emp_inf_halberdiers_ror_0"] = false,
 			["wh2_dlc13_emp_veh_steam_tank_ror_0"] = false
+		},
+		["wh_main_emp_middenland"] = {
+			["wh2_dlc13_emp_inf_handgunners_ror_0"] = false,
+			["wh2_dlc13_emp_inf_spearmen_ror_0"] = false,
+			["wh2_dlc13_emp_inf_swordsmen_ror_0"] = false,
+			["wh2_dlc13_emp_cav_outriders_ror_0"] = false,
+			["wh2_dlc13_emp_cav_pistoliers_ror_0"] = false,
+			["wh2_dlc13_emp_inf_crossbowmen_ror_0"] = false,
+			["wh2_dlc13_emp_art_mortar_ror_0"] = false,
+			["wh2_dlc13_emp_cav_empire_knights_ror_0"] = false,
+			["wh2_dlc13_emp_cav_empire_knights_ror_1"] = false,
+			["wh2_dlc13_emp_cav_empire_knights_ror_2"] = false,
+			["wh2_dlc13_emp_inf_greatswords_ror_0"] = false,
+			["wh2_dlc13_emp_inf_halberdiers_ror_0"] = false,
+			["wh2_dlc13_emp_veh_steam_tank_ror_0"] = false
+		},
+		["wh3_main_emp_cult_of_sigmar"] = {
+			["wh2_dlc13_emp_inf_handgunners_ror_0"] = false,
+			["wh2_dlc13_emp_inf_spearmen_ror_0"] = false,
+			["wh2_dlc13_emp_inf_swordsmen_ror_0"] = false,
+			["wh2_dlc13_emp_cav_outriders_ror_0"] = false,
+			["wh2_dlc13_emp_cav_pistoliers_ror_0"] = false,
+			["wh2_dlc13_emp_inf_crossbowmen_ror_0"] = false,
+			["wh2_dlc13_emp_art_mortar_ror_0"] = false,
+			["wh2_dlc13_emp_cav_empire_knights_ror_0"] = false,
+			["wh2_dlc13_emp_cav_empire_knights_ror_1"] = false,
+			["wh2_dlc13_emp_cav_empire_knights_ror_2"] = false,
+			["wh2_dlc13_emp_inf_greatswords_ror_0"] = false,
+			["wh2_dlc13_emp_inf_halberdiers_ror_0"] = false,
+			["wh2_dlc13_emp_veh_steam_tank_ror_0"] = false
 		}
+	
 	},
 
 	locked_tooltips = {
@@ -56,6 +89,7 @@ empire_state_troops = {
 			["wh2_dlc13_emp_cav_empire_knights_ror_1"] = "state_troop_lock_tooltip_elspeth_knights_of_morr",
 			["wh2_dlc13_emp_veh_steam_tank_ror_0"] = "state_troop_lock_tooltip_elspeth_emperors_wrath",
 		},
+
 		["default"] = {
 			["wh2_dlc13_emp_inf_handgunners_ror_0"] = "state_troop_lock_tooltip_marksman",
 			["wh2_dlc13_emp_inf_spearmen_ror_0"] = "state_troop_lock_tooltip_spear",
@@ -101,24 +135,41 @@ empire_state_troops = {
 		}
 	},
 
+	building_unlocks = {
+		["wh2_dlc13_emp_veh_steam_tank_ror_0"] = {
+			"wh_main_special_nuln_cannon_foundry",
+			"wh_main_special_nuln_gunnery_school",
+		},
+		["wh2_dlc13_emp_cav_empire_knights_ror_1"] = {
+			"wh3_dlc25_gom_temple_of_morr_1",
+		},
+		["wh2_dlc13_emp_inf_swordsmen_ror_0"] = {
+			"wh_main_special_great_temple_of_ulric_2",
+			"wh_main_special_great_temple_of_ulric_3",
+			"wh_main_special_great_temple_of_ulric_4",
+		},
+	},
+
 	custom_unlocks = {
 		["wh2_dlc13_emp_veh_steam_tank_ror_0"] = {
-			building_key_1 = "wh_main_special_nuln_cannon_foundry",
-			building_key_2 = "wh_main_special_nuln_gunnery_school",
 			building_built = false,
 			tech_unlocked = false
 		},
 		["wh2_dlc13_emp_cav_empire_knights_ror_1"] = {
-			building_key = "wh3_dlc25_gom_temple_of_morr_1",
+			building_built = false,
+			tech_unlocked = false
+		},
+		["wh2_dlc13_emp_inf_swordsmen_ror_0"] = {
 			building_built = false,
 			tech_unlocked = false
 		}
 	},
 
-	nuln_region_keys = {
-		"wh3_main_chaos_region_nuln",
-		"wh3_main_combi_region_nuln"
-	}
+	nuln_chaos_region_key = "wh3_main_chaos_region_nuln",
+	nuln_combi_region_key = "wh3_main_combi_region_nuln",
+
+	middenland_region_key = "wh3_main_combi_region_middenheim",
+
 }
 
 function empire_state_troops:initialise()
@@ -139,6 +190,23 @@ function empire_state_troops:initialise()
 			for _, unit in ipairs(self.unit_keys) do
 				cm:add_units_to_faction_mercenary_pool(gelt_faction_cqi, unit, 1)
 			end
+		
+			local boris_todbringer_faction_cqi = cm:get_faction(self.boris_todbringer_key):command_queue_index()
+
+			self:lock_all_units(self.boris_todbringer_key, true)
+
+			for _, unit in ipairs(self.unit_keys) do
+				cm:add_units_to_faction_mercenary_pool(boris_todbringer_faction_cqi, unit, 1)
+			end
+
+			local volkmar_faction_cqi = cm:get_faction(self.volkmar_key):command_queue_index()
+
+			self:lock_all_units(self.volkmar_key, true)
+
+			for _, unit in ipairs(self.unit_keys) do
+				cm:add_units_to_faction_mercenary_pool(volkmar_faction_cqi, unit, 1)
+			end
+
 		end
 	end
 
@@ -149,12 +217,41 @@ function empire_state_troops:initialise()
 			return context:faction():name() == self.elspeth_key
 		end,
 		function(context) 
-			self:update_building_status()
+			local region_key = false
+
+			if cm:get_campaign_name() == "main_warhammer" then
+				region_key = self.nuln_combi_region_key
+			elseif cm:get_campaign_name() == "wh3_main_chaos" then
+				region_key = self.nuln_chaos_region_key
+			else
+				return
+			end
+
+			self:update_building_status(self.elspeth_key, "wh2_dlc13_emp_veh_steam_tank_ror_0", region_key)
+			self:update_building_status(self.elspeth_key, "wh2_dlc13_emp_cav_empire_knights_ror_1", region_key)
+
 			self:update_or_lock_unit(self.elspeth_key, "wh2_dlc13_emp_veh_steam_tank_ror_0")
 			self:update_or_lock_unit(self.elspeth_key, "wh2_dlc13_emp_cav_empire_knights_ror_1")
 		end, 
 		true
 	)
+
+	-- Though the Middenland faction is present in the Realms of Chaos campaign, it is not playable there and the Middenland region is with a different key,
+	-- so the following listener will ultimately fail and cause a crash. Therefore we add the listener only when playing the combined (main) campaign.
+	if cm:get_campaign_name() == "main_warhammer" then
+		core:add_listener(
+			"BorisStateTroopTurnStart",
+			"FactionTurnStart",
+			function(context)
+				return context:faction():name() == self.boris_todbringer_key
+			end,
+			function(context)
+				self:update_building_status(self.boris_todbringer_key, "wh2_dlc13_emp_inf_swordsmen_ror_0", self.middenland_region_key)
+				self:update_or_lock_unit(self.boris_todbringer_key, "wh2_dlc13_emp_inf_swordsmen_ror_0")
+			end,
+			true
+		)
+	end
 
 	core:add_listener(
 		"listener_salvage_unit_upgrade_tech",
@@ -191,6 +288,9 @@ function empire_state_troops:lock_all_units(faction_key, lock)
 end
 
 function empire_state_troops:update_or_lock_unit(faction_key, unit_key)
+	if not is_table(self.custom_unlocks[unit_key]) then
+		return
+	end
 	local unit_data = self.custom_unlocks[unit_key]
 
 	if unit_data.building_built or unit_data.tech_unlocked then
@@ -217,22 +317,22 @@ function empire_state_troops:change_unit_lock_status(faction_key, unit, lock)
 	end
 end
 
-function empire_state_troops:update_building_status()
-	local wissenland = cm:get_faction(self.elspeth_key)
-	local foreign_slot_list = wissenland:foreign_slot_managers()
+function empire_state_troops:update_building_status(faction_key, unit_key, region_key)
 
-	self.custom_unlocks["wh2_dlc13_emp_cav_empire_knights_ror_1"].building_built = false
-	self.custom_unlocks["wh2_dlc13_emp_veh_steam_tank_ror_0"].building_built = false
+	local faction = cm:get_faction(faction_key) 
+	local foreign_slot_list = faction:foreign_slot_managers()
+	local region = cm:get_region(region_key)
 
-	for _, region_key in pairs(self.nuln_region_keys) do
-		local region = cm:get_region(region_key)
-		
-		if region ~= false and region:owning_faction():name() == self.elspeth_key then
-			if region:building_exists(self.custom_unlocks["wh2_dlc13_emp_veh_steam_tank_ror_0"].building_key_1) then
-				self.custom_unlocks["wh2_dlc13_emp_veh_steam_tank_ror_0"].building_built = true
-				break
-			elseif region:building_exists(self.custom_unlocks["wh2_dlc13_emp_veh_steam_tank_ror_0"].building_key_2) then
-				self.custom_unlocks["wh2_dlc13_emp_veh_steam_tank_ror_0"].building_built = true
+	if not is_table(self.custom_unlocks[unit_key]) then
+		return
+	end
+	self.custom_unlocks[unit_key].building_built = false
+
+	if region ~= false and region:owning_faction():name() == faction_key then
+		for i = 1, #self.building_unlocks[unit_key] do
+			local building_list = self.building_unlocks[unit_key]
+			if region:building_exists(building_list[i]) then
+				self.custom_unlocks[unit_key].building_built = true
 				break
 			end
 		end
@@ -244,15 +344,17 @@ function empire_state_troops:update_building_status()
 
 		for j = 0, foreign_building_slot_list:num_items() - 1 do
 			local building_slot = foreign_building_slot_list:item_at(j)
-
-			if(building_slot:has_building() and building_slot:building() == self.custom_unlocks["wh2_dlc13_emp_cav_empire_knights_ror_1"].building_key) then
-				self.custom_unlocks["wh2_dlc13_emp_cav_empire_knights_ror_1"].building_built = true
-				return
+			for k = 1, #self.building_unlocks[unit_key] do
+				local building_list = self.building_unlocks[unit_key]
+				if (building_slot:has_building() and building_slot:building() == building_list[k]) then
+					self.custom_unlocks[unit_key].building_built = true
+					return
+				end
 			end
 		end
 	end
+	
 end
-
 
 --------------------- SAVE/LOAD ---------------------
 

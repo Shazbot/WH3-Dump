@@ -620,7 +620,9 @@ function generated_battle:get_enemy_force(alliance_num, army_num)
 					local generated_army_sunits = self.generated_armies[i][j][k].sunits;
 					
 					for l = 1, generated_army_sunits:count() do					
-						table.insert(sunits_table, generated_army_sunits:item(l));
+						if generated_army_sunits:item(l).unit:is_deployed() then
+							table.insert(sunits_table, generated_army_sunits:item(l));
+						end;
 					end;
 				end;
 			end;

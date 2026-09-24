@@ -265,8 +265,8 @@ function college_of_magic:initialise()
 			return faction:name() == self.faction_key and faction:is_human() == false
 		end,
 		function(context)
-			local difficulty = cm:get_difficulty()
-
+			-- HACK: remove when get_difficulty and combined_difficulty_level are fixed to be consistent in autoruns
+			local difficulty = 2 - cm:model():combined_difficulty_level()
 			cm:faction_add_pooled_resource(self.faction_key, "wh3_dlc25_emp_arcane_essays", "other", self.ai_income[difficulty])
 		end,
 		true

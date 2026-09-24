@@ -24,11 +24,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_dwarfs = gb:get_army(gb:get_player_alliance_num(0), 1);
@@ -55,7 +51,6 @@ ga_greenskins_03:reinforce_on_message("summon_wave_03", 0);
 gb:set_objective_on_message("battle_started", "wh_main_qb_dwf_thorgrim_grudgebearer_dragon_crown_of_karaz_stage_3_main_objective");
 
 -------HINTS-------
-gb:play_sound_on_message("summon_wave_02", Orc_Horn, nil, 5000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_dwf_thorgrim_grudgebearer_dragon_crown_of_karaz_stage_3_hint_objective", 5000, 2000, 1000);
 gb:queue_help_on_message("army_routing", "wh_main_qb_dwf_thorgrim_grudgebearer_dragon_crown_of_karaz_stage_3_hint_allied_reinforcements", 5000, 2000, 24000);
 gb:queue_help_on_message("summon_wave_02", "wh_main_qb_dwf_thorgrim_grudgebearer_dragon_crown_of_karaz_stage_3_hint_enemy_reinforcements_01", 5000, 2000, 25000);

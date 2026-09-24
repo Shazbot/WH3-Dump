@@ -269,7 +269,13 @@ function malus_sanity:update_effects(faction)
 		self:unlock_warmaster();
 	else
 		cm:apply_effect_bundle_to_character(self.effects.sanity_4_character, malus_character, 0);
-		cm:lock_ritual(faction, self.rite_key);
+		
+		-- Short Victory reward allows unlock Rite of Warmaster at Low and Very Low Possession
+		if cm:get_factions_bonus_value(faction, "wh3_dlc29_def_malus_warmaster_unlock_at_low_possession") == 1 then
+			self:unlock_warmaster();
+		else
+			cm:lock_ritual(faction, self.rite_key);
+		end
 	end
 
 	self:update_ui();

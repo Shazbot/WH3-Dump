@@ -1,5 +1,6 @@
 the_changeling_features = {
 	faction_key = "wh3_dlc24_tze_the_deceivers",
+	changeling_subtype = "wh3_dlc24_tze_the_changeling",
 	campaign_name = "",
 	cultist_type = "engineer",
 	cultist_subtype = "wh3_dlc24_tze_the_changeling_cultist_special",
@@ -1646,6 +1647,12 @@ the_changeling_features = {
 			wh_dlc04_vmp_vlad_von_carstein_hero = true,
 			wh_dlc04_vmp_vlad_con_carstein = true
 		},
+		-- Maggoth Riders lord variants map to the unlockable hero form keys in campaign_to_agent_subtypes
+		maggoth_riders = {
+			wh3_dlc29_chs_bloab_lord = "wh3_dlc29_chs_bloab",
+			wh3_dlc29_chs_morbidex_lord = "wh3_dlc29_chs_morbidex",
+			wh3_dlc29_chs_orghotts_lord = "wh3_dlc29_chs_orghotts",
+		},
 		player_free_forms = { -- One is randomly given to the Changeling at campaign start if they're a player
 			"wh_dlc08_nor_wulfrik",
 			"wh_main_emp_karl_franz",
@@ -1678,7 +1685,8 @@ the_changeling_features = {
 			"wh3_main_tze_kairos",
 			"wh3_main_ksl_katarin"
 		},
-		unlocked_agent_subtypes = {}
+		unlocked_agent_subtypes = {},
+		current_changeling_faction_key = nil, -- Faction The Changeling currently belongs to; updated on reassignment
 	},
 	cult_region_composite_scene = "wh3_dlc24_campaign_changeling_settlement",
 	cult_region_vfx_prefix = "changeling_cult_",
@@ -1690,10 +1698,9 @@ function the_changeling_features:initialise()
 	local faction = cm:get_faction(self.faction_key)
 	
 	if not faction then return end
-	
-	local faction_cqi = faction:command_queue_index()
 
 	if cm:is_new_game() then
+		self:set_current_changeling_faction_key(self.faction_key)
 		self:update_victory_conditions_text()
 
 		-- Embed the starting hero into the changeling's army
@@ -1702,7 +1709,7 @@ function the_changeling_features:initialise()
 		for i = 1,  character_list:num_items() - 1 do
 			local character = character_list:item_at(i)
 			local subtype_key = character:character_subtype_key()
-			if subtype_key ~= "wh3_dlc24_tze_the_changeling" and subtype_key ~= self.cultist_subtype then
+			if subtype_key ~= self.changeling_subtype and subtype_key ~= self.cultist_subtype then
 				cm:embed_agent_in_force(character, force)
 			end
 		end
@@ -1761,7 +1768,7 @@ function the_changeling_features:initialise()
 
 		else
 			-- Give the AI a selection of formless horror forms to start with
-			self:grant_formless_horror_form(self.formless_horror.ai_free_forms, faction_cqi)
+			self:grant_formless_horror_form(self.formless_horror.ai_free_forms)
 		end
 
 		cm:set_saved_value("the_changeling_schemes_complete", self.schemes.schemes_complete)
@@ -1790,6 +1797,7 @@ function the_changeling_features:initialise()
 		self.schemes.schemes_complete = cm:get_saved_value("the_changeling_schemes_complete") or {}
 		self.schemes.grand_scheme_objectives = cm:get_saved_value("the_changeling_schemes_grand_scheme_objectives")
 		self.formless_horror.unlocked_agent_subtypes = cm:get_saved_value("the_changeling_agent_subtypes_unlocked") or {}
+		self.formless_horror.current_changeling_faction_key = cm:get_saved_value("the_changeling_formless_horror_current_faction") or self.faction_key
 	end
 
 	-- Update the icons for the schemes in the schemes panel
@@ -1917,30 +1925,29 @@ function the_changeling_features:initialise()
 		true
 	)
 
-	--Gives AI changeling a random form every 3 turns
-	if faction:is_human() == false then
-		core:add_listener(
-			"the_changeling_ai_formless_horror",
-			"WorldStartRound",
-			function()
-				local changeling_faction = cm:get_faction(self.faction_key)
-				return changeling_faction:is_dead() == false and changeling_faction:was_confederated() == false and cm:turn_number() % 3 == 1
-			end,
-			function()
-				local random_forms = {}
-				for form, _ in pairs(self.formless_horror.unlocked_agent_subtypes) do
-					table.insert(random_forms, form)
-				end
+	-- Gives AI Changeling a random form every 3 turns (uses current Changeling faction)
+	core:add_listener(
+		"the_changeling_ai_formless_horror",
+		"WorldStartRound",
+		function()
+			local changeling_faction = self:get_current_changeling_faction()
+			return changeling_faction and not changeling_faction:is_null_interface() and not changeling_faction:is_human() and not changeling_faction:is_dead() and cm:turn_number() % 3 == 1
+		end,
+		function()
+			local changeling_faction = self:get_current_changeling_faction()
+			local random_forms = {}
+			for form, _ in pairs(self.formless_horror.unlocked_agent_subtypes) do
+				table.insert(random_forms, form)
+			end
 
-				if #random_forms > 0 then
-					local chosen_random_form = random_forms[cm:random_number(#random_forms, 1)]
-					out("Equipping random Formless Horror form for the Changeling AI. Chosen form is: "..chosen_random_form)
-					cm:equip_transformable_unit(cm:get_faction(self.faction_key):command_queue_index(), chosen_random_form)
-				end
-			end,
-			true
-		)
-	end
+			if #random_forms > 0 then
+				local chosen_random_form = random_forms[cm:random_number(#random_forms, 1)]
+				out("Equipping random Formless Horror form for the Changeling AI. Chosen form is: "..chosen_random_form)
+				cm:equip_transformable_unit(changeling_faction:command_queue_index(), chosen_random_form)
+			end
+		end,
+		true
+	)
 
 	-- Removed the orb of tzeentch if the starter hero dies
 	core:add_listener(
@@ -2162,19 +2169,17 @@ function the_changeling_features:initialise()
 		true
 	)
 
-	-- Grant the form of legendary heroes when they are recruited
+	-- Grant forms when characters are created in The Changeling's current faction (covers unique heroes and scripted forces)
 	core:add_listener(
-		"the_changeling_formless_horror_unique_hero_recruited",
-		"UniqueAgentSpawned",
+		"the_changeling_formless_horror_character_created",
+		"CharacterCreated",
 		function(context)
-			return context:unique_agent_details():character():faction():name() == self.faction_key
+			local character = context:character()
+			return character:faction():name() == self.formless_horror.current_changeling_faction_key
+				and not character:character_subtype(self.changeling_subtype)
 		end,
 		function(context)
-			local character = context:unique_agent_details():character()
-			if not character:is_null_interface() then
-				self:grant_formless_horror_form(character:character_subtype_key())
-			end
-
+			self:grant_formless_horror_form(context:character():character_subtype_key())
 		end,
 		true
 	)
@@ -2185,14 +2190,13 @@ function the_changeling_features:initialise()
 		"CharacterCompletedBattle",
 		function(context)
 			local character = context:character()
-			return character:character_subtype("wh3_dlc24_tze_the_changeling") and character:won_battle()
+			return character:character_subtype(self.changeling_subtype) and character:won_battle()
 		end,
 		function(context)
 			local enemy_agent_subtype = self:get_enemy_subtypes()
-			local the_changeling_faction_cqi = context:character():faction():command_queue_index()
 			
 			for i = 1, #enemy_agent_subtype do
-				self:grant_formless_horror_form(enemy_agent_subtype[i], the_changeling_faction_cqi)
+				self:grant_formless_horror_form(enemy_agent_subtype[i])
 			end
 		end,
 	true
@@ -2245,12 +2249,12 @@ function the_changeling_features:initialise()
 		"the_changeling_formless_horror_allied_to_faction",
 		"PositiveDiplomaticEvent",
 		function(context)
-			return (context:recipient():name() == self.faction_key or context:proposer():name() == self.faction_key) and (context:is_military_alliance() or context:is_defensive_alliance() or context:is_vassalage())
+			local current_faction_key = self.formless_horror.current_changeling_faction_key
+			return (context:recipient():name() == current_faction_key or context:proposer():name() == current_faction_key) and (context:is_alliance() or context:is_vassalage())
 		end,
 		function(context)
-			local other_faction
-			
-			if context:proposer():name() == self.faction_key then
+			local other_faction			
+			if context:proposer():name() == self.formless_horror.current_changeling_faction_key then
 				other_faction = context:recipient()
 			else
 				other_faction = context:proposer()
@@ -2273,27 +2277,41 @@ function the_changeling_features:initialise()
 		true
 	)
 
-	-- Update the owned forms for the changeling when they are involved in confederation
+	-- Track The Changeling's faction on reassignment.
+	-- Grant forms when he joins a faction or when another character joins his current faction (covers confederation and subjugation).
 	core:add_listener(
-		"the_changeling_formless_horror_confederates_faction",
-		"FactionJoinsConfederation",
+		"the_changeling_formless_horror_character_faction_change",
+		"CharacterFactionChangeEvent",
 		function(context)
-			return context:confederation():name() == self.faction_key or context:faction():name() == self.faction_key
+			local character = context:character()
+			return character:character_subtype(self.changeling_subtype)
+				or character:faction():name() == self.formless_horror.current_changeling_faction_key
 		end,
 		function(context)
-			local confederation = context:confederation()
-			local character_list = confederation:character_list()
+			local character = context:character()
 
-			for i = 0,  character_list:num_items() - 1 do
-				local character = character_list:item_at(i)
-				local subtype_key = character:character_subtype_key()
-				if subtype_key ~= "wh3_dlc24_tze_the_changeling" then
-					self:grant_formless_horror_form(subtype_key, confederation:command_queue_index())
+			if not character:character_subtype(self.changeling_subtype) then
+				-- If the character is not The Changeling, then they are joining The Changeling's faction, so grant their form and exit.
+				self:grant_formless_horror_form(character:character_subtype_key())
+				return
+			end
+
+			-- The Changeling themselves changes faction.
+			-- Track their current faction and grant forms for all characters in the new faction (excluding The Changeling himself).
+			local new_faction = character:faction()
+			self:set_current_changeling_faction_key(new_faction:name())
+
+			local character_list = new_faction:character_list()
+			for i = 0, character_list:num_items() - 1 do
+				local faction_character = character_list:item_at(i)
+				local subtype_key = faction_character:character_subtype_key()
+				if subtype_key ~= self.changeling_subtype then
+					self:grant_formless_horror_form(subtype_key)
 				end
 			end
 		end,
 		true
-	);
+	)
 	
 	-- The below listeners are all based around missions, teleport networks, and schemes, which aren't available to the AI
 	if faction:is_human() then
@@ -2921,10 +2939,20 @@ function the_changeling_features:trigger_scripted_mission(mission_list)
 	end
 end
 
--- Common function to grant formless horror forms
-function the_changeling_features:grant_formless_horror_form(agent_subtype, faction_cqi)
+function the_changeling_features:set_current_changeling_faction_key(faction_key)
+	self.formless_horror.current_changeling_faction_key = faction_key
+	cm:set_saved_value("the_changeling_formless_horror_current_faction", faction_key)
+end
 
-	faction_cqi = faction_cqi or cm:get_faction(self.faction_key):command_queue_index()
+function the_changeling_features:get_current_changeling_faction()
+	return cm:get_faction(self.formless_horror.current_changeling_faction_key)
+end
+
+-- Common function to grant formless horror forms
+function the_changeling_features:grant_formless_horror_form(agent_subtype)
+
+	local faction = self:get_current_changeling_faction()
+	local faction_cqi = faction:command_queue_index()
 	
 	-- Isabella and Vlad are always unlocked as a pair, no matter how they are originally obtained
 	if self.formless_horror.von_carsteins[agent_subtype] then
@@ -2939,6 +2967,10 @@ function the_changeling_features:grant_formless_horror_form(agent_subtype, facti
 
 	for i = 1, #agent_subtype do
 		local current_agent_subtype = agent_subtype[i]
+		-- Maggoth Riders dilemma lords use *_lord subtypes; Formless Horror only unlocks the hero keys
+		if self.formless_horror.maggoth_riders[current_agent_subtype] then
+			current_agent_subtype = self.formless_horror.maggoth_riders[current_agent_subtype]
+		end
 		-- Before unlocking we need to make sure the agent subtype is valid in the current campaign, and that we haven't already unlocked it
 		if cm:is_agent_transformation_available(current_agent_subtype) and not self.formless_horror.unlocked_agent_subtypes[current_agent_subtype] then
 			self.formless_horror.unlocked_agent_subtypes[current_agent_subtype] = true
@@ -2950,8 +2982,6 @@ function the_changeling_features:grant_formless_horror_form(agent_subtype, facti
 				self:complete_objective(mission)
 			end
 
-			local faction = cm:model():faction_for_command_queue_index(faction_cqi)
-			
 			if faction:is_human() then
 				cm:show_message_event(
 					faction:name(),
@@ -3264,7 +3294,7 @@ function the_changeling_features:get_enemy_subtypes()
 	for i = 1, num_attackers do
 		local char_subtype = cm:pending_battle_cache_get_attacker_subtype(i)
 		
-		if char_subtype == "wh3_dlc24_tze_the_changeling" then
+		if char_subtype == self.changeling_subtype then
 			was_attacker = true
 			break
 		end

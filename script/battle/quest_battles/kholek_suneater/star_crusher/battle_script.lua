@@ -22,12 +22,9 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
---
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 undead_armies_routed = 0;
 
 -------GENERALS SPEECH--------
---
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -37,7 +34,6 @@ ga_ai_02_vmp_defenders = gb:get_army(gb:get_non_player_alliance_num(), "necroman
 ga_ai_02_vmp_side_attack_1 = gb:get_army(gb:get_non_player_alliance_num(), "side_attack_1"); -- Vamps
 ga_ai_02_vmp_side_attack_2 = gb:get_army(gb:get_non_player_alliance_num(), "side_attack_2"); -- Vamps
 ga_ai_02_vmp_side_attack_3 = gb:get_army(gb:get_non_player_alliance_num(), "side_attack_3"); -- Vamps
-
 
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_defeat_army");
@@ -52,20 +48,15 @@ gb:complete_objective_on_message("all_vamps_routed", "wh_main_qb_objective_defen
 --gb:queue_help_on_message("battle_started", "wh_dlc01_qb_chs_kholek_suneater_starcrusher_stage_3_hint_objective", 13000, 2000, 1000);
 gb:queue_help_on_message("battle_started", "wh_dlc01_qb_chs_kholek_suneater_starcrusher_stage_3_hint_objective", 13000, 2000, 1000);
 
-gb:play_sound_on_message("casualties_sustained_01", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("casualties_sustained_01", "wh_dlc01_qb_chs_kholek_suneater_starcrusher_stage_3_hint_reinforcements_1", 13000, 2000, 1000);
 
-gb:play_sound_on_message("casualties_sustained_02", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("casualties_sustained_02", "wh_dlc01_qb_chs_kholek_suneater_starcrusher_stage_3_hint_reinforcements_2", 13000, 2000, 1000);
 
-gb:play_sound_on_message("casualties_sustained_03", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("casualties_sustained_03", "wh_dlc01_qb_chs_kholek_suneater_starcrusher_stage_3_hint_reinforcements_3", 13000, 2000, 1000);
 
-gb:play_sound_on_message("casualties_sustained_04", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("casualties_sustained_04", "wh_dlc01_qb_chs_kholek_suneater_starcrusher_stage_3_hint_reinforcements_4", 13000, 2000, 1000);
 
 -------ORDERS-------
-
 ga_ai_01:message_on_rout_proportion("casualties_sustained_01", 0.1);
 ga_ai_01:message_on_rout_proportion("casualties_sustained_02", 0.5);
 ga_ai_01:message_on_rout_proportion("casualties_sustained_03", 0.75);

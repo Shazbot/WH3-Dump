@@ -347,6 +347,7 @@ function CUS:convert_character(character, new_type, new_subtype, opt_inherited_l
 	local old_char_details = {
 		mf = character:military_force(),
 		rank = character:rank(),
+		cqi = character:command_queue_index(),
 		fm_cqi = character:family_member():command_queue_index(),
 		character_details = character:character_details(),
 		faction_key = character:faction():name(),
@@ -366,7 +367,7 @@ function CUS:convert_character(character, new_type, new_subtype, opt_inherited_l
 		new_character = cm:create_agent(old_char_details.faction_key, new_type, new_subtype, new_x, new_y)
 	end
 
-	if new_character then
+	if new_character and not new_character:is_null_interface() then
 		self:update_new_character(old_char_details, new_character, inherited_level_proportion)
 		if opt_incident then
 			cm:trigger_incident_with_targets(new_character:faction():command_queue_index(), opt_incident, 0, 0, new_character:command_queue_index(), 0, 0, 0)
@@ -441,6 +442,11 @@ function CUS:update_new_character(old_char_details, new_char_interface, level_pr
 
 	cm:add_agent_experience(cm:char_lookup_str(new_char_interface:command_queue_index()), math.floor(old_char_details.rank * new_character_level_proportion)+1, true)
 	cm:suppress_immortality(old_char_details.fm_cqi, true)
+
+	local old_character = cm:get_character_by_cqi(old_char_details.cqi)
+	if old_character and not old_character:is_null_interface() then
+		core:trigger_event("ScriptEventCharacterUpgraded", old_character, new_char_interface)
+	end
 
 	cm:callback(function()
 		cm:kill_character_and_commanded_unit("family_member_cqi:" .. old_char_details.fm_cqi, true)

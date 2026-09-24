@@ -50,7 +50,19 @@ campaign_experience_triggers = {
 		"chs_khorne",
 		"saurus",
 		"chd_convoy",
-		"ksl_atamans"
+		"ksl_atamans",
+		"skv_verminlords",
+		"skv_plague_priests",
+		"skv_warlock_engineers",
+		"skv_assassins",
+		"skv_chieftains",
+		"skv_schemers",
+		"nag_vmp",
+		"nag_tmb",
+		"nag_cst",
+		"emp_ulric",
+		"vmp_vampire_heroes",
+		"vmp_necromancers"
 	},
 
 	---bonus values that modify the xp gain from all sources
@@ -62,7 +74,19 @@ campaign_experience_triggers = {
 		chs_undivided = "experience_mod_chs_undivided",
 		def_casters = "experience_mod_for_def_casters",
 		hef_casters = "experience_mod_for_hef_casters",
-		saurus = "experience_mod_for_saurus_characters"
+		saurus = "experience_mod_for_saurus_characters",
+		skv_verminlords = "experience_mod_for_skv_verminlords",
+		skv_plague_priests = "experience_mod_for_plague_priests",
+		skv_warlock_engineers = "experience_mod_for_warlock_engineers",
+		skv_assassins = "experience_mod_for_assassins",
+		skv_chieftains = "experience_mod_for_chieftains",
+		skv_schemers = "experience_mod_for_schemers",
+		nag_vmp = "experience_mod_for_nag_vmp",
+		nag_tmb = "experience_mod_for_nag_tmb",
+		nag_cst = "experience_mod_for_nag_cst",
+		emp_ulric = "experience_mod_for_emp_ulric",
+		vmp_vampire_heroes = "experience_mod_for_vampire_heroes",
+		vmp_necromancers = "experience_mod_for_vmp_necromancers"
 	},
 
 	---bonus values that add a flat XP amount per turn
@@ -285,6 +309,17 @@ function campaign_experience_triggers:setup_experience_triggers()
 		true
 	);
 
+	core:add_listener(
+		"ScriptedChaoticPlanAddExperienceListener",
+		"ScriptedChaoticPlanAddExperience",
+		true,
+		function(context)
+			-- experience for schemer from completing a plan
+			self:add_experience(context.stored_table.schemer, true, context.stored_table.value, false, 1, true)
+		end,
+		true
+	)
+
 end;
 
 function campaign_experience_triggers:add_assassination_bonus(target_rank)
@@ -381,7 +416,7 @@ function campaign_experience_triggers:calculate_battle_result_experience(context
 end;
 
 
-function campaign_experience_triggers:add_experience(context, is_general, value, ignore_xp_mod_bonuses, mod)
+function campaign_experience_triggers:add_experience(context, is_general, value, ignore_xp_mod_bonuses, mod, use_character_details)
 	local character = false;
 	
 	if is_character(context) then
@@ -395,6 +430,11 @@ function campaign_experience_triggers:add_experience(context, is_general, value,
 	local faction = character:faction();
 	local character_subtype = character:character_subtype_key();
 	local mod = mod or 1;
+
+	-- special case - experience gain suppressed
+	if bv:scripted_value("experience_gain_suppressed", "value") > 0 then
+		return
+	end
 	
 	mod = mod + bv:scripted_value("experience_mod", "value") / 100;
 	
@@ -435,7 +475,11 @@ function campaign_experience_triggers:add_experience(context, is_general, value,
 	end
 	
 	if amount_to_add > 0 then
-		cm:get_game_interface():add_agent_experience(cm:char_lookup_str(character), amount_to_add);
+		if use_character_details then
+			cm:character_details_add_experience(character:character_details(), amount_to_add)
+		else
+			cm:get_game_interface():add_agent_experience(cm:char_lookup_str(character), amount_to_add)
+		end
 	end;
 end;
 

@@ -1070,7 +1070,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="GetIfElse(ShouldDisplayZeroFactors, NegativeFactorList.Sort(StringValue, true), NegativeFactorList.Filter(IntValue &lt; 0).Sort(StringValue, true))"/>
+					context_function_id="(factors = GetIfElse(ShouldDisplayZeroFactors, NegativeFactorList, NegativeFactorList.Filter(IntValue &lt; 0))) =&gt; { GetIfElse(AreFactorsDBSorted, factors.Sort(SortOrder, true), factors.Sort(StringValue, true)) }"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -1145,7 +1145,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignPooledResource"
-					context_function_id="GetIfElse(ShouldDisplayZeroFactors, PositiveFactorList.Sort(StringValue, true), PositiveFactorList.Filter(IntValue &gt; 0).Sort(StringValue, true))"/>
+					context_function_id="(factors = GetIfElse(ShouldDisplayZeroFactors, PositiveFactorList, PositiveFactorList.Filter(IntValue &gt; 0))) =&gt; { GetIfElse(AreFactorsDBSorted, factors.Sort(SortOrder, true), factors.Sort(StringValue, true)) }"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate

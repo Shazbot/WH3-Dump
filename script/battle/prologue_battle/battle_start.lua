@@ -35,8 +35,7 @@ else
 	bm:out("prologue_next_quote is not set");
 end;
 
-
-
+require("wh_battle_collapse_composite_scenes");
 
 bm:load_scripted_tours();
 

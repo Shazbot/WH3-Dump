@@ -23,11 +23,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -45,7 +41,6 @@ ga_ai_04:get_army():suppress_reinforcement_adc();
 gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_defeat_army_ambush");
 
 -------HINTS-------
-gb:play_sound_on_message("summon_wave_01", Orc_Horn, nil, 3000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_vmp_heinrich_kemmler_cloak_of_mists_stage_3_hint_objective", 5000, 2000, 1000);
 gb:queue_help_on_message("summon_wave_01", "wh_main_qb_vmp_heinrich_kemmler_cloak_of_mists_stage_3_hint_reinforcements_01", 5000, 2000, 1000);
 gb:queue_help_on_message("summon_wave_01", "wh_main_qb_vmp_heinrich_kemmler_cloak_of_mists_stage_3_hint_reinforcements_02", 5000, 2000, 60000);

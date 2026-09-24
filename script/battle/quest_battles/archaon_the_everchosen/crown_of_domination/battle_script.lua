@@ -22,17 +22,11 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
 
-
 -------ARMY SETUP-------
-
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1);
 ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), 2);
-
 
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_dlc01_qb_chs_archaon_crown_of_domination_stage_2_main_objective");
@@ -40,9 +34,7 @@ gb:set_objective_on_message("deployment_started", "wh_dlc01_qb_chs_archaon_crown
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_dlc01_qb_chs_archaon_crown_of_domination_stage_2_hint_objective");
 
-gb:play_sound_on_message("reinforcements_1", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("reinforcements_1", "wh_dlc01_qb_chs_archaon_crown_of_domination_stage_2_hint_reinforcements", 13000, 2000, 4000);
-
 
 -------ORDERS-------
 gb:message_on_time_offset("reinforcements_1", 60000);

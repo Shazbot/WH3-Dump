@@ -67,6 +67,7 @@ local FACTION_CULTURES_TO_RACIAL_NARRATIVE_EVENTS_FILENAMES_MAP = {
 	wh3_main_dae_daemons = 			{"wh3_narrative_daemon_prince", "wh3_narrative_chaos"},
 	wh3_main_ogr_ogre_kingdoms = 	{"wh3_narrative_ogres"},
 	wh3_dlc23_chd_chaos_dwarfs = 	{"wh3_narrative_chaos_dwarfs"},
+	wh3_dlc29_nag_undead_legions =  {"wh3_narrative_undead_legions"},
 };
 
 
@@ -582,7 +583,10 @@ local function add_narrative_data_for_playable_faction(faction_key)
 		narrative.add_data_for_faction(faction_key, "ogre_contracts_trigger_war_contract_block", false)
 	end
 
-
+	if faction_key == "wh3_dlc29_nag_host_of_nagash" then
+		-- shielding the nagash case for now - narrative is not yet designed and start-pos situation will likely not feature an enemy with a region
+		narrative.add_data_for_faction(faction_key, "shared_technology_chain_block", true); -- Nagash doesn't have technology
+	end
 
 
 
@@ -759,9 +763,6 @@ local function add_narrative_data_for_playable_faction(faction_key)
 	if faction_key == "wh3_dlc26_grn_gorbad_ironclaw" then
 		narrative.add_data_for_faction(faction_key, "greenskins_da_plan_trigger_campaign_start_equip_tactic_block", false)
 	end
-
-
-	--SLAANESH
 
 	--Dechala
 	if faction_key == "wh3_dlc27_sla_the_tormentors" then

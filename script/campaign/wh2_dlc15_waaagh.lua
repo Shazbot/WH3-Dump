@@ -5,6 +5,7 @@ waaagh = {
 	waaagh_per_turn = 1, -- Passive gain per turn
 	waaagh_ended = -100, -- Waaagh removed after a waaagh ends. -100 ensures the resource resets to 0
 	battle_mod = 0.015, -- Multiplier applied to kills to work out how much waaagh is earned from Battles. Default 0.015, higher = more resource
+	battle_mod_scripted = "waaagh_battle_mod_scripted",
 	ai_cooldown = 30, -- Number of turns before we roll for AI boosts to automatically start a waaargh
 	ai_boost = 100, -- Amount of Waaagh AI will get when boosted. 100 guarantees it'll trigger a waaagh
 	ai_boost_chance = 20, -- %chance/turn AI will get ai_boost added to waaagh if they haven't triggered a waaagh for ai_cooldown+ turns
@@ -77,7 +78,8 @@ waaagh = {
 			culture = {
 				wh2_dlc09_tmb_tomb_kings = true,
 				wh2_dlc11_cst_vampire_coast = true,
-				wh_main_vmp_vampire_counts = true
+				wh_main_vmp_vampire_counts = true,
+				wh3_dlc29_nag_undead_legions = true
 			}
 		},
 		["elves"] = {
@@ -774,6 +776,7 @@ function waaagh:add_waaagh_listeners()
 		local default_faction_setup = {
 			reward_level = nil,
 			reward_culture = nil,
+			target_culture = nil,
 			previous_reward_level = nil,
 			previous_reward_culture = nil,
 			gork_counter = 0,
@@ -866,10 +869,14 @@ function waaagh:add_waaagh_listeners()
 			return faction:is_human() and self.factions[faction:name()] and context:garrison_residence():region():name() == self.factions[faction:name()].ritual_region_key
 		end,
 		function(context)
-			local faction_key = context:character():faction():name()
+			local faction = context:character():faction()
+			local faction_key = faction:name()
 			self.factions[faction_key].success = true;
 			out.design("### Waaagh target has been razed: WAAAGH! was a success")
 			cm:trigger_incident(faction_key,"wh_main_incident_grn_waaagh_success_raze", true)
+			if faction:is_human() then
+				core:trigger_event("PlayerWaghEndedSuccessful", faction);
+			end
 		end,
 		true
 	);
@@ -881,9 +888,13 @@ function waaagh:add_waaagh_listeners()
 			return faction:is_human() and self.factions[faction:name()] and context:garrison_residence():region():name() == self.factions[faction:name()].ritual_region_key 
 		end,
 		function(context)
-			local faction = context:character():faction():name()
+			local faction = context:character():faction()
+			local faction_key = faction:name()
 			out.design("### Waaagh target has been occupied and needs to be held")
-			cm:trigger_incident(faction,"wh_main_incident_grn_waaagh_success_occupy", true)
+			cm:trigger_incident(faction_key,"wh_main_incident_grn_waaagh_success_occupy", true)
+			if faction:is_human() then
+				core:trigger_event("PlayerWaghEndedSuccessful", faction);
+			end
 		end,
 		true
 	);
@@ -1102,6 +1113,8 @@ function waaagh:waaagh_started(context)
 	self.factions[faction_key].reward_level = reward_level
 	self.factions[faction_key].reward_culture = reward_culture
 	
+	-- Store exact culture for IE Victory Conditions
+	self.factions[faction_key].target_culture = ritual_region_owner_culture
 end
 
 function waaagh:waaagh_ended_human(context)
@@ -1478,8 +1491,10 @@ function waaagh:battle_completed()
 			for i = 1, #attacker_factions do
 				local faction_key = attacker_factions[i]
 				local faction = cm:get_faction(faction_key);
-				
+				local scripted_battle_mod = cm:get_factions_bonus_value(faction, self.battle_mod_scripted)
+
 				local waaagh_reward = attacker_waaagh * self.battle_mod;
+				waaagh_reward = waaagh_reward + (waaagh_reward * scripted_battle_mod / 100)
 
 				self:modify_pooled_resource(faction_key, self.rs_waagh_battle_other, waaagh_reward);
 				self:print_battle(faction_key, waaagh_reward, attacker_value, defender_value, attacker_multiplier, kill_ratio_attacker);
@@ -1496,8 +1511,10 @@ function waaagh:battle_completed()
 			for i = 1, #defender_factions do
 				local faction_key = defender_factions[i]
 				local faction = cm:get_faction(faction_key);
+				local scripted_battle_mod = cm:get_factions_bonus_value(faction, self.battle_mod_scripted)
 	
 				local waaagh_reward = defender_waaagh * self.battle_mod;
+				waaagh_reward = waaagh_reward + (waaagh_reward * scripted_battle_mod / 100)
 
 				self:modify_pooled_resource(faction_key, self.rs_waagh_battle_other, waaagh_reward);
 				self:print_battle(faction_key, waaagh_reward, attacker_value, defender_value, defender_multiplier, kill_ratio_defender);

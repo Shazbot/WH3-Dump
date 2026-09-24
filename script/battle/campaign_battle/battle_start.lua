@@ -14,5 +14,6 @@ bm:out("********************************************************************");
 bm:out("");
 
 require("wh_battle_advice");
+require("wh_battle_collapse_composite_scenes");
 
 bm:load_scripted_tours();

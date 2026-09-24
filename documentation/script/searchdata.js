@@ -568,6 +568,22 @@ var all_terms = [
 		}
 	},
 	{
+		term:"is_region_group_dynamic_data()",
+		envs:{
+			campaign:"campaign/global.html#function:global:is_region_group_dynamic_data",
+			battle:"battle/global.html#function:global:is_region_group_dynamic_data",
+			frontend:"frontend/global.html#function:global:is_region_group_dynamic_data"
+		}
+	},
+	{
+		term:"is_region_group_dynamic_system()",
+		envs:{
+			campaign:"campaign/global.html#function:global:is_region_group_dynamic_system",
+			battle:"battle/global.html#function:global:is_region_group_dynamic_system",
+			frontend:"frontend/global.html#function:global:is_region_group_dynamic_system"
+		}
+	},
+	{
 		term:"is_garrisonresidence()",
 		envs:{
 			campaign:"campaign/global.html#function:global:is_garrisonresidence",
@@ -656,6 +672,14 @@ var all_terms = [
 		}
 	},
 	{
+		term:"is_region_group_pooled_resource_managers_system()",
+		envs:{
+			campaign:"campaign/global.html#function:global:is_region_group_pooled_resource_managers_system",
+			battle:"battle/global.html#function:global:is_region_group_pooled_resource_managers_system",
+			frontend:"frontend/global.html#function:global:is_region_group_pooled_resource_managers_system"
+		}
+	},
+	{
 		term:"is_buildinglist()",
 		envs:{
 			campaign:"campaign/global.html#function:global:is_buildinglist",
@@ -685,6 +709,30 @@ var all_terms = [
 			campaign:"campaign/global.html#function:global:is_foreignslot",
 			battle:"battle/global.html#function:global:is_foreignslot",
 			frontend:"frontend/global.html#function:global:is_foreignslot"
+		}
+	},
+	{
+		term:"is_pooledresourcemanager()",
+		envs:{
+			campaign:"campaign/global.html#function:global:is_pooledresourcemanager",
+			battle:"battle/global.html#function:global:is_pooledresourcemanager",
+			frontend:"frontend/global.html#function:global:is_pooledresourcemanager"
+		}
+	},
+	{
+		term:"is_initiative_set()",
+		envs:{
+			campaign:"campaign/global.html#function:global:is_initiative_set",
+			battle:"battle/global.html#function:global:is_initiative_set",
+			frontend:"frontend/global.html#function:global:is_initiative_set"
+		}
+	},
+	{
+		term:"is_pooledresource()",
+		envs:{
+			campaign:"campaign/global.html#function:global:is_pooledresource",
+			battle:"battle/global.html#function:global:is_pooledresource",
+			frontend:"frontend/global.html#function:global:is_pooledresource"
 		}
 	},
 	{
@@ -4381,6 +4429,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"battle_ui_manager:highlight_survival_battle_specific_ui()",
+		envs:{
+			battle:"battle/battle_ui_manager.html#function:battle_ui_manager:highlight_survival_battle_specific_ui"
+		}
+	},
+	{
 		term:"battle_ui_manager:highlight_tactical_map_button()",
 		envs:{
 			battle:"battle/battle_ui_manager.html#function:battle_ui_manager:highlight_tactical_map_button"
@@ -5407,6 +5461,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:faction_add_pooled_resource()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:faction_add_pooled_resource"
+		}
+	},
+	{
 		term:"campaign_manager:output_campaign_obj()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:output_campaign_obj"
@@ -5929,6 +5989,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:region_lookup_str()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:region_lookup_str"
+		}
+	},
+	{
 		term:"campaign_manager:char_in_owned_region()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:char_in_owned_region"
@@ -6142,6 +6208,12 @@ var all_terms = [
 		term:"campaign_manager:create_force_with_existing_general()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:create_force_with_existing_general"
+		}
+	},
+	{
+		term:"campaign_manager:create_spawnable_force()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:create_spawnable_force"
 		}
 	},
 	{
@@ -6571,6 +6643,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:region_has_building()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:region_has_building"
+		}
+	},
+	{
 		term:"campaign_manager:region_has_chain_or_superchain()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:region_has_chain_or_superchain"
@@ -6580,6 +6658,12 @@ var all_terms = [
 		term:"campaign_manager:instantly_upgrade_building_in_region()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:instantly_upgrade_building_in_region"
+		}
+	},
+	{
+		term:"campaign_manager:build_building_in_slot_in_region()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:build_building_in_slot_in_region"
 		}
 	},
 	{
@@ -7135,6 +7219,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:scroll_camera_to_character()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:scroll_camera_to_character"
+		}
+	},
+	{
 		term:"campaign_manager:scroll_camera_with_cutscene()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:scroll_camera_with_cutscene"
@@ -7687,6 +7777,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:set_active_mission_status_for_faction()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:set_active_mission_status_for_faction"
+		}
+	},
+	{
 		term:"campaign_manager:trigger_dilemma()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:trigger_dilemma"
@@ -7741,6 +7837,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaign_manager:print_disable_event_feed_events_history()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:print_disable_event_feed_events_history"
+		}
+	},
+	{
 		term:"campaign_manager:show_message_event()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:show_message_event"
@@ -7750,6 +7852,24 @@ var all_terms = [
 		term:"campaign_manager:show_message_event_located()",
 		envs:{
 			campaign:"campaign/campaign_manager.html#function:campaign_manager:show_message_event_located"
+		}
+	},
+	{
+		term:"campaign_manager:toggle_initiative_script_locked()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:toggle_initiative_script_locked"
+		}
+	},
+	{
+		term:"campaign_manager:lock_initiative()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:lock_initiative"
+		}
+	},
+	{
+		term:"campaign_manager:unlock_initiative()",
+		envs:{
+			campaign:"campaign/campaign_manager.html#function:campaign_manager:unlock_initiative"
 		}
 	},
 	{
@@ -8344,6 +8464,12 @@ var all_terms = [
 		term:"payload.iron_favour()",
 		envs:{
 			campaign:"campaign/payload.html#function:payload:iron_favour"
+		}
+	},
+	{
+		term:"payload.Warpstone()",
+		envs:{
+			campaign:"campaign/payload.html#function:payload:Warpstone"
 		}
 	},
 	{
@@ -10576,6 +10702,66 @@ var all_terms = [
 		term:"campaign_ui_manager:highlight_mercenary_contracts()",
 		envs:{
 			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_mercenary_contracts"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_great_temple_of_ulric()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_great_temple_of_ulric"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_web_of_power()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_web_of_power"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_nef_manipulations()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_nef_manipulations"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_vampire_confederation()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_vampire_confederation"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_chaotic_plans()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_chaotic_plans"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_gifts_of_nurge()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_gifts_of_nurge"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_necromancy()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_necromancy"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_black_pyramid()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_black_pyramid"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_books_of_nagash_nag()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_books_of_nagash_nag"
+		}
+	},
+	{
+		term:"campaign_ui_manager:highlight_mortarchs()",
+		envs:{
+			campaign:"campaign/campaign_ui_manager.html#function:campaign_ui_manager:highlight_mortarchs"
 		}
 	},
 	{
@@ -15553,6 +15739,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"battle_camera:add_shake()",
+		envs:{
+			battle:"battle/battle_camera.html#function:battle_camera:add_shake"
+		}
+	},
+	{
 		term:"battle_camera:disable_shake()",
 		envs:{
 			battle:"battle/battle_camera.html#function:battle_camera:disable_shake"
@@ -18415,6 +18607,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"battle_reinforcements:set_unit_locked_until_event()",
+		envs:{
+			battle:"battle/battle_reinforcements.html#function:battle_reinforcements:set_unit_locked_until_event"
+		}
+	},
+	{
 		term:"battle_reinforcement_line:script_id()",
 		envs:{
 			battle:"battle/battle_reinforcements.html#function:battle_reinforcement_line:script_id"
@@ -18484,6 +18682,12 @@ var all_terms = [
 		term:"battle_reinforcement_army:assign_spawn_zone()",
 		envs:{
 			battle:"battle/battle_reinforcements.html#function:battle_reinforcement_army:assign_spawn_zone"
+		}
+	},
+	{
+		term:"battle_composite_scenes_system:far_terrain_composite_scenes()",
+		envs:{
+			battle:"battle/battle_composite_scenes_system.html#function:battle_composite_scenes_system:far_terrain_composite_scenes"
 		}
 	},
 	{
@@ -18568,6 +18772,12 @@ var all_terms = [
 		term:"battle_composite_scene:scene_name()",
 		envs:{
 			battle:"battle/battle_composite_scenes_system.html#function:battle_composite_scene:scene_name"
+		}
+	},
+	{
+		term:"battle_composite_scene:scene_centre()",
+		envs:{
+			battle:"battle/battle_composite_scenes_system.html#function:battle_composite_scene:scene_centre"
 		}
 	},
 	{
@@ -19747,6 +19957,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"campaignui.UpdateAllCityInfoBars()",
+		envs:{
+			campaign:"campaign/campaignui.html#function:campaignui:UpdateAllCityInfoBars"
+		}
+	},
+	{
 		term:"campaignui.UpdateSettlementEffectIcons()",
 		envs:{
 			campaign:"campaign/campaignui.html#function:campaignui:UpdateSettlementEffectIcons"
@@ -20751,6 +20967,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"episodic_scripting:set_episode_stage_audio_awareness()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:set_episode_stage_audio_awareness"
+		}
+	},
+	{
 		term:"episodic_scripting:set_camera_position()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:set_camera_position"
@@ -21117,6 +21339,84 @@ var all_terms = [
 		}
 	},
 	{
+		term:"episodic_scripting:dynamic_region_group_exists()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:dynamic_region_group_exists"
+		}
+	},
+	{
+		term:"episodic_scripting:create_dynamic_region_group()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:create_dynamic_region_group"
+		}
+	},
+	{
+		term:"episodic_scripting:remove_dynamic_region_group()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_dynamic_region_group"
+		}
+	},
+	{
+		term:"episodic_scripting:add_region_to_dynamic_region_group()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:add_region_to_dynamic_region_group"
+		}
+	},
+	{
+		term:"episodic_scripting:remove_region_from_dynamic_region_group()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_region_from_dynamic_region_group"
+		}
+	},
+	{
+		term:"episodic_scripting:dynamic_region_group_pooled_resource_manager_exists()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:dynamic_region_group_pooled_resource_manager_exists"
+		}
+	},
+	{
+		term:"episodic_scripting:create_dynamic_region_group_pooled_resource_manager()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:create_dynamic_region_group_pooled_resource_manager"
+		}
+	},
+	{
+		term:"episodic_scripting:remove_dynamic_region_group_pooled_resource_manager()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_dynamic_region_group_pooled_resource_manager"
+		}
+	},
+	{
+		term:"episodic_scripting:region_group_add_pooled_resource()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:region_group_add_pooled_resource"
+		}
+	},
+	{
+		term:"episodic_scripting:character_details_add_experience()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:character_details_add_experience"
+		}
+	},
+	{
+		term:"episodic_scripting:character_details_add_ancillary()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:character_details_add_ancillary"
+		}
+	},
+	{
+		term:"episodic_scripting:character_details_set_rank()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:character_details_set_rank"
+		}
+	},
+	{
+		term:"episodic_scripting:character_details_add_skill_point()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:character_details_add_skill_point"
+		}
+	},
+	{
 		term:"episodic_scripting:grant_faction_additional_vision()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:grant_faction_additional_vision"
@@ -21297,6 +21597,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"episodic_scripting:upgrade_unit()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:upgrade_unit"
+		}
+	},
+	{
 		term:"episodic_scripting:add_experience_to_units_commanded_by_character()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:add_experience_to_units_commanded_by_character"
@@ -21348,6 +21654,18 @@ var all_terms = [
 		term:"episodic_scripting:teleport_military_force_to()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:teleport_military_force_to"
+		}
+	},
+	{
+		term:"episodic_scripting:enter_limbo()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:enter_limbo"
+		}
+	},
+	{
+		term:"episodic_scripting:leave_limbo()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:leave_limbo"
 		}
 	},
 	{
@@ -21987,6 +22305,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"episodic_scripting:set_mercenary_pool_unit_scripted_capacity_bonus()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:set_mercenary_pool_unit_scripted_capacity_bonus"
+		}
+	},
+	{
 		term:"episodic_scripting:add_units_to_province_mercenary_pool_by_region()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:add_units_to_province_mercenary_pool_by_region"
@@ -22122,6 +22446,12 @@ var all_terms = [
 		term:"episodic_scripting:remove_scripted_mission_entities()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_scripted_mission_entities"
+		}
+	},
+	{
+		term:"episodic_scripting:increase_scripted_mission_count()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:increase_scripted_mission_count"
 		}
 	},
 	{
@@ -22293,6 +22623,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"episodic_scripting:foreign_slot_instantly_complete_construction()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:foreign_slot_instantly_complete_construction"
+		}
+	},
+	{
 		term:"episodic_scripting:remove_faction_foreign_slots_from_region()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_faction_foreign_slots_from_region"
@@ -22302,6 +22638,18 @@ var all_terms = [
 		term:"episodic_scripting:instant_set_building_health_percent()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:instant_set_building_health_percent"
+		}
+	},
+	{
+		term:"episodic_scripting:force_lifecycle_transition_progress()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:force_lifecycle_transition_progress"
+		}
+	},
+	{
+		term:"episodic_scripting:force_lifecycle_transition()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:force_lifecycle_transition"
 		}
 	},
 	{
@@ -22563,6 +22911,12 @@ var all_terms = [
 		}
 	},
 	{
+		term:"episodic_scripting:force_awake_from_death_and_confederate()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:force_awake_from_death_and_confederate"
+		}
+	},
+	{
 		term:"episodic_scripting:force_make_trade_agreement()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:force_make_trade_agreement"
@@ -22572,6 +22926,12 @@ var all_terms = [
 		term:"episodic_scripting:make_diplomacy_available()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:make_diplomacy_available"
+		}
+	},
+	{
+		term:"episodic_scripting:add_garrison_residence_exposed_to_faction()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:add_garrison_residence_exposed_to_faction"
 		}
 	},
 	{
@@ -22632,6 +22992,30 @@ var all_terms = [
 		term:"episodic_scripting:remove_event_restricted_building_record_for_faction()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_event_restricted_building_record_for_faction"
+		}
+	},
+	{
+		term:"episodic_scripting:add_event_restricted_occupation_option_record()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:add_event_restricted_occupation_option_record"
+		}
+	},
+	{
+		term:"episodic_scripting:remove_event_restricted_occupation_option_record()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_event_restricted_occupation_option_record"
+		}
+	},
+	{
+		term:"episodic_scripting:add_event_restricted_occupation_option_record_for_faction()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:add_event_restricted_occupation_option_record_for_faction"
+		}
+	},
+	{
+		term:"episodic_scripting:remove_event_restricted_occupation_option_record_for_faction()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:remove_event_restricted_occupation_option_record_for_faction"
 		}
 	},
 	{
@@ -22830,6 +23214,12 @@ var all_terms = [
 		term:"episodic_scripting:unlock_rituals_in_category()",
 		envs:{
 			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:unlock_rituals_in_category"
+		}
+	},
+	{
+		term:"episodic_scripting:apply_ritual_cooldown()",
+		envs:{
+			campaign:"campaign/episodic_scripting.html#function:episodic_scripting:apply_ritual_cooldown"
 		}
 	},
 	{
@@ -24396,6 +24786,870 @@ var all_terms = [
 		term:"st_helper.setup_tour_end()",
 		envs:{
 			battle:"battle/st_helper.html#function:st_helper:setup_tour_end"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_AT_LEAST_X_OF_A_POOLED_RESOURCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_AT_LEAST_X_OF_A_POOLED_RESOURCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ALL_PLAYERS_RAZE_SACK_OR_OWN_X_SETTLEMENTS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ALL_PLAYERS_RAZE_SACK_OR_OWN_X_SETTLEMENTS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OCCUPY_LOOT_RAZE_OR_SACK_X_SETTLEMENTS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SCRIPTED_COMPLETE_SHORT_VICTORY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SCRIPTED_COMPLETE_SHORT_VICTORY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SCRIPTED_MISSION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SCRIPTED_MISSION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DESTROY_FACTION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DESTROY_FACTION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_PERFORM_RITUAL_BY_CATEGORY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_PERFORM_RITUAL_BY_CATEGORY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_PERFORM_RITUAL_BY_KEY_LIST_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_PERFORM_RITUAL_BY_KEY_LIST_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONTROL_N_REGIONS_FROM_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONTROL_N_REGIONS_FROM_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CAPTURE_REGIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CAPTURE_REGIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RAZE_OR_SACK_N_DIFFERENT_SETTLEMENTS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RAZE_OR_SACK_N_DIFFERENT_SETTLEMENTS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OWN_AT_LEAST_ONE_SOURCE_OF_EACH_RESOURCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OWN_AT_LEAST_ONE_SOURCE_OF_EACH_RESOURCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_END_REBELLION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_END_REBELLION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_LIFT_BLOCKADE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_LIFT_BLOCKADE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_FULLY_OWN_N_SEA_REGIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_FULLY_OWN_N_SEA_REGIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MAKE_ALLIANCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MAKE_ALLIANCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MAKE_TRADE_AGREEMENT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MAKE_TRADE_AGREEMENT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MAKE_PEACE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MAKE_PEACE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DECLARE_WAR_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DECLARE_WAR_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SIGN_NON_AGGRESSION_PACT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SIGN_NON_AGGRESSION_PACT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_BE_AT_WAR_WITH_FACTION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_BE_AT_WAR_WITH_FACTION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_BE_AT_WAR_WITH_N_FACTIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_BE_AT_WAR_WITH_N_FACTIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MAKE_CLIENT_STATE_OF_FACTION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MAKE_CLIENT_STATE_OF_FACTION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MAINTAIN_N_CLIENT_STATES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MAINTAIN_N_CLIENT_STATES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MAINTAIN_N_ALLIANCES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MAINTAIN_N_ALLIANCES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONFEDERATE_FACTIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONFEDERATE_FACTIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SUBJUGATE_FACTIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SUBJUGATE_FACTIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_LIMIT_FACTION_TO_REGIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_LIMIT_FACTION_TO_REGIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_GIVE_TRIBUTE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_GIVE_TRIBUTE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DEMAND_TRIBUTE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DEMAND_TRIBUTE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONTROL_N_REGIONS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONTROL_N_REGIONS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONTROL_N_PROVINCES_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONTROL_N_PROVINCES_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OWN_N_REGIONS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OWN_N_REGIONS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OWN_A_PORT_ADJOINING_SEA_REGIONS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OWN_A_PORT_ADJOINING_SEA_REGIONS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OWN_A_REGION_IN_N_PROVINCES_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OWN_A_REGION_IN_N_PROVINCES_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HOLD_ENTIRETY_OF_N_PROVINCES_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HOLD_ENTIRETY_OF_N_PROVINCES_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_KEEP_ARMY_IN_PROVINCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_KEEP_ARMY_IN_PROVINCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ABANDON_N_REGIONS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ABANDON_N_REGIONS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DO_NOT_LOSE_REGION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DO_NOT_LOSE_REGION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RAZE_OR_OWN_X_SETTLEMENTS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RAZE_OR_OWN_X_SETTLEMENTS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RAZE_OR_OWN_SETTLEMENTS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RAZE_OR_OWN_SETTLEMENTS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_LOOT_OR_SACK_N_DIFFERENT_SETTLEMENTS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_LOOT_OR_SACK_N_DIFFERENT_SETTLEMENTS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OWN_N_PORTS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OWN_N_PORTS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONTROL_N_PORTS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONTROL_N_PORTS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_BLOCKADE_PORT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_BLOCKADE_PORT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_BLOCKADE_X_SETTLEMENTS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_BLOCKADE_X_SETTLEMENTS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OWN_N_UNITS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OWN_N_UNITS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_OWN_N_NAVAL_UNITS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_OWN_N_NAVAL_UNITS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RECRUIT_UNIT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RECRUIT_UNIT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RECRUIT_N_UNITS_FROM_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RECRUIT_N_UNITS_FROM_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RECRUIT_AGENT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RECRUIT_AGENT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MOVE_X_AGENTS_TO_Y_REGIONS_OWNED_BY_Z_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MOVE_X_AGENTS_TO_Y_REGIONS_OWNED_BY_Z_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ENGAGE_FORCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ENGAGE_FORCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DEFEAT_N_ARMIES_OF_FACTION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DEFEAT_N_ARMIES_OF_FACTION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_AMBUSH_ARMY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_AMBUSH_ARMY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RAID_X_REGIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RAID_X_REGIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RAID_SUBCULTURE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RAID_SUBCULTURE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RAISE_FORCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RAISE_FORCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_N_UNITS_IN_ARMY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_N_UNITS_IN_ARMY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ARMY_CONTAINS_N_UNITS_OF_TYPE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ARMY_CONTAINS_N_UNITS_OF_TYPE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DEFEAT_ROGUE_ARMY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DEFEAT_ROGUE_ARMY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_KILL_X_ENTITIES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_KILL_X_ENTITIES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_KILL_X_ENTITIES_BY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_KILL_X_ENTITIES_BY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ASSASSINATE_CHARACTER_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ASSASSINATE_CHARACTER_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ASSASSINATE_X_CHARACTERS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ASSASSINATE_X_CHARACTERS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ELIMINATE_CHARACTER_IN_BATTLE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ELIMINATE_CHARACTER_IN_BATTLE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_KILL_CHARACTER_BY_ANY_MEANS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_KILL_CHARACTER_BY_ANY_MEANS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_CHARACTER_WOUNDED_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_CHARACTER_WOUNDED_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_CHARACTER_WITHIN_RANGE_OF_POSITION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_CHARACTER_WITHIN_RANGE_OF_POSITION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MOVE_TO_REGION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MOVE_TO_REGION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MOVE_TO_PROVINCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MOVE_TO_PROVINCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_N_AGENTS_OF_TYPE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_N_AGENTS_OF_TYPE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_EMBED_AGENT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_EMBED_AGENT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_PERFORM_ANY_AGENT_ACTION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_PERFORM_ANY_AGENT_ACTION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ACHIEVE_CHARACTER_RANK_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ACHIEVE_CHARACTER_RANK_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_INCOME_AT_LEAST_X_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_INCOME_AT_LEAST_X_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_TRADE_INCOME_AT_LEAST_X_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_TRADE_INCOME_AT_LEAST_X_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_AT_LEAST_X_MONEY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_AT_LEAST_X_MONEY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_EARN_X_AMOUNT_FROM_RAIDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_EARN_X_AMOUNT_FROM_RAIDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_AT_LEAST_X_INFLUENCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_AT_LEAST_X_INFLUENCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CAPTURE_X_BATTLE_CAPTIVES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CAPTURE_X_BATTLE_CAPTIVES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_RESOURCES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_RESOURCES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_BUILDINGS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_BUILDINGS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_BUILDINGS_FROM_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_BUILDINGS_FROM_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_BUILDINGS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_BUILDINGS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_BUILDING_IN_PROVINCES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_BUILDING_IN_PROVINCES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_BUILDING_CHAIN_IN_PROVINCES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_BUILDING_CHAIN_IN_PROVINCES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_N_OF_A_BUILDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_N_OF_A_BUILDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_N_OF_A_BUILDING_CHAIN_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_N_OF_A_BUILDING_CHAIN_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_NO_BUILDINGS_OF_TYPE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_NO_BUILDINGS_OF_TYPE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_CONSTRUCT_NO_BUILDINGS_OF_CHAIN_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_CONSTRUCT_NO_BUILDINGS_OF_CHAIN_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_VASSALS_OWN_BUILDINGS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_VASSALS_OWN_BUILDINGS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RESEARCH_TECHNOLOGY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RESEARCH_TECHNOLOGY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RESEARCH_N_TECHS_INCLUDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RESEARCH_N_TECHS_INCLUDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_COMPLETE_RITUAL_CHAIN_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_COMPLETE_RITUAL_CHAIN_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SEARCH_RUINS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SEARCH_RUINS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_AT_LEAST_X_PUBLIC_ORDER_IN_ALL_PROVINCES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_AT_LEAST_X_PUBLIC_ORDER_IN_ALL_PROVINCES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_AT_LEAST_X_PUBLIC_ORDER_IN_PROVINCES_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_AT_LEAST_X_PUBLIC_ORDER_IN_PROVINCES_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_COMPLETE_N_MISSIONS_OF_CATEGORY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_COMPLETE_N_MISSIONS_OF_CATEGORY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HAVE_NO_ACTIVE_MISSIONS_OF_CATEGORY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HAVE_NO_ACTIVE_MISSIONS_OF_CATEGORY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_AQUIRE_MISSION_CATEGORY_WEIGHT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_AQUIRE_MISSION_CATEGORY_WEIGHT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ISSUE_PROVINCE_INITIATIVE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ISSUE_PROVINCE_INITIATIVE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_FIGHT_SET_PIECE_BATTLE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_FIGHT_SET_PIECE_BATTLE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DO_NOT_LOSE_SET_PIECE_BATTLE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DO_NOT_LOSE_SET_PIECE_BATTLE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_RAZE_OR_SACK_N_DIFFERENT_SETTLEMENTS_OF_SUBCULTURE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_RAZE_OR_SACK_N_DIFFERENT_SETTLEMENTS_OF_SUBCULTURE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ENSURE_FACTIONS_HAVE_NO_MILITARY_PRESENCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ENSURE_FACTIONS_HAVE_NO_MILITARY_PRESENCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SPEND_AT_LEAST_X_OF_A_POOLED_RESOURCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SPEND_AT_LEAST_X_OF_A_POOLED_RESOURCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MAINTAIN_TRADE_WITH_N_FACTIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MAINTAIN_TRADE_WITH_N_FACTIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ACHIEVE_VICTORY_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ACHIEVE_VICTORY_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ACHIEVE_GLOBAL_FOOD_SURPLUS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ACHIEVE_GLOBAL_FOOD_SURPLUS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_END_CIVIL_WAR_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_END_CIVIL_WAR_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_STAY_HORDE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_STAY_HORDE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MP_COMPETITIVE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MP_COMPETITIVE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_LIBERATE_N_REGIONS_TO_FACTION_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_LIBERATE_N_REGIONS_TO_FACTION_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ATTAIN_FACTION_LEVEL_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ATTAIN_FACTION_LEVEL_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DEPLOY_N_AGENTS_TO_REGIONS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DEPLOY_N_AGENTS_TO_REGIONS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DEPLOY_AGENT_TYPE_IN_PROVINCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DEPLOY_AGENT_TYPE_IN_PROVINCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DEPLOY_X_AGENTS_TO_Y_REGIONS_OWNED_BY_Z_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DEPLOY_X_AGENTS_TO_Y_REGIONS_OWNED_BY_Z_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_BRIBE_FORCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_BRIBE_FORCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SABOTAGE_FORCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SABOTAGE_FORCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_DEMORALISE_FORCE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_DEMORALISE_FORCE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_TRIGGER_WAAAGH_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_TRIGGER_WAAAGH_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_SABOTAGE_BUILDING_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_SABOTAGE_BUILDING_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_BRIBE_GARRISON_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_BRIBE_GARRISON_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_INCITE_REVOLT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_INCITE_REVOLT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_HINDER_SETTLEMENT_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_HINDER_SETTLEMENT_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_ASSIGN_CHARACTER_TO_OFFICE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_ASSIGN_CHARACTER_TO_OFFICE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_EARN_X_AMOUNT_FROM_BUILDING_WEALTH_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_EARN_X_AMOUNT_FROM_BUILDING_WEALTH_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_COMPLETE_N_QUEST_CHAINS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_COMPLETE_N_QUEST_CHAINS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_REACH_SPECIFIED_DATE_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_REACH_SPECIFIED_DATE_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:generate_MEET_ALL_OTHER_OBJECTIVES_WITHIN_X_TURNS_objective()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:generate_MEET_ALL_OTHER_OBJECTIVES_WITHIN_X_TURNS_objective"
+		}
+	},
+	{
+		term:"victory_objective_helpers:update_mission_entity_completion_states()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:update_mission_entity_completion_states"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_BUILDINGS_IN_REGION()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_BUILDINGS_IN_REGION"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_BUILDINGS_IN_MULTIPLE_REGIONS()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_BUILDINGS_IN_MULTIPLE_REGIONS"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_N_OF_A_FOREIGN_SLOT_BUILDING()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_N_OF_A_FOREIGN_SLOT_BUILDING"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_N_OF_A_MILITARY_FORCE_BUILDING()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONSTRUCT_N_OF_A_MILITARY_FORCE_BUILDING"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_PERFORM_RITUALS_IN_REGIONS()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_PERFORM_RITUALS_IN_REGIONS"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_RANKUP_N_UNITS()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_RANKUP_N_UNITS"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_PERFORM_UNIQUE_RITUALS()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_PERFORM_UNIQUE_RITUALS"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_PERFORM_RITUALS_FROM_CATEGORIES()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_PERFORM_RITUALS_FROM_CATEGORIES"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_RANK_UP_AGENTS()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_RANK_UP_AGENTS"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_DEFEAT_LEGENDARY_LORDS()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_DEFEAT_LEGENDARY_LORDS"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONFEDERATE_FACTIONS_OF_CULTURE()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONFEDERATE_FACTIONS_OF_CULTURE"
+		}
+	},
+	{
+		term:"victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONFEDERATE_VASSALISE_OR_DESTROY_X_FACTIONS()",
+		envs:{
+			campaign:"campaign/victory_objective_helpers.html#function:victory_objective_helpers:victory_objectives_scripted_listeners.add_listener_SCRIPTED_CONFEDERATE_VASSALISE_OR_DESTROY_X_FACTIONS"
 		}
 	},
 

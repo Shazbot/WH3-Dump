@@ -184,24 +184,29 @@ CampaignSelect
 		{
 			GetIfElse
 			(
-				is_ie_map && IsFirstTimeUserExperience,
+				leader.IsRecommendedFactionLeaderOverride,
+				true,
 				GetIfElse
 				(
-					IsOriginalWh3Owned,
-					IsRecommendedWh3FrontendFactionLeader(leader),
+					is_ie_map && IsFirstTimeUserExperience,
 					GetIfElse
 					(
-						IsWh2Owned,
-						IsRecommendedWh2FrontendFactionLeader(leader),
+						IsOriginalWh3Owned,
+						IsRecommendedWh3FrontendFactionLeader(leader),
 						GetIfElse
 						(
-							IsWh1Owned,
-							IsRecommendedWh1FrontendFactionLeader(leader),
-							false
+							IsWh2Owned,
+							IsRecommendedWh2FrontendFactionLeader(leader),
+							GetIfElse
+							(
+								IsWh1Owned,
+								IsRecommendedWh1FrontendFactionLeader(leader),
+								false
+							)
 						)
-					)
-				),
-				leader.FrontendFactionLeaderRecordContext.Difficulty == "easy"
+					),
+					leader.FrontendFactionLeaderRecordContext.Difficulty == "easy"
+				)
 			)
 		}
 	}

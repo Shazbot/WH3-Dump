@@ -24,9 +24,11 @@ enemy_armies_near_our_agents_positions	resource_mobile	enemy_regions_near_our_ag
 enemy_factions	faction	alive_factions		union	pick_all			
 enemy_factions_human	faction	enemy_factions		union	pick_all			
 enemy_forces	resource_mobile	enemy_factions		union	pick_all			
+enemy_forces_faction_has_gotrek_felix	resource_mobile	enemy_factions		union	pick_all			
 enemy_forces_in_cathay_shouldnt_enter	resource_mobile	enemy_military_forces		union	pick_all			
 enemy_forces_in_chaos_corrupted_province	resource_mobile	enemy_forces		union	pick_all			
 enemy_forces_in_chaos_corrupted_province_in_regiongroup	resource_mobile	enemy_forces_in_chaos_corrupted_province		union	pick_all			
+enemy_forces_with_books	resource_mobile	enemy_military_forces		union	pick_all			
 enemy_last_region	region	enemy_settlements		union	pick_all			
 enemy_military_forces	resource_mobile	enemy_forces		union	pick_all			
 enemy_military_forces_in_personality_region_group_identifier_1	resource_mobile	enemy_military_forces	regions_in_personality_region_group_identifier_1	intersection	pick_all			
@@ -43,6 +45,7 @@ enemy_regions_near_our_agents_positions_with_low_corruption_exclude_rifts_nurgle
 enemy_regions_near_our_agents_positions_with_low_corruption_exclude_rifts_slaanesh	region	enemy_regions_near_our_agents_positions_exclude_rifts		union	pick_all			
 enemy_regions_near_our_agents_positions_with_low_corruption_exclude_rifts_tzeentch	region	enemy_regions_near_our_agents_positions_exclude_rifts		union	pick_all			
 enemy_regions_near_our_forces	region	regions_near_our_forces	enemy_settlements	intersection	pick_all			
+enemy_regions_near_our_forces_with_books	region	regions_near_our_forces	enemy_settlements	intersection	pick_all			
 enemy_rift_regions_in_province_at_least_x_units_far_from_home_territory_near_our_armies	region	rift_provinces_at_least_x_units_far_from_home_territory_near_our_armies		union	pick_all			
 enemy_settlements	region	alive_factions		union	pick_all			
 enemy_settlements_in_chaos_corrupted_province	region	enemy_settlements		union	pick_all			
@@ -67,6 +70,7 @@ not_our_faction_or_rebels	faction	alive_factions		union	pick_all
 occupation_decision_captured_region	region			union	pick_all		occupation_decision_captured_region	
 occupation_decision_capturing_character	character			union	pick_all		occupation_decision_capturing_character	
 our_agents	resource_mobile	our_faction		union	pick_all			
+our_agents_handmaidens	resource_mobile	our_agents		union	pick_all			
 our_agents_near_friendly_army	resource_mobile	our_agents		union	pick_all			
 our_agents_positions	region	our_agents		union	pick_all			
 our_agents_with_nurgle_plague_recipe_ague	resource_mobile	our_agents		union	pick_all		our_agents_with_plague_recipe	wh3_domain_variable_set_nurgle_plague_recipe_ague
@@ -103,6 +107,7 @@ our_characters	character	our_faction		union	pick_all
 our_characters_alive	character	our_characters		union	pick_all			
 our_damaged_character_using_rift_to_teleport	character	our_character_using_rift_to_teleport		union	pick_all			
 our_faction	faction			union	pick_all		our_faction	
+our_faction_if_at_least_100_proper_factions	faction	our_faction		union	pick_all			
 our_faction_if_completed_all_realms	faction	our_faction		union	pick_all			
 our_faction_if_completed_all_realms_and_game_is_still_on	faction	our_faction_if_completed_all_realms	our_faction_if_game_is_still_on	intersection	pick_all			
 our_faction_if_difficulty_is_easy	faction	our_faction		union	pick_all			
@@ -121,6 +126,7 @@ our_faction_if_no_ogre_camps	faction	our_faction		union	pick_all
 our_faction_if_primary	faction	our_faction		union	pick_all			
 our_faction_if_primary_and_game_is_still_on	faction	our_faction_if_primary	our_faction_if_game_is_still_on	intersection	pick_all			
 our_faction_if_primary_if_collected_soul_this_cycle	faction	our_faction_if_primary		union	pick_all			
+our_faction_if_scenario_is_active	faction	our_faction		union	pick_all			
 our_faction_leader_army	resource_mobile	our_armies		union	pick_all			
 our_faction_leader_army_at_least_14_units	resource_mobile	our_armies_with_at_least_14_units	our_faction_leader_army	intersection	pick_all			
 our_faction_leader_army_at_low_hp	resource_mobile	our_faction_leader_army	our_armies_low_hp	intersection	pick_all			
@@ -157,6 +163,8 @@ our_regions_with_high_variety_units_recruitable	region	our_regions		union	pick_b
 our_settlements_in_personality_region_group_identifier_1	region	our_regions	regions_in_personality_region_group_identifier_1	intersection	pick_all			
 our_settlements_in_personality_region_group_identifier_2	region	our_regions	regions_in_personality_region_group_identifier_2	intersection	pick_all			
 our_settlements_in_personality_region_group_identifier_3	region	our_regions	regions_in_personality_region_group_identifier_3	intersection	pick_all			
+our_settlements_of_type_necropolis	region	our_regions		union	pick_best			
+out_settlement_of_type_necropolis_by_level	region	our_settlements_of_type_necropolis		union	pick_best	pick_probabilistically		
 promise_of_perfection_enemy_armies	resource_mobile			union	pick_all		prebattle_unit_bribery_enemy_armies	
 promise_of_perfection_enemy_units	unit	promise_of_perfection_enemy_armies		union	pick_all			
 promise_of_perfection_our_army	resource_mobile			union	pick_all		prebattle_unit_bribery_our_army	

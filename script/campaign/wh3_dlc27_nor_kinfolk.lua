@@ -311,16 +311,22 @@ function norsca_kinfolk:get_available_character(faction_key)
 	local faction_interface = cm:get_faction(faction_key)
 
 	local faction_leader = faction_interface:faction_leader()
-	if faction_leader and faction_leader:is_null_interface() == false and faction_leader:is_wounded() == false and faction_leader:has_military_force() and faction_leader:military_force():unit_list():num_items() < 20 then
-		return faction_leader
+	if faction_leader and faction_leader:is_null_interface() == false and faction_leader:is_wounded() == false and faction_leader:has_military_force() then
+		local mf = faction_leader:military_force()
+		if mf:recruitment_item_count() + mf:unit_list():num_items() < 20 then
+			return faction_leader
+		end
 	end
 
 	local valid_target_chars = {}
 	local random_char = false
 	local character_list = faction_interface:character_list()
 	for i, character in model_pairs(character_list) do
-		if cm:char_is_general_with_army(character) and not character:military_force():is_armed_citizenry() and character:has_military_force() and character:military_force():unit_list():num_items() < 20 then
-			table.insert(valid_target_chars, character)
+		if cm:char_is_general_with_army(character) and not character:military_force():is_armed_citizenry() and character:has_military_force() then
+			local mf = character:military_force()
+			if mf:recruitment_item_count() + mf:unit_list():num_items() < 20 then
+				table.insert(valid_target_chars, character)
+			end
 		end
 	end
 

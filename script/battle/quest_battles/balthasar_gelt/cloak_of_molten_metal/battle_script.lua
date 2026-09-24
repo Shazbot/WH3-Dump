@@ -21,7 +21,6 @@ gb = generated_battle:new(
 );
 
 gb:set_cutscene_during_deployment(true);
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 -- Gelt vs Greenskins, easier battle
 
@@ -51,5 +50,4 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_d
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_balthasar_gelt_cloak_of_molten_metal_hint_objective", 6000, 2000, 1000);
 
-gb:play_sound_on_message("battle_started", Orc_Horn, v(0, 110, 0), 11000);
 gb:queue_help_on_message("start_reinforcement1", "wh_main_qb_emp_balthasar_gelt_cloak_of_molten_metal_hint_reinforcements", 6000, 2000, 1000);

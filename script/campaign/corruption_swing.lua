@@ -53,6 +53,11 @@ corruption_swing = {
 			swing_modifier = 1,
 			crackdown_effect_key = "wh3_main_effect_corruption_reduction_crackdown_vampiric",
 		},
+		FavouredCorruptionUndead = {
+			resource = "wh3_main_corruption_nagash",
+			swing_modifier = 1,
+			crackdown_effect_key = "wh3_dlc29_effect_corruption_reduction_crackdown_nagash",
+		},
 	},
 	swing_resource_factor = "post_battle_corruption_swing",
 	victor_army_corruption_gain = 0.5,	-- This portion of the calculated casualty value will be given to the victor's favoured corruption.

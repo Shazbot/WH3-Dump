@@ -47,7 +47,6 @@ local function start_narrative_shared_chain_defeat_initial_enemy(faction_key)
 		return false
 	end
 
-
 	-- output header
 	narrative.output_chain_header("defeat_initial_enemy", faction_key);
 

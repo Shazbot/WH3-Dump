@@ -36,33 +36,27 @@ gb:queue_help_on_message("green_knight_advance", "wh_dlc08_qb_nor_wulfrik_sword_
 gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_defeat_army");
 
 -------ORDERS-------
+ga_player_01:message_on_proximity_to_enemy("archers_alerted",180);
+ga_player_01:message_on_proximity_to_enemy("militia_alerted",180);
+ga_player_01:message_on_proximity_to_enemy("knights_alerted", 180);
+ga_player_01:message_on_proximity_to_enemy("green_knight_alerted", 180);
+
 ga_ai_bret_01:release_on_message("archers_alerted");
+ga_ai_bret_01:message_on_proximity_to_enemy("under_attack",30);
+ga_ai_bret_01:rush_on_message("under_attack");
 
-ga_player_01:message_on_proximity_to_enemy("archers_alerted",160);
-ga_ai_bret_02:release_on_message("archers_alerted");
-ga_ai_bret_02:reinforce_on_message("archers_alerted",15000);
+ga_ai_bret_02:reinforce_on_message("archers_alerted", 30000);
 ga_ai_bret_02:message_on_any_deployed("archers_advance"); 
-ga_ai_bret_02:attack_on_message("archers_advance");
-ga_ai_bret_02:message_on_proximity_to_enemy("archers_engaged",50);
-ga_ai_bret_02:release_on_message("archers_engaged");
+ga_ai_bret_02:rush_on_message("archers_advance");
 
-ga_ai_bret_02:message_on_proximity_to_enemy("militia_alerted",180);
-ga_ai_bret_03:reinforce_on_message("militia_alerted",30000);
+ga_ai_bret_03:reinforce_on_message("militia_alerted", 120000);
 ga_ai_bret_03:message_on_any_deployed("militia_advance"); 
-ga_ai_bret_03:attack_on_message("militia_advance");
-ga_ai_bret_03:message_on_proximity_to_enemy("militia_engaged",50);
-ga_ai_bret_03:release_on_message("militia_engaged");
+ga_ai_bret_03:rush_on_message("militia_advance");
 
-ga_ai_bret_03:message_on_proximity_to_enemy("knights_alerted", 160);
-ga_ai_bret_04:reinforce_on_message("knights_alerted",90000);
+ga_ai_bret_04:reinforce_on_message("knights_alerted", 300000);
 ga_ai_bret_04:message_on_any_deployed("knights_advance"); 
-ga_ai_bret_04:attack_on_message("knights_advance");
-ga_ai_bret_04:message_on_proximity_to_enemy("knights_engaged",50);
-ga_ai_bret_04:release_on_message("knights_engaged");
+ga_ai_bret_04:rush_on_message("knights_advance");
 
-ga_ai_bret_04:message_on_proximity_to_enemy("green_knight_alerted", 160);
-ga_ai_bret_05:reinforce_on_message("green_knight_alerted",45000);
+ga_ai_bret_05:reinforce_on_message("green_knight_alerted", 360000);
 ga_ai_bret_05:message_on_any_deployed("green_knight_advance"); 
-ga_ai_bret_05:attack_on_message("green_knight_advance");
-ga_ai_bret_05:message_on_proximity_to_enemy("green_knight_engaged",50);
-ga_ai_bret_05:release_on_message("green_knight_engaged");
+ga_ai_bret_05:rush_on_message("green_knight_advance");

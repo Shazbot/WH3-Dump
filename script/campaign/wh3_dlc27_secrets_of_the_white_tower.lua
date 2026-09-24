@@ -144,6 +144,8 @@ function secrets_of_the_white_tower:initialise()
 
 			cm:set_character_immortality(character_lookup, true)
 			secrets_of_the_white_tower.current_ritual_key = ""
+
+			core:trigger_event("ScriptEventVictoryConditionWhiteTowerMageRecruited", context:character():cqi())
 		end,
 		true
 	)

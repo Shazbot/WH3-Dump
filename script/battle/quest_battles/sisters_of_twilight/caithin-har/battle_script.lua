@@ -116,27 +116,27 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --\
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 2000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_01", "subtitle_with_frame", 2, true) end, 2000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_01", "subtitle_with_frame", 0.1, true) end, 2000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 6000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 6500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_02", "subtitle_with_frame", 15, true) end, 6500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_02", "subtitle_with_frame", 0.1, true) end, 6500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 21500);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 22000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_03", "subtitle_with_frame", 8, true) end, 22000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_03", "subtitle_with_frame", 0.1, true) end, 22000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 31000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 31500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_04", "subtitle_with_frame", 17, true) end, 31500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_04", "subtitle_with_frame", 0.1, true) end, 31500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 49000);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_05) end, 50000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_05", "subtitle_with_frame", 9, true) end, 50000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_05", "subtitle_with_frame", 0.1, true) end, 50000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 61500);
 
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_06) end, 62000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_06", "subtitle_with_frame", 1, true) end, 62000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_dlc16_Sisters_Ceithin_Har_pt_06", "subtitle_with_frame", 0.1, true) end, 62000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 65000);
 
 	cutscene_intro:start();

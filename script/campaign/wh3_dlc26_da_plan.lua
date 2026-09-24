@@ -381,7 +381,7 @@ function da_plan:unlock_valid_initiatives_for_all_generals()
 			for _, initiative in ipairs(self.unlocked_tactics) do
 				local initiative_set = general:character_details():lookup_character_initiative_set_by_key("wh3_dlc26_force_initiative_grn_da_plan")
 			
-				cm:toggle_initiative_script_locked(initiative_set, initiative, false)
+				cm:unlock_initiative(initiative_set, initiative)
 			end
 		end
 	end

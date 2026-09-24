@@ -83,7 +83,7 @@ function fragments_of_sorcery:initialise_default_spells(character)
 						and not initiative:is_active()
 					then
 						if initiative:is_script_locked() then
-							cm:toggle_initiative_script_locked(initiative_set, initiative_key, false)
+							cm:unlock_initiative(initiative_set, initiative_key)
 						end
 
 						cm:toggle_initiative_active(initiative_set, initiative_key, true)

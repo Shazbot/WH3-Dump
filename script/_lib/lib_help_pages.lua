@@ -613,6 +613,46 @@ local help_panel_position_overrides_campaign = {
 		["x"] = -5,
 		["y"] = "middle"
 	},
+
+	dlc29_nag_necromancy = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
+
+	dlc29_nag_black_pyramid = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
+
+	dlc29_nag_mortarchs = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
+
+	dlc29_emp_great_temple_of_ulric = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
+
+	dlc29_chs_blessings_of_nurgle_panel_main = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
+
+	dlc29_skv_chaotic_plans = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
+
+	dlc29_vmp_confederation = {
+		["x"] = -5,
+		["y"] = "middle"
+	},
+
+	dlc29_endgame_crisis_scenarios = {
+		["x"] = -5,
+		["y"] = 50
+	},
 };
 
 

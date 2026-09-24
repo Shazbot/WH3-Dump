@@ -139,3 +139,4 @@ require("wh3_campaign_subjugation")
 require("DEBUG_economy_logging");
 
 require("wh2_campaign_custom_starts");
+require("wh3_campaign_climate_change_manager")

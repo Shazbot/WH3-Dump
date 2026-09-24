@@ -243,6 +243,66 @@ core:add_listener(
 	true
 );
 
+--climate control listeners
+core:add_listener(
+	"RegionTurnStart_ForceClimateTemperate",
+	"RegionTurnStart",
+	true,
+	function(context)
+		local region = context:region()
+		forced_climate_conversion("convert_climate_temperate", region, "temperate")
+	end,
+	true
+)
+core:add_listener(
+	"BuildingCompleted_ForceClimateTemperate",
+	"BuildingCompleted",
+	function(context)
+		return context:building():name() == "wh2_main_special_salzenmund_laurelorn_human_1";
+	end,
+	function(context)
+		local region = context:garrison_residence():region()
+		forced_climate_conversion("convert_climate_temperate", region, "temperate")
+	end,
+	true
+)
+core:add_listener(
+	"CharacterRazedSettlement_ForceClimateTemperate",
+	"CharacterRazedSettlement",
+	true,
+	function(context)
+		local region = context:garrison_residence():region()
+		forced_climate_conversion("convert_climate_temperate", region, "temperate")
+	end,
+	true
+)
+core:add_listener(
+	"RegionFactionChangeEvent_ForceClimateTemperate",
+	"RegionFactionChangeEvent",
+	function(context)
+		local reason = context:reason()
+		return reason == "abandoned" or reason == "abandoned to rebels"
+	end,
+	function(context)
+		local region = context:region()
+		forced_climate_conversion("convert_climate_temperate", region, "temperate")
+	end,
+	true
+)
+
+
+function forced_climate_conversion(scripted_bv, region, climate_key) 
+	if is_table(climate_change) == false then
+		return
+	end
+	local value = cm:get_regions_bonus_value(region, scripted_bv)
+	if value > 0 then
+		climate_change:add_climate_override(region, climate_key)
+	else
+		climate_change:remove_climate_override(region, climate_key)
+	end
+end
+
 core:add_listener(
 	"sea_lanes_character_arrived_bonus",
 	"TeleportationNetworkMoveCompleted",
@@ -601,7 +661,17 @@ core:add_listener(
 	true
 );
 
--- campaign_movement_range_post_battle_win
+-- campaign_movement_range_post_battle_win campaign_movement_range_post_battle_win_exact
+local function replenish_character_ap(character, amount)
+	local exact_amount = cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win_exact")
+
+	if exact_amount > 0 then
+		cm:replenish_action_points(cm:char_lookup_str(character), exact_amount / 100)
+	elseif amount > 0 then
+		cm:replenish_action_points(cm:char_lookup_str(character), (character:action_points_remaining_percent() + amount) / 100)
+	end
+end
+
 core:add_listener(
 	"campaign_movement_range_post_battle_win",
 	"CharacterCompletedBattle",
@@ -610,14 +680,54 @@ core:add_listener(
 	end,
 	function(context)
 		local character = context:character();
-		local bonus_value = cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win");
-		
-		if bonus_value > 0 then
-			cm:replenish_action_points(cm:char_lookup_str(character), (character:action_points_remaining_percent() + bonus_value) / 100);
-		end;
+		replenish_character_ap(character, cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win"))
 	end,
 	true
 );
+
+-- replenish AP after razing
+-- also includes post-battle AP replen as otherwise it gets zeroed out by raze
+core:add_listener(
+	"campaign_movement_range_post_raze",
+	"CharacterRazedSettlement",
+	true,
+	function(context)
+		local character = context:character();
+		replenish_character_ap(character, cm:get_characters_bonus_value(character, "campaign_movement_range_post_raze") + cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win"))
+	end,
+	true
+);
+
+-- replenish AP after looting
+-- also includes post-battle AP replen as otherwise it gets zeroed out by looting
+core:add_listener(
+	"campaign_movement_range_post_loot",
+	"CharacterPerformsSettlementOccupationDecision",
+	function(context)
+		return context:settlement_option() == "occupation_decision_loot"
+	end,
+	function(context)
+		local character = context:character()
+		replenish_character_ap(character, cm:get_characters_bonus_value(character, "campaign_movement_range_post_loot") + cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win"))
+	end,
+	true
+)
+
+-- replenish AP after sack or occupy
+-- also includes post-battle AP replen as otherwise it gets zeroed out by occupy/loot
+core:add_listener(
+	"campaign_movement_range_post_occupy_sack",
+	"CharacterPerformsSettlementOccupationDecision",
+	function(context)
+		local option = context:settlement_option()
+		return option == "occupation_decision_sack" or option == "occupation_decision_occupy"
+	end,
+	function(context)
+		local character = context:character()
+		replenish_character_ap(character, cm:get_characters_bonus_value(character, "campaign_movement_range_post_occupy_sack") + cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win"))
+	end,
+	true
+)
 
 --campaign_movement_range_post_enemy_retreat
 core:add_listener(
@@ -693,6 +803,25 @@ core:add_listener(
 	end,
 	true
 );
+
+--Boris todbgringer Sanctuary effect - grant Fervour when finishing construction on settlement chain emp_fervour_settlement_construction
+core:add_listener(
+	"FervourSettlementConstruction_BuildingCompleted",
+	"BuildingCompleted", 
+	function(context)
+		local value = cm:get_regions_bonus_value(context:garrison_residence():region(), "emp_fervour_settlement_construction")
+		return context:building():superchain() == "wh_main_sch_main_settlement" and (value > 0)
+	end,
+	function(context)
+		local region = context:garrison_residence():region()
+		if region:owning_faction():is_human() then
+			local faction = region:owning_faction():name()
+			local value = cm:get_regions_bonus_value(region, "emp_fervour_settlement_construction")
+			cm:faction_add_pooled_resource(faction, "wh3_dlc29_emp_fervour", "wh3_dlc29_emp_sanctuary_income", value)
+		end	
+	end,
+	true
+)
 
 function give_climate_growth(faction)
 	local growth_in_climate_chaotic = cm:get_factions_bonus_value(faction, "growth_in_climate_chaotic");
@@ -1072,6 +1201,45 @@ core:add_listener(
 	true
 );
 
+
+local function try_expanding_under_empire_from_region(region, faction)
+	local adjacent_region_list = region:adjacent_region_list();
+	local faction_key = faction:name()
+
+	for j = 0, adjacent_region_list:num_items() - 1 do
+		local possible_region = adjacent_region_list:item_at(j);
+		local region_key = possible_region:name();
+		out("\t\tAdjacent Region: "..region_key);
+		
+		if not possible_region:is_abandoned() and not possible_region:owning_faction():is_null_interface() and possible_region:owning_faction():name() ~= faction_key then
+			local slot_manager = possible_region:foreign_slot_manager_for_faction(faction_key);
+			
+			if slot_manager:is_null_interface() == true then
+				out("\t\t\tAccepting Region: "..region_key);
+				cm:add_foreign_slot_set_to_region_for_faction(faction:command_queue_index(), possible_region:cqi(), "wh2_dlc12_slot_set_underempire");
+				cm:make_region_visible_in_shroud(faction_key, region_key);
+				
+				local settlement_x = possible_region:settlement():logical_position_x();
+				local settlement_y = possible_region:settlement():logical_position_y();
+				
+				cm:show_message_event_located(
+					faction_key,
+					"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_expanded_title",
+					"regions_onscreen_"..region_key,
+					"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_expanded_description",
+					settlement_x, settlement_y,
+					false,
+					123
+				);
+				
+				return true;
+			end
+		end
+	end
+
+	return false;
+end
+
 -- under_empire_adjacent_region_expansion_chance
 cm:add_faction_turn_start_listener_by_culture(
 	"under_empire_adjacent_region_expansion_chance",
@@ -1085,44 +1253,40 @@ cm:add_faction_turn_start_listener_by_culture(
 			local under_empire = under_empires:item_at(i);
 			local region = under_empire:region();
 			local expand_chance = cm:get_regions_bonus_value(region, "under_empire_adjacent_region_expansion_chance");
-			out("UnderEmpireBuildingExpansion - "..region:name());
 				
 			if expand_chance > 0 then
-				out("\tChance - "..tostring(expand_chance).."%");
 				if cm:model():random_percent(expand_chance) then
-					out("\t\tSuccess!");
-					local adjacent_region_list = region:adjacent_region_list();
-					
-					for j = 0, adjacent_region_list:num_items() - 1 do
-						local possible_region = adjacent_region_list:item_at(j);
-						local region_key = possible_region:name();
-						out("\t\tAdjacent Region: "..region_key);
-						
-						if possible_region:is_abandoned() == false and possible_region:owning_faction():is_null_interface() == false and possible_region:owning_faction():name() ~= faction_key then
-							local slot_manager = possible_region:foreign_slot_manager_for_faction(faction_key);
-							
-							if slot_manager:is_null_interface() == true then
-								out("\t\t\tAccepting Region: "..region_key);
-								cm:add_foreign_slot_set_to_region_for_faction(faction:command_queue_index(), possible_region:cqi(), "wh2_dlc12_slot_set_underempire");
-								cm:make_region_visible_in_shroud(faction_key, region_key);
-								
-								local settlement_x = possible_region:settlement():logical_position_x();
-								local settlement_y = possible_region:settlement():logical_position_y();
-								
-								cm:show_message_event_located(
-									faction_key,
-									"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_expanded_title",
-									"regions_onscreen_"..region_key,
-									"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_expanded_description",
-									settlement_x, settlement_y,
-									false,
-									123
-								);
-								
-								expand_chance = -1;
-								return true;
-							end
-						end
+					if try_expanding_under_empire_from_region(region, faction) then
+						expand_chance = -1
+						return
+					end
+				end
+			end
+		end
+		core:trigger_event("ScriptEventUnderEmpireExpansionFailed", faction_key)
+	end,
+	true
+);
+
+-- under_empire_adjacent_region_expansion_chance_global - separate bonus value to expand under empire, factionwide, rolls once and then finds a region to expand to, only triggered if under_empire_adjacent_region_expansion_chance roll failed for all regions
+core:add_listener(
+	"under_empire_adjacent_region_expansion_chance_global",
+	"ScriptEventUnderEmpireExpansionFailed",
+	true,
+	function(context)
+		local faction_key = context.string;
+		local faction = cm:get_faction(faction_key);
+		local under_empires = faction:foreign_slot_managers();
+		local global_expand_chance = cm:get_factions_bonus_value(faction_key, "under_empire_adjacent_region_expansion_chance_global");
+
+		if global_expand_chance > 0 then
+			if cm:model():random_percent(global_expand_chance) then
+				for i = 0, under_empires:num_items() - 1 do
+					local under_empire = under_empires:item_at(i);
+					local region = under_empire:region();
+					if try_expanding_under_empire_from_region(region, faction) then
+						global_expand_chance = -1
+						return
 					end
 				end
 			end
@@ -1234,13 +1398,29 @@ core:add_listener(
 core:add_listener(
 	"create_disciple_army_foreign_slot",
 	"ForeignSlotBuildingCompleteEvent",
-	function(context)
-		return cm:get_regions_bonus_value(context:slot_manager():region(), "create_disciple_army") ~= 0;
-	end,
+	true,
 	function(context)
 		local sm = context:slot_manager()
+		local region = sm:region()
+		local region_name = region:name()
+
+		-- There is a bug where this event is triggered for a foreign slot in a sea region. Log more information in case this happens again.
+		local region_verify = cm:get_region(region_name)
+		if not is_region(region_verify) then
+			script_error("ERROR: ForeignSlotBuildingCompleteEvent occured for building [" .. context:building() .. "] of faction [" .. sm:faction():name() .. "] in region [" .. region_name .. "], but the event region is not a land region.");
+			return
+		end
+		local bonus_value_create_disciple_army = cm:get_regions_bonus_value(region, "create_disciple_army")
+		if not is_number(bonus_value_create_disciple_army) then
+			script_error("ERROR: ForeignSlotBuildingCompleteEvent occured for building [" .. context:building() .. "] of faction [" .. sm:faction():name() .. "] in region [" .. region_name .. "], but the event region bonus value create_disciple_army is not an integer.")
+			return
+		end
+
+		if bonus_value_create_disciple_army <= 0 then
+			return
+		end
+
 		local faction_name = sm:faction():name();
-		local region_name = sm:region():name();
 		local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction_name, region_name, false, true, 12);
 		
 		if x > 0 then
@@ -1531,7 +1711,7 @@ core:add_listener(
 -- character_starting_rank
 core:add_listener(
 	"character_starting_rank",
-	"WorldCreated",
+	"WorldStartRound",
 	function()
 		return cm:is_new_game();
 	end,
@@ -1564,6 +1744,55 @@ core:add_listener(
 	end,
 	false
 );
+
+-- add growth points in faction capital provinces and outside
+core:add_listener(
+	"growth_capitals_or_not",
+	"FactionTurnStart",
+	true,
+	function(context)
+		local faction = context:faction();
+		update_faction_capital_growth_bonus(faction);
+	end,
+	true
+);
+
+function update_faction_capital_growth_bonus(faction)
+	local enable_non_capital_effects = false;
+
+	if faction:has_home_region() == true then
+		local home_region = faction:home_region();
+		local growth_inside_capital = cm:get_factions_bonus_value(faction, "growth_faction_capital") or 0;
+
+		if growth_inside_capital ~= 0 then
+			if home_region:has_effect_bundle("wh3_main_bundle_vmp_tech_growth_non_capital_hidden") == false then
+				cm:apply_effect_bundle_to_region("wh3_main_bundle_vmp_tech_growth_capital_hidden", home_region:name(), 2);
+			end
+		end
+
+		if enable_non_capital_effects == true then
+			local growth_outside_capital = cm:get_factions_bonus_value(faction, "growth_faction_capital_outside") or 0;
+			
+			if growth_outside_capital ~= 0 then
+				local province_list = faction:provinces();
+				local home_province_key = home_region:province_name();
+
+				for i = 0, province_list:num_items() - 1 do
+					local province_manager = province_list:item_at(i);
+					local province_key = province_manager:province():key();
+					
+					if province_key ~= home_province_key and province_manager:regions():is_empty() == false then
+						local first_region = province_manager:regions():item_at(0);
+
+						if first_region:has_effect_bundle("wh3_main_bundle_vmp_tech_growth_non_capital_hidden") == false then
+							cm:apply_effect_bundle_to_region("wh3_main_bundle_vmp_tech_growth_non_capital_hidden", first_region:name(), 2);
+						end
+					end
+				end
+			end
+		end
+	end
+end
 
 -- add growth points factionwide when a battle is won
 core:add_listener(
@@ -1717,24 +1946,6 @@ core:add_listener(
 				end;
 			end;
 		end;
-	end,
-	true
-);
-
-
--- replenish AP after razing
--- also includes post-battle AP replen as otherwise it gets zeroed out by raze
-core:add_listener(
-	"campaign_movement_range_post_raze",
-	"CharacterRazedSettlement",
-	function(context)
-		local character = context:character()
-		return cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win") + cm:get_characters_bonus_value(character, "campaign_movement_range_post_raze") > 0;
-	end,
-	function(context)
-		local character = context:character();
-		local movement_to_replenish = cm:get_characters_bonus_value(character, "campaign_movement_range_post_raze") + cm:get_characters_bonus_value(character, "campaign_movement_range_post_battle_win")
-		cm:replenish_action_points(cm:char_lookup_str(character), (character:action_points_remaining_percent() + movement_to_replenish) / 100);
 	end,
 	true
 );
@@ -1918,6 +2129,21 @@ core:add_listener(
 	true
 );
 
+--When a unit dies that is within the defined unit set add Fervour to the faction
+core:add_listener(
+	"FervourOnDeath_UnitAboutToBeDestroyedByBattle",
+	"UnitAboutToBeDestroyedByBattle",
+	function(context)
+		return cm:get_factions_bonus_value(context:unit():faction(), "fervour_on_ulric_unit_death") >0 and context:unit():is_unit_in_set("wh3_dlc29_ulric_units")
+	end,
+	function(context)
+		local faction = context:unit():faction()
+		local value = cm:get_factions_bonus_value(faction, "fervour_on_ulric_unit_death")
+		cm:faction_add_pooled_resource(faction:name(), "wh3_dlc29_emp_fervour", "wh3_dlc29_emp_sanctuary_income", value)
+	end,
+	true
+)
+
 core:add_listener(
 	"UnbreakableGrudgeBonus_PendingBattle",
 	"PendingBattle",
@@ -1929,7 +2155,7 @@ core:add_listener(
 
 		local attackers_with_bonus_value = {}
 		local defenders_with_bonus_value = {}
-		local attackers_grudges, defenders_grudges = grudges_scripted_bv_handler("unbreakable_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)
+		local attackers_grudges, defenders_grudges = pr_scripted_bv_handler("unbreakable_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value, "grudges")
 
 		if attackers_grudges >= 1000 then
 			for i = 1, #defenders_with_bonus_value do
@@ -1958,7 +2184,7 @@ core:add_listener(
 		
 		local attackers_with_bonus_value = {}
 		local defenders_with_bonus_value = {}
-		grudges_scripted_bv_handler("unbreakable_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)	
+		pr_scripted_bv_handler("unbreakable_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value, "grudges")	
 		
 		for i = 1, #defenders_with_bonus_value do
 			cm:remove_effect_bundle_from_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", defenders_with_bonus_value[i])
@@ -1981,7 +2207,7 @@ core:add_listener(
 
 		local attackers_with_bonus_value = {}
 		local defenders_with_bonus_value = {}
-		local attackers_grudges, defenders_grudges = grudges_scripted_bv_handler("perfect_vigour_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)
+		local attackers_grudges, defenders_grudges = pr_scripted_bv_handler("perfect_vigour_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value, "grudges")
 
 		if attackers_grudges >= 1000 then
 			for i = 1, #defenders_with_bonus_value do
@@ -2010,13 +2236,117 @@ core:add_listener(
 		
 		local attackers_with_bonus_value = {}
 		local defenders_with_bonus_value = {}
-		grudges_scripted_bv_handler("perfect_vigour_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value)
+		pr_scripted_bv_handler("perfect_vigour_when_grudges_over_1000", pb, attackers_with_bonus_value, defenders_with_bonus_value, "grudges")
 
 		for i = 1, #defenders_with_bonus_value do
 			cm:remove_effect_bundle_from_force("wh3_dlc25_perfect_vigour_grudge_scripted_hidden", defenders_with_bonus_value[i])
 		end
 		for i = 1, #attackers_with_bonus_value do
 			cm:remove_effect_bundle_from_force("wh3_dlc25_perfect_vigour_grudge_scripted_hidden", attackers_with_bonus_value[i])	
+		end
+	end,
+	true
+)
+
+core:add_listener(
+	"UnbreakableFervourBonus_PendingBattle",
+	"PendingBattle",
+	function(context)
+		return pending_battle_bv_check("unbreakable_when_fervour_over_500", context:pending_battle(), true, false)
+	end,
+	function(context)
+		local pb = context:pending_battle()
+
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		local attackers_fervour, defenders_fervour = pr_scripted_bv_handler("unbreakable_when_fervour_over_500", pb, attackers_with_bonus_value, defenders_with_bonus_value, "fervour")
+
+		if attackers_fervour >= 500 then
+			for i = 1, #defenders_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", defenders_with_bonus_value[i], 1)
+			end
+		end
+		if defenders_fervour >= 500 then
+			for i = 1, #attackers_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", attackers_with_bonus_value[i], 1)	
+			end
+		end
+		
+		cm:update_pending_battle()
+	end,
+	true
+)
+
+core:add_listener(
+	"UnbreakableFervourBonus_BattleCompleted",
+	"BattleCompleted",
+	function(context)
+		return pending_battle_bv_check("unbreakable_when_fervour_over_500", context:model():pending_battle(), true, false)
+	end,
+	function(context)	
+		local pb = context:model():pending_battle()
+		
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		pr_scripted_bv_handler("unbreakable_when_fervour_over_500", pb, attackers_with_bonus_value, defenders_with_bonus_value, "fervour")	
+		
+		for i = 1, #defenders_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", defenders_with_bonus_value[i])
+		end
+		for i = 1, #attackers_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc25_unbreakable_grudge_scripted_hidden", attackers_with_bonus_value[i])	
+		end
+	end,
+	true
+)
+
+core:add_listener(
+	"FrenzyFervourBonus_PendingBattle",
+	"PendingBattle",
+	function(context)
+		return pending_battle_bv_check("frenzy_when_fervour_over_500", context:pending_battle(), true, false)
+	end,
+	function(context)
+		local pb = context:pending_battle()
+
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		local attackers_fervour, defenders_fervour = pr_scripted_bv_handler("frenzy_when_fervour_over_500", pb, attackers_with_bonus_value, defenders_with_bonus_value, "fervour")
+
+		if attackers_fervour >= 5 then
+			for i = 1, #defenders_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc29_frenzy_fevour_scripted_hidden", defenders_with_bonus_value[i], 1)
+			end
+		end
+		if defenders_fervour >= 5 then
+			for i = 1, #attackers_with_bonus_value do
+				cm:apply_effect_bundle_to_force("wh3_dlc29_frenzy_fevour_scripted_hidden", attackers_with_bonus_value[i], 1)	
+			end
+		end
+		
+		cm:update_pending_battle()
+	end,
+	true
+)
+
+core:add_listener(
+	"FrenzyFervourBonus_BattleCompleted",
+	"BattleCompleted",
+	function(context)
+		return pending_battle_bv_check("frenzy_when_fervour_over_500", context:model():pending_battle(), true, false)
+	end,
+	function(context)	
+		local pb = context:model():pending_battle()
+		
+		local attackers_with_bonus_value = {}
+		local defenders_with_bonus_value = {}
+		pr_scripted_bv_handler("frenzy_when_fervour_over_500", pb, attackers_with_bonus_value, defenders_with_bonus_value, "fervour")	
+		
+		for i = 1, #defenders_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc29_frenzy_fevour_scripted_hidden", defenders_with_bonus_value[i])
+		end
+		for i = 1, #attackers_with_bonus_value do
+			cm:remove_effect_bundle_from_force("wh3_dlc29_frenzy_fevour_scripted_hidden", attackers_with_bonus_value[i])	
 		end
 	end,
 	true
@@ -2057,27 +2387,33 @@ function pending_battle_bv_check(bonus_value, pending_battle, check_force, check
 	return scripted_bonus_value_present
 end
 
-function grudges_scripted_bv_handler(bonus_value, pending_battle, attackers_with_bonus_value, defenders_with_bonus_value)
 
-	local total_attackers_grudges = 0
-	local total_defenders_grudges = 0
+local resource_table_mapping = {
+	["grudges"] = {region = "wh3_dlc25_dwf_grudge_points_enemy_settlements", force = "wh3_dlc25_dwf_grudge_points_enemy_armies"},
+	["fervour"] = {region = "wh3_dlc29_emp_fervour_rivalry_enemy_settlements", force = "wh3_dlc29_emp_fervour_rivalry_enemy_armies"},
+}
+
+function pr_scripted_bv_handler(bonus_value, pending_battle, attackers_with_bonus_value, defenders_with_bonus_value, resource)
+
+	local total_attackers_resource = 0
+	local total_defenders_resource = 0
 
 	local attacker = pending_battle:attacker()
 	if not attacker:is_null_interface() then
-		total_attackers_grudges = grudges_scripted_bv_check(attacker:military_force(), bonus_value, attackers_with_bonus_value, total_attackers_grudges) 
+		total_attackers_resource = pr_scripted_bv_check(attacker:military_force(), bonus_value, attackers_with_bonus_value, total_attackers_resource, resource) 
 	end
 
 	local attacker_list = pending_battle:secondary_attackers()
 	for i = 0, attacker_list:num_items() - 1 do
 		local attacker = attacker_list:item_at(i)
 		if not attacker:is_null_interface() then
-			total_attackers_grudges = total_attackers_grudges + grudges_scripted_bv_check(attacker:military_force(), bonus_value, attackers_with_bonus_value, total_attackers_grudges) 
+			total_attackers_resource = total_attackers_resource + pr_scripted_bv_check(attacker:military_force(), bonus_value, attackers_with_bonus_value, total_attackers_resource, resource) 
 		end
 	end
 
 	local defender = pending_battle:defender()
 	if not defender:is_null_interface() then
-		total_defenders_grudges = grudges_scripted_bv_check(defender:military_force(), bonus_value, defenders_with_bonus_value, total_defenders_grudges) 
+		total_defenders_resource = pr_scripted_bv_check(defender:military_force(), bonus_value, defenders_with_bonus_value, total_defenders_resource, resource) 
 	end
 
 	local defender_list = pending_battle:secondary_defenders()
@@ -2085,14 +2421,14 @@ function grudges_scripted_bv_handler(bonus_value, pending_battle, attackers_with
 		local defender = defender_list:item_at(i)
 
 		if not defender:is_null_interface() then
-			total_defenders_grudges = total_defenders_grudges + grudges_scripted_bv_check(defender:military_force(), bonus_value, defenders_with_bonus_value, total_defenders_grudges) 
+			total_defenders_resource = total_defenders_resource + pr_scripted_bv_check(defender:military_force(), bonus_value, defenders_with_bonus_value, total_defenders_resource, resource) 
 		end
 	end
 
-	return total_attackers_grudges, total_defenders_grudges
+	return total_attackers_resource, total_defenders_resource
 end
 
-function grudges_scripted_bv_check(military_force, bonus_value, forces_with_bonus_value, total_grudges) 
+function pr_scripted_bv_check(military_force, bonus_value, forces_with_bonus_value, total_resource, resource)  
 
 	-- Check if the attacker has the bonus value
 	if cm:get_forces_bonus_value(military_force, bonus_value) > 0 then
@@ -2106,21 +2442,21 @@ function grudges_scripted_bv_check(military_force, bonus_value, forces_with_bonu
 			-- Check if region has Grudge resource and if it does, is it over 1000
 			if not region:pooled_resource_manager():is_null_interface() then
 				local region_prm = region:pooled_resource_manager()
-				if not region_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_settlements"):is_null_interface() then
-					total_grudges = total_grudges + region_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_settlements"):value()
+				if not region_prm:resource(resource_table_mapping[resource].region):is_null_interface() then
+					total_resource = total_resource + region_prm:resource(resource_table_mapping[resource].region):value()
 				end
 			end
 		else
 			-- Check if force has Grudge resource and if it does, is it over 1000
 			if not military_force:pooled_resource_manager():is_null_interface() then
 				local mf_prm = military_force:pooled_resource_manager()
-				if not mf_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_armies"):is_null_interface() then
-					total_grudges = total_grudges + mf_prm:resource("wh3_dlc25_dwf_grudge_points_enemy_armies"):value()
+				if not mf_prm:resource(resource_table_mapping[resource].force):is_null_interface() then
+					total_resource = total_resource + mf_prm:resource(resource_table_mapping[resource].force):value()
 				end
 			end
 		end
 	end
-	return total_grudges
+	return total_resource
 end
 
 

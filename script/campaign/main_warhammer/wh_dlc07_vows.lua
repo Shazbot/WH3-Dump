@@ -109,7 +109,7 @@ local function is_female(character)
 	return character:character_details():character_subtype_has_female_name() and not character:character_subtype("wh2_dlc14_brt_repanse")
 end
 
-function add_vow_progress(character, trait, ai, agents)
+function add_vow_progress(character, trait, ai, check_embedded_agents, character_is_agent)
 	if character:is_null_interface() then
 		return false
 	end
@@ -122,12 +122,10 @@ function add_vow_progress(character, trait, ai, agents)
 	
 	local char_cqi = character:cqi()
 	out.design("------------------------------------------------")
-	out.design("add_vow_progress - " .. char_cqi .. " - " .. trait .. " - " .. tostring(ai) .. " - " .. tostring(agents))
+	out.design("add_vow_progress called for " .. common.get_localised_string(character:get_forename()) .. " - " .. char_cqi .. " - " .. trait .. " - " .. tostring(ai) .. " - " .. tostring(check_embedded_agents))
 	local max_trait_points = vow_max_points[trait] or 6
 	out.design("\tMax Points - " .. max_trait_points)
 	local incident = "wh_dlc07_incident_brt_vow_gained"
-	local incident_uc = incident
-	local trait_uc = trait
 	
 	if is_female(character) then
 		out.design("\tFemale Character")
@@ -140,8 +138,8 @@ function add_vow_progress(character, trait, ai, agents)
 			out.design("\tFay Trait - " .. trait)
 		end
 	end
-	
-	local event_key = trait
+
+	if character_is_agent then trait = trait .. "_agent" end
 	
 	local faction_cqi = faction:command_queue_index()
 	local points = character:trait_points(trait)
@@ -157,20 +155,20 @@ function add_vow_progress(character, trait, ai, agents)
 			out.design("\tTriggering event: " .. char_cqi)
 			cm:trigger_incident_with_targets(faction_cqi, incident, 0, 0, char_cqi, 0, 0, 0)
 			
-			if event_key:starts_with("wh_dlc07_trait_brt_knights_vow") then 
+			if trait:starts_with("wh_dlc07_trait_brt_knights_vow") then 
 				core:trigger_event("ScriptEventBretonniaKnightsVowCompleted", character)
-			elseif event_key:starts_with("wh_dlc07_trait_brt_questing_vow") then
+			elseif trait:starts_with("wh_dlc07_trait_brt_questing_vow") then
 				core:trigger_event("ScriptEventBretonniaQuestingVowCompleted", character)
-			elseif event_key:starts_with("wh_dlc07_trait_brt_grail_vow") then
+			elseif trait:starts_with("wh_dlc07_trait_brt_grail_vow") then
 				core:trigger_event("ScriptEventBretonniaGrailVowCompleted", character)
-			elseif event_key:starts_with("wh_dlc07_trait_brt_virtue_troth") then
+			elseif trait:starts_with("wh_dlc07_trait_brt_virtue_troth") then
 				core:trigger_event("ScriptEventBretonniaVirtueTrothCompleted", character) 
 			end
 		end
 	end
 	
 	-- Do all heroes in this characters army
-	if agents and character:has_military_force() then
+	if check_embedded_agents and character:has_military_force() then
 		local force_characters = character:military_force():character_list()
 		local force_character_count = force_characters:num_items()
 		out.design("Checking agents (" .. force_character_count .. ")...")
@@ -178,29 +176,9 @@ function add_vow_progress(character, trait, ai, agents)
 		for i = 0, force_character_count - 1 do
 			local current_char = force_characters:item_at(i)
 			local subtype_key = current_char:character_subtype_key()
-			if is_female(current_char) then
-				trait = vow_to_troth[trait_uc] .. "_agent"
-			else
-				trait = trait_uc .. "_agent"
-			end
-			out.design("\t\tCharacter: " .. subtype_key)
-			
+
 			if vow_agents[subtype_key] then
-				local agent_points = current_char:trait_points(trait)
-				out.design("\t\t\tPoints: " .. agent_points)
-				
-				if (agent_points > 0 or ai == true) and agent_points < max_trait_points then
-					out.design("\t\t\tAdding agent trait - " .. trait)
-					char_cqi = current_char:command_queue_index()
-					cm:force_add_trait(cm:char_lookup_str(current_char), trait, false, 1)
-					agent_points = agent_points + 1
-					out.design("\t\t\tNew Points: " .. agent_points)
-					
-					if agent_points == max_trait_points and ai == false then
-						out.design("\t\t\tTriggering event: " .. char_cqi)
-						cm:trigger_incident_with_targets(faction_cqi, incident_uc, 0, 0, char_cqi, 0, 0, 0)
-					end
-				end
+				add_vow_progress(current_char, trait, ai, false, true)
 			end
 		end
 	end

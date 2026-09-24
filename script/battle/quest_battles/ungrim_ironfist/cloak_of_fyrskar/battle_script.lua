@@ -22,8 +22,6 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 ---DWF vs Greenskins, regular version
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -35,11 +33,9 @@ ga_ai_01_reinforcement_02 = gb:get_army(gb:get_non_player_alliance_num(), 1, "re
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_dwf_ungrim_ironfist_dragon_cloak_of_fyrskar_stage_3.2_main_objective");
 
-
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_dwf_ungrim_ironfist_dragon_cloak_of_fyrskar_stage_3.2_hint_objective", 6000, 2000, 1000);
 
-gb:play_sound_on_message("start_reinforcement", Orc_Horn, v(0, 110, 0), 1000);
 gb:queue_help_on_message("start_reinforcement", "wh_main_qb_dwf_ungrim_ironfist_dragon_cloak_of_fyrskar_stage_3.2_hint_reinforcements", 6000, 2000, 1000);
 
 -------ORDERS-------

@@ -326,8 +326,15 @@ ga_defender_scout:rout_over_time_on_message("simaergul_defeated", 2000)
 ga_defender_sim:halt();
 
 ga_defender_sim:set_enabled_on_message("01_intro_cutscene_end", false);
-ga_defender_sim.sunits:set_invisible_to_all_on_message("one_hound_defeated", false);
+-- ga_defender_sim.sunits:set_invisible_to_all_on_message("one_hound_defeated", false);
 ga_defender_sim:set_enabled_on_message("one_hound_defeated", true);
+
+gb:add_listener(
+	"one_hound_defeated",
+	function()
+		ga_defender_sim.sunits:set_invisible_to_all(false);
+	end
+);
 
 --ga_defender_sim:set_invincible_on_message("01_intro_cutscene_end", true);
 --ga_defender_sim:set_invincible_on_message("one_hound_defeated", false);

@@ -24,6 +24,11 @@
 						<food_cost_entry this="BEDD9113-71BC-4D1E-AF59B65DFA7A1BAB"/>
 						<description_window this="C1AE8170-1F9F-4320-BEBF797096C9914C"/>
 						<effects_list this="73246BD4-02E6-4C7A-A5DA552947DAA3D6"/>
+						<character_traits this="9B956215-CBDE-4678-87C69B4450074C62">
+							<template_trait this="5955C6E1-48A4-4F71-A1F1819C4BA6F079">
+								<dy_trait this="1388EE0F-5657-493D-8706B6AC75A2E356"/>
+							</template_trait>
+						</character_traits>
 						<bottom_padding this="3484385D-AAA6-41E0-8CB861FACE8EF51E"/>
 						<stick_progress_bar this="1CD543C2-8141-41A9-9CAD85ACC53E1619">
 							<bar_extents_and_pos this="C2D7160D-7857-42F6-96ED44F6468C076B">
@@ -83,7 +88,7 @@
 		<bottom_padding
 			this="3484385D-AAA6-41E0-8CB861FACE8EF51E"
 			id="bottom_padding"
-			offset="0.00,152.00"
+			offset="0.00,190.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			priority="255"
@@ -153,7 +158,7 @@
 					this="3F32B744-93DE-4C8E-B4C474F22127CF5B"
 					name="default"
 					width="400"
-					height="232"
+					height="270"
 					interactive="true"
 					uniqueguid="3F32B744-93DE-4C8E-B4C474F22127CF5B"/>
 			</states>
@@ -197,7 +202,7 @@
 					this="95F73737-9187-44F9-8D38B519A04D1255"
 					name="wh3"
 					width="400"
-					height="179"
+					height="217"
 					uniqueguid="95F73737-9187-44F9-8D38B519A04D1255">
 					<imagemetrics>
 						<image
@@ -205,7 +210,7 @@
 							uniqueguid="E74C7F60-E014-431D-9B3515826F2BCDCD"
 							componentimage="0E43BCCB-4729-4A1F-88409470C45E6336"
 							width="400"
-							height="179"
+							height="217"
 							tile="true"
 							margin="15.00,15.00,15.00,15.00"/>
 					</imagemetrics>
@@ -270,7 +275,7 @@
 					this="88C2EAA1-3CC3-4E9D-A100851A257BAF6A"
 					name="default"
 					width="400"
-					height="179"
+					height="217"
 					uniqueguid="88C2EAA1-3CC3-4E9D-A100851A257BAF6A"/>
 			</states>
 			<LayoutEngine
@@ -453,6 +458,56 @@
 				</default>
 			</states>
 		</category_frame>
+		<character_traits
+			this="9B956215-CBDE-4678-87C69B4450074C62"
+			id="character_traits"
+			offset="0.00,152.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="9B956215-CBDE-4678-87C69B4450074C62"
+			currentstate="1CA5CEC8-245C-4811-9C7761D347036EAA">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoBuildingLevelRecord"
+					context_function_id="CharacterTraitList">
+					<child_m_user_properties>
+						<property
+							name="hide_if_empty"
+							value=""/>
+						<property
+							name="refresh_if_not_visible"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="1CA5CEC8-245C-4811-9C7761D347036EAA"
+					name="NewState"
+					width="400"
+					height="38"
+					uniqueguid="1CA5CEC8-245C-4811-9C7761D347036EAA">
+					<component_text
+						textxoffset="12.00,8.00"
+						textyoffset="2.00,4.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="0.00,-7.00"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="400"/>
+				</columnwidths>
+			</LayoutEngine>
+		</character_traits>
 		<completed_comp
 			this="1B4285EE-03C4-4575-A7917372B992EE62"
 			id="completed_comp"
@@ -606,6 +661,68 @@
 				</newstate>
 			</states>
 		</dy_title>
+		<dy_trait
+			this="1388EE0F-5657-493D-8706B6AC75A2E356"
+			id="dy_trait"
+			offset="2.00,3.00"
+			allowhorizontalresize="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="1388EE0F-5657-493D-8706B6AC75A2E356"
+			currentstate="790F2637-62DC-4FAE-93231589C80246BF">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCharacterTraitLevelRecord"
+					context_function_id="Name"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCharacterTraitLevelRecord"
+					context_function_id="TraitRecordContext.IconPath"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="max_text_width"
+					value="273"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="AA302A45-82E1-4B3F-8F58683805EAF7A3"
+					uniqueguid="AA302A45-82E1-4B3F-8F58683805EAF7A3"
+					imagepath="ui/skins/default/construction_positive.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="790F2637-62DC-4FAE-93231589C80246BF"
+					name="NewState"
+					width="313"
+					uniqueguid="790F2637-62DC-4FAE-93231589C80246BF">
+					<imagemetrics>
+						<image
+							this="1995430B-C2C8-430E-B2D13C6771B37A29"
+							uniqueguid="1995430B-C2C8-430E-B2D13C6771B37A29"
+							componentimage="AA302A45-82E1-4B3F-8F58683805EAF7A3"
+							offset="0.00,4.00"
+							width="24"
+							height="24"
+							dockpoint="Center Left"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="dy_trait"
+						textvalign="Center"
+						textxoffset="28.00,2.00"
+						textyoffset="8.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_8ed22abd"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</dy_trait>
 		<effects_list
 			this="73246BD4-02E6-4C7A-A5DA552947DAA3D6"
 			id="effects_list"
@@ -722,7 +839,7 @@
 		<instruction_window
 			this="029E2F21-CCCF-4585-8CE1AF981A9583D0"
 			id="instruction_window"
-			offset="0.00,171.00"
+			offset="0.00,209.00"
 			allowhorizontalresize="false"
 			clipchildren="true"
 			priority="255"
@@ -1078,5 +1195,68 @@
 					is_text_localised="false"/>
 			</localised_texts>
 		</stick_progress_bar>
+		<template_trait
+			this="5955C6E1-48A4-4F71-A1F1819C4BA6F079"
+			id="template_trait"
+			offset="11.00,0.00"
+			dock_offset="11.00,0.00"
+			priority="255"
+			uniqueguid="5955C6E1-48A4-4F71-A1F1819C4BA6F079"
+			currentstate="CD3A84D5-C92A-44A8-AA5E091DEAE78406">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCharacterTraitLevelRecord">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="ui/common ui/character_trait_tooltip_sticky"/>
+						<property
+							name="offset_x"
+							value=""/>
+						<property
+							name="offset_y"
+							value="-15"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="max_text_width"
+					value="273"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="B97DE340-39AC-42CF-90FD56054827EA58"
+					uniqueguid="B97DE340-39AC-42CF-90FD56054827EA58"
+					imagepath="ui/skins/default/selectable_non_button_hover_gradient.png"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="CD3A84D5-C92A-44A8-AA5E091DEAE78406"
+					name="NewState"
+					width="389"
+					height="38"
+					interactive="true"
+					uniqueguid="CD3A84D5-C92A-44A8-AA5E091DEAE78406">
+					<imagemetrics>
+						<image
+							this="CAD33ED5-EF0B-497A-9661C6FFB3E99737"
+							uniqueguid="CAD33ED5-EF0B-497A-9661C6FFB3E99737"
+							componentimage="B97DE340-39AC-42CF-90FD56054827EA58"
+							width="389"
+							height="38"
+							colour="#FFFFFF32"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
+				</newstate>
+			</states>
+		</template_trait>
 	</components>
 </layout>

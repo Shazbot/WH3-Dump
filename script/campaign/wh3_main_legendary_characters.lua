@@ -232,7 +232,8 @@ character_unlocking.character_data = {
 			"wh_main_emp_empire"
 		},
 		override_allowed_factions = {
-			"wh3_dlc25_dwf_malakai"
+			"wh3_dlc25_dwf_malakai",
+			"wh3_dlc29_vmp_neferata"
 		},
 		factions_involved = {},
 		starting_mission_keys = {
@@ -335,7 +336,6 @@ character_unlocking.character_data = {
 				"wh3_dlc20_chs_vilitch",
 				"wh3_main_dae_daemon_prince",
 				"wh3_dlc20_chs_kholek",
-				"wh3_dlc20_chs_sigvald",
 				"wh_main_chs_chaos",
 				"wh3_main_chs_shadow_legion"
 			},
@@ -350,7 +350,6 @@ character_unlocking.character_data = {
 		starting_mission_keys = {
 			["wh3_main_tze_oracles_of_tzeentch"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1",
 			["wh3_dlc20_chs_kholek"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
-			["wh3_dlc20_chs_sigvald"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
 			["wh3_dlc20_chs_vilitch"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
 			["wh_main_chs_chaos"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
 			["wh3_main_chs_shadow_legion"] = "wh3_dlc24_mis_tze_blue_scribes_stage_1_chs",
@@ -424,7 +423,6 @@ character_unlocking.character_data = {
 				"wh3_dlc20_chs_vilitch",
 				"wh3_main_dae_daemon_prince",
 				"wh3_dlc20_chs_kholek",
-				"wh3_dlc20_chs_sigvald",
 				"wh_main_chs_chaos",
 				"wh3_main_chs_shadow_legion"
 			},
@@ -454,9 +452,6 @@ character_unlocking.character_data = {
 				["wh3_main_chaos"] = "wh3_dlc24_mis_tze_aekold_helbrass_stage_1_changeling"
 			},
 			wh3_dlc20_chs_kholek = {
-				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
-			},
-			wh3_dlc20_chs_sigvald = {
 				["main_warhammer"] = "wh3_dlc24_mis_ie_tze_aekold_helbrass_stage_1_chs",
 			},
 			wh_main_chs_chaos = {
@@ -770,7 +765,8 @@ character_unlocking.character_data = {
 				"wh2_dlc17_dwf_thorek_ironbrow",
 				"wh_main_dwf_karak_izor",
 				"wh_main_dwf_karak_kadrin",
-				"wh3_cp1_cth_tiger_warriors"
+				"wh3_cp1_cth_tiger_warriors",
+				"wh_main_emp_middenland"
 			},
 			wh3_main_chaos = {
 				"wh_main_emp_wissenland",
@@ -860,6 +856,9 @@ character_unlocking.character_data = {
 			wh3_cp1_cth_tiger_warriors = {
 				["main_warhammer"] = "wh3_cp1_qb_gotrek_felix_ie_bhashiva"
 			},
+			wh_main_emp_middenland = {
+				["main_warhammer"] = "wh3_dlc29_qb_gotrek_felix_ie_boris_todbringer"
+			},
 		},
 		ancillaries = {
 			"wh2_pro08_anc_weapon_gotrek_axe",
@@ -890,7 +889,8 @@ character_unlocking.character_data = {
 				"wh3_dlc25_qb_gotrek_felix_ie_volkmar",
 				"wh3_dlc25_qb_gotrek_felix_ie_yuan_bo",
 				"wh3_dlc25_qb_gotrek_felix_ie_zhao_ming",
-				"wh3_cp1_qb_gotrek_felix_ie_bhashiva"
+				"wh3_cp1_qb_gotrek_felix_ie_bhashiva",
+				"wh3_dlc29_qb_gotrek_felix_ie_boris_todbringer"
 			},
 			wh3_main_chaos = {
 				"wh3_dlc25_qb_gotrek_felix_chaos_boris",
@@ -1029,6 +1029,7 @@ character_unlocking.character_data = {
 		require_dlc = {"TW_WH3_OMENS_OF_DESTRUCTION_KHO"},
 		override_allowed_factions = {
 			"wh3_dlc20_chs_valkia",
+			"wh_main_chs_chaos",
 			"wh3_main_kho_exiles_of_khorne",
 			"wh3_dlc26_kho_arbaal",
 			"wh3_dlc26_kho_skulltaker",
@@ -1053,7 +1054,9 @@ character_unlocking.character_data = {
 		required_buildings = {
 			"wh3_main_kho_infra_champion_1",
 			"wh3_main_kho_infra_champion_2",
-			"wh3_dlc20_woc_dark_fortress_vassals_2",
+			"wh3_dlc20_settlement_woc_dark_fortress_3",
+			"wh3_dlc20_settlement_woc_dark_fortress_4",
+			"wh3_dlc20_settlement_woc_dark_fortress_5",
 			"wh3_main_dae_advanced_kho_3"
 		}
 	},
@@ -1076,7 +1079,8 @@ character_unlocking.character_data = {
 			"wh_dlc08_nor_norsca",
 			"wh_dlc08_nor_wintertooth",
 			"wh3_dlc26_kho_arbaal",
-			"wh3_dlc26_kho_skulltaker"
+			"wh3_dlc26_kho_skulltaker",
+			"wh3_dlc27_nor_sayl"
 		},
 		factions_involved = {},
 		starting_mission_keys = "wh3_dlc26_kho_exiles_of_khorne_scyla_anfingrimm_unlock_1",
@@ -1238,7 +1242,7 @@ character_unlocking.character_data = {
 			}
 		}
 	},
-	taoyan = {
+taoyan = {
 		-- Cathayan players will get a mission to unlock Taoyan once their faction leader reaches rank 13.
 		-- If there are no human Cathayan players the strongest Cathay faction will get Taoyan after 30 turns
 		unlock_rank = 8,
@@ -1281,9 +1285,320 @@ character_unlocking.character_data = {
 				"wh3_cp1_cth_taoyan_unlock_2",
 			}
 		},
-	},			
+	},
+	emil_valgeir = {
+		unlock_rank = 8,
+		ai_unlock_turn = 20,
+		has_spawned = false,
+		name = "emil",
+		require_dlc = {"TW_WH3_LOET_BORIS"},
+		subtype = "wh3_dlc29_emp_cha_emil_valgeir",
+		starting_owner_faction = "wh_main_emp_middenland",	
+				-- This sets it so that if a human player is playing as the specified faction only they can get Beorg Bearstruck
+		priority_ai_faction = "wh_main_emp_middenland",			-- This sets is so that if there is no human empire player then the specified AI faction gets them
+		override_allowed_factions = {
+			"wh_main_emp_empire",
+			"wh2_dlc13_emp_golden_order",
+			"wh2_dlc13_emp_the_huntmarshals_expedition",
+			"wh_main_emp_wissenland",
+			"wh_main_emp_middenland"
+		},
+		factions_involved = {},
+		starting_mission_keys = {
+			wh_main_emp_empire = {
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+			},
+			wh_main_emp_wissenland = {
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+			},
+			wh2_dlc13_emp_the_huntmarshals_expedition = {
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+			},
+			wh2_dlc13_emp_golden_order = {
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+			},
+		},
+		
+		final_mission_key = "wh3_dlc29_ie_emp_emil_valgeir_stage_2",
+		ancillaries = {
+			"wh3_dlc29_anc_armour_emp_wolfplate_armour",
+			"wh3_dlc29_anc_weapon_hammer_axe_of_skoll"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_2",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_2",
+			}
+		}
+	},
+	emil_valgeir_volkmar = {
+		required_mission_keys = {"wh3_main_ie_qb_emp_volkmar_the_grim_staff_of_command"},
+		has_spawned = false,
+		name = "emil_volkmar",
+		require_dlc = {"TW_WH3_LOET_BORIS"},
+		subtype = "wh3_dlc29_emp_cha_emil_valgeir",
+		override_allowed_factions = {
+			"wh3_main_emp_cult_of_sigmar"
+		},
+		factions_involved = {},
+		starting_mission_keys = "wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+		final_mission_key = "wh3_dlc29_ie_emp_emil_valgeir_stage_2",
+		ancillaries = {
+			"wh3_dlc29_anc_armour_emp_wolfplate_armour",
+			"wh3_dlc29_anc_weapon_hammer_axe_of_skoll"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_1",
+				"wh3_dlc29_ie_emp_emil_valgeir_stage_2",
+			},
+		}
+	},
+	gutrot_spume = {
+		unlock_rank = 7,
+		ai_unlock_turn = 14,
+		has_spawned = false,
+		name = "gutrot",
+		require_dlc = {"TW_WH3_LOET_GLOTTKIN"},
+		subtype = "wh3_dlc29_chs_gutrot_spume",
+				-- This sets it so that if a human player is playing as the specified faction only they can get Beorg Bearstruck
+		priority_ai_faction = "wh3_dlc29_chs_host_of_the_triplets",			-- This sets is so that if there is no human empire player then the specified AI faction gets them
+		allowed_cultures = {
+			"wh3_main_nur_nurgle",
+			"wh_dlc08_nor_norsca",
+		},
+		override_allowed_factions = {
+			"wh3_dlc20_chs_festus",
+			"wh3_dlc20_chs_kholek",
+			"wh3_dlc29_chs_host_of_the_triplets",
+			"wh3_main_chs_shadow_legion",
+			"wh_main_chs_chaos",
+		},
+		factions_involved = {},
+		starting_mission_keys = {
+			wh3_main_nur_nurgle = {
+				["main_warhammer"] = "wh3_dlc29_ie_nur_unlock_gutrot_spume_stage_1",
+				["wh3_main_chaos"] = "wh3_dlc29_ie_nur_unlock_gutrot_spume_stage_1"
+			},
+			wh3_dlc29_chs_host_of_the_triplets = {
+				["main_warhammer"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1_glottkin",
+				["wh3_main_chaos"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_2_glottkin"
+			},
+			wh3_dlc20_chs_festus = {
+				["main_warhammer"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1",
+				["wh3_main_chaos"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1"
+			},
+			wh_main_chs_chaos = {
+				["main_warhammer"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1",
+				["wh3_main_chaos"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1"
+			},
+			wh3_dlc20_chs_kholek = {
+				["main_warhammer"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1",
+				["wh3_main_chaos"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1"
+			},
+			wh3_main_chs_shadow_legion = {
+				["main_warhammer"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1",
+				["wh3_main_chaos"] = "wh3_dlc29_ie_unlock_gutrot_spume_stage_1"
+			},
+			wh_dlc08_nor_norsca = {
+				["main_warhammer"] = "wh3_dlc29_ie_nor_unlock_gutrot_spume_stage_1",
+			}
+		},
+		final_mission_key = {
+		"wh3_dlc29_ie_unlock_gutrot_spume_stage_2",
+		"wh3_dlc29_ie_unlock_gutrot_spume_stage_2_glottkin",
+		"wh3_dlc29_ie_nor_unlock_gutrot_spume_stage_2"
+		},
+		ancillaries = {
+			"wh3_dlc29_anc_weapon_rot_pocked_axe",
+			"wh3_dlc29_anc_talisman_mark_of_the_plague_fleet",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc29_ie_nur_unlock_gutrot_spume_stage_1",
+				"wh3_dlc29_ie_unlock_gutrot_spume_stage_1",
+				"wh3_dlc29_ie_unlock_gutrot_spume_stage_2",
+				"wh3_dlc29_ie_unlock_gutrot_spume_stage_1_glottkin",
+				"wh3_dlc29_ie_unlock_gutrot_spume_stage_2_glottkin",
+				"wh3_dlc29_ie_nor_unlock_gutrot_spume_stage_1",
+				"wh3_dlc29_ie_nor_unlock_gutrot_spume_stage_2"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc29_ie_nur_unlock_gutrot_spume_stage_1",
+				"wh3_dlc29_ie_unlock_gutrot_spume_stage_1",
+				"wh3_dlc29_ie_unlock_gutrot_spume_stage_2"
+			}
+		},
+	},
+	skreech_verminking = {
+		unlock_rank = 8,
+		ai_unlock_turn = 35,
+		has_spawned = false,
+		name = "skreech",
+		require_dlc = {"TW_WH3_LOET_THANQUOL"},
+		subtype = "wh3_dlc29_skv_skreech_verminking",
+		priority_ai_faction = "wh3_dlc29_skv_clan_scruten",
+		priority_alternate_unlock_faction = "wh3_dlc29_skv_clan_scruten",
+		override_allowed_factions = {
+			--"wh3_dlc29_skv_clan_scruten", -- this faction has its own way of unlocking Skreech
+			"wh2_dlc09_skv_clan_rictus",
+			"wh2_main_skv_clan_eshin",
+			"wh2_main_skv_clan_mors",
+			"wh2_main_skv_clan_moulder",
+			"wh2_main_skv_clan_pestilens",
+			"wh2_main_skv_clan_skryre",
+		},
+		factions_involved = {},
+		alternate_unlock_mission_keys = {
+			wh3_dlc29_skv_clan_scruten = "wh3_dlc29_qb_skv_thanquol_staff_of_the_horned_rat"
+		},
+		starting_mission_keys = {
+			wh2_main_skv_clan_moulder = {
+				["main_warhammer"] = "wh3_dlc29_mission_skreech_verminking_unlock_1",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_skreech_verminking_unlock_1",
+			},
+			wh2_dlc09_skv_clan_rictus = {
+				["main_warhammer"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_rictus",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_rictus",
+			},
+			wh2_main_skv_clan_eshin = {
+				["main_warhammer"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_eshin",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_eshin",
+			},
+			wh2_main_skv_clan_mors = {
+				["main_warhammer"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_mors",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_mors",
+			},
+			wh2_main_skv_clan_pestilens = {
+				["main_warhammer"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_pestilens",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_pestilens",
+			},
+			wh2_main_skv_clan_skryre = {
+				["main_warhammer"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_skryre",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_skreech_verminking_unlock_1_skryre",
+			},
+		},
+		final_mission_key = "wh3_dlc29_mission_skreech_verminking_unlock_3",
+		ancillaries = {
+			"wh3_cp1_anc_weapon_tyrants_talon",
+			--"wh3_dlc29_anc_weapon_doom_glaive",
+			--"wh3_dlc29_anc_enchanted_item_plaguereaper"
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_rictus",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_rictus",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_eshin",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_eshin",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_mors",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_mors",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_pestilens",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_pestilens",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_skryre",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_skryre",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2",
+				"wh3_dlc29_mission_skreech_verminking_unlock_3"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_rictus",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_rictus",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_eshin",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_eshin",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_mors",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_mors",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_pestilens",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_pestilens",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1_skryre",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2_skryre",
+				"wh3_dlc29_mission_skreech_verminking_unlock_1",
+				"wh3_dlc29_mission_skreech_verminking_unlock_2",
+				"wh3_dlc29_mission_skreech_verminking_unlock_3"
+			}
+		}
+	},
+	morbidex = {
+		unlock_rank = 16,
+		ai_unlock_turn = 22,
+		has_spawned = false,
+		name = "morbidex",
+		require_dlc = {"TW_WH3_LOET_GLOTTKIN"},
+		subtype = "wh3_dlc29_chs_morbidex",
+				-- This sets it so that if a human player is playing as the specified faction only they can get Beorg Bearstruck
+		priority_ai_faction = "wh3_dlc29_chs_host_of_the_triplets",			-- This sets is so that if there is no human empire player then the specified AI faction gets them
+		blessed_symptom = 1,
+		spread_plague = 7,
+		nurgle_rains = 5,
+		putrid_blightkings = 7,
+		allowed_cultures = {
+			"wh3_main_nur_nurgle",
+		},
+		override_allowed_factions = {
+			"wh3_dlc29_chs_host_of_the_triplets",
+			"wh3_dlc20_chs_festus",
+			"wh_main_chs_chaos",
+		},
+		factions_involved = {},
+		starting_mission_keys = {
+			wh3_dlc29_chs_host_of_the_triplets = {
+				["main_warhammer"] = "wh3_dlc29_mission_chs_maggoth_riders_unlock_step_1",
+			},
+			wh3_dlc20_chs_festus = {
+				["main_warhammer"] = "wh3_dlc29_mission_chs_maggoth_riders_unlock_step_1",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_chs_maggoth_riders_unlock_step_1",
+			},
+			wh_main_chs_chaos = {
+				["main_warhammer"] = "wh3_dlc29_mission_chs_maggoth_riders_unlock_step_1",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_chs_maggoth_riders_unlock_step_1",
+			},
+			wh3_main_nur_nurgle = {
+				["main_warhammer"] = "wh3_dlc29_mission_nur_maggoth_riders_unlock_step_1",
+				["wh3_main_chaos"] = "wh3_dlc29_mission_nur_maggoth_riders_unlock_step_1",
+			},
+		},
+		final_mission_key = {"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_3", "wh3_dlc29_mission_nur_maggoth_riders_unlock_step_3"},
+		ancillaries = {
+			"wh3_dlc29_anc_weapon_rot_pocked_axe",
+			"wh3_dlc29_anc_talisman_mark_of_the_plague_fleet",
+		},
+		mission_chain_keys = {
+			main_warhammer = {
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_1",
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_2",
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_3",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_1",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_2",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_3",
+			},
+			wh3_main_chaos = {
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_1",
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_2",
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_3",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_1",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_2",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_3",
+			}
+		},
+    	missions_to_trigger_dilemma = {
+			main_warhammer = {
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_3",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_3"
+			},
+			wh3_main_chaos = {
+				"wh3_dlc29_mission_chs_maggoth_riders_unlock_step_3",
+				"wh3_dlc29_mission_nur_maggoth_riders_unlock_step_3"
+			}
+		},
+		trigger_dilemma_key = "wh3_dlc29_chs_maggoth_riders_choice",
+		alt_reward_dilemma_triggered = false
+	},
 }
 
+	
 -- build a numerically indexed list of character keys
 character_unlocking.character_list = {}
 for character_name, _ in pairs(character_unlocking.character_data) do
@@ -1299,6 +1614,9 @@ function character_unlocking:setup_legendary_hero_unlocking()
 		-- Generate allowed factions list for character
 		if current_character.allowed_factions == nil then
 			current_character.allowed_factions = self:get_allowed_factions_list(current_character)
+		end
+		if current_character.alternate_unlock_mission_keys then
+			self:add_alternate_unlock_mission_listener(character)
 		end
 		if character and self:character_has_valid_faction_in_campaign(character) then
 			local has_starting_owner = false
@@ -1325,6 +1643,8 @@ function character_unlocking:setup_legendary_hero_unlocking()
 					self:add_ritual_listener(character)
 				elseif current_character.required_buildings then
 					self:add_building_completed_listeners(character)
+				elseif current_character.required_mission_keys then
+					self:add_mission_succeeded_listener(character)
 				elseif current_character.starting_mission_keys then
 					self:add_quest_mission_listener(character)
 				else
@@ -1349,6 +1669,14 @@ function character_unlocking:add_listeners_for_character_rank_unlock(character)
 	local character_info = self.character_data[character]
 	local rank_hero_unlock_human_count = 0
 	local priority_faction_found = false
+
+	if character_info.priority_alternate_unlock_faction then
+		local priority_faction = cm:get_faction(character_info.priority_alternate_unlock_faction)
+		if priority_faction and priority_faction:is_human() then
+			self:cancel_standard_unlock_missions(character_info)
+			return
+		end
+	end
 
 	if character_info.priority_faction ~= nil then
 		local faction_interface = cm:get_faction(character_info.priority_faction)
@@ -1455,6 +1783,30 @@ function character_unlocking:setup_rank_unlock_mission_listeners(character)
 			true
 		)
 	end
+end
+
+function character_unlocking:add_alternate_unlock_mission_listener(character)
+	local character_info = self.character_data[character]
+	local character_alternate_unlock = character_info.name .. "AlternateUnlock"
+
+	core:add_listener(
+		character_alternate_unlock,
+		"MissionSucceeded",
+		function(context)
+			return character_info.has_spawned == false and self:is_match_key_from_list(
+				context:mission():mission_record_key(),
+				character_info.alternate_unlock_mission_keys,
+				context:faction():name()
+			)
+		end,
+		function(context)
+			local faction = context:faction()
+			local faction_name = faction:name()
+			self:spawn_hero(faction_name, character, faction:faction_leader():command_queue_index())
+			self:cancel_missions_for_other_players(faction_name, character, character_alternate_unlock)
+		end,
+		true
+	)
 end
 
 ----------------------------------
@@ -1732,6 +2084,77 @@ function character_unlocking:add_building_completed_listeners(character)
 	)
 
 	if building_unlock_human_faction_counter == 0 then
+		self:spawn_hero_for_ai(character)
+	end
+end
+
+----------------------------------
+---- Specific Mission Unlock  ----
+----------------------------------
+
+function character_unlocking:add_mission_succeeded_listener(character)
+	local character_info = self.character_data[character]
+	local character_mission_complete = character_info.name .. "MissionSucceeded"
+	local mission_unlock_human_faction_counter = 0
+	local priority_faction_found = false
+
+	-- Setup mission trigger listeners
+	if character_info.priority_faction ~= nil then
+		local faction = cm:get_faction(character_info.priority_faction)
+		if faction and faction:is_human() then
+			local faction_name = faction:name()
+			character_info.factions_involved[faction_name] = true
+			mission_unlock_human_faction_counter = mission_unlock_human_faction_counter + 1
+			self:setup_mission_succeeded_spawn_hero_listener(character, faction_name, character_mission_complete)
+			priority_faction_found = true
+		end
+	end
+
+	if not priority_faction_found then
+		for i = 1, #character_info.allowed_factions do
+			local faction = cm:get_faction(character_info.allowed_factions[i])
+
+			if faction and faction:is_human() then
+				local faction_name = faction:name()
+				character_info.factions_involved[faction_name] = true
+				mission_unlock_human_faction_counter = mission_unlock_human_faction_counter + 1
+				self:setup_mission_succeeded_spawn_hero_listener(character, faction_name, character_mission_complete)
+			end
+		end
+	end
+
+	-- Spawn hero on mission completion
+	local required_mission_success = "legendary_character_required_mission_success"
+	core:add_listener(
+		required_mission_success,
+		"MissionSucceeded",
+		function(context)
+			if character_info.final_mission_key then
+				return self:is_match_key_from_list(
+					context:mission():mission_record_key(),
+					character_info.final_mission_key,
+					context:faction():name()
+				)
+			else
+				return self:is_match_key_from_list(
+					context:mission():mission_record_key(),
+					character_info.mission_chain_keys,
+					context:faction():name()
+				)
+			end
+		end,
+		function(context)
+			local faction = context:faction()
+			local faction_name = faction:name()
+			if not character_info.trigger_dilemma_key then
+				self:spawn_hero(faction_name, character, faction:faction_leader():command_queue_index())
+				self:cancel_missions_for_other_players(faction_name, character, required_mission_success)
+			end
+		end,
+		false
+	)
+
+	if mission_unlock_human_faction_counter == 0 then
 		self:spawn_hero_for_ai(character)
 	end
 end
@@ -2122,11 +2545,25 @@ function character_unlocking:cancel_missions_for_faction(faction_key, character_
 	end
 end
 
+function character_unlocking:cancel_standard_unlock_missions(character_info)
+	for i = 1, #character_info.allowed_factions do
+		self:cancel_missions_for_faction(character_info.allowed_factions[i], character_info)
+	end
+end
+
 function character_unlocking:cancel_mission_for_character_info(character_info, completing_faction, character_mission_success_listener)
 	for i = 1, #character_info.allowed_factions do
 		local faction = character_info.allowed_factions[i]
 		if character_info.factions_involved[faction] and faction ~= completing_faction then
 			self:cancel_missions_for_faction(faction, character_info, character_mission_success_listener)
+		end
+	end
+
+	if character_info.alternate_unlock_mission_keys then
+		for faction_key, _ in dpairs(character_info.alternate_unlock_mission_keys) do
+			if faction_key ~= completing_faction then
+				cm:cancel_custom_mission(faction_key, self:get_mission_key(character_info.alternate_unlock_mission_keys, faction_key))
+			end
 		end
 	end
 end
@@ -2228,6 +2665,319 @@ function character_unlocking:setup_building_completed_spawn_hero_listener(charac
 		true
 	)
 end
+
+function character_unlocking:setup_mission_succeeded_spawn_hero_listener(character, faction_name, character_mission_complete)
+	local character_info = self.character_data[character]
+
+	core:add_listener(
+		faction_name..character_mission_complete,
+		"MissionSucceeded",
+		function(context)
+			local mission_key = context:mission():mission_record_key()
+			local faction_key = context:faction():name()
+			return faction_key == faction_name and self:is_match_key_from_list(mission_key, character_info.required_mission_keys)
+		end,
+		function(context)
+			local faction_key = context:faction():name()
+			cm:trigger_mission(faction_key, self:get_mission_key(character_info.starting_mission_keys, faction_key), true)
+			core:remove_listener(faction_name..character_mission_complete)
+		end,
+		true
+	)
+end
+
+function character_unlocking:embed_agents_in_force(faction_name, army_leader_cqi, subtypes)
+	cm:callback(
+		function()
+			local faction = cm:get_faction(faction_name)
+			local army_leader = cm:get_character_by_cqi(army_leader_cqi)
+
+			if faction and army_leader and army_leader:has_military_force() then
+				local force = army_leader:military_force()
+				local character_list = faction:character_list()
+
+				for i = 0, character_list:num_items() - 1 do
+					local character = character_list:item_at(i)
+					local subtype = character:character_subtype_key()
+					if table.contains(subtypes, subtype) then
+						cm:embed_agent_in_force(character, force)
+					end
+				end
+			end
+		end,
+	0.1
+	)
+end
+
+function character_unlocking:spawn_maggot_lord(faction_cqi, faction_name, general_name, region_name, pos_x, pos_y)
+	if general_name == "wh3_dlc29_chs_orghotts_lord" then
+		cm:spawn_unique_agent(faction_cqi, "wh3_dlc29_chs_morbidex", true)
+		cm:spawn_unique_agent(faction_cqi, "wh3_dlc29_chs_bloab", true)
+		cm:create_force_with_general(
+			faction_name,
+			"wh3_dlc20_chs_inf_chaos_marauders_mnur_greatweapons,wh3_dlc20_chs_inf_chaos_marauders_mnur_greatweapons,wh3_dlc29_chs_morbidex,wh3_dlc29_chs_bloab",
+			region_name,
+			pos_x,
+			pos_y,
+			"general",
+			general_name,
+			"names_name_2028427876",
+			"",
+			"names_name_988580465",
+			"",
+			false,
+			function(army_leader_cqi)
+				cm:set_character_immortality(cm:char_lookup_str(army_leader_cqi), true)
+				cm:replenish_action_points(cm:char_lookup_str(army_leader_cqi))
+				local army_leader = cm:get_character_by_cqi(army_leader_cqi)
+				cm:force_add_ancillary(army_leader, "wh3_dlc29_anc_weapon_the_rot_axes", true, true)
+				self:embed_agents_in_force(
+					faction_name,
+					army_leader_cqi,
+					{
+						"wh3_dlc29_chs_morbidex",
+						"wh3_dlc29_chs_bloab"
+					}
+				)
+			end
+		)
+    elseif general_name == "wh3_dlc29_chs_bloab_lord" then
+		cm:spawn_unique_agent(faction_cqi, "wh3_dlc29_chs_morbidex", true)
+		cm:spawn_unique_agent(faction_cqi, "wh3_dlc29_chs_orghotts", true)
+		cm:create_force_with_general(
+			faction_name,
+			"wh3_main_nur_inf_nurglings_0,wh3_main_nur_inf_nurglings_0",
+			region_name,
+			pos_x,
+			pos_y,
+			"general",
+			general_name,
+			"names_name_475030931",
+			"",
+			"names_name_1251097162",
+			"",
+			false,
+			function(army_leader_cqi)
+				cm:set_character_immortality(cm:char_lookup_str(army_leader_cqi), true)
+				cm:replenish_action_points(cm:char_lookup_str(army_leader_cqi))
+				local army_leader = cm:get_character_by_cqi(army_leader_cqi)
+				cm:force_add_ancillary(army_leader, "wh3_dlc29_anc_arcane_item_doombells", true, true)
+				cm:force_add_ancillary(army_leader, "wh3_dlc29_anc_weapon_harvestman_scythe", true, true)
+				self:embed_agents_in_force(
+					faction_name,
+					army_leader_cqi,
+					{
+						"wh3_dlc29_chs_morbidex",
+						"wh3_dlc29_chs_orghotts"
+					}
+				)
+			end
+		)
+
+	elseif general_name == "wh3_dlc29_chs_morbidex_lord" then
+		cm:spawn_unique_agent(faction_cqi, "wh3_dlc29_chs_bloab", true)
+		cm:spawn_unique_agent(faction_cqi, "wh3_dlc29_chs_orghotts", true)
+		cm:create_force_with_general(
+			faction_name,
+			"wh3_dlc20_chs_inf_chaos_marauders_mnur,wh3_dlc20_chs_inf_chaos_marauders_mnur",
+			region_name,
+			pos_x,
+			pos_y,
+			"general",
+			general_name,
+			"names_name_714266682",
+			"",
+			"names_name_951979084",
+			"",
+			false,
+			function(army_leader_cqi)
+				cm:set_character_immortality(cm:char_lookup_str(army_leader_cqi), true)
+				cm:replenish_action_points(cm:char_lookup_str(army_leader_cqi))
+				local army_leader = cm:get_character_by_cqi(army_leader_cqi)
+				cm:force_add_ancillary(army_leader, "wh3_dlc29_anc_weapon_fleshreaper_scythe", true, true)
+				self:embed_agents_in_force(
+					faction_name,
+					army_leader_cqi,
+					{
+						"wh3_dlc29_chs_bloab",
+						"wh3_dlc29_chs_orghotts"
+					}
+				)
+			end
+		)
+	end
+end
+
+function character_unlocking:suppress_immortality_for_subtype_in_pending_battle(pending_battle, subtype)
+	local participants = {}
+
+	if pending_battle:has_attacker() then
+		table.insert(participants, pending_battle:attacker())
+	end
+
+	if pending_battle:has_defender() then
+		table.insert(participants, pending_battle:defender())
+	end
+
+	for i, character in model_pairs(pending_battle:secondary_attackers()) do
+		table.insert(participants, character)
+	end
+
+	for i, character in model_pairs(pending_battle:secondary_defenders()) do
+		table.insert(participants, character)
+	end
+
+	for i = 1, #participants do
+		local participant = participants[i]
+
+		if participant:has_military_force() then
+			-- character_list contains the force commander as well as any embedded agents
+			for j, force_character in model_pairs(participant:military_force():character_list()) do
+				if force_character:character_subtype(subtype) then
+					cm:suppress_immortality(force_character:family_member():command_queue_index(), true)
+				end
+			end
+		end
+	end
+end
+
+-- Maggot Lord dilemma
+	core:add_listener(
+		"Maggot_Lord_Dilemma",
+		"DilemmaChoiceMadeEvent",
+			function(context)
+				return context:dilemma() == "wh3_dlc29_chs_maggoth_riders_choice"
+			end,
+			function(context)
+				local cancel_for_other_mp_players = true
+				local faction_name = context:faction():name()
+				local faction_interface = cm:get_faction(faction_name);
+				local faction_cqi = faction_interface:command_queue_index();
+				local faction_leader = faction_interface:faction_leader();
+				local choice = context:choice()
+				if faction_interface:has_home_region() then
+					faction_capital_key = faction_interface:home_region():name()
+				end
+
+				if choice == 0 then
+					if faction_leader:is_null_interface() == false and faction_leader:is_wounded() == false then
+						local x, y = cm:find_valid_spawn_location_for_character_from_character(faction_name, cm:char_lookup_str(faction_leader), true, 5)
+						local faction_leader_region = faction_leader:region();
+						local faction_leader_region_key = faction_leader_region:name()
+						character_unlocking:spawn_maggot_lord(faction_cqi, faction_name, "wh3_dlc29_chs_orghotts_lord", faction_leader_region_key, x, y)						
+					elseif faction_leader:is_null_interface() == false and faction_leader:is_wounded() == true and faction_interface:has_home_region() then	
+						local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction_name, faction_capital_key, false, true)
+						character_unlocking:spawn_maggot_lord(faction_cqi, faction_name, "wh3_dlc29_chs_orghotts_lord", faction_capital_key, x, y)
+					end
+				elseif choice == 1 then
+					if faction_leader:is_null_interface() == false and faction_leader:is_wounded() == false then					
+						local x, y = cm:find_valid_spawn_location_for_character_from_character(faction_name, cm:char_lookup_str(faction_leader), true, 5)						
+						local faction_leader_region = faction_leader:region();
+						local faction_leader_region_key = faction_leader_region:name()
+						character_unlocking:spawn_maggot_lord(faction_cqi, faction_name, "wh3_dlc29_chs_bloab_lord", faction_leader_region_key, x, y)
+					elseif faction_leader:is_null_interface() == false and faction_leader:is_wounded() == true and faction_interface:has_home_region() then	
+						local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction_name, faction_capital_key, false, true)						
+						character_unlocking:spawn_maggot_lord(faction_cqi, faction_name, "wh3_dlc29_chs_bloab_lord", faction_capital_key, x, y)
+					end
+				elseif choice == 2 then				
+					if faction_leader:is_null_interface() == false and faction_leader:is_wounded() == false then					
+						local x, y = cm:find_valid_spawn_location_for_character_from_character(faction_name, cm:char_lookup_str(faction_leader), true, 5)
+						local faction_leader_region = faction_leader:region();
+						local faction_leader_region_key = faction_leader_region:name()
+						character_unlocking:spawn_maggot_lord(faction_cqi, faction_name, "wh3_dlc29_chs_morbidex_lord", faction_leader_region_key, x, y)
+					elseif faction_leader:is_null_interface() == false and faction_leader:is_wounded() == true and faction_interface:has_home_region() then	
+						local x, y = cm:find_valid_spawn_location_for_character_from_settlement(faction_name, faction_capital_key, false, true)
+						character_unlocking:spawn_maggot_lord(faction_cqi, faction_name, "wh3_dlc29_chs_morbidex_lord", faction_capital_key, x, y)
+					end				
+				end
+			
+				local faction_name = context:faction():name()
+				if cancel_for_other_mp_players == true then
+					character_unlocking:cancel_missions_for_other_players(faction_name, "morbidex")
+				end
+			end,
+		false
+	);
+
+	core:add_listener(
+		"Maggot_Lords_UniqueAgentSpawned",
+		"UniqueAgentSpawned",
+		function(context)
+			local character = context:unique_agent_details():character()
+			return context:unique_agent_details():character():character_subtype_key():starts_with("wh3_dlc29_chs_")
+		end,
+		function(context)
+			local unique_agent = context:unique_agent_details():character()
+			local unique_agent_subtype = unique_agent:character_subtype_key()
+			local char_lookup_str = cm:char_lookup_str(unique_agent)
+
+			if unique_agent_subtype == "wh3_dlc29_chs_morbidex" then
+				cm:force_add_ancillary(unique_agent, "wh3_dlc29_anc_weapon_fleshreaper_scythe", true, true);
+				cm:replenish_action_points(char_lookup_str)
+			end
+
+			if unique_agent_subtype == "wh3_dlc29_chs_orghotts" then
+				cm:force_add_ancillary(unique_agent, "wh3_dlc29_anc_weapon_the_rot_axes", true, true);
+				cm:replenish_action_points(char_lookup_str)
+			end
+
+			if unique_agent_subtype == "wh3_dlc29_chs_bloab" then
+				cm:force_add_ancillary(unique_agent, "wh3_dlc29_anc_arcane_item_doombells", true, true);
+				cm:force_add_ancillary(unique_agent, "wh3_dlc29_anc_weapon_harvestman_scythe", true, true);
+				cm:replenish_action_points(char_lookup_str)
+			end
+		end,
+		true
+	)	
+
+
+	core:add_listener(
+		"MorbidexMissionChainCompleted",
+		"MissionSucceeded",
+		function(context)
+			local completed_mission_key = context:mission():mission_record_key()
+			return table.contains(character_unlocking.character_data["morbidex"].final_mission_key, completed_mission_key)
+		end,
+		function(context)
+			core:trigger_event("ScriptEventMaggotsLordsMissionsCompleted", context:faction())
+		end,
+		true
+	)
+
+
+-- Emil Valgeir unlock as Volkmar
+
+	core:add_listener(
+		"Volkmar_Unlock_Emil",
+		"MissionSucceeded",
+		function(context)
+			return context:mission():mission_record_key() == "wh3_main_ie_qb_emp_volkmar_the_grim_staff_of_command"
+		end,
+		function(context)
+			local faction_interface = context:faction()
+			local faction_key = faction_interface:name()
+			if faction_interface:is_human() and faction_key == "wh3_main_emp_cult_of_sigmar" then
+				cm:trigger_mission(faction_key, "wh3_dlc29_ie_emp_emil_valgeir_stage_1", true)
+			end
+		end,
+		true
+	)
+
+-- Skreech Verminking unlock as Thanquol
+
+	local thanquol_staff_mission_key = "wh3_dlc29_qb_skv_thanquol_staff_of_the_horned_rat"
+
+    core:add_listener(
+        "Thanquol_Staff_Of_The_Horned_Rat_PendingBattle",
+        "PendingBattle",
+        function(context)
+            return context:pending_battle():quest_mission_key() == thanquol_staff_mission_key
+        end,
+        function(context)
+            character_unlocking:suppress_immortality_for_subtype_in_pending_battle(context:pending_battle(), character_unlocking.character_data.skreech_verminking.subtype)
+        end,
+        true
+    )
 
 --------------------------------------------------------------
 ----------------------- SAVING / LOADING ---------------------

@@ -16,6 +16,7 @@
 							<template_objective this="50BAB15D-5655-469A-A92AB6107134D2F0">
 								<requirement_holder this="E5D48267-2163-4A0E-AE7B4A2BC5E01B52">
 									<label_requirement this="795A1988-D6B2-47A9-893FBC919EA946A5"/>
+									<label_requirement_units this="66D46973-8B51-4167-BA475C727D576D04"/>
 									<unit_requirements_holder this="1BD6CACC-F0E1-453B-8FABEFB6C0FC9F6D">
 										<template_unit_requirement this="3CF51969-FA3C-4F49-90E74F9CF5413564"/>
 									</unit_requirements_holder>
@@ -989,6 +990,10 @@
 							value="MissionEnded"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="MissionDefinitionContext.PrimaryObjectivesList.Transform((o) =&gt; o.ObjectiveRequirementsList).Filter((r) =&gt; IsContextValid(r.UnitRecordContext)).IsEmpty"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -1064,6 +1069,117 @@
 				</inactive>
 			</states>
 		</label_requirement>
+		<label_requirement_units
+			this="66D46973-8B51-4167-BA475C727D576D04"
+			id="label_requirement_units"
+			offset="433.00,0.00"
+			allowhorizontalresize="false"
+			visible="false"
+			priority="255"
+			tooltipslocalised="true"
+			uniqueguid="66D46973-8B51-4167-BA475C727D576D04"
+			currentstate="93FD2BDF-7BF9-4447-BF3453B6FFDE2114"
+			defaultstate="93FD2BDF-7BF9-4447-BF3453B6FFDE2114">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignMission"
+					context_function_id="MissionDefinitionContext.PrimaryObjectivesList.FirstContext.ObjectiveRequirementsList.JoinString((o) =&gt; o.Description,  &quot;&#10;&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RitualComplete"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextInactiveStateSetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="Completed">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="MissionEnded"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignMission"
+					context_function_id="MissionDefinitionContext.PrimaryObjectivesList.Transform((o) =&gt; o.ObjectiveRequirementsList).Filter((r) =&gt; IsContextValid(r.UnitRecordContext)).IsEmpty == false"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="09A14EDD-525D-4BF6-9B69FD9E59A42F21"
+					uniqueguid="09A14EDD-525D-4BF6-9B69FD9E59A42F21"
+					imagepath="ui/skins/default/cp1_cth_shang_yang/top_bar_mission_incomplete.png"/>
+				<component_image
+					this="CEE7D1FE-02A1-445B-861812DE77A71472"
+					uniqueguid="CEE7D1FE-02A1-445B-861812DE77A71472"
+					imagepath="ui/skins/default/cp1_cth_shang_yang/top_bar_mission_complete.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="E0BEE99B-641F-4153-96AEA5F2EE15918A"
+					name="active"
+					width="433"
+					height="26"
+					uniqueguid="E0BEE99B-641F-4153-96AEA5F2EE15918A">
+					<imagemetrics>
+						<image
+							this="5B41A9BA-C9F9-4308-8050FE225EFF8D7C"
+							uniqueguid="5B41A9BA-C9F9-4308-8050FE225EFF8D7C"
+							componentimage="CEE7D1FE-02A1-445B-861812DE77A71472"
+							offset="11.00,2.00"
+							width="18"
+							height="18"
+							dockpoint="Top Left"
+							dock_offset="11.00,2.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="Example effect"
+						textxoffset="44.00,30.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_45bc5618"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						font_colour_override_preset_key="green"/>
+				</active>
+				<inactive
+					this="93FD2BDF-7BF9-4447-BF3453B6FFDE2114"
+					name="inactive"
+					width="433"
+					height="26"
+					uniqueguid="93FD2BDF-7BF9-4447-BF3453B6FFDE2114">
+					<imagemetrics>
+						<image
+							this="7B942803-B62D-4D90-A2573B496F0AEBE5"
+							uniqueguid="7B942803-B62D-4D90-A2573B496F0AEBE5"
+							componentimage="09A14EDD-525D-4BF6-9B69FD9E59A42F21"
+							offset="11.00,2.00"
+							width="18"
+							height="18"
+							dockpoint="Top Left"
+							dock_offset="11.00,2.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						text="Example effect"
+						textxoffset="44.00,10.00"
+						textyoffset="4.00,6.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_442b0fd1"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</inactive>
+			</states>
+		</label_requirement_units>
 		<list_parent
 			this="B1C28CB2-CFB5-4ACD-AEAFFEB1B657F49A"
 			id="list_parent"

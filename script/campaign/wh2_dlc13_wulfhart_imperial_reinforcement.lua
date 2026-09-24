@@ -1,11 +1,12 @@
 local wulfhart_faction = "wh2_dlc13_emp_the_huntmarshals_expedition"
 
-wulfhart_buildings_to_lock = {"wh_main_emp_barracks_3", "wh_main_emp_stables_2", "wh_main_emp_stables_3", "wh_main_emp_forges_2", "wh_main_emp_forges_3", "wh3_dlc25_emp_shooting_range_3", "wh_main_emp_forges_4"}
+wulfhart_buildings_to_lock = {"wh_main_emp_barracks_3", "wh_main_emp_stables_2", "wh_main_emp_stables_3", "wh_main_emp_forges_2", "wh_main_emp_forges_3", "wh3_dlc25_emp_shooting_range_3", "wh_main_emp_forges_4", "wh3_dlc29_emp_worship_ulric_2","wh3_dlc29_emp_worship_ulric_3"}
 
 wulfhart_buildings_to_unlock = {
+	--each row is a level of Acclaim
 	{},
-	{"wh_main_emp_barracks_3", "wh_main_emp_stables_2"},
-	{"wh_main_emp_forges_2", "wh_main_emp_stables_3", "wh3_dlc25_emp_shooting_range_3"},
+	{"wh_main_emp_barracks_3", "wh_main_emp_stables_2",  "wh3_dlc29_emp_worship_ulric_2"},
+	{"wh_main_emp_forges_2", "wh_main_emp_stables_3", "wh3_dlc25_emp_shooting_range_3", "wh3_dlc29_emp_worship_ulric_3"},
 	{"wh_main_emp_forges_3"},
 	{"wh_main_emp_forges_4"},
 	{}

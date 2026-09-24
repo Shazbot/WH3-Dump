@@ -382,6 +382,7 @@ function nor_treacheries:add_listeners()
 			local faction_player_cqi = faction_player:command_queue_index()
 			local faction_settlement_owner = context:slot_owner()
 			local slot_region = context:region()
+			local slot_list = slot_region:foreign_slot_manager_for_faction(self.config.faction_key):slots();
 
 			if self.config.are_slots_expanding == false and slot_region and slot_region:foreign_slot_manager_for_faction(self.config.faction_key):is_null_interface() == false then
 				local slot_list = slot_region:foreign_slot_manager_for_faction(self.config.faction_key):slots();

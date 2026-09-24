@@ -29,11 +29,9 @@ else
 end;
 
 -------BATTLE SETUP--------
-
 gb:set_cutscene_during_deployment(true);
 
 -------AUDIO-------
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -48,12 +46,10 @@ ga_ai_01:attack_on_message("player_advancing", 3000);
 
 ga_ai_02:reinforce_on_message("player_visible", 60000);
 
-
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_grn_grimgor_ironhide_subterranean_main_objective");
 
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_grimgor_ironhide_subterranean_hint_objective");
 
-gb:play_sound_on_message("player_visible", Orc_Horn, v(-300, 108, -540), 60000);
 gb:queue_help_on_message("player_visible", "wh_main_qb_grn_grimgor_ironhide_subterranean_hint_reinforcement", 13000, 2000, 60000);

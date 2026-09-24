@@ -583,7 +583,7 @@ function bhashiva_campaign:add_listeners()
 			local reminder_turns = self.config.relics_turn_reminder
 			local max_relics = self.config.max_usable_relics
 
-			if cm:model():turn_number() - relics_collected_turn > reminder_turns and self.config.key_variables.total_relics_collected < max_relics and was_reminded ~= true then
+			if cm:model():turn_number() - relics_collected_turn > reminder_turns and self.config.key_variables.total_relics_collected < max_relics and was_reminded ~= true and cm:model():turn_number() < 60 then
 				self:handle_regular_relics_reminder()
 				self.config.key_variables.last_relics_collected_reminded = true
 			end

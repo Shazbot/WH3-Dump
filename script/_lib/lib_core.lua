@@ -16,9 +16,7 @@
 ----------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------
 
-
-
-
+local evt_callback = nil
 
 ----------------------------------------------------------------------------
 --	Definition
@@ -97,7 +95,7 @@ core_object = {
 	active_pointers = {}
 };
 
-
+	
 set_class_custom_type_and_tostring(core_object, TYPE_CORE);
 
 
@@ -119,6 +117,15 @@ function core_object:new()
 	local c = {};
 	
 	set_object_class(c, self);
+
+	-- If the tweaker USE_PROTECTED_EVENT_CALLBACKS is set to true, then we use event_protected_callback() 
+	-- to handle callbacks - this will catch the error, throw a script_error(), and log it in campaign.
+	-- Otherwise we use event_unprotected_callback() which will allow scripts to fail
+	if c:is_tweaker_set("USE_PROTECTED_EVENT_CALLBACKS") then
+		evt_callback = event_protected_callback;
+	else
+		evt_callback = event_unprotected_callback;
+	end;
 	
 	
 	----------------------------------------------------------
@@ -1914,7 +1921,7 @@ end;
 
 
 -- Calls an event callback in protected mode and acts on the result
-local function event_protected_callback(eventname, listener_record, context, call_event_condition)
+function event_protected_callback(eventname, listener_record, context, call_event_condition)
 	local condition_result, call_succeeded, error;
 
 	local call_succeeded, error, traceback;
@@ -1945,6 +1952,15 @@ local function event_protected_callback(eventname, listener_record, context, cal
 	script_error(error_str .. "\n\nThe callstack of the failed script is:\n" .. traceback .. "\n\nThe callstack of the script which established the failed listener is:\n" .. listener_record.callstack, -1);
 end;
 
+-- Calls an event callback in unprotected mode and acts on the result. This function will be used to process event callbacks if the FORCE_PROTECTED_EVENT_CALLBACKS tweaker is not set.
+-- This function will allow lua to fail - it is used during autotests and in the released version of the game.
+function event_unprotected_callback(eventname, listener_record, context, call_event_condition)
+	if call_event_condition then
+		return listener_record.condition(context);
+	end;
+
+	return listener_record.callback(context);
+end;
 
 -- event callback
 -- an event has occured, work out who to notify
@@ -1962,7 +1978,7 @@ function core_object:event_callback(eventname, context)
 	for i = 1, #listeners do
 		local current_listener = listeners[i];
 		
-		if current_listener.condition == true or event_protected_callback(eventname, current_listener, context, true) then			
+		if current_listener.condition == true or evt_callback(eventname, current_listener, context, true) then			
 			table.insert(callbacks_to_call, current_listener);
 			
 			if not current_listener.persistent then
@@ -1988,7 +2004,7 @@ function core_object:event_callback(eventname, context)
 	
 	if not self.show_performance_report then
 		for i = 1, #callbacks_to_call do
-			event_protected_callback(eventname, callbacks_to_call[i], context, false);
+			evt_callback(eventname, callbacks_to_call[i], context, false);
 		end;
 	else
 		local max_permitted_interval = 0.1;

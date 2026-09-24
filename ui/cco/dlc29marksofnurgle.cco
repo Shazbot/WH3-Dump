@@ -1,0 +1,49 @@
+CcoInitiativeRecord
+{
+	ExMarksOfNurgle_FactionInitiative
+	{
+		(initiative_key = Key) =>
+		{
+			PlayersFaction.InitiativeSetList.Transform(InitiativeList).FirstContext(InitiativeContext.Key == initiative_key)
+		}
+	}
+
+	ExMarksOfNurgle_RemainingCooldown
+	{
+		(faction_initiative = ExMarksOfNurgle_FactionInitiative) =>
+		{
+			GetIfElse(IsContextValid(faction_initiative), faction_initiative.RemainingCooldown, 0)
+		}
+	}
+
+	ExMarksOfNurgle_IsOnCooldown
+	{
+		ExMarksOfNurgle_RemainingCooldown > 0
+	}
+}
+
+CcoCampaignInitiative
+{
+	ExMarksOfNurgle_RemainingCooldown
+	{
+		InitiativeContext.ExMarksOfNurgle_RemainingCooldown
+	}
+
+	ExMarksOfNurgle_IsOnCooldown
+	{
+		InitiativeContext.ExMarksOfNurgle_IsOnCooldown
+	}
+}
+
+CcoCampaignInitiativeManager
+{
+	ExMarksOfNurgle_ActiveMarkInitiatives
+	{
+		ActiveInitiatives.Filter(InitiativeContext.Key.Contains("wh3_dlc29_marks_of_nurgle"))
+	}
+
+	ExMarksOfNurgle_HasActiveMark
+	{
+		ExMarksOfNurgle_ActiveMarkInitiatives.IsEmpty == false
+	}
+}

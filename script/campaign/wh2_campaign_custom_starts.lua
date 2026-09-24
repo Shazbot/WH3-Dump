@@ -165,6 +165,32 @@ custom_starts.start_data.me_custom_start_factions = {
 		}
 	},
 
+	------------------
+	------ BORIS -----
+	------------------
+	{
+		if_human = "wh_main_emp_middenland",
+		if_ai = "wh_dlc03_bst_beastmen",
+		changes = {
+			-- Remove Khazrak in Middenland is human and Khazrak is AI
+			{"kill_faction", "wh_dlc03_bst_beastmen"},
+			-- Add XP ranks to starting units to reflect the Lord trait
+			{"add_xp_to_unit", "wh_main_emp_middenland", "wh3_dlc29_emp_inf_warriors_of_ulric", 2},
+			{"add_xp_to_unit", "wh_main_emp_middenland", "wh3_dlc29_emp_inf_wolf_kin", 2},
+			{"add_xp_to_unit", "wh_main_emp_middenland", "wh3_dlc29_emp_cav_knights_of_the_white_wolf", 2},
+			{"add_xp_to_unit", "wh_main_emp_middenland", "wh3_dlc29_emp_inf_teutogen_guard", 2},
+		}
+	},
+
+	{
+		if_human = "wh_main_emp_middenland",
+		if_ai = "wh3_dlc20_chs_festus",
+		changes = {
+			--Remove unit(s) from AI Festus to make Boris start a bit easier
+			{"modify_units_in_army", "wh3_dlc20_chs_festus", 590, 718, {}, {"wh_main_chs_mon_giant"}, nil, nil }
+		}
+	},
+
 	---------------------------
 	------ VLAD/ISABELLA -----
 	---------------------------
@@ -368,7 +394,7 @@ function custom_starts:add_campaign_custom_start_listeners()
 							cm:disable_event_feed_events(true,"all")
 							
 							if changes[1] == "region_change" then
-								self:region_change(changes[2], changes[3]);
+								self:region_change(changes[2], changes[3], changes[4]);
 							elseif changes[1] == "primary_slot_change" then 
 								self:primary_slot_change(changes[2], changes[3]);
 							elseif changes[1] == "port_slot_change" then 
@@ -446,7 +472,7 @@ end
 --- @desc Give a region to the specified faction.
 --- @p @string region key, The key of the region to be transferred.
 --- @p @string faction_name, The key of the faction to receive the region.
-function custom_starts:region_change(region_name, faction_name)
+function custom_starts:region_change(region_name, faction_name, settlement_type)
 	--check the region key is a string
 	if not is_string(region_name) then
 		script_error("ERROR: region_change() called but supplied target region key [" .. tostring(region_name) .. "] is not a string");
@@ -459,8 +485,11 @@ function custom_starts:region_change(region_name, faction_name)
 		return false;
 	end
 
-
-	cm:transfer_region_to_faction(region_name, faction_name);
+	if (settlement_type ~= nil and settlement_type ~= "") then
+		cm:transfer_region_to_faction(region_name, faction_name, settlement_type);
+	else
+		cm:transfer_region_to_faction(region_name, faction_name);
+	end
 
 	cm:callback(function() 
 		cm:heal_garrison(cm:get_region(region_name):cqi());

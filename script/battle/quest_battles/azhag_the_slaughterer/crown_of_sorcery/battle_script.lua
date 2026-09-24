@@ -21,10 +21,7 @@ gb = generated_battle:new(
 );
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1); -- Initial Chaos Force
@@ -38,7 +35,6 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_grn_azhag_the_slau
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_azhag_the_slaughterer_crown_of_sorcery_stage_3_hint_objective");
 
-gb:play_sound_on_message("reinforcements_2", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("reinforcements_2", "wh_main_qb_grn_azhag_the_slaughterer_crown_of_sorcery_stage_3_hint_reinforcements");
 
 -------ORDERS-------

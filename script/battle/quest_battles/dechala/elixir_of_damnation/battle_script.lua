@@ -1,14 +1,12 @@
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- KEY INFO --------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 -- Dechala
 -- Elixir of Damnation
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- PRELOADS --------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 load_script_libraries();
 bm = battle_manager:new(empire_battle:new());
 
@@ -24,10 +22,9 @@ gb:set_cutscene_during_deployment(true);
 
 intro_cinematic_file = "script/battle/quest_battles/_cutscene/managers/wh3_qb_dechala_phase01.CindySceneManager";
 bm:cindy_preload(intro_cinematic_file);
+
 mid_cinematic_file = "script/battle/quest_battles/_cutscene/managers/wh3_qb_sla_dechala_phase02.CindySceneManager";
 bm:cindy_preload(mid_cinematic_file);
-
-
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------- INTRO CUTSCENE --------------------------------------------
@@ -268,13 +265,9 @@ end
 ---------------------------------------- VO & SUBS  & Audio -------------------------------------
 -------------------------------------------------------------------------------------------------
 
-
-
-
 -------------------------------------------------------------------------------------------------
 ------------------------------------------ ARMY SETUP -------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 ga_player = gb:get_army(gb:get_player_alliance_num(), 1); -- Player's army
 
 highelf_prince = gb:get_army(gb:get_non_player_alliance_num(),"hef_prince"); -- High Elf units that serve to attack, delay and/or ambush the player
@@ -291,49 +284,42 @@ militia_centre_back = gb:get_army(gb:get_non_player_alliance_num(),"centre_back_
 khorne_army = gb:get_army(gb:get_non_player_alliance_num(),"kho_main_army");
 khorne_army_com = gb:get_army(gb:get_non_player_alliance_num(),"kho_main_army_com");
 
---khorne_army_com.sunits:set_stat_attribute("flying", true)
-
-
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- WAYPOINTS -------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 -- Waypoints are invisible markers that can be placed around the battle map, these can be used as triggers for messages or AI actions. Use the Cursor Position
 -- option in the BattleDebugUI menu to get X, Y, Z coordinates.
-
-
 defender_right_waypoint = v(358.2, 167.7, 93.8) 
 defender_left_waypoint = v(-249.9, 171.7, -95.1) 
 defender_back_waypoint = v(39.2, 145.0, -152.2) 
--- -------------------------------------------------------------------------------------------------
--- ---------------------------------------- ORDERS -------------------------------------------------
--- -------------------------------------------------------------------------------------------------
 
+-------------------------------------------------------------------------------------------------
+---------------------------------------- ORDERS -------------------------------------------------
+-------------------------------------------------------------------------------------------------
 ga_player:message_on_proximity_to_position("right_defenders_defend", defender_right_waypoint, 150) -- If the player is within proximity to this waypoint, order the AI near it to defend a position
-ga_player:message_on_proximity_to_position("back_defenders_defend", defender_right_waypoint, 150) 
+ga_player:message_on_proximity_to_position("right_defenders_attack", defender_right_waypoint, 50) 
 right_evac_point:defend_on_message("right_defenders_defend", 382.1, 125.6, 100, 1000)
-right_evac_point:attack_on_message("right_defenders_defend")
+right_evac_point:attack_on_message("right_defenders_attack")
 
 ga_player:message_on_proximity_to_position("left_defenders_defend", defender_left_waypoint, 150) -- If the player is within proximity to this waypoint, order the AI near it to defend a position
-ga_player:message_on_proximity_to_position("back_defenders_defend", defender_left_waypoint, 150) 
+ga_player:message_on_proximity_to_position("left_defenders_attack", defender_left_waypoint, 50) 
 left_evac_point:defend_on_message("left_defenders_defend", -280.5, -216.1, 100, 1000)
-left_evac_point:attack_on_message("left_defenders_defend")
+left_evac_point:attack_on_message("left_defenders_attack")
 
 ga_player:message_on_proximity_to_position("back_defenders_defend", defender_back_waypoint, 250) -- If the player is within proximity to this waypoint, order the AI near it to defend a position
+ga_player:message_on_proximity_to_position("back_defenders_attack", defender_back_waypoint, 50)
 centreback_evac_point:defend_on_message("back_defenders_defend", 403.9, -351.2, 100, 1000)
+centreback_evac_point_art:defend_on_message("back_defenders_defend", 403.9, -351.2, 100, 1000)
 highelf_prince:defend_on_message("back_defenders_defend", 403.9, -351.2, 100, 1000)
-highelf_prince:attack_on_message("back_defenders_defend")
+highelf_prince:attack_on_message("back_defenders_attack")
 
--- -------------------------------------------------------------------------------------------------
--- ---------------------------------------- UNIT TELEPORTS -----------------------------------------
--- -------------------------------------------------------------------------------------------------
-
+-------------------------------------------------------------------------------------------------
+---------------------------------------- UNIT TELEPORTS -----------------------------------------
+-------------------------------------------------------------------------------------------------
 -- Prince --
-
 highelf_prince.sunits:item(1).uc:teleport_to_location(v(334.6, -289.9), 340, 20) -- High Elf Phoenix Guard
 
 -- Evac Point defenders
-
 left_evac_point.sunits:item(1).uc:teleport_to_location(v(-356.6, -151.9), 40, 40) -- High Elf Phoenix Guard
 left_evac_point.sunits:item(2).uc:teleport_to_location(v(-305.5, -150.7), 40, 40) -- High Elf Phoenix Guard
 left_evac_point.sunits:item(3).uc:teleport_to_location(v(-254.3, -178.9), 40, 40) -- High Elf Phoenix Guard
@@ -359,7 +345,6 @@ centreback_evac_point_art.sunits:item(5).uc:teleport_to_location(v(458.5, -350.5
 centreback_evac_point_art.sunits:item(6).uc:teleport_to_location(v(434.5, -388.3), 320, 40) -- Bolt Thrower
 
 -- Militia
-
 militia_left.sunits:item(1).uc:teleport_to_location(v(-369.1, -238.4), 40, 20)
 militia_left.sunits:item(2).uc:teleport_to_location(v(-296.3, -273.8), 340, 20)
 militia_left.sunits:item(3).uc:teleport_to_location(v(-303.5, -227.3), 340, 20)
@@ -372,58 +357,77 @@ militia_centre_back.sunits:item(1).uc:teleport_to_location(v(344.2, -353.7), 340
 militia_centre_back.sunits:item(2).uc:teleport_to_location(v(406.7, -310.8), 340, 20)
 militia_centre_back.sunits:item(3).uc:teleport_to_location(v(354.1, -276.1), 340, 20)
 
-
-
--- -------------------------------------------------------------------------------------------------
--- ---------------------------------------- MESSAGES -----------------------------------------------
--- -------------------------------------------------------------------------------------------------
-
-gb:message_on_time_offset("start", 1000);
-
+-------------------------------------------------------------------------------------------------
+---------------------------------------- MESSAGES -----------------------------------------------
+-------------------------------------------------------------------------------------------------
+gb:message_on_time_offset("start", 100);
 gb:message_on_time_offset("starting_message", 2000) -- Starting message, tells the player what to do
+
 gb:queue_help_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_01")
 
 gb:message_on_time_offset("militia_message", 15000)
-gb:queue_help_on_message("militia_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill_hint")
+-- gb:queue_help_on_message("militia_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill_hint") -- Missing hint
 
 gb:message_on_time_offset("dechala_death_hint", 30000);
 gb:queue_help_on_message("dechala_death_hint", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_01_dechala_death_hint")
 
 gb:queue_help_on_message("khorne_enter", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_02")
 
--- -------------------------------------------------------------------------------------------------
--- ---------------------------------------- Objectives ---------------------------------------------
--- -------------------------------------------------------------------------------------------------
-
+-------------------------------------------------------------------------------------------------
+---------------------------------------- Objectives ---------------------------------------------
+-------------------------------------------------------------------------------------------------
 -- Keep Dechala Alive
-
-gb:set_objective_on_message("dechala_death_hint", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_dechala_alive")
+-- gb:set_objective_on_message("start", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_dechala_alive")
+gb:set_locatable_objective_callback_on_message(
+    "start",
+    "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_dechala_alive",
+    0,
+    function()
+        local sunit = ga_player.sunits:get_general_sunit();
+        if sunit then
+            local cam_targ = sunit.unit:position();
+            local cam_pos = v_offset_by_bearing(
+                cam_targ,
+                get_bearing(cam_targ, bm:camera():position()),    -- horizontal bearing from camera target to current camera position
+                75,                                               -- distance from camera position to camera target
+                d_to_r(30)                                        -- vertical bearing from horizon to cam-targ/cam-pos line
+            );
+            return cam_pos, cam_targ;
+        end;
+    end,
+    2
+);
 
 -- Left Evac Point Guard
-
-gb:set_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_1")
+-- gb:set_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_1")
+gb:set_locatable_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_1", 0, v(-300.8, 212.5, -119.9), v(-329.3, -129.0, -685.5), 2, true);
 
 left_evac_point:message_on_rout_proportion("left_defenders_dead", 0.8) -- When this 80% of this force is dead, fire the message.
 gb:queue_help_on_message("left_defenders_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_left")
 gb:complete_objective_on_message("left_defenders_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_1", 1000) -- Sets the objective as complete
-militia_left:rout_over_time_on_message("left_defenders_dead", 15)
+militia_left:rout_over_time_on_message("left_defenders_dead", 5000);
+left_evac_point:rout_over_time_on_message("left_defenders_dead", 15000);
 
 -- Right Evac Point Guard
-
-gb:set_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_2")
+-- gb:set_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_2")
+gb:set_locatable_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_2", 500, v(398.1, 212.5, 157.2), v(369.6, -129.0, -408.4), 2, true);
 
 right_evac_point:message_on_rout_proportion("right_defenders_dead", 0.8) -- When this 80%% of this force is dead, fire the message.
 gb:queue_help_on_message("right_defenders_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_right")
 gb:complete_objective_on_message("right_defenders_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_2", 1000) -- Sets the objective as complete
-militia_right:rout_over_time_on_message("right_defenders_dead", 15)
+militia_right:rout_over_time_on_message("right_defenders_dead", 5000);
+right_evac_point:rout_over_time_on_message("right_defenders_dead", 15000);
 
 -- Centre Back Evac Guard
-
-gb:set_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_3")
+-- gb:set_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_3")
+gb:set_locatable_objective_on_message("starting_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_3", 1000, v(378.3, 212.5, -234.3), v(349.8, -129.0, -799.9), 2, true);
 
 centreback_evac_point:message_on_rout_proportion("centre_back_defenders_dead", 0.8) -- When this 80% of this force is dead, fire the message.
 gb:complete_objective_on_message("centre_back_defenders_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_3", 1000) -- Sets the objective as complete
-militia_centre_back:rout_over_time_on_message("centre_back_defenders_dead", 15)
+militia_centre_back:rout_over_time_on_message("centre_back_defenders_dead", 5000);
+highelf_prince:rout_over_time_on_message("centre_back_defenders_dead", 15000);
+centreback_evac_point:rout_over_time_on_message("centre_back_defenders_dead", 15000);
+centreback_evac_point_art:rout_over_time_on_message("centre_back_defenders_dead", 15000);
 
 gb:set_objective_on_message("militia_message", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill")
 
@@ -448,57 +452,83 @@ gb:add_listener(
 		bm:callback(
 			function()
 				play_mid_cutscene()
-			--	sm:trigger_message("clean_up_units")
+
+				bm:remove_objective("wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_1");
+				bm:remove_objective("wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_2");
+				bm:remove_objective("wh3_dlc27_qb_sla_dechala_elixir_of_damnation_evac_point_3");
+				bm:remove_objective("wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill");
 			end,
-			2000
+			5000
 		)
     end
 )
 
 gb:message_on_all_messages_received("mid_cutscene", "left_defenders_dead", "right_defenders_dead", "centre_back_defenders_dead") -- When all of the defenders have been killed, trigger the second cutscene
-gb:complete_objective_on_message("mid_cutscene", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill", 1000) -- Set militia objective as complete.
+gb:complete_objective_on_message("mid_cutscene", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill") -- Set militia objective as complete.
+
+gb:message_on_time_offset("start", 100)
 
 khorne_army:reinforce_on_message("khorne_enter", 1000) -- Khorne reinforcements
-khorne_army_com:reinforce_on_message("khorne_enter", 60000)
-khorne_army:attack_force_on_message("khorne_enter", ga_player, 2000);
-khorne_army_com:attack_force_on_message("khorne_enter", ga_player, 2000);
+khorne_army:message_on_any_deployed("khorne_army_in")
+khorne_army:rush_on_message("khorne_army_in");
 
-gb:set_objective_on_message("khorne_enter", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_khorne_prince")
+khorne_army_com:reinforce_on_message("khorne_enter", 2500)
+khorne_army_com:message_on_any_deployed("khorne_lord_in")
+khorne_army_com:rush_on_message("khorne_lord_in");
 
+-- gb:set_objective_on_message("khorne_enter", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_khorne_prince", 2500)
+gb:set_locatable_objective_callback_on_message(
+    "khorne_enter",
+    "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_khorne_prince",
+    2500,
+    function()
+        local sunit = khorne_army_com.sunits:get_general_sunit();
+        if sunit then
+            local cam_targ = sunit.unit:position();
+            local cam_pos = v_offset_by_bearing(
+                cam_targ,
+                get_bearing(cam_targ, bm:camera():position()),    -- horizontal bearing from camera target to current camera position
+                75,                                               -- distance from camera position to camera target
+                d_to_r(30)                                        -- vertical bearing from horizon to cam-targ/cam-pos line
+            );
+            return cam_pos, cam_targ;
+        end;
+    end,
+    2
+);
 
--- -------------------------------------------------------------------------------------------------
--- ---------------------------------------- Victory ------------------------------------------------
--- -------------------------------------------------------------------------------------------------
-
+-------------------------------------------------------------------------------------------------
+---------------------------------------- Victory ------------------------------------------------
+-------------------------------------------------------------------------------------------------
 khorne_army_com:message_on_commander_dead_or_routing("commander_dead") -- On death, message is created for the garrison commander
 gb:queue_help_on_message("commander_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_victory") -- Success message
 gb:complete_objective_on_message("commander_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_khorne_prince", 1000) -- Sets the objective as complete
 
-khorne_army:rout_over_time_on_message("commander_dead", 15000) -- Enemy slowly routs after the commander's death
-ga_player:force_victory_on_message("commander_dead", 16000) -- Victory for the enemy after the commander's death
+gb:complete_objective_on_message("commander_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_dechala_alive", 1000) -- Sets the objective as complete
 
--- -------------------------------------------------------------------------------------------------
--- ---------------------------------------- Defeat -------------------------------------------------
--- -------------------------------------------------------------------------------------------------
+khorne_army:rout_over_time_on_message("commander_dead", 5000) -- Enemy slowly routs after the commander's death
+ga_player:force_victory_on_message("commander_dead", 6000) -- Victory for the enemy after the commander's death
 
+-------------------------------------------------------------------------------------------------
+---------------------------------------- Defeat -------------------------------------------------
+-------------------------------------------------------------------------------------------------
 ga_player:message_on_commander_death("lord_dead", 1) -- Dechala death message triggered
 ga_player:rout_over_time_on_message("lord_dead", 15000) -- Player's force slowly routs followed by a defeat
 highelf_prince:force_victory_on_message("lord_dead", 16000) -- Victory for the enemy after Dechala death
 gb:queue_help_on_message("lord_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_dechala_death") -- Death message for Dechala
 gb:fail_objective_on_message("lord_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_dechala_alive", 1000) -- Keep Dechala alive objective failed
 
-
-militia_left:message_on_casualties("militia_dead",0.6); -- Fail objective and mission if 60% of the left Militia have been killed.
+militia_left:message_on_casualties("militia_dead",0.75); -- Fail objective and mission if 75% of the left Militia have been killed.
 gb:fail_objective_on_message("militia_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill", 1000) -- Keep Militia alive!
 highelf_prince:force_victory_on_message("militia_dead", 16000)
 gb:queue_help_on_message("militia_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_fail")
 
-militia_right:message_on_casualties("militia_dead",0.6); -- Fail objective and mission if 60% of the left Militia have been killed.
+militia_right:message_on_casualties("militia_dead",0.75); -- Fail objective and mission if 75% of the left Militia have been killed.
 gb:fail_objective_on_message("militia_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill", 1000) -- Keep Militia alive!
 highelf_prince:force_victory_on_message("militia_dead", 16000)
 gb:queue_help_on_message("militia_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_fail")
 
-militia_centre_back:message_on_casualties("militia_dead",0.6); -- Fail objective and mission if 60% of the left Militia have been killed.
+militia_centre_back:message_on_casualties("militia_dead",0.75); -- Fail objective and mission if 75% of the left Militia have been killed.
 gb:fail_objective_on_message("militia_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_kill", 1000) -- Keep Militia alive!
 highelf_prince:force_victory_on_message("militia_dead", 16000)
 gb:queue_help_on_message("militia_dead", "wh3_dlc27_qb_sla_dechala_elixir_of_damnation_militia_fail")

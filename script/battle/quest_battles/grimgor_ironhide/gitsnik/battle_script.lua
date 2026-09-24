@@ -22,11 +22,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_greenskins = gb:get_army(gb:get_player_alliance_num(0), 1);
@@ -38,11 +34,8 @@ ga_empire = gb:get_army(gb:get_non_player_alliance_num(1), 1);
 gb:set_objective_on_message("battle_started", "wh_main_qb_grn_grimgor_ironhide_gitsnik_stage_4_main_objective");
 
 -------HINTS-------
-
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_grimgor_ironhide_gitsnik_stage_4_hint_objective", 4000, 2000, 1000);
 gb:queue_help_on_message("summon_wave_01", "wh_main_qb_grn_grimgor_ironhide_gitsnik_stage_4_hint_enemy_reinforcements_01", 3000, 2000, 1000);
-gb:play_sound_on_message("empire_defeated", Orc_Horn, nil, 3000);
-gb:play_sound_on_message("dwarfs_defeated", Orc_Horn, nil, 3000);
 gb:queue_help_on_message("empire_defeated", "wh_main_qb_grn_grimgor_ironhide_gitsnik_stage_4_hint_empire_defeated", 5000, 2000, 25000);
 gb:queue_help_on_message("dwarfs_defeated", "wh_main_qb_grn_grimgor_ironhide_gitsnik_stage_4_hint_dwarfs_defeated", 5000, 2000, 25000);
 

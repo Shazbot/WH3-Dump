@@ -24,10 +24,7 @@ gb = generated_battle:new(
 );
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1);
@@ -39,12 +36,9 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_d
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_azhag_the_slaughterer_slaggas_slashas_stage_4_hint_objective");
 
-gb:play_sound_on_message("battle_started", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_azhag_the_slaughterer_slaggas_slashas_stage_4_hint_reinforcements", 13000, 2000, 4000);
 
-
 -------ORDERS-------
-
 ga_ai_02:reinforce_on_message("battle_started");
 ga_ai_02:message_on_proximity_to_enemy("player_close", 340);
 ga_ai_01:message_on_proximity_to_enemy("player_close", 500);

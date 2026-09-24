@@ -861,7 +861,44 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		ram:add_unit(key, "wh2_main_lzd_mon_stegadon_1", 1*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_mon_ancient_stegadon", 1*weighting_modifier);
 		ram:add_unit(key, "wh2_main_lzd_mon_carnosaur_0", 1*weighting_modifier);
+		--
+	elseif template_key == "gotrek_and_felix" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh2_pro08_neu_cha_felix", 20*weighting_modifier);
+		ram:add_unit(key, "wh2_pro08_neu_cha_gotrek", 20*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_miners_0", 18*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_miners_1", 6*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_dwarf_warrior_0", 15*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_dwarf_warrior_1", 10*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_quarrellers_0", 10*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_quarrellers_1", 4*weighting_modifier);
 
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh2_pro08_neu_cha_felix", 20*weighting_modifier);
+		ram:add_unit(key, "wh2_pro08_neu_cha_gotrek", 20*weighting_modifier);
+
+		ram:add_unit(key, "wh_main_dwf_inf_thunderers_0", 3*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_longbeards", 4*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_longbeards_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_slayers", 3*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_art_grudge_thrower", 4*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_art_cannon", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_art_organ_gun", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_art_flame_cannon", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc06_dwf_inf_rangers_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh_dlc06_dwf_inf_rangers_1", 2*weighting_modifier);
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh2_pro08_neu_cha_felix", 20*weighting_modifier);
+		ram:add_unit(key, "wh2_pro08_neu_cha_gotrek", 20*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_hammerers", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_ironbreakers", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc10_dwf_inf_giant_slayers", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_irondrakes_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_inf_irondrakes_2", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_veh_gyrocopter_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_veh_gyrocopter_1", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_dwf_veh_gyrobomber", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc06_dwf_inf_bugmans_rangers_0", 1*weighting_modifier);
 
 	elseif template_key == "khorne_spawned_armies" then
 		
@@ -1110,6 +1147,109 @@ function WH_Random_Army_Generator:generate_random_army(key, template_key, num_un
 		local weighting_modifier = high_tier_modifier
 		ram:add_unit(key, "wh2_dlc15_hef_veh_lion_chariot_of_chrace_0", 1*weighting_modifier);
 		ram:add_unit(key, "wh2_dlc15_hef_mon_war_lions_of_chrace_0", 1*weighting_modifier);
+
+	elseif template_key == "wh3_main_sc_ksl_kislev" then
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh3_main_ksl_inf_armoured_kossars_0", 16*weighting_modifier);
+		ram:add_unit(key, "wh3_main_ksl_mon_snow_leopard_0", 12*weighting_modifier);
+		ram:add_unit(key, "wh3_main_ksl_inf_armoured_kossars_1", 6*weighting_modifier);
+		ram:add_unit(key, "wh3_main_pro_ksl_inf_streltsi_0", 4*weighting_modifier);
+
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh3_main_pro_ksl_inf_tzar_guard_0", 8*weighting_modifier);
+		ram:add_unit(key, "wh3_main_pro_ksl_inf_kossars_1", 8*weighting_modifier);
+		ram:add_unit(key, "wh3_main_pro_ksl_inf_kossars_0", 4*weighting_modifier);
+		ram:add_unit(key, "wh3_main_ksl_inf_ice_guard_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_main_ksl_inf_armoured_kossars_1", 1*weighting_modifier);
+
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh3_main_pro_ksl_veh_little_grom_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh3_main_ksl_mon_elemental_bear_0", 1*weighting_modifier);
+
+	elseif template_key == "wh3_dlc29_nag_host_of_nagash" then 
+		--Low Tier
+		local weighting_modifier = low_tier_modifier
+		ram:add_unit(key, "wh_main_vmp_inf_zombie", 20*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_inf_skeleton_warriors_0", 15*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_inf_skeleton_warriors_1", 13*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_inf_crypt_ghouls", 8*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_inf_crypt_ghouls", 8*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_mon_fell_bats", 5*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_mon_dire_wolves", 5*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_inf_skeleton_warriors_0", 15*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_inf_skeleton_spearmen_0", 13*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_inf_skeleton_archers_0", 12*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_carrion_0", 5*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_cav_skeleton_horsemen_0", 4*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_cav_skeleton_horsemen_archers_0", 3*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_zombie_deckhands_mob_0", 10*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_zombie_deckhands_mob_1", 7*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_zombie_gunnery_mob_0", 7*weighting_modifier);		
+		ram:add_unit(key, "wh_main_vmp_mon_crypt_horrors", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_ushabti_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_mournguls_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_animated_hulks_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh3_dlc29_vmp_inf_spirit_host", 9*weighting_modifier);
+		
+		--Mid Tier
+		local weighting_modifier = mid_tier_modifier
+		ram:add_unit(key, "wh_main_vmp_cav_black_knights_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_cav_black_knights_3", 2*weighting_modifier);
+		ram:add_unit(key, "wh_dlc04_vmp_veh_corpse_cart_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc04_vmp_veh_corpse_cart_1", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc04_vmp_veh_corpse_cart_2", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_inf_grave_guard_0", 4*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_inf_grave_guard_1", 4*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_mon_crypt_horrors", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_mon_vargheists", 2*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_inf_cairn_wraiths", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_inf_nehekhara_warriors_0", 5*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_cav_nehekhara_horsemen_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_veh_skeleton_chariot_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_veh_skeleton_archer_chariot_0", 3*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_sepulchral_stalkers_0", 3*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_ushabti_0", 4*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_ushabti_1", 1*weighting_modifier)
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_tomb_scorpion_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_art_screaming_skull_catapult_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_zombie_deckhands_mob_1", 10*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_zombie_gunnery_mob_1", 6*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_zombie_gunnery_mob_2", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_zombie_gunnery_mob_3", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_art_mortar", 7*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_art_carronade", 4*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_deck_gunners_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_syreens", 3*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_cav_deck_droppers_0", 5*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_cav_deck_droppers_1", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_cav_deck_droppers_2", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_mournguls_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_animated_hulks_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_rotting_prometheans_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_rotting_prometheans_gunnery_mob_0", 1*weighting_modifier);
+		
+		--High Tier
+		local weighting_modifier = high_tier_modifier
+		ram:add_unit(key, "wh_main_vmp_mon_varghulf", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_mon_terrorgheist", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_cav_hexwraiths", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc02_vmp_cav_blood_knights_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh_main_vmp_veh_black_coach", 1*weighting_modifier);
+		ram:add_unit(key, "wh_dlc04_vmp_veh_mortis_engine_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_cav_necropolis_knights_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_cav_necropolis_knights_1", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_veh_khemrian_warsphinx_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_inf_tomb_guard_0", 6*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_inf_tomb_guard_1", 3*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_heirotitan_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_mon_necrosphinx_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_pro06_tmb_mon_bone_giant_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc09_tmb_art_casket_of_souls_0", 1*weighting_modifier);	
+		ram:add_unit(key, "wh2_dlc11_cst_inf_depth_guard_0", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_inf_depth_guard_1", 2*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_terrorgheist", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_rotting_leviathan_0", 1*weighting_modifier);
+		ram:add_unit(key, "wh2_dlc11_cst_mon_necrofex_colossus_0", 1*weighting_modifier);	
 
 	else
 		script_error("ERROR: generate_random_army() called but supplied template_key [" .. template_key .. "] is not supported");

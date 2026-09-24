@@ -34,7 +34,11 @@ function q_setup()
 			{"mission", "wh3_dlc25_anc_talisman_deaths_timekeeper", "wh3_dlc25_ie_qb_emp_elspeth_deaths_timekeeper", nil, "wh3_dlc25_elspeth_cam_quest_mission_001"},
 			{"mission", "wh3_dlc25_anc_weapon_the_pale_scythe", "wh3_dlc23_ie_qb_emp_elspeth_the_pale_scythe"},
 		},
-		
+		["wh_dlc03_emp_boris_todbringer"] = {			
+			{"mission", "wh3_dlc29_anc_weapon_legbiter", "wh3_dlc29_emp_boris_middenland_runefang", nil, nil},
+			{"mission", "wh3_dlc29_anc_talisman_talisman_of_ulric", "wh3_dlc29_qb_emp_boris_spilled_blood", nil, "war.camp.advice.quests.001"},
+		},
+
 		----------------------
 		------- DWARFS -------
 		----------------------	
@@ -119,6 +123,15 @@ function q_setup()
 		["wh_pro02_vmp_isabella_von_carstein"] = {			
 			{"mission", "wh_pro02_anc_enchanted_item_blood_chalice_of_bathori", "wh3_main_ie_qb_vmp_isabella_von_carstein_blood_chalice_of_bathori", nil, "war.camp.advice.quests.001"},
 		},
+		["wh3_dlc29_vmp_neferata"] = {
+			{"mission", "wh3_dlc29_anc_weapon_akhmet_kar_dagger_of_jet", "wh3_dlc29_vmp_neferata_akmet_kar_the_dagger_of_jet", nil, nil},
+			{"mission", "wh3_dlc29_anc_enchanted_item_ruby_of_lahmia", "wh3_dlc29_vmp_neferata_ruby_of_lahmia", nil, nil},
+            {"mission", "wh3_dlc29_anc_weapon_aken_seth_the_staff_of_pain", "wh3_dlc29_qb_vmp_silver_sisterhood", nil, nil},
+		},
+		["wh_dlc05_vmp_red_duke"] = {
+			{"reward", "wh3_dlc29_anc_talisman_jewel_of_unlife", nil},
+			{"reward", "wh3_dlc29_anc_armour_armour_of_blood", nil},
+		},				
 		
 		----------------------
 		-------- CHAOS -------
@@ -152,6 +165,10 @@ function q_setup()
 		},
 		["wh3_main_dae_belakor"] = {
 			{"reward", "wh3_main_anc_weapon_blade_of_shadow", nil}
+		},
+		["wh3_dlc29_chs_glottkin"] = {
+			{"mission", "wh3_dlc29_anc_arcane_item_ethrac_brazier", "wh3_dlc29_ie_qb_chs_glottkin_war_in_the_darkwald"},
+			{"mission", "wh3_dlc29_anc_weapon_otto_scythe", "wh3_dlc29_ie_qb_chs_glottkin_otto_scythe"}
 		},
 		----------------------
 		------ BEASTMEN ------
@@ -337,6 +354,11 @@ function q_setup()
 			{"mission", "wh2_dlc16_anc_enchanted_item_whip_of_domination", "wh3_main_ie_qb_skv_throt_main_whip_of_domination", nil, "war.camp.advice.quests.001"},
 			{"mission", "wh2_dlc16_anc_weapon_creature_killer", "wh3_main_ie_qb_skv_throt_main_creature_killer"},
 		},
+		["wh3_dlc29_skv_thanquol"] = {
+			{"mission", "wh3_dlc29_anc_weapon_staff_of_the_horned_rat", "wh3_dlc29_qb_skv_thanquol_staff_of_the_horned_rat", nil, "war.camp.advice.quests.001"},
+			{"mission", "wh3_dlc29_anc_talisman_warp_amulet", "wh3_dlc29_skv_thanquol_warp_amulet"},
+			{"mission", "wh3_dlc29_anc_enchanted_item_warpstone_tokens", "wh3_dlc29_skv_thanquol_warpstone_tokens"},
+		},
 
 		----------------------
 		----- TOMB KINGS -----
@@ -344,6 +366,8 @@ function q_setup()
 		["wh2_dlc09_tmb_settra"] = {
 			{"mission", "wh2_dlc09_anc_enchanted_item_the_crown_of_nehekhara", "wh3_main_ie_qb_tmb_settra_the_crown_of_nehekhara", nil, "dlc09.camp.advice.quest.settra.the_crown_of_nehekhara.001"},
 			{"mission", "wh2_dlc09_anc_weapon_the_blessed_blade_of_ptra", "wh3_main_ie_qb_tmb_settra_the_blessed_blade_of_ptra", nil, "dlc09.camp.advice.quest.settra.the_blessed_blade_of_ptra.001"},
+			{"mission", "wh3_dlc29_anc_talisman_the_scarab_brooch_of_usirian", "wh3_dlc29_ie_qb_tmb_settra_the_scarab_brooch_of_usirian",},
+			{"mission", "wh3_dlc29_anc_armour_the_armour_of_golden_magnificence", "wh3_dlc29_ie_qb_tmb_settra_the_armour_of_golden_magnificence",},
 		},
 		["wh2_dlc09_tmb_arkhan"] = {
 			{"mission", "wh2_dlc09_anc_weapon_the_tomb_blade_of_arkhan", "wh3_main_ie_qb_tmb_arkhan_the_tomb_blade_of_arkhan", nil, "dlc09.camp.advice.quest.arkhan.the_tomb_blade_of_arkhan.001"},
@@ -490,6 +514,15 @@ function q_setup()
 		["wh3_dlc23_chd_astragoth"] = {
 			{"mission", "wh3_dlc23_anc_talisman_stone_mantle", "wh3_dlc23_ie_chd_astragoth_stone_mantle"},
 			{"mission", "wh3_dlc23_anc_weapon_black_hammer_of_hashut", "wh3_dlc23_ie_qb_chd_astragoth_black_hammer_of_hashut", nil, "wh3_dlc23_astragoth_cam_quest_mission_001"}
+		},
+
+		----------------------
+		--- UNDEAD LEGIONS ---
+		----------------------
+		["wh3_dlc29_nag_nagash"] = {
+			{"mission", "wh3_dlc29_anc_armour_morikhane_the_black_armour", "wh3_dlc29_ie_nag_nagash_morikhane_the_black_armour"},
+			{"mission", "wh3_dlc29_anc_weapon_zefet_nebtar_the_mortis_blade", "wh3_dlc29_ie_nag_nagash_zefet_nebtar_the_mortis_blade"},
+			{"mission", "wh3_dlc29_anc_arcane_item_alakanash_the_staff_of_power", "wh3_dlc29_ie_nag_nagash_alakanash_the_staff_of_power"}
 		}
 	}
 	

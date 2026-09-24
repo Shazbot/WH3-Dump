@@ -2,3 +2,6 @@ key	expression	description
 #ritual_region_target_criterias_context_expressions_tables;0;db/ritual_region_target_criterias_context_expressions_tables/data__		
 CP1MilitaryForcePresent	IsAnyEnemyMilitaryForcePresent(ModelFactionContextFromKey("wh3_cp1_cth_tiger_warriors"))	Targets settlements with a military force of Bhashiva present in the region. 
 GarrisonedSettlements	Settlement.HasGarrison	Targets settlements with a valid garrison army or garrison navy.
+MajorSettlements	Settlement.IsProvinceCapital	Targets major settlements.
+NurgleGardenCandidates	Settlement.SettlementType != "wh3_dlc29_woc_glottkin_garden_of_nurgle_minor" && Settlement.SettlementType != "wh3_dlc29_woc_glottkin_garden_of_nurgle_major" && !Settlement.PrimaryBuilding.IsDamaged && !HasResource("res_fortress") && !HasResource("res_bastion") && !HasResource("res_empire_fort") && Settlement.Region.RecordKeyIsOneOf("wh3_main_combi_region_the_galleons_graveyard") == false	Targets major settlements.
+RegionInNonDevastatedMajorityOwnedProvince	Settlement.Region.Province.DoesFactionOwnMajorityOfRegions(Settlement.Owner) && Settlement.Region.IsEffectBundleActive("wh3_dlc29_land_of_the_dead_devastated") == false	Targets settlements where the local faction owns more than half the regions in the province and the province has not been devastated by Nagash

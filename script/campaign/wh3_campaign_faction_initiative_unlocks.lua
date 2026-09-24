@@ -180,7 +180,7 @@ function faction_initiatives_unlocker:start(faction_interface)
 					for _, initiative_set in model_pairs(faction:faction_initiative_sets()) do
 						for j = 1, #initiative_list do
 							if not initiative_set:lookup_initiative_by_key(initiative_list[j]):is_null_interface() then
-								cm:toggle_initiative_script_locked(initiative_set, initiative_list[j], false);
+								cm:unlock_initiative(initiative_set, initiative_list[j]);
 
 								out.design("Initiatives -- Unlocking Initiative with key [" .. initiative_list[j] .. "]")
 								-- Immediatly activate the initiative if it exists in the initiatives_to_activate_immediately list

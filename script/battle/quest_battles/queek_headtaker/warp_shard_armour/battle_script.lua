@@ -103,15 +103,15 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_warp_shard_armour_stage_6_warp_shard_caverns_pt_01", "subtitle_with_frame", 10) end, 3100);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_warp_shard_armour_stage_6_warp_shard_caverns_pt_01", "subtitle_with_frame", 0.1) end, 3100);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 15000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 15500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_warp_shard_armour_stage_6_warp_shard_caverns_pt_02", "subtitle_with_frame", 8) end, 15600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_warp_shard_armour_stage_6_warp_shard_caverns_pt_02", "subtitle_with_frame", 0.1) end, 15600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 26000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 26500);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_warp_shard_armour_stage_6_warp_shard_caverns_pt_03", "subtitle_with_frame", 5) end, 26600);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_warp_shard_armour_stage_6_warp_shard_caverns_pt_03", "subtitle_with_frame", 0.1) end, 26600);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 32500);
 	
 

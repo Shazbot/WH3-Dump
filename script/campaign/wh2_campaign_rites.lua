@@ -420,6 +420,20 @@ function rite_unlock_listeners()
 				end,
 			["show_unlock_message"] = true
 		},
+		----------------
+		-- ascendancy verminlord --
+		----------------
+		{
+			["culture"] = "wh2_main_skv_skaven",
+			["rite_name"] = "wh3_main_ritual_skv_ascendancy_verminlord",
+			["event_name"] = "FactionLeaderIssuesEdict",
+			["condition"] =
+				function(context, faction_name)
+					return context:faction():name() == faction_name and context:initiative_key() == "wh2_main_edict_skv_expansionist_planning";
+				end,
+			["show_unlock_message"] = false,
+			["ignore_disabled_lock_condition"] = true
+		},
 		------------
 		-- doooom --
 		------------
@@ -578,6 +592,22 @@ function rite_unlock_listeners()
 		{
 			["culture"] = "wh2_main_skv_skaven",
 			["rite_name"] = "wh2_main_ritual_skv_thirteen_moulder",
+			["event_name"] = "CharacterRankUp",
+			["condition"] =
+				function(context, faction_name)					
+					local character = context:character();
+					
+					return character:faction():name() == faction_name and character:is_faction_leader() and character:rank() >= 7;
+				end,
+			["show_unlock_message"] = true
+		},
+
+		--------------------------
+		-- thirteen (scruten) --
+		--------------------------
+		{
+			["culture"] = "wh2_main_skv_skaven",
+			["rite_name"] = "wh3_dlc29_ritual_skv_thirteen_scruten",
 			["event_name"] = "CharacterRankUp",
 			["condition"] =
 				function(context, faction_name)					
@@ -1185,7 +1215,9 @@ function rite_unlock_listeners()
 			local ritual_status = current_faction:rituals():ritual_status(current_rite_template.rite_name);
 
 			if ritual_status:is_null_interface() == false then
-				if current_faction:culture() == current_rite_template.culture and ritual_status:disabled() == false then
+				if current_faction:culture() == current_rite_template.culture and 
+					(ritual_status:disabled() == false or current_rite_template.ignore_disabled_lock_condition) 
+				then
 					cm:lock_ritual(current_faction, current_rite_template.rite_name)
 					local rite = rite_unlock:new(
 						current_rite_template.rite_name,

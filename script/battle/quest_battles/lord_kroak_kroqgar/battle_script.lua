@@ -90,7 +90,7 @@ function end_deployment_phase()
 	subtitles:set_alignment("bottom_centre");
 	subtitles:clear();
 		
-	cutscene_intro:set_post_cutscene_fade_time(3.0, 3200);
+	cutscene_intro:set_post_cutscene_fade_time(1.0, 1000);
 	
 	-- skip callback
 	cutscene_intro:set_skippable(
@@ -158,11 +158,8 @@ gb:message_on_time_offset("stop_cs", 531000);
 gb:message_on_time_offset("stop_cs_2", 534000);
 
 --kroak messages
-
 gb:message_on_time_offset("kroak_guardians", 550000);
 gb:message_on_time_offset("kroak", 560000);
-gb:message_on_time_offset("kroak_guardians_release", 560000);
-gb:message_on_time_offset("kroak_release", 570000);
 
 --reinforcement 2 messages
 gb:message_on_time_offset("reinforce_2", 400000);
@@ -202,10 +199,11 @@ ga_enemy_reinforcements_2:release_on_message("reinforce_2_release");
 
 --kroak orders
 ga_player_reinf_01:reinforce_on_message("kroak_guardians", 10);
+ga_player_reinf_01:message_on_any_deployed("kroak_guardians_in");
+ga_player_reinf_01:attack_on_message("kroak_guardians_in");
 ga_player_reinf_02:reinforce_on_message("kroak", 1);
-ga_player_reinf_02:attack_on_message("kroak_guardians")
-
-
+ga_player_reinf_02:message_on_any_deployed("kroak_in");
+ga_player_reinf_02:attack_on_message("kroak_in");
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- OBJECTIVES ------------------------------------------

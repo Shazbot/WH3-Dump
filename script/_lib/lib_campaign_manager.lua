@@ -39,14 +39,14 @@ local all_agent_types = {
 };
 
 
-local corruption_types = {
+corruption_types = {
 	"wh3_main_corruption_chaos",
 	"wh3_main_corruption_khorne",
 	"wh3_main_corruption_nurgle",
 	"wh3_main_corruption_skaven",
 	"wh3_main_corruption_slaanesh",
 	"wh3_main_corruption_tzeentch",
-	"wh3_main_corruption_vampiric"
+	"wh3_main_corruption_vampiric",
 };
 
 -- Set for easy checking of the validity of a corruption type key.
@@ -2004,7 +2004,7 @@ function campaign_manager:log_event_error(event_name, error, traceback, establis
 	local faction_list_table = {};
 	local turn_number;
 
-	if self.model() then
+	if self:model() then
 		turn_number = self:turn_number();
 
 		local faction_list = cm:whose_turn_is_it();	
@@ -2615,6 +2615,9 @@ local function campaign_intro_cutscene_play(faction_key, cindy_scene_key_or_dura
 			cutscene_intro:start();
 		end;
 	else
+		-- Both machines must progress through the same end_callback when this intro finishes,
+		-- otherwise ScriptEventIntroCutsceneFinished / campaign intro complete diverge and MP desyncs.
+		-- Local-only dressing (post-intro advice) is gated inside composite_end_callback.
 		cm:progress_on_all_clients_ui_triggered(
 			faction_key .. "_intro_finished",
 			function()
@@ -2707,7 +2710,10 @@ function campaign_manager:setup_campaign_intro_cutscene(faction_key, cam_gamepla
 		if end_callback then
 			end_callback();
 		end;
-		core:trigger_event("ScriptEventIntroCutsceneFinished");
+		
+		if faction_start == nil or faction_start.suppress_post_intro_event == false then
+			core:trigger_event("ScriptEventIntroCutsceneFinished");	
+		end
 	end;
 
 	-- Failsafe: position the camera over the local faction's main army
@@ -3254,7 +3260,36 @@ function campaign_manager:get_total_pooled_resource_spent_for_faction(faction_ke
 end;
 
 
+--- @function faction_add_pooled_resource
+--- @desc Adds a value to a pooled resource for a faction. This is a wrapper for the @episodic_scripting:faction_add_pooled_resource function, which performs the actual addition of the pooled resource value.
+--- @p @string faction key, Key of the faction to add the pooled resource to, from the <code>factions</code> database table.
+--- @p @string pooled resource key, Key of the pooled resource to add to, from the <code>pooled_resources</code> database table.
+--- @p @string pooled resource factor key, Key of the pooled resource factor to add to, from the <code>pooled_resource_factors</code> database table.
+--- @p @number value, Value to add to the pooled resource
+--- @return @boolean success
+function campaign_manager:faction_add_pooled_resource(faction_key, key, factor, value)
+	if not is_string(faction_key) then
+		script_error("ERROR: faction_add_pooled_resource() called but supplied faction key [" .. tostring(faction_key) .. "] is not a string");
+		return false;
+	end;
 
+	if not is_string(key) then
+		script_error("ERROR: faction_add_pooled_resource() called but supplied pooled resource key [" .. tostring(key) .. "] is not a string");
+		return false;
+	end;
+	
+	if not is_string(factor) then
+		script_error("ERROR: faction_add_pooled_resource() called but supplied pooled resource factor [" .. tostring(factor) .. "] is not a string");
+		return false;
+	end;
+
+	if not is_number(value) then
+		script_error("ERROR: faction_add_pooled_resource() called but supplied pooled resource value [" .. tostring(value) .. "] is not a number");
+		return false;
+	end;
+
+	return self.game_interface:faction_add_pooled_resource(faction_key, key, factor, value);
+end
 
 
 
@@ -3854,7 +3889,7 @@ end;
 
 --- @function get_faction_list
 --- @desc Returns a script interface wrapping a list of script interfaces for ALL factions
---- @r @FACTION_LIST_SCRIPT_INTERFACE all factions
+--- @r @faction_list, List of interfaces of all factions
 function campaign_manager:get_faction_list()
 	if self.faction_list == nil then
 		-- a list returned by faction_list holds faction script interfaces. 
@@ -4252,7 +4287,7 @@ end;
 --- @desc Returns a handle to the game model at any time (after the game has been created). See the @model_hierarchy pages for more information about game model interfaces such as @model.
 --- @r @model model
 function campaign_manager:model()
-	if self.game_interface:model() then
+	if self.game_interface:model() and self.game_interface:model():is_ready_for_script_access() then
 		return self.game_interface:model();
 	else
 		script_error("ERROR: an attempt was made to call model() before the model was created - this call needs to happen later in the loading sequence");
@@ -5522,6 +5557,19 @@ function campaign_manager:char_lookup_str(obj)
 	end;
 end;
 
+--- @function region_lookup_str 
+--- @desc Various game interface functions lookup regions using a lookup string. This function converts a region into a lookup string that can be used by code functions to find that same region. It may also be supplied a region cqi in place of a region object. 
+--- @p object region or region cqi
+--- @r string lookup string
+function campaign_manager:region_lookup_str(obj)
+	if is_number(obj) or is_string(obj) then
+		return "region_cqi:" .. obj;
+	elseif is_region(obj) then
+		return "region_cqi:" .. obj:cqi();
+	else
+		script_error("ERROR: region_lookup_str() called but supplied object [" .. tostring(obj) .. "] not recognised");
+	end;
+end
 
 --- @function char_in_owned_region
 --- @desc Returns <code>true</code> if the supplied character is in a region their faction controls, <code>false</code> otherwise.
@@ -6787,7 +6835,7 @@ function campaign_manager:create_force_with_general(faction_key, unit_list, regi
 	out.dec_tab();
 	
 	-- make the call to create the force
-	self.game_interface:create_force_with_general(faction_key, unit_list, region_key, x, y, agent_type, agent_subtype, forename, clan_name, family_name, other_name, id, make_faction_leader, force_diplomatic_discovery, no_background_trait);
+	return self.game_interface:create_force_with_general(faction_key, unit_list, region_key, x, y, agent_type, agent_subtype, forename, clan_name, family_name, other_name, id, make_faction_leader, force_diplomatic_discovery, no_background_trait);
 end;
 
 
@@ -6896,6 +6944,98 @@ function campaign_manager:create_force_with_existing_general(char_str, faction_k
 end;
 
 
+--- @function create_spawnable_force
+--- @desc Instantly spawn an army on the campaign map based on a spawnable force record. This function is a wrapper for the episodic_scripting:create_spawnable_force function provided by the episodic scripting interface, adding debug output and success callback functionality.
+--- @p @string faction key, Faction key of the faction to which the force is to belong.
+--- @p @string spawnable force key, Spawnable force record key for the configuration of the force being created.
+--- @p @string region key, Region key of home region for this force.
+--- @p @number x, x logical co-ordinate of force.
+--- @p @number y, y logical co-ordinate of force.
+--- @p [opt=nil] @function success callback, Callback to call once the force is created. The callback will be passed the created military force leader's cqi and the military force cqi.
+--- @example cm:create_spawnable_force(
+--- @example 	"wh_main_dwf_dwarfs",
+--- @example 	"wh3_dlc29_alliance_order_dwf",
+--- @example 	"wh_main_the_silver_road_karaz_a_karak",
+--- @example 	714,
+--- @example 	353,
+--- @example 	function(cqi, force_cqi)
+--- @example 		out("Force created with char cqi:" .. cqi .. " force cqi:" .. force_cqi);
+--- @example 	end
+--- @example );
+function campaign_manager:create_spawnable_force(faction_key, spawnable_force_key, region_key, x, y, success_callback)
+	if not is_string(faction_key) then
+		script_error("ERROR: create_spawnable_force() called but supplied faction key [" .. tostring(faction_key) .. "] is not a string");
+		return;
+	end;
+	
+	if not is_string(spawnable_force_key) then
+		script_error("ERROR: create_spawnable_force() called but supplied unit list [" .. tostring(spawnable_force_key) .. "] is not a string");
+		return;
+	end;
+	
+	if spawnable_force_key == "" then
+		script_error("ERROR: create_spawnable_force() called but supplied unit list [" .. tostring(spawnable_force_key) .. "] is an empty string");
+		return;
+	end;
+	
+	if not is_string(region_key) then
+		script_error("ERROR: create_spawnable_force() called but supplied region key [" .. tostring(region_key) .. "] is not a string");
+		return;
+	end;
+	
+	if not is_number(x) or x < 0 then
+		script_error("ERROR: create_spawnable_force() called but supplied x co-ordinate [" .. tostring(x) .. "] is not a positive number");
+		return;
+	end;
+	
+	if not is_number(y) or y < 0 then
+		script_error("ERROR: create_spawnable_force() called but supplied y co-ordinate [" .. tostring(y) .. "] is not a positive number");
+		return;
+	end;
+	
+	if not is_function(success_callback) and not is_nil(success_callback) then
+		script_error("ERROR: create_spawnable_force() called but supplied success callback [" .. tostring(success_callback) .. "] is not a function or nil");
+		return;
+	end;
+	
+	local region = cm:get_region(region_key);
+	if not is_region(region) then
+		script_error("ERROR: create_spawnable_force() called but supplied region key [" .. tostring(region_key) .. "] is not a valid region");
+	end;
+	
+	-- this is now generated internally, rather than being passed in from the calling function
+	local id = tostring(core:get_unique_counter());
+	
+	local listener_name = "campaign_manager_create_force_" .. id;
+	
+	-- establish a listener for the force being created
+	core:add_listener(
+		listener_name,
+		"ScriptedForceCreated",
+		function(context)
+			return context.string == id;
+		end,
+		function() self:force_created(id, listener_name, faction_key, x, y, success_callback) end,
+		false
+	);
+	
+	out("create_spawnable_force() called:");
+	out.inc_tab();
+	
+	out("faction_key: " .. faction_key);
+	out("spawnable_force_key: " .. spawnable_force_key);
+	out("region_key: " .. region_key);
+	out("x: " .. tostring(x));
+	out("y: " .. tostring(y));
+	out("id: " .. id);
+	
+	out.dec_tab();
+	
+	-- make the call to create the force
+	self.game_interface:create_spawnable_force(faction_key, spawnable_force_key, region_key, x, y, id);
+end;
+
+
 -- called by create_force() commands above when a force has been created, either directly (if the force was not created via the command
 -- queue) or via the ScriptedForceCreated event (if the force was created via the command queue). This attempts to find the newly-created 
 -- character and returns its cqi to the calling code.
@@ -6940,8 +7080,9 @@ end;
 --- @example 	714,
 --- @example 	353
 --- @example );
-function campaign_manager:create_agent(faction_key, agent_key, subtype_key, x, y, disable_auto_select)
+function campaign_manager:create_agent(faction_key, agent_key, subtype_key, x, y, disable_auto_select, no_background_skill)
 	disable_auto_select = disable_auto_select or false
+	no_background_skill = no_background_skill or false
 	if not is_string(faction_key) then
 		script_error("ERROR: create_agent() called but supplied faction key [" .. tostring(faction_key) .. "] is not a string");
 		return;
@@ -6995,7 +7136,7 @@ function campaign_manager:create_agent(faction_key, agent_key, subtype_key, x, y
 	end
 	
 	-- make the call to create the agent
-	local new_agent_interface = self.game_interface:create_agent(faction_key, agent_key, subtype_key, x, y, id);
+	local new_agent_interface = self.game_interface:create_agent(faction_key, agent_key, subtype_key, x, y, id, no_background_skill);
 
 	if disable_auto_select then
 		uim:override("selection_change"):unlock()
@@ -7014,12 +7155,13 @@ end;
 --- @desc Kills the specified character, with the ability to also destroy their whole force if they are commanding one. The character may be specified by a lookup string or by character cqi.
 --- @p @string character lookup string, Character string of character to kill. This uses the standard character string lookup system. Alternatively, a @number may be supplied, which specifies a character cqi.
 --- @p [opt=false] @boolean destroy force, Will also destroy the characters whole force if true.
-function campaign_manager:kill_character(character_lookup_value, destroy_force)
+function campaign_manager:kill_character(character_lookup_value, destroy_force, silent)
 	destroy_force = destroy_force or false;
+	silent = silent or false;
 
 	-- If the lookup value is a string pass it straight to code and exit
 	if is_string(character_lookup_value) then
-		self.game_interface:kill_character(character_lookup_value, destroy_force);
+		self.game_interface:kill_character(character_lookup_value, destroy_force, silent);
 		return;
 	end;
 
@@ -7037,19 +7179,19 @@ function campaign_manager:kill_character(character_lookup_value, destroy_force)
 			-- If this character has a force then they also currently have a unit so to kill the character AND the unit too we need to use a bespoke function
 			if character_obj:has_military_force() == true then
 				if destroy_force then
-					out("* killing character with cqi [" .. character_lookup_value .. "], their unit, and their military force");
+					out.design("* killing character with cqi [" .. character_lookup_value .. "], their unit, and their military force");
 				else
-					out("* killing character with cqi [" .. character_lookup_value .. "], their unit, but not their military force");
+					out.design("* killing character with cqi [" .. character_lookup_value .. "], their unit, but not their military force");
 				end;
-				self.game_interface:kill_character_and_commanded_unit(lookup, destroy_force);
+				self.game_interface:kill_character_and_commanded_unit(lookup, destroy_force, silent);
 			else
-				out("* killing character with cqi [" .. character_lookup_value .. "] (this character has no military force)");
-				self.game_interface:kill_character(lookup, destroy_force);
+				out.design("* killing character with cqi [" .. character_lookup_value .. "] (this character has no military force)");
+				self.game_interface:kill_character(lookup, destroy_force, silent);
 			end
 			return true;
 		end;
 	else
-		out("* kill_character() called for character with cqi [" .. character_lookup_value .. "] but no such character could be found, continuing");
+		out.design("* kill_character() called for character with cqi [" .. character_lookup_value .. "] but no such character could be found, continuing");
 	end
 	return false;
 end
@@ -7821,9 +7963,9 @@ end;
 --- @p [opt=false] boolean by_level, If set to true, the level/rank can be supplied instead of an exact amount of experience which is looked up from a table in the campaign manager
 function campaign_manager:add_agent_experience(char_str, exp_to_give, by_level)
 	if by_level then
-		local desired_rank = math.min(exp_to_give, #self.character_xp_per_level)
-		out("add_agent_experience() called, char_str is " .. tostring(char_str) .. " and desired rank is " .. tostring(desired_rank));
-		self.game_interface:level_up_agent_rank(char_str, desired_rank)
+		local level_up_amount = math.min(exp_to_give, #self.character_xp_per_level)
+		out("add_agent_experience() called, char_str is " .. tostring(char_str) .. " and is increasing their level by " .. tostring(level_up_amount));
+		self.game_interface:level_up_agent_rank(char_str, level_up_amount)
 		return
 	end
 	
@@ -9484,6 +9626,40 @@ function campaign_manager:region_adjacent_to_faction(region, faction)
 	end;
 end;
 
+--- @function region_has_building
+--- @desc Returns whether the supplied region contains the key specified building including the higher level buildings of its building chain
+--- @p @region region_obj
+--- @p @string building_level_key building level key
+--- @r boolean region has building including lower levels
+function campaign_manager:region_has_building(region_obj, building_level_key)
+	if not validate.is_region(region_obj) then
+		return false;
+	end;
+	
+	if not validate.is_string(building_level_key) then
+		return false;
+	end;
+	
+	if region_obj:building_exists(building_level_key) then
+		return true;
+	end
+
+	local building_chain_key = self:building_chain_key_for_building(building_level_key);
+
+	if building_chain_key then
+		local slot_list = region_obj:slot_list();
+		local building_level = self:building_level_for_building(building_level_key);
+	
+		for i = 0, slot_list:num_items() - 1 do
+			local current_slot = slot_list:item_at(i);
+			if current_slot:has_building() and current_slot:building():chain() == building_chain_key and current_slot:building():building_level() >= building_level then
+				return true;
+			end;
+		end;
+	end;
+
+	return false;
+end;
 
 --- @function region_has_chain_or_superchain
 --- @desc Returns whether the supplied region contains the key specified building chain or superchain
@@ -9525,6 +9701,42 @@ function campaign_manager:instantly_upgrade_building_in_region(slot, target_buil
 	self.game_interface:region_slot_instantly_upgrade_building(slot, target_building_key);
 end;
 
+--- @function build_building_in_slot_in_region
+--- @desc Instantly builds the building in the supplied slot number of the supplied region to the supplied building key.
+--- @p string region key
+--- @p number slot number
+--- @p string target building key
+--- @p bool ignore cost 
+--- @p bool should build instantly 
+function campaign_manager:build_building_in_slot_in_region(region_key, slot_num, target_building_key, ignore_cost, build_instnalty)
+	if not is_string(region_key) then
+		script_error("ERROR: build_building_in_slot_in_region() called but supplied region key [" .. tostring(region_key) .. "] is not a string")
+		return false
+	end
+	
+	if not is_number(slot_num) then
+		script_error("ERROR: build_building_in_slot_in_region() called but supplied slot number [" .. tostring(slot_num) .. "] is not a number")
+		return false
+	end
+	
+	if not is_string(target_building_key) then
+		script_error("ERROR: build_building_in_slot_in_region() called but supplied target building key [" .. tostring(target_building_key) .. "] is not a string")
+		return false
+	end
+
+	if not is_boolean(ignore_cost) then
+		script_error("ERROR: build_building_in_slot_in_region() called but supplied ignore_cost flag [" .. tostring(ignore_cost) .. "] is not a boolean value");
+		return false;
+	end;
+
+	if not is_boolean(build_instnalty) then
+		script_error("ERROR: build_building_in_slot_in_region() called but supplied build_instnalty flag [" .. tostring(build_instnalty) .. "] is not a boolean value");
+		return false;
+	end;
+	
+	self.game_interface:build_building_in_slot(region_key .. ":" .. tostring(slot_num), target_building_key, ignore_cost, build_instnalty)
+	return true
+end
 
 --- @function instantly_dismantle_building_in_region
 --- @desc Instantly dismantles the building in the supplied slot number of the supplied region.
@@ -11690,9 +11902,6 @@ function campaign_manager:pending_battle_cache_mf_is_attacker(obj)
 		mf_cqi = obj;
 	end;
 	
-	-- cast it to string
-	mf_cqi = tostring(mf_cqi);
-	
 	for i = 1, self:pending_battle_cache_num_attackers() do
 		local current_char_cqi, current_mf_cqi, current_faction_name = self:pending_battle_cache_get_attacker(i);
 		
@@ -11717,9 +11926,6 @@ function campaign_manager:pending_battle_cache_mf_is_defender(obj)
 	else
 		mf_cqi = obj;
 	end;
-	
-	-- cast it to string
-	mf_cqi = tostring(mf_cqi);
 	
 	for i = 1, self:pending_battle_cache_num_defenders() do
 		local current_char_cqi, current_mf_cqi, current_faction_name = self:pending_battle_cache_get_defender(i);
@@ -12019,38 +12225,41 @@ end;
 
 
 --- @function random_number
---- @desc Assembles and returns a random integer between 1 and 100, or other supplied values. The result returned is inclusive of the supplied max/min. This is safe to use in multiplayer scripts.
+--- @desc Assembles and returns a random integer between 1 and 100, or other supplied values. The result returned is inclusive of the supplied max/min, and accepts reverse order. This is safe to use in multiplayer scripts.
 --- @p [opt=100] integer max, Maximum value of returned random number.
 --- @p [opt=1] integer min, Minimum value of returned random number.
 --- @r number random number
 function campaign_manager:random_number(max_num, min_num)
 	if is_nil(max_num) then
 		max_num = 100;
-	end;
-	
-	if is_nil(min_num) then
-		min_num = 1;
-	end;
-	
-	if not is_number(max_num) or math.floor(max_num) < max_num then
-		script_error("random_number ERROR: supplied max number [" .. tostring(max_num) .. "] is not a valid integer");
+	elseif not is_number(max_num) then
+		script_error("random_number ERROR: supplied max number [" .. tostring(max_num) .. "] is not a valid integer or nil");
 		return 0;
 	end;
-	
+
+	if is_nil(min_num) then
+		min_num = 1;
+	elseif not is_number(min_num) then
+		script_error("random_number ERROR: supplied min number [" .. tostring(min_num) .. "] is not an integer or nil");
+		return 0;
+	end;
+
 	if max_num == min_num then
 		return max_num;
 	end;
 	
-	if min_num == 1 and max_num < min_num then
-		script_error("random_number ERROR: supplied max number [" .. tostring(max_num) .. "] can only be negative if a min number is also supplied");
-		return 0;
+	-- if we were given the min and max in reverse order we just switch them
+	if max_num < min_num then
+		local temp = max_num
+		max_num = min_num
+		min_num = temp
 	end;
 	
-	if not is_number(min_num) or min_num >= max_num or math.floor(min_num) < min_num then
-		script_error("random_number ERROR: supplied min number [" .. tostring(min_num) .. "] is not an integer less than the max num [" .. tostring(max_num) .. "]");
+	if not is_number(min_num) then
+		script_error("random_number ERROR: supplied min number [" .. tostring(min_num) .. "] is not an integer");
 		return 0;
 	end;
-	
+
 	return self:model():random_int(min_num, max_num);
 end;
 
@@ -12399,6 +12608,41 @@ function campaign_manager:scroll_camera_to_region(faction_key, region_key, time)
 	if cm:get_local_faction_name() == faction_key then
 		local display_x = region:settlement():display_position_x()
 		local display_y = region:settlement():display_position_y()
+		local cached_x, cached_y, cached_d, cached_b, cached_h = cm:get_camera_position()
+		cm:scroll_camera_from_current(false, time, {display_x, display_y, cached_d, cached_b, cached_h})
+	end
+end
+
+--- @function scroll_camera_to_character
+--- @desc Scrolls the camera from the current camera position. This hooks into scroll_camera_from_current, and respects the player's current height/rotation
+--- @p string faction_key, which faction to pan the camera for. This is to make sure we're not panning the camera for all players in mp
+--- @p string character_cqi, the character the camera should pan to. 
+--- @p string time, Time in seconds over which to scroll.
+--- @example cm:scroll_camera_to_character(
+--- @example 	"wh_main_emp_empire",
+--- @example 	321,
+--- @example 	5
+--- @example )
+function campaign_manager:scroll_camera_to_character(faction_key, character_cqi, time)
+	if not is_string(faction_key) then
+		script_error("ERROR: scroll_camera_to_character() called but supplied faction key [" .. tostring(faction_key) .. "] is not a string")
+		return false
+	end
+
+	if not is_number(character_cqi) then
+		script_error("ERROR: scroll_camera_to_character() called but supplied character cqi [" .. tostring(character_cqi) .. "] is not a number")
+		return false
+	end
+
+	local character = cm:get_character_by_cqi(character_cqi)
+	if not is_character(character) then
+		script_error("ERROR: scroll_camera_to_character() called but a valid character with supplied cqi [" .. tostring(character_cqi) .. "] could not be found")
+		return false
+	end
+	
+	if cm:get_local_faction_name() == faction_key then
+		local display_x = character:display_position_x()
+		local display_y = character:display_position_y()
 		local cached_x, cached_y, cached_d, cached_b, cached_h = cm:get_camera_position()
 		cm:scroll_camera_from_current(false, time, {display_x, display_y, cached_d, cached_b, cached_h})
 	end
@@ -14057,7 +14301,7 @@ function campaign_manager:progress_on_battle_completed(name, callback, delay)
 	if self:is_processing_battle() then
 		core:add_listener(
 			"progress_on_battle_completed_" .. name,
-			"ScriptEventPlayerBattleSequenceCompleted",
+			"ScriptEventBattleSequenceCompleted",
 			true,
 			function(context)
 				self:callback(function() callback() end, delay, "progress_on_battle_completed_" .. name);
@@ -15006,7 +15250,7 @@ end;
 --- @function remove_effect_bundle_from_region
 --- @desc Removes an effect bundle from a region.
 --- @p string effect bundle key, Effect bundle key from the effect bundles table.
---- @p string number cqi, Command queue index of the character commander of the military force to remove the effect from.
+--- @p string region key, Key of the region to remove the effect bundle from.
 function campaign_manager:remove_effect_bundle_from_region(bundle_key, region_key)
 	if not is_string(bundle_key) then
 		script_error("ERROR: apply_effect_bundle_to_region() called but supplied bundle key [" .. tostring(bundle_key) .. "] is not a string");
@@ -15737,6 +15981,46 @@ function campaign_manager:trigger_mission(faction_key, mission, fire_immediately
 end;
 
 
+--- @function set_active_mission_status_for_faction
+--- @desc Sets the supplied mission status for a specific active mission for a specific faction. If the mission is not currently active no change will be made.
+--- @p object faction interface or faction key
+--- @p @string mission key, Mission key, from the <code>missions</code> table.
+--- @p @string status, Mission status, valid status keys are: ACTIVE, SUCCEEDED, CANCELLED, EXPIRED, PENDING.
+function campaign_manager:set_active_mission_status_for_faction(faction, mission, status)
+	local statuses = {
+		ACTIVE = true,
+		CANCELLED = true,
+		PENDING = true,
+		EXPIRED = true,
+		SUCCEEDED = true
+	}
+
+	if not is_string(faction) and not is_faction(faction) then
+		script_error("ERROR: set_active_mission_status_for_faction() called, but supplied faction [" .. tostring(faction) .. "] is not a string or faction object");
+		return false;
+	end;
+	
+	if not validate.is_string(status) then
+		return false;
+	end;
+
+	if not statuses[status] then
+		script_error("ERROR: set_active_mission_status_for_faction() called, but supplied mission status [" .. tostring(status) .. "] is not a valid status to set");
+		return false;
+	end;
+
+	if is_string(faction) then
+		faction = cm:get_faction(faction);
+		
+		if not validate.is_faction(faction) then
+			return false;
+		end;
+	end;
+
+	return self.game_interface:set_active_mission_status_for_faction(faction, mission, status)
+end;
+
+
 --- @function trigger_dilemma
 --- @desc Triggers dilemma with a specified key, based on a record from the database, preferentially wrapped in an intervention. The delivery of the dilemma will be wrapped in an intervention in singleplayer mode, whereas in multiplayer mode the dilemma is triggered directly. It is preferred to use this function to trigger a dilemma, unless the calling script is running from within an intervention in which case @campaign_manager:trigger_dilemma_raw should be used.
 --- @p @string faction key, Faction key, from the <code>factions</code> table.
@@ -16188,6 +16472,23 @@ end;
 --- @p [opt=false] @boolean whitelist, Supply <code>true</code> here to also whitelist the dilemma event type, so that it displays even if event feed restrictions are in place (see @campaign_manager:suppress_all_event_feed_messages and @campaign_manager:whitelist_event_feed_event_type).
 --- @r @boolean incident was triggered
 function campaign_manager:trigger_incident(faction, incident, fire_immediately, whitelist)
+	if not is_string(faction) then
+		script_error("ERROR: trigger_incident() called but supplied faction key [" .. tostring(faction) .. "] is not a string");
+		return false;
+	end;
+	
+	local faction_obj = self:get_faction(faction);
+
+	if not is_faction(faction_obj) then
+		script_error("ERROR: trigger_incident() called but supplied faction [" .. tostring(faction) .. "] could not be found");
+		return false;
+	end;
+
+	-- do not bother trying to show the event if the faction is not player controlled
+	if not faction_obj:is_human() then
+		return false;
+	end;
+
 	fire_immediately = not not fire_immediately;
 
 	out("++ triggering incident from db " .. tostring(incident) .. " for faction " .. tostring(faction) .. ", fire_immediately: " .. tostring(fire_immediately));
@@ -16600,12 +16901,64 @@ function campaign_manager:show_message_event_located(faction_key, title_loc_key,
 	self.game_interface:show_message_event_located(faction_key, title_loc_key, primary_detail_loc_key, secondary_detail_loc_key, x, y, is_persistent, index_num);
 end;
 
+--- @function toggle_initiative_script_locked
+--- @desc Locks or unlocks a scripted initiative. This function wraps the @episodic_scripting:toggle_initiative_script_locked function on the underlying episodic scripting interface, adding input validation and output.
+--- @p @string initiative set interface, Initiative set interface.
+--- @p @string initiative key, Initiative key.
+--- @p @boolean locked, Lock or unlock flag.
+--- @p [opt=""] @string reason, Optional reason for locking
+--- @p [opt=true] @boolean show_event, Whether to show the Initiative unlocked event feed message
+function campaign_manager:toggle_initiative_script_locked(initiative_set, initiative_key, locked, opt_reason, opt_show_event)
+	if not is_initiative_set(initiative_set) then
+		script_error("ERROR: toggle_initiative_script_locked() called but supplied initiative set [" .. tostring(initiative_set) .. "] is not an initiative set interface")
+		return false
+	end;
 
+	if not is_string(initiative_key) then
+		script_error("ERROR: toggle_initiative_script_locked() called but supplied initiative key [" .. tostring(initiative_key) .. "] is not a string")
+		return false
+	end;
 
+	if not is_boolean(locked) then
+		script_error("ERROR: toggle_initiative_script_locked() called but supplied locked flag [" .. tostring(locked) .. "] is not a boolean value")
+		return false
+	end;
 
+	local reason = opt_reason or ""
+	if not is_string(reason) then
+		script_error("ERROR: toggle_initiative_script_locked() called but supplied reason [" .. tostring(reason) .. "] is not a string or nil")
+		return false
+	end;
 
+	local show_event = true
+	if opt_show_event ~= nil then
+		if not is_boolean(opt_show_event) then
+			script_error("ERROR: toggle_initiative_script_locked() called but supplied show_event flag [" .. tostring(opt_show_event) .. "] is not a boolean value")
+			return false
+		end
+		show_event = opt_show_event
+	end;
 
+	out.design("toggle_initiative_script_locked() called, setting initiative [" .. initiative_key .. "] in set [" .. initiative_set:record_key() .. "] to " .. tostring(locked) .. " for reason [" .. reason .. "], show_event [" .. tostring(show_event) .. "]")
 
+	return self.game_interface:toggle_initiative_script_locked(initiative_set, initiative_key, locked, reason, show_event)
+end
+
+--- @function lock_initiative
+--- @desc Locks a scripted initiative. This function wraps the @episodic_scripting:toggle_initiative_script_locked function on the underlying episodic scripting interface, adding input validation and output.
+--- @p @string initiative set interface, Initiative set interface.
+--- @p @string initiative key, Initiative key.
+function campaign_manager:lock_initiative(initiative_set, initiative_key, reason)
+	return self:toggle_initiative_script_locked(initiative_set, initiative_key, true, reason)
+end
+
+--- @function unlock_initiative
+--- @desc Unlocks a scripted initiative. This function wraps the @episodic_scripting:toggle_initiative_script_locked function on the underlying episodic scripting interface, adding input validation and output.
+--- @p @string initiative set interface, Initiative set interface.
+--- @p @string initiative key, Initiative key.
+function campaign_manager:unlock_initiative(initiative_set, initiative_key)
+	return self:toggle_initiative_script_locked(initiative_set, initiative_key, false)
+end
 
 
 

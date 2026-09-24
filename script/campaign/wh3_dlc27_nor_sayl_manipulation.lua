@@ -1871,6 +1871,12 @@ function sayl_manipulation:add_ritual_listeners()
 				for i = 1, #ritual_list do
 					if ritual_list[i] == context:ritual():ritual_key() then
 						if self.config.ritual_unlock_levels[level].max_cost then
+
+							-- Short victory reward: performing manipulations will only add minimum amount of attention of the gods (already added as default ritual resource cost at this point)
+							if cm:get_factions_bonus_value(context:performing_faction(), "wh3_dlc29_nor_sayl_manipulation_cost_reduction") > 0 then
+								return
+							end
+
 							local base_cost = self.config.ritual_unlock_levels[level].min_cost
 							local max_cost = self.config.ritual_unlock_levels[level].max_cost
 							local ritual_cost = cm:random_number(max_cost, base_cost)

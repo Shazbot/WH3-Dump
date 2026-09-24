@@ -26,6 +26,10 @@
 							<template_global_effect_icon_and_timer this="33B21EDA-3945-4527-9A0037EEC6324314"/>
 							<template_global_effect_icon this="014A063A-259C-4A7D-AF3C210710C10451"/>
 						</character_effect_list>
+						<dlc29_nef_concealment this="BA8860B0-04C4-4FBC-89FA487AF77716D3"/>
+						<icon_mark_of_nurgle this="9DB615C0-D59A-4D01-A51B0BC8526BB7BE">
+							<icon_mark this="D768C40E-6149-46E8-81F3A95DB9FDD985"/>
+						</icon_mark_of_nurgle>
 					</effects_list>
 					<faction this="0E16CDAE-B6A2-44E0-9127CB2970E4888D"/>
 					<diplomatic_relations this="3EED3A6F-F1D4-4CA7-8E847051DA477490"/>
@@ -479,10 +483,96 @@
 				</player_owned>
 			</states>
 		</diplomatic_relations_fill>
+		<dlc29_nef_concealment
+			this="BA8860B0-04C4-4FBC-89FA487AF77716D3"
+			id="dlc29_nef_concealment"
+			offset="145.00,-6.00"
+			allowverticalresize="false"
+			dock_offset="0.00,-6.00"
+			priority="1"
+			componentleveltooltip="{{tr:neferata_concealment_loss_agent_tooltip}}"
+			tooltiplabel="ComponentTooltip_f4b2904d"
+			uniqueguid="BA8860B0-04C4-4FBC-89FA487AF77716D3"
+			currentstate="EE5D9A66-AB6E-4BF8-81459B136FAE2142"
+			defaultstate="EE5D9A66-AB6E-4BF8-81459B136FAE2142">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="IsContextValid( PlayersFaction.PooledResourceContext(&quot;wh3_dlc29_nef_manipulation&quot;) ) == false"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="IsEffectPresent(&quot;wh3_main_effect_causes_concealment_loss_dummy&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignTurnStart"/>
+						<property
+							name="event1"
+							value="EffectsListUpdated"/>
+						<property
+							name="event2"
+							value="CharacterMoveEnd"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="0429F049-6A44-45B0-BF3562CC2C072CB4"
+					uniqueguid="0429F049-6A44-45B0-BF3562CC2C072CB4"
+					imagepath="ui/skins/default/icon_banner.png"/>
+				<component_image
+					this="36B1A417-1923-4EAA-84EC4831BD5647C1"
+					uniqueguid="36B1A417-1923-4EAA-84EC4831BD5647C1"
+					imagepath="ui/skins/default/dlc29_vmp_web_of_power/wh3_dlc29_vmp_neferata_concealement.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="EE5D9A66-AB6E-4BF8-81459B136FAE2142"
+					name="default"
+					width="273"
+					height="34"
+					interactive="true"
+					disabled="true"
+					uniqueguid="EE5D9A66-AB6E-4BF8-81459B136FAE2142">
+					<imagemetrics>
+						<image
+							this="91997BED-614E-4E39-9B3A3EA1CE70BAC6"
+							uniqueguid="91997BED-614E-4E39-9B3A3EA1CE70BAC6"
+							componentimage="0429F049-6A44-45B0-BF3562CC2C072CB4"
+							offset="15.00,0.00"
+							width="232"
+							height="34"
+							tile="true"
+							margin="0.00,40.00,0.00,10.00"/>
+						<image
+							this="5E790D81-5759-4B67-8476495E582F8C1C"
+							uniqueguid="5E790D81-5759-4B67-8476495E582F8C1C"
+							componentimage="36B1A417-1923-4EAA-84EC4831BD5647C1"
+							offset="1.00,2.00"
+							width="124"
+							height="30"
+							dockpoint="Center Left"
+							dock_offset="1.00,0.00"/>
+					</imagemetrics>
+					<component_text
+						text="{{tr:concealment_agent_banner}}"
+						textxoffset="34.00,18.00"
+						textyoffset="10.00,0.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_a290f85a"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</default>
+			</states>
+		</dlc29_nef_concealment>
 		<dy_mp_player_name
 			this="BB009B80-AA69-4278-8430267DE92E6F23"
 			id="dy_mp_player_name"
-			offset="0.00,124.00"
+			offset="123.00,124.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="BB009B80-AA69-4278-8430267DE92E6F23"
@@ -676,7 +766,7 @@
 		<dy_name
 			this="D6BB91A2-E4B4-47A6-949C0F81F45EEFAB"
 			id="dy_name"
-			offset="25.00,92.00"
+			offset="148.00,92.00"
 			allowverticalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="D6BB91A2-E4B4-47A6-949C0F81F45EEFAB"
@@ -864,7 +954,7 @@
 		<effects_list
 			this="2A5E613A-AAC0-47FC-90984C615A26C3D9"
 			id="effects_list"
-			offset="35.00,156.00"
+			offset="0.00,156.00"
 			tooltipslocalised="true"
 			uniqueguid="2A5E613A-AAC0-47FC-90984C615A26C3D9"
 			currentstate="41939BB7-E067-4134-BD5FBFA5BB798018"
@@ -873,8 +963,8 @@
 				<default
 					this="41939BB7-E067-4134-BD5FBFA5BB798018"
 					name="default"
-					width="142"
-					height="26"
+					width="457"
+					height="36"
 					uniqueguid="41939BB7-E067-4134-BD5FBFA5BB798018"/>
 			</states>
 			<LayoutEngine
@@ -885,7 +975,7 @@
 		<faction
 			this="0E16CDAE-B6A2-44E0-9127CB2970E4888D"
 			id="faction"
-			offset="82.00,186.00"
+			offset="205.00,196.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			tooltipslocalised="true"
@@ -1152,10 +1242,137 @@
 				</yin>
 			</states>
 		</icon_harmony>
+		<icon_mark
+			this="D768C40E-6149-46E8-81F3A95DB9FDD985"
+			id="icon_mark"
+			offset="3.00,3.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="D768C40E-6149-46E8-81F3A95DB9FDD985"
+			currentstate="C5F8E4C9-E374-48A8-B4024DA1E2921CCD"
+			defaultstate="C5F8E4C9-E374-48A8-B4024DA1E2921CCD">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="InitiativeManager.ExMarksOfNurgle_ActiveMarkInitiatives.FirstContext.InitiativeContext.ImagePath"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="5C531846-FD99-4987-A3332F2DC7881126"
+					uniqueguid="5C531846-FD99-4987-A3332F2DC7881126"
+					imagepath="ui/skins/default/auth_nurgle_icon.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="C5F8E4C9-E374-48A8-B4024DA1E2921CCD"
+					name="default"
+					width="30"
+					height="30"
+					uniqueguid="C5F8E4C9-E374-48A8-B4024DA1E2921CCD">
+					<imagemetrics>
+						<image
+							this="701166CD-A0D4-4530-ACF2365D288C0552"
+							uniqueguid="701166CD-A0D4-4530-ACF2365D288C0552"
+							componentimage="5C531846-FD99-4987-A3332F2DC7881126"
+							offset="-2.00,-2.00"
+							width="34"
+							height="34"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</icon_mark>
+		<icon_mark_of_nurgle
+			this="9DB615C0-D59A-4D01-A51B0BC8526BB7BE"
+			id="icon_mark_of_nurgle"
+			uniqueguid_in_template="EA027957-E8B5-4A01-ABE0DABE6097795D"
+			offset="421.00,0.00"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="9DB615C0-D59A-4D01-A51B0BC8526BB7BE"
+			aspect_ratio_locked_behaviour="Width First"
+			currentstate="27C3B666-1599-4C03-8EE8E09D0E277B8D"
+			defaultstate="27C3B666-1599-4C03-8EE8E09D0E277B8D">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="InitiativeManager.ExMarksOfNurgle_HasActiveMark">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterInitiativeActivationChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignCharacter"
+					context_function_id="InitiativeManager.ExMarksOfNurgle_ActiveMarkInitiatives.FirstContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CharacterInitiativeActivationChanged"/>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_dlc29_chs_marks_of_nurgle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_object_id="CcoStaticObject"
+					context_function_id="CanUseUiFeature(&quot;BLESSINGS_OF_NURGLE&quot;) == false"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="B4955783-17BB-4A96-978C8E95339EF1AC"
+					uniqueguid="B4955783-17BB-4A96-978C8E95339EF1AC"
+					imagepath="ui/skins/default/seductive_influence_multi_layout_border.png"/>
+				<component_image
+					this="BB5BA6B4-F5F5-4779-B36D8DE863879970"
+					uniqueguid="BB5BA6B4-F5F5-4779-B36D8DE863879970"
+					imagepath="ui/skins/default/daemon_army_ability_bar_circle_1.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="27C3B666-1599-4C03-8EE8E09D0E277B8D"
+					name="default"
+					width="36"
+					height="36"
+					interactive="true"
+					disabled="true"
+					uniqueguid="27C3B666-1599-4C03-8EE8E09D0E277B8D">
+					<imagemetrics>
+						<image
+							this="531365E7-EC0C-4E48-931F61C4471B51E1"
+							uniqueguid="531365E7-EC0C-4E48-931F61C4471B51E1"
+							componentimage="BB5BA6B4-F5F5-4779-B36D8DE863879970"
+							offset="-12.00,-12.00"
+							width="60"
+							height="60"
+							colour="#797979FF"
+							dockpoint="Center"
+							aspect_ratio_locked_behaviour="Width First"/>
+						<image
+							this="0A5E617F-3D6F-4F5C-928CE37D748A2B19"
+							uniqueguid="0A5E617F-3D6F-4F5C-928CE37D748A2B19"
+							componentimage="B4955783-17BB-4A96-978C8E95339EF1AC"
+							width="36"
+							height="36"
+							dockpoint="Center"
+							aspect_ratio_locked_behaviour="Width First"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</icon_mark_of_nurgle>
 		<list_parent
 			this="ED9FEF08-7C61-4D77-87969B77D582445C"
 			id="list_parent"
-			offset="-94.00,-183.00"
+			offset="-216.00,-193.00"
 			docking="Bottom Center"
 			component_anchor_point="0.50,1.00"
 			tooltipslocalised="true"
@@ -1166,8 +1383,8 @@
 				<default
 					this="B621CC7A-05F5-4792-AAA21EB43AE84775"
 					name="default"
-					width="212"
-					height="234"
+					width="457"
+					height="244"
 					uniqueguid="B621CC7A-05F5-4792-AAA21EB43AE84775"/>
 			</states>
 			<LayoutEngine
@@ -1183,7 +1400,7 @@
 		<mission_icon
 			this="419BDBAD-ED56-4C26-A3BE89B39828A5C7"
 			id="mission_icon"
-			offset="86.00,0.00"
+			offset="209.00,0.00"
 			allowhorizontalresize="false"
 			priority="100"
 			tooltipslocalised="true"
@@ -1583,7 +1800,7 @@
 		<region_effect_list
 			this="E1BFAFB4-8C5C-4635-9C56FEC4A0EB430C"
 			id="region_effect_list"
-			offset="36.00,64.00"
+			offset="159.00,64.00"
 			tooltipslocalised="true"
 			uniqueguid="E1BFAFB4-8C5C-4635-9C56FEC4A0EB430C"
 			updatewhennotvisible="true"

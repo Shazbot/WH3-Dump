@@ -155,6 +155,23 @@ function setup_encounters_at_sea_listeners()
 	random_army_manager:add_unit("encounter_force", "wh2_dlc11_cst_inf_depth_guard_0", 2);
 	random_army_manager:add_unit("encounter_force", "wh2_dlc11_cst_inf_depth_guard_1", 2);
 	random_army_manager:add_unit("encounter_force", "wh2_dlc11_cst_mon_rotting_leviathan_0", 1);
+			
+	-- Populate the encounter_sea_spots table, either because it is the start of a new game or because the save file was corrupted and no or an empty table is saved.
+	if is_empty_table(encounter_sea_spots) then
+		local campaign_set = encounter_sea_location_set[cm:get_campaign_name()];
+		local chosen_coordinate_set = campaign_set[cm:random_number(#campaign_set)];
+		
+		for i = 1, #chosen_coordinate_set do
+			local spot = {
+				["index"] = i,
+				["location"] = chosen_coordinate_set[i],
+				["occupied"] = "not",
+				["cooldown"] = 0
+			};
+			
+			table.insert(encounter_sea_spots, spot);
+		end;
+	end
 	
 	-- spawn the encounters on turn 1, then respawn every so many turns
 	core:add_listener(
@@ -162,23 +179,8 @@ function setup_encounters_at_sea_listeners()
 		"WorldStartRound",
 		true,
 		function()
-			local turn_number = cm:model():turn_number();
-			
-			if turn_number == 1 then
-				local campaign_set = encounter_sea_location_set[cm:get_campaign_name()];
-				local chosen_coordinate_set = campaign_set[cm:random_number(#campaign_set)];
-				
-				for i = 1, #chosen_coordinate_set do
-					local spot = {
-						["index"] = i,
-						["location"] = chosen_coordinate_set[i],
-						["occupied"] = "not",
-						["cooldown"] = 0
-					};
-					
-					table.insert(encounter_sea_spots, spot);
-				end;
-				
+			local turn_number = cm:model():turn_number();			
+			if turn_number == 1 then				
 				local encounters_to_spawn = math.floor((encounter_number_start / 100) * #encounter_sea_spots);
 				
 				populate_sea_spots("battle", encounters_to_spawn);
@@ -235,7 +237,9 @@ function setup_encounters_at_sea_listeners()
 			local remove_encounter = true;
 			local dilemma_triggered = false;
 			
-			if faction:is_human() and faction:is_factions_turn() then
+			-- Below, an "occupied" value of "not" means there was save corruption and the encounter_sea_spots were regenerated.
+			-- Just let such a marker be removed and put on cooldown, from which point the system should pick up using it later.
+			if faction:is_human() and faction:is_factions_turn() and active_encounter["occupied"] ~= "not" then
 				if faction_name == "wh2_dlc15_grn_broken_axe" then
 					core:trigger_event("ScriptEventSeaEncounterTriggeredByPlayerThatIsPlayingGrom")
 				end
@@ -407,7 +411,7 @@ function trigger_encounter_followup_incident(character, incident)
 	cm:trigger_incident_with_targets(faction_cqi, incident, 0, 0, character_cqi, force_cqi, 0, 0);
 	
 	-- trigger extra loot event if the faction has a bonus value
-	if faction:bonus_values():scripted_value("increase_sea_encounter_loot", "value") > 0 then
+	if cm:get_characters_bonus_value(character, "increase_sea_encounter_loot") > 0 or faction:bonus_values():scripted_value("increase_sea_encounter_loot", "value") > 0 then
 		cm:callback(
 			function()
 				cm:trigger_incident_with_targets(faction_cqi, "wh2_dlc11_neo_counter_extra_loot", 0, 0, character_cqi, force_cqi, 0, 0);

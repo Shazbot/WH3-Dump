@@ -121,7 +121,7 @@ function start_new_game_all_factions()
 	end;
 	
 	if campaign_ai_script then
-		campaign_ai_script:kislev_background_income()
+		campaign_ai_script:start_background_incomes()
 	end
 end;
 
@@ -253,6 +253,12 @@ function start_game_all_factions()
 	-- add corruption after the custom starts have been applied (e.g. Boris Ursus)
 	if cm:is_new_game() then
 		add_starting_corruption();
+
+		-- Hide the endgame related buildings
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_1" , "");
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_2a" , "");
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_2b" , "");
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_2c" , "");
 	end
 	
 	out.dec_tab();

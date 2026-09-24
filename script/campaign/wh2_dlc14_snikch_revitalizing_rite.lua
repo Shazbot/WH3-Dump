@@ -18,11 +18,17 @@ function add_snikch_revitalizing_listeners()
 			local snikch_char_list = snikch_interface:character_list();
 			local snikch_force_list = snikch_interface:military_force_list();
 
+			local restore_army_movement = cm:get_factions_bonus_value(snikch_interface, "snikch_revitalizing_ritual_enhanced");
+
 			for i = 0, snikch_char_list:num_items() - 1 do
 				local snikch_char = snikch_char_list:item_at(i);
 
 				-- return convalescing characters back into action
 				cm:stop_character_convalescing(snikch_char:cqi());
+
+				if cm:char_is_general(snikch_char) and restore_army_movement then
+					cm:replenish_action_points(cm:char_lookup_str(snikch_char));
+				end
 			end
 			for j = 0, snikch_force_list:num_items() - 1 do
 				local snikch_force = snikch_force_list:item_at(j);

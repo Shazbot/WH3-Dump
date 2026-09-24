@@ -9,7 +9,6 @@
 
 load_script_libraries()
 
-
 gb = generated_battle:new(
 	false,                                      -- screen starts black
 	false,                                      -- prevent deployment for player
@@ -81,7 +80,6 @@ end
 -------------------------------------------------------------------------------------------------
 ------------------------------------------ ARMY SETUP -------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 --friendly factions
 ga_playerarmy = gb:get_army(gb:get_player_alliance_num(), 1)
 
@@ -94,29 +92,22 @@ ga_enemy_guards = gb:get_army(gb:get_non_player_alliance_num(), "guards")
 --defining bosses in script
 fatsod = ga_enemy1.sunits:get_sunit_by_type("wh3_dlc25_nur_cha_exalted_great_unclean_one_nurgle_qb_boss")
 
-
 -------------------------------------------------------------------------------------------------
 ----------------------------------------- ARMY TELEPORT -----------------------------------------
 -------------------------------------------------------------------------------------------------
-
 -- casters
 ga_enemy_casters.sunits:item(1).uc:teleport_to_location(v(295, -277), 229, 2)
 ga_enemy_casters.sunits:item(2).uc:teleport_to_location(v(194, -250), 143, 2)
 ga_enemy_casters.sunits:item(3).uc:teleport_to_location(v(222, -376), 17, 2)
-
 
 -- guards
 ga_enemy_guards.sunits:item(1).uc:teleport_to_location(v(312, -263), 57, 39)
 ga_enemy_guards.sunits:item(2).uc:teleport_to_location(v(186, -230), 338, 39)
 ga_enemy_guards.sunits:item(3).uc:teleport_to_location(v(217, -393), 194, 39)
 
-
 -------------------------------------------------------------------------------------------------
 ---------------------------------- ORDERS & OBJECTIVES ------------------------------------------
 -------------------------------------------------------------------------------------------------
-
-
-
 for i = 1, ga_enemy_casters.sunits:count() do
 	local sunit = ga_enemy_casters.sunits:item(i)
 	sunit:add_ping_icon(15)
@@ -130,7 +121,7 @@ for i = 1, ga_enemy_guards.sunits:count() do
 end
 
 --boss functions
-gb:add_listener("battle_started", function() 
+gb:add_listener("start", function() 
 	bm:set_objective("wh3_dlc25_qb_nur_tamurkhan_chieftain_kazyk_objective_03")
 	bm:set_objective("wh3_dlc25_qb_nur_tamurkhan_chieftain_survive_objective_01")
 	bm:queue_help_message("wh3_dlc25_qb_nur_tamurkhan_chieftain_kazyk_hint_02", 8000, 2000, true)
@@ -175,13 +166,13 @@ if fatsod then
 end
 
 --release armies and make enemy charge player
-gb:message_on_time_offset("battle_started", 3000)
+gb:message_on_time_offset("start", 100)
 
-ga_enemy1:rush_on_message("battle_started", 1000)
+ga_enemy1:rush_on_message("start", 1000)
 ga_enemy1:message_on_casualties("hint", 0.1)
 
 -- casters
-ga_enemy_casters:message_on_casualties("casters_dead", 0.99)
+ga_enemy_casters:message_on_rout_proportion("casters_dead", 0.99)
 
 gb:complete_objective_on_message("casters_dead", "wh3_dlc25_qb_nur_tamurkhan_chieftain_kazyk_objective_03")
 gb:set_objective_on_message("casters_dead", "wh3_dlc25_qb_nur_tamurkhan_chieftain_kazyk_objective_02", 3000)
@@ -195,7 +186,8 @@ gb:add_listener("casters_dead", function()
 end)
 
 ga_enemy2:reinforce_on_message("casters_dead")
-
+ga_enemy2:message_on_any_deployed("enemy2_in");
+ga_enemy2:rush_on_message("enemy2_in");
 
 --lord must survive
 gb:complete_objective_on_message("victory", "wh3_dlc25_qb_nur_tamurkhan_chieftain_survive_objective_01", 1000)
@@ -208,7 +200,6 @@ gb:queue_help_on_message("casters_dead", "wh3_dlc25_qb_nur_tamurkhan_chieftain_k
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- VICTORY -------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 --victory
 ga_playerarmy:force_victory_on_message("victory", 1000)
 

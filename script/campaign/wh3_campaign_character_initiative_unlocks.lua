@@ -1810,7 +1810,7 @@ function initiative_unlock:start(cqi)
 					local initiative = initiative_set:lookup_initiative_by_key(self.initiative_key)
 					
 					if not initiative:is_null_interface() and initiative:is_script_locked() then
-						cm:toggle_initiative_script_locked(initiative_set, self.initiative_key, false);
+						cm:unlock_initiative(initiative_set, self.initiative_key);
 						if self.grant_immediately then
 							cm:toggle_initiative_active(initiative_set, self.initiative_key, true);
 						end

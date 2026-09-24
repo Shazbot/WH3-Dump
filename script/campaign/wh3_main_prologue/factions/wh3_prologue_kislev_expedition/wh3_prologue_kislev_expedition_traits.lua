@@ -515,7 +515,13 @@ events.CharacterTurnStart[#events.CharacterTurnStart+1] =
 function (context)
 	local character = context:character();
 	
-	if character:faction():is_human() and character:has_region() and character:faction():is_allowed_to_capture_territory() and cm:char_is_general_with_army(character) then
+	if character:is_null_interface() == false
+		and wh_faction_is_horde(character:faction()) == false
+		and character:faction():culture() ~= "wh_dlc03_bst_beastmen"
+		and cm:char_is_general_with_army(character)
+		and character:has_region()
+		and not character:region():is_abandoned()
+	then
 		if character:in_settlement() and character:military_force():active_stance() ~= "MILITARY_FORCE_ACTIVE_STANCE_TYPE_MUSTER" then
 			local char_turns_being_lazy = Get_Lord_Record(character, "turns_lazy") or 0;
 			char_turns_being_lazy = char_turns_being_lazy + 1;

@@ -2960,7 +2960,7 @@ victory_objectives_ie = {
 			},
 			long_objectives = {
 				{
-					-- Тake over a large percent of Ulthuan
+					-- ?ake over a large percent of Ulthuan
 					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
 						"total 8",
@@ -2996,7 +2996,7 @@ victory_objectives_ie = {
 			},
 			long_objectives = {
 				{
-					-- Тake over a large percent of Ulthuan
+					-- ?ake over a large percent of Ulthuan
 					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
 						"total 6",
@@ -3049,7 +3049,7 @@ victory_objectives_ie = {
 			},
 			long_objectives = {
 				{
-					-- Тake over a large percent of Ulthuan
+					-- ?ake over a large percent of Ulthuan
 					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
 						"total 6",
@@ -3121,7 +3121,7 @@ victory_objectives_ie = {
 					}
 				},
 				{
-					-- Тake over a large percent of Ulthuan
+					-- ?ake over a large percent of Ulthuan
 					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
 						"total 3",
@@ -3157,7 +3157,7 @@ victory_objectives_ie = {
 			},
 			long_objectives = {
 				{
-					-- Тake over a large percent of Ulthuan
+					-- ?ake over a large percent of Ulthuan
 					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
 						"total 6",
@@ -3209,7 +3209,7 @@ victory_objectives_ie = {
 			},
 			long_objectives = {
 				{
-					-- Тake over a large percent of Ulthuan
+					-- ?ake over a large percent of Ulthuan
 					type = "CONTROL_N_PROVINCES_INCLUDING",
 					conditions = {
 						"total 3",
@@ -4158,7 +4158,125 @@ victory_objectives_ie = {
 			},
 			no_subculture_objective = true,
 			no_alignment_objective = true
-		}
+		},
+		wh3_dlc29_chs_host_of_the_triplets = {
+			objectives = {
+				{
+					-- attack the empire
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"province wh3_main_combi_province_the_wasteland",
+						"province wh3_main_combi_province_reikland",
+						"province wh3_main_combi_province_talabecland",
+						"province wh3_main_combi_province_river_lynsk",
+						"total 4"
+					}
+				}
+			},
+			long_objectives = {
+				{
+					-- Max out blight
+					type = "HAVE_AT_LEAST_X_OF_A_POOLED_RESOURCE",
+					conditions = {
+						"pooled_resource wh3_dlc29_glottkin_blight",
+						"total 100"
+					}
+				}
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+		},
+
+		--Boris Todbringer
+		wh_main_emp_middenland = {
+			objectives = {
+				{
+					-- Defend Middenland and any direct threats
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh3_dlc20_chs_festus",
+						"faction wh_dlc03_grn_black_pit",						
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc29_mission_boris_usurp_seats_vc",
+						"script_key wh3_dlc29_mission_boris_usurp_seats_vc_short",
+						"total 8",
+						"count 0",
+						"count_completion" 
+					}
+				},
+			},
+			long_objectives = {
+								{
+					-- destroy long term threat to the Empire
+					type = "CONTROL_N_PROVINCES_INCLUDING",
+					conditions = {
+						"province wh3_dlc20_combi_province_middle_mountains",
+						"province wh3_main_combi_province_ice_tooth_mountains",
+						"province wh3_main_combi_province_trollheim_mountains",
+						"province wh3_main_combi_province_the_misty_hills",
+						"province wh3_main_combi_province_vanaheim_mountains",
+						"province wh3_main_combi_province_mountains_of_naglfari",
+						"province wh3_main_combi_province_mountains_of_hel",
+						"province wh3_main_combi_province_helspire_mountains",
+						"province wh3_main_combi_province_gianthome_mountains",
+						"province wh3_main_combi_province_goromadny_mountains",
+						"province wh3_main_combi_province_eastern_oblast",
+						"province wh3_main_combi_province_the_skull_road",
+						"total 9"
+					}
+				},
+				{
+					type = "SCRIPTED",
+					conditions = {
+						"override_text mission_text_text_wh3_dlc29_mission_boris_usurp_seats_vc",
+						"script_key wh3_dlc29_mission_boris_usurp_seats_vc_long",
+						"total 20",
+						"count 0",
+						"count_completion"
+					}
+				},
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+
+		},
+
+		--Thanquol
+		wh3_dlc29_skv_clan_scruten = {
+			objectives = {
+				{
+					-- Defend Karak Kadrin and nearby Greenskins
+					type = "DESTROY_FACTION",
+					conditions = {
+						"faction wh_main_dwf_karak_kadrin",
+						"faction wh_main_grn_red_eye",						
+					}
+				},
+				{
+					type = "FIGHT_SET_PIECE_BATTLE",
+					conditions = {
+						"set_piece_battle wh3_dlc29_qb_skv_thanquol_death_from_within"
+					}
+				},
+			},
+			long_objectives = {
+				
+				{
+					type = "FIGHT_SET_PIECE_BATTLE",
+					conditions = {
+						"set_piece_battle wh3_dlc29_qb_skv_thanquol_final_battle"
+					}
+				},
+			},
+			no_subculture_objective = true,
+			no_alignment_objective = true
+
+		},
+		
 	},
 	-- used to track gelts unique ritual objective
 	gelt_unique_rituals = {},
@@ -4179,6 +4297,14 @@ victory_objectives_ie = {
 -- Ideally all factions should have subculture and (optionally) faction objectives defined
 -- The script supports adding generic victory objectives to factions that are missing data as well
 function victory_objectives_ie:initialise_victory_missions(faction_key, multiplayer)
+
+	-- temporary bypass - if the faction has a new style config let it handle the missions
+	if _victory_objectives_ie.config.factions[faction_key] and is_table(_victory_objectives_ie.config.factions[faction_key])then 
+		return
+	elseif _victory_objectives_ie.factions_using_lord_as_variant_key[faction_key] then
+		return
+	end
+
 	local faction_subculture_key = cm:get_faction(faction_key):subculture()
 	
 	-- Set the faction alignment between order/destruction. 
@@ -4461,6 +4587,11 @@ end
 
 -- Listeners for scripted faction-specific objectives
 function victory_objectives_ie:add_scripted_victory_listeners()
+
+	-- If campaign was started after DLC 29 Victory Conditions Overhaul - don't add old mission victory listeners
+	if cm:get_saved_value("IEVictoryConditionUseDLC29Config") then
+		return
+	end
 
 	-- Mark faction victory as complete for the cultural victory objective and fire an incident informing the player they beat the mission
 		core:add_listener(
@@ -5338,6 +5469,38 @@ function victory_objectives_ie:add_scripted_victory_listeners()
 					cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc27_mission_norsca_defeat_lords_short_victory", characters_defeated)
 					cm:increase_scripted_mission_count("wh_main_long_victory", "wh3_dlc27_mission_norsca_defeat_lords_long_victory", characters_defeated)
 				end
+			end,
+			true
+		)
+
+	end
+	--Boris
+	local boris_faction_key = "wh_main_emp_middenland"
+	if cm:get_faction(boris_faction_key) and cm:get_faction(boris_faction_key):is_human() then
+		
+		-- Take seats in the divine conclave
+		core:add_listener(
+			"boris_victory_objectives_listener",
+			"ContextTriggerEvent",
+			function(context)
+				return context.string:starts_with("trigger_taking_seat:") --This trigger is not implemented yet
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc29_mission_boris_usurp_seats_vc_short", 1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "wh3_dlc29_mission_boris_usurp_seats_vc_long", 1)
+			end,
+			true
+		)
+
+		core:add_listener(
+			"boris_victory_objectives_listener",
+			"ContextTriggerEvent",
+			function(context)
+				return context.string:starts_with("trigger_losing_seat:")  --This trigger is not implemented yet
+			end,
+			function(context)
+				cm:increase_scripted_mission_count("wh_main_short_victory", "wh3_dlc29_mission_boris_usurp_seats_vc_short", -1)
+				cm:increase_scripted_mission_count("wh_main_long_victory", "wh3_dlc29_mission_boris_usurp_seats_vc_long", -1)
 			end,
 			true
 		)

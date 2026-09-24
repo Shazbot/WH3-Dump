@@ -1147,7 +1147,7 @@ function advice_monitor:start()
 			end;
 		
 			core:add_listener(
-				name .. "_halt_listeners",
+				name .. "_halt_listeners_"..i,
 				event,
 				condition,
 				function()
@@ -1192,7 +1192,7 @@ function advice_monitor:start()
 						am:out("");
 					end;
 				end,
-				name .. "_startup_listeners"
+				name .. "_startup_listeners_"..i
 			);
 		end;
 	end;
@@ -1227,7 +1227,7 @@ function advice_monitor:start()
 			end;
 		
 			core:add_listener(
-				name .. "_startup_listeners",
+				name .. "_startup_listeners_"..i,
 				event,
 				condition,
 				function()
@@ -1272,7 +1272,7 @@ function advice_monitor:start()
 						am:out("");
 					end;
 				end,
-				name .. "_startup_listeners"
+				name .. "_startup_listeners_"..i
 			);
 		end;
 	end;
@@ -1333,7 +1333,7 @@ function advice_monitor:start_trigger_listeners()
 			end;
 		
 			core:add_listener(
-				name .. "_trigger_listeners",
+				name .. "_trigger_listeners_" .. i,
 				event,
 				function(context) 
 					return am.advice_lock_level == 0 and (condition == true or condition(context))
@@ -1380,7 +1380,7 @@ function advice_monitor:start_trigger_listeners()
 						am:out("");
 					end;
 				end,
-				name .. "_trigger_listeners"
+				name .. "_trigger_listeners_" .. i
 			);
 		end;
 	end;
@@ -1532,20 +1532,26 @@ end;
 
 
 function advice_monitor:stop_startup_listeners()
-	bm:remove_process(self.name .. "_startup_listeners");
-	core:remove_listener(self.name .. "_startup_listeners");
+	for i = 1, #self.start_conditions do
+		bm:remove_process(self.name .. "_startup_listeners_"..i);
+		core:remove_listener(self.name .. "_startup_listeners_"..i);
+	end	
 end;
 
 
 function advice_monitor:stop_trigger_listeners()
 	self.trigger_listeners_started = false;
-	
-	bm:remove_process(self.name .. "_trigger_listeners");
-	core:remove_listener(self.name .. "_trigger_listeners");
+
+	for i = 1, #self.trigger_conditions do
+		bm:remove_process(self.name .. "_trigger_listeners_" ..i)
+		core:remove_listener(self.name .. "_trigger_listeners_" ..i)
+	end
 end;
 
 
 function advice_monitor:stop_halt_listeners()
-	bm:remove_process(self.name .. "_halt_listeners");
-	core:remove_listener(self.name .. "_halt_listeners");
+	for i = 1, #self.halt_conditions do
+		bm:remove_process(self.name .. "_halt_listeners_"..i);
+		core:remove_listener(self.name .. "_halt_listeners_"..i);
+	end
 end;

@@ -466,6 +466,8 @@ function mother_ostankya_features:initialise()
 					if cooking_interface:is_ingredient_unlocked(potential_unlocks[i]) == false then
 						cm:unlock_cooking_ingredient(faction, potential_unlocks[i]);
 						unlock_count = unlock_count + 1;
+						
+						core:trigger_event("ScriptEventOstankyaIngridientUnlocked", faction)
 
 						if unlock_count == 2 then
 							break;
@@ -637,6 +639,8 @@ function mother_ostankya_features:initialise()
 				mm:add_condition("set_piece_battle " .. self.hex_6_roc_mission_key)
 				if campaign_name == "wh3_main_chaos" then
 					mm:add_payload("text_display dummy_wh3_main_survival_forge_of_souls")
+				elseif campaign_name == "main_warhammer" then
+					-- dlc29 victory conditions no longer give long victory for this mission
 				else
 					mm:add_payload("text_display dummy_wh3_dlc24_long_campaign_victory")
 				end
@@ -959,6 +963,7 @@ function mother_ostankya_features:unlock_ingredient(ingredient, hide_incident)
 		if not hide_incident and faction:is_human() then
 			cm:trigger_incident(self.ostankya_faction, "wh3_dlc24_incident_mother_ostankya_ingredient_unlocked", true)
 		end
+		core:trigger_event("ScriptEventOstankyaIngridientUnlocked", faction)
 	end
 end
 

@@ -22,11 +22,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -41,11 +37,8 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_defend_d
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_dlc01_qb_chs_prince_sigvald_sliverslash_stage_4_hint_objective");
 
-gb:play_sound_on_message("reinforcement_one", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("reinforcement_one", "wh_dlc01_qb_chs_prince_sigvald_sliverslash_stage_4_hint_reinforcements");
 
-
-gb:play_sound_on_message("reinforcement_two", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("reinforcement_two", "wh_dlc01_qb_chs_prince_sigvald_sliverslash_stage_4_hint_reinforcements_2");
 
 -------ORDERS-------
@@ -62,9 +55,3 @@ ga_ai_02:attack_on_message("first_attack");
 
 ga_ai_01:attack_on_message("second_attack");
 ga_ai_03:attack_on_message("second_attack");
-
-
-
-
-
-

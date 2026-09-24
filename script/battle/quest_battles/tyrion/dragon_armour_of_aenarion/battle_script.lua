@@ -181,7 +181,7 @@ ga_attacker_01:release_on_message("assault");
 ------------------------------------------- OBJECTIVES ------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-gb:set_locatable_objective_on_message("01_intro_cutscene_end", "wh2_main_qb_hef_tyrion_dragon_armour_of_aenarion_stage_4_vauls_anvil_hints_main_objective", 100, v(-19, 404, -390), v(-50, 369, -162), 15);        
+gb:set_locatable_objective_on_message("01_intro_cutscene_end", "wh2_main_qb_hef_tyrion_dragon_armour_of_aenarion_stage_4_vauls_anvil_hints_main_objective", 100, v(-19, 425, -390), v(-50, 375, -162), 2);        
 
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- HINTS ---------------------------------------------

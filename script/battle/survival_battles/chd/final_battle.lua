@@ -1000,6 +1000,7 @@ end
 
 function teleport_starting_enemy_units()
 	bm:out("\tbattle_start_teleport_units() called");
+	ga_ai_start.sunits:take_control();
 
 	ga_ai_start.sunits:item(1).uc:teleport_to_location(v(542.54, -295.07), 270, 1.5); -- Lord
 
@@ -1027,12 +1028,13 @@ end;
 ---------------
 -----SETUP-----
 ---------------
-
+gb:message_on_time_offset("start", 100);
 gb:message_on_time_offset("timer_01", 180000);
 
 gb:add_listener(
-	"battle_started",
+	"start",
 	function()
+		ga_ai_start.sunits:release_control();
 		bm:stop_terrain_composite_scene(drill_spin_idle);	
 		bm:start_terrain_composite_scene(drill_move_down, nil, 0);
 	end,
@@ -1056,13 +1058,12 @@ gb:add_listener(
 	"intro_cutscene_end",
 	function()
 		ga_ai_start:set_enabled(true);
-		ga_ai_start.sunits:release_control();
 		ga_ai_start.sunits:set_always_visible_no_hidden_no_leave_battle(true);
 	end,
 	true
 );
 
-ga_ai_start:release_on_message("battle_started");
+ga_ai_start:release_on_message("start");
 ga_ai_start:message_on_any_deployed("start_in");
 ga_ai_start:rush_on_message("start_in");
 
@@ -1087,8 +1088,8 @@ end
 -----ENEMY WAVE 1-----
 ----------------------
 
-gb:message_on_time_offset("fight", 1000, "battle_started");
-gb:message_on_time_offset("ai_wave_01", 5000, "battle_started");
+gb:message_on_time_offset("fight", 1000, "start");
+gb:message_on_time_offset("ai_wave_01", 5000, "start");
 
 ga_ai_start:rush_on_message("fight");
 
@@ -1113,7 +1114,7 @@ gb:add_listener(
 );
 
 gb:add_listener(
-	"battle_started",
+	"start",
 	function()
 		ga_ai_start.sunits:prevent_rallying_if_routing(perpetual,shattered_only,permit_rampaging);
 		ga_ai_start.sunits:set_always_visible_no_leave_battle(true);
@@ -1685,7 +1686,7 @@ gb:add_listener(
 gb:message_on_capture_location_capture_completed("drill_captured", "ai_wave_01", "cp_drill", nil, ga_player_01, ga_ai_start);
 
 gb:add_listener(
-    "battle_started",
+    "start",
 	function()
 		bm:set_locatable_objective(
 			"wh3_dlc23_chd_final_battle_main_objective_drill", 

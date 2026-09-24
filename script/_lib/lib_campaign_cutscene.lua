@@ -1330,9 +1330,9 @@ function campaign_cutscene:skip(advice_being_dismissed)
 	-- reposition camera if we have a skip camera (this is delayed in case the cindy scene is still running)
 	if self.skip_cam_x then
 		if self.cindy_camera_specified then
-			cm:callback(function() cm:set_camera_position(self.skip_cam_x, self.skip_cam_y, self.skip_cam_d, self.skip_cam_b, self.skip_cam_h) end, 0.1);
+			cm:callback(function() cm:set_gameplay_camera_position(self.skip_cam_x, self.skip_cam_y, self.skip_cam_d, self.skip_cam_b, self.skip_cam_h) end, 0.1);
 		else
-			cm:set_camera_position(self.skip_cam_x, self.skip_cam_y, self.skip_cam_d, self.skip_cam_b, self.skip_cam_h);
+			cm:set_gameplay_camera_position(self.skip_cam_x, self.skip_cam_y, self.skip_cam_d, self.skip_cam_b, self.skip_cam_h);
 		end;
 		
 	elseif self.restore_cam_time >= 0 then

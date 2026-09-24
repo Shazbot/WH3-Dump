@@ -131,66 +131,47 @@ ga_ally_02 = gb:get_army(gb:get_non_player_alliance_num(), "enemy_reinforcements
 ga_bat_01 = gb:get_army(gb:get_non_player_alliance_num(), "great_bat_wave_1");
 ga_bat_02 = gb:get_army(gb:get_non_player_alliance_num(), "great_bat_wave_2");
 ga_bat_03 = gb:get_army(gb:get_non_player_alliance_num(), "great_bat_wave_3");
-	
---[[
-if gb:get_army(gb:get_non_player_alliance_num(), 3):are_unit_types_in_army("wh_main_vmp_mon_terrorgheist_qb") then
-	ga_attacker_01 = gb:get_army(gb:get_non_player_alliance_num(), 1,"enemy_army");
-	ga_ally_01 = gb:get_army(gb:get_non_player_alliance_num(), 2,"enemy_reinforcements_1");
-	ga_ally_02 = gb:get_army(gb:get_non_player_alliance_num(), 2,"enemy_reinforcements_2");
-
-	ga_bat_01 = gb:get_army(gb:get_non_player_alliance_num(), 3,"great_bat_wave_1");
-	ga_bat_02 = gb:get_army(gb:get_non_player_alliance_num(), 3,"great_bat_wave_2");
-	ga_bat_03 = gb:get_army(gb:get_non_player_alliance_num(), 3,"great_bat_wave_3");
-else
-	ga_attacker_01 = gb:get_army(gb:get_non_player_alliance_num(), 1,"enemy_army");
-	ga_ally_01 = gb:get_army(gb:get_non_player_alliance_num(), 3,"enemy_reinforcements_1");
-	ga_ally_02 = gb:get_army(gb:get_non_player_alliance_num(), 3,"enemy_reinforcements_2");
-
-	ga_bat_01 = gb:get_army(gb:get_non_player_alliance_num(), 2,"great_bat_wave_1");
-	ga_bat_02 = gb:get_army(gb:get_non_player_alliance_num(), 2,"great_bat_wave_2");
-	ga_bat_03 = gb:get_army(gb:get_non_player_alliance_num(), 2,"great_bat_wave_3");
-end
-]]
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------- ORDERS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
+gb:message_on_time_offset("start", 100);
 
---ga_attacker_01:halt();
-
-ga_attacker_01:release_on_message("reinforcements_1", 100);
+ga_attacker_01:rush_on_message("start");
 gb:message_on_time_offset("reinforcements_1", 43500);
 ga_attacker_01:message_on_proximity_to_enemy("reinforcements_1", 190); -- Skaven ambush when the player approaches the main army
 ga_attacker_01:message_on_casualties("reinforcements_1", 0.1); -- Backup to trigger Skaven reinforcements if the player tries to kill them from long range
 
 ga_ally_01:reinforce_on_message("reinforcements_1");
 ga_ally_02:reinforce_on_message("reinforcements_1");
-ga_ally_01:attack_on_message("reinforcements_1", 100);
-ga_ally_02:attack_on_message("reinforcements_1", 100);
-
-
+ga_ally_01:message_on_any_deployed("ally_01_in");
+ga_ally_02:message_on_any_deployed("ally_02_in");
+ga_ally_01:rush_on_message("ally_01_in");
+ga_ally_02:rush_on_message("ally_02_in");
 
 ga_attacker_01:message_on_casualties("bat_1", 0.15); -- Bat wave when the player approaches the main army
 ga_attacker_01:message_on_casualties("bat_2", 0.25); -- Bat wave when the player approaches the main army
 ga_attacker_01:message_on_casualties("bat_3", 0.35);
 
-
 ga_bat_01:reinforce_on_message("bat_1");
-ga_bat_01:release_on_message("bat_1", 100);
+ga_bat_01:message_on_any_deployed("bat_01_in");
+ga_bat_01:rush_on_message("bat_01_in");
+
 ga_bat_02:reinforce_on_message("bat_2");
-ga_bat_02:release_on_message("bat_2", 100);
+ga_bat_02:message_on_any_deployed("bat_02_in");
+ga_bat_02:rush_on_message("bat_02_in");
+
 ga_bat_03:reinforce_on_message("bat_3");
-ga_bat_03:release_on_message("bat_3", 100);
+ga_bat_03:message_on_any_deployed("bat_03_in");
+ga_bat_03:rush_on_message("bat_03_in");
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- OBJECTIVES ------------------------------------------
 -------------------------------------------------------------------------------------------------
-  
 gb:set_objective_on_message("01_intro_cutscene_end", "wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_hints_main_objective");
 
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- HINTS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 gb:queue_help_on_message("01_intro_cutscene_end", "wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_hints_skaven", 3000, nil, 5000);
 gb:queue_help_on_message("bat_1", "wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_hints_bat_00");
 gb:queue_help_on_message("bat_2", "wh2_main_qb_hef_teclis_war_crown_of_saphery_stage_3_caverns_of_the_great_bat_hints_bat_01");
@@ -200,8 +181,6 @@ gb:queue_help_on_message("bat_3", "wh2_main_qb_hef_teclis_war_crown_of_saphery_s
 --------------------------------------------- MISC ----------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- VICTORY ----------------------------------------------
 -------------------------------------------------------------------------------------------------
-

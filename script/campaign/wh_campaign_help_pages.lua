@@ -36,6 +36,7 @@ function setup_campaign_help_pages()
 	-- Supply an optional third parameter - this should be a function that returns true or false
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_the_eternal_dance", "sla_eternal_dance_repetoire_holder");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_the_eternal_dance", "sla_eternal_dance_subpanel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_vampire_lairs", "dlc29_vmp_vampire_lair_popup");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_province_overview_panel", "settlement_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_war_coordination", "war_coordination_panel");		-- needs to be above "diplomacy_dropdown"
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_faction_summary_screen", "clan");
@@ -66,7 +67,6 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_diplomacy_screen", "diplomacy_dropdown");			-- needs to come after key_*
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_rituals", "chain_ritual_details");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_intervention_armies", "interrupt_options");
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_books_of_nagash", "books_of_nagash");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_bloodlines", "bloodlines_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_monsters", "book_of_monster_hunts");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_infamy", "infamy_tooltip");
@@ -100,6 +100,7 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaos_rifts", "rifts_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaos_rifts", "teleport_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_unholy_manifestations", "great_game_rituals");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_great_temple_of_ulric", "dlc29_emp_great_temple_rituals"); -- should be above campaign_rites
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_rites", "rituals_panel");				-- needs to come after unholy_manifestations
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sea_lanes", "sea_lanes_panel");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_grudges", "dlc25_bog_main");
@@ -137,12 +138,20 @@ function setup_campaign_help_pages()
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_asur_domination", "dlc27_settlement_captured_gift_faction_choice");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sayl_manipulations", "dlc27_nor_sayl_manipulations");
 	hpm:register_help_page_to_info_button_mapping("script_link_campaign_sayl_dark_ritual", "dlc27_nor_aethyr_winds");
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_thralls", "dlc27_sla_dechala_thralls_economy_panel")
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_tiger_court", "cp1_cth_tiger_court")
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_armies_of_shang_yang", "cp1_cth_armies_of_shang_yang")
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_armies_of_shang_yang", "cp1_cth_shang_yang")
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_twitch_integration", "twitch_settings_panel")
-	hpm:register_help_page_to_info_button_mapping("script_link_campaign_twitch_integration", "twitch_unit_name_raffle_panel")
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_thralls", "dlc27_sla_dechala_thralls_economy_panel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_tiger_court", "cp1_cth_tiger_court");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_armies_of_shang_yang", "cp1_cth_shang_yang");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_twitch_integration", "twitch_settings_panel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_twitch_integration", "twitch_unit_name_raffle_panel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_great_temple_of_ulric", "dlc29_emp_great_temple_of_ulric");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_web_of_power", "dlc29_vmp_nef_web_of_power");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_vampire_confederation", "dlc29_vmp_confederation");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_gifts_of_nurgle", "dlc29_chs_blessings_of_nurgle_panel_main");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_gifts_of_nurgle", "dlc29_chs_planting_garden_of_nurgle_ritual_panel");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_necromancy", "dlc29_nag_necromancy");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_black_pyramid", "dlc29_nag_black_pyramid");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_mortarchs", "dlc29_nag_mortarchs");
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_chaotic_plans", "dlc29_skv_chaotic_plans");
 	
 	hpm:register_help_page_to_info_button_mapping(
 		"script_link_campaign_intrigue_at_the_court",
@@ -571,6 +580,16 @@ function setup_campaign_help_pages()
 		end
 	);
 
+	hpm:register_help_page_to_info_button_mapping(
+		"script_link_campaign_books_of_nagash_nag", 
+		"books_of_nagash",
+		function()
+			local faction = cm:get_faction(local_faction);
+			return faction and faction:culture() == "wh3_dlc29_nag_undead_legions";
+		end
+	);
+
+	hpm:register_help_page_to_info_button_mapping("script_link_campaign_books_of_nagash", "books_of_nagash"); -- needs to be below the setup for Nagash
 
 	-------------------------------------------------------------------------------------------------------------------------
 	--
@@ -8175,7 +8194,8 @@ function setup_campaign_help_pages()
 		"ui_text_replacements_localised_text_hp_campaign_description_nemesis_crown", 
 		"UI/help_images/campaign_game.png"
 	);
-	
+
+
 	--
 	-- non_aggression_pacts
 	--
@@ -9719,11 +9739,7 @@ function setup_campaign_help_pages()
 		"script_link_campaign_raising_dead",
 		hpr_title("war.camp.hp.raising_dead.001"),
 		hpr_leader("war.camp.hp.raising_dead.002"),
-		hpr_normal("war.camp.hp.raising_dead.003"),
-		hpr_normal("war.camp.hp.raising_dead.004"),
-		hpr_normal("war.camp.hp.raising_dead.005"),
-		hpr_normal("war.camp.hp.raising_dead.006"),
-		hpr_normal("war.camp.hp.raising_dead.007")
+		hpr_normal("war.camp.hp.raising_dead.003")
 	);
 	parser:add_record("campaign_raising_dead", "script_link_campaign_raising_dead", "tooltip_campaign_raising_dead");
 	tp_raising_dead = tooltip_patcher:new("tooltip_campaign_raising_dead");
@@ -14247,8 +14263,559 @@ function setup_campaign_help_pages()
 			uim:unhighlight_all_for_tooltips();
 		end
 	);
-	
 
+	--
+	-- gifts_of_nurgle
+	--
+
+	hp_gifts_of_nurgle = help_page:new(
+		"script_link_campaign_gifts_of_nurgle",
+		hpr_title("war.camp.hp.gifts_of_nurgle.001"),
+		hpr_leader("war.camp.hp.gifts_of_nurgle.002"),
+
+		hpr_section("tallied_souls"),
+		hpr_normal_unfaded("war.camp.hp.gifts_of_nurgle.tallied_souls.001", "tallied_souls"),
+		hpr_normal("war.camp.hp.gifts_of_nurgle.tallied_souls.002", "tallied_souls"),
+
+		hpr_section("blessings"),
+		hpr_normal_unfaded("war.camp.hp.gifts_of_nurgle.blessings.001", "blessings"),
+		hpr_normal("war.camp.hp.gifts_of_nurgle.blessings.002", "blessings"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.blessings.003", "blessings"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.blessings.004", "blessings"),
+
+		hpr_section("gardens"),
+		hpr_normal_unfaded("war.camp.hp.gifts_of_nurgle.gardens.001", "gardens"),
+		hpr_normal("war.camp.hp.gifts_of_nurgle.gardens.002", "gardens"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.gardens.003", "gardens"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.gardens.004", "gardens"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.gardens.005", "gardens"),
+
+		hpr_section("garden_plagues"),
+		hpr_normal_unfaded("war.camp.hp.gifts_of_nurgle.plagues.001", "garden_plagues"),
+		hpr_normal("war.camp.hp.gifts_of_nurgle.plagues.002", "garden_plagues"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.plagues.003", "garden_plagues"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.plagues.004", "garden_plagues"),
+
+		hpr_section("rituals_decay"),
+		hpr_normal_unfaded("war.camp.hp.gifts_of_nurgle.rituals.001", "rituals_decay"),
+		hpr_normal("war.camp.hp.gifts_of_nurgle.rituals.002", "rituals_decay"),
+		hpr_bulleted("war.camp.hp.gifts_of_nurgle.rituals.003", "rituals_decay")
+	);
+
+	parser:add_record("campaign_gifts_of_nurgle", "script_link_campaign_gifts_of_nurgle", "tooltip_campaign_gifts_of_nurgle");
+	tp_gifts_of_nurgle = tooltip_patcher:new("tooltip_campaign_gifts_of_nurgle");
+	tp_gifts_of_nurgle:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_gifts_of_nurgle",
+		"ui_text_replacements_localised_text_hp_campaign_description_gifts_of_nurgle"
+	);
+
+	-- Grandfather's Blessings
+	parser:add_record("campaign_grandfather_blessings", "script_link_campaign_gifts_of_nurgle", "tooltip_campaign_grandfather_blessings");
+	tp_grandfather_blessings = tooltip_patcher:new("tooltip_campaign_grandfather_blessings");
+	tp_grandfather_blessings:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_wh3_dlc29_blessings_of_nurgle_marks_of_nurgle_title",
+		"ui_text_replacements_localised_text_hp_campaign_description_grandfather_blessings"
+	);
+
+	-- Gardens of Corruption
+	parser:add_record("campaign_gardens_of_corruption", "script_link_campaign_gifts_of_nurgle", "tooltip_campaign_gardens_of_corruption");
+	tp_gardens_of_corruption = tooltip_patcher:new("tooltip_campaign_gardens_of_corruption");
+	tp_gardens_of_corruption:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_nurgle_gardens",
+		"ui_text_replacements_localised_text_hp_campaign_description_nurgle_gardens"
+	);
+	-- Rituals of Decay
+	parser:add_record("campaign_rituals_of_decay", "script_link_campaign_gifts_of_nurgle", "tooltip_campaign_rituals_of_decay");
+	tp_rituals_of_decay = tooltip_patcher:new("tooltip_campaign_rituals_of_decay");
+	tp_rituals_of_decay:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_rituals_of_decay",
+		"ui_text_replacements_localised_text_hp_campaign_description_rituals_of_decay"
+	);
+	-- Gardens Plagues
+	parser:add_record("campaign_garden_plagues", "script_link_campaign_gifts_of_nurgle", "tooltip_campaign_garden_plagues");
+	tp_ogre_camps = tooltip_patcher:new("tooltip_campaign_garden_plagues");
+	tp_ogre_camps:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_garden_plagues",
+		"ui_text_replacements_localised_text_hp_campaign_description_garden_plagues"
+	);
+	-- Tallied Souls
+	parser:add_record("campaign_tallied_souls", "script_link_campaign_gifts_of_nurgle", "tooltip_campaign_tallied_souls");
+	tp_ogre_camps = tooltip_patcher:new("tooltip_campaign_tallied_souls");
+	tp_ogre_camps:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_wh3_dlc29_woc_glottkin_earned_souls",
+		"ui_text_replacements_localised_text_hp_campaign_description_tallied_souls"
+	);
+
+	tl_gifts_of_nurgle = tooltip_listener:new(
+		"tooltip_campaign_gifts_of_nurgle", 
+		function() 
+			uim:highlight_gifts_of_nurgle(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
+	--
+	-- The Nurgle Rains
+	--
+
+	hp_glottkin_nurgle_rains = help_page:new(
+		"script_link_campaign_nurgle_rains",
+		hpr_title("war.camp.hp.nurgle_rains.001"),
+		hpr_leader("war.camp.hp.nurgle_rains.002"),
+    	hpr_bulleted("war.camp.hp.nurgle_rains.003"),
+    	hpr_bulleted("war.camp.hp.nurgle_rains.004"),
+    	hpr_bulleted("war.camp.hp.nurgle_rains.005")
+	);
+	parser:add_record("campaign_nurgle_rains", "script_link_campaign_nurgle_rains", "tooltip_campaign_nurgle_rains");
+	tp_glottkin_nurgle_rains  = tooltip_patcher:new("tooltip_campaign_nurgle_rains");
+	tp_glottkin_nurgle_rains:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_nurgle_rains", "ui_text_replacements_localised_text_hp_campaign_description_nurgle_rains");
+
+	--
+	-- The Great Temple of Ulric
+	--
+
+	hp_great_temple_of_ulric = help_page:new(
+		"script_link_campaign_great_temple_of_ulric",
+		hpr_title("war.camp.hp.great_temple_of_ulric.001"),
+		hpr_leader("war.camp.hp.great_temple_of_ulric.002"),
+		hpr_normal("war.camp.hp.great_temple_of_ulric.003"),
+		hpr_normal("war.camp.hp.great_temple_of_ulric.004"),
+		hpr_normal("war.camp.hp.great_temple_of_ulric.005"),
+		hpr_normal("war.camp.hp.great_temple_of_ulric.006"),
+		hpr_normal("war.camp.hp.great_temple_of_ulric.007")
+	);
+	parser:add_record("campaign_great_temple_of_ulric", "script_link_campaign_great_temple_of_ulric", "tooltip_campaign_great_temple_of_ulric");
+	tp_great_temple_of_ulric = tooltip_patcher:new("tooltip_campaign_great_temple_of_ulric");
+	tp_great_temple_of_ulric:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_great_temple_of_ulric", "ui_text_replacements_localised_text_hp_campaign_description_great_temple_of_ulric");
+	
+	tl_great_temple_of_ulric = tooltip_listener:new(
+		"tooltip_campaign_great_temple_of_ulric", 
+		function() 
+			uim:highlight_great_temple_of_ulric(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+	
+	--
+	-- The Great Temple of Ulric link
+	--
+
+	parser:add_record("campaign_great_temple_of_ulric_link", "script_link_campaign_great_temple_of_ulric_link", "tooltip_campaign_great_temple_of_ulric_link");
+	tp_great_temple_of_ulric_link = tooltip_patcher:new("tooltip_campaign_great_temple_of_ulric_link");
+	tp_great_temple_of_ulric_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_great_temple_of_ulric_link");
+	
+	tl_great_temple_of_ulric_link = tooltip_listener:new(
+		"tooltip_campaign_great_temple_of_ulric_link",
+		function() 
+			uim:highlight_great_temple_of_ulric(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- chaotic plans
+	--
+
+	hp_chaotic_plans = help_page:new(
+		"script_link_campaign_chaotic_plans",
+		hpr_title("war.camp.hp.chaotic_plans.001"),
+		hpr_leader("war.camp.hp.chaotic_plans.002"),
+		hpr_normal("war.camp.hp.chaotic_plans.003")
+	);
+	parser:add_record("campaign_chaotic_plans", "script_link_campaign_chaotic_plans", "tooltip_campaign_chaotic_plans");
+	tp_chaotic_plans = tooltip_patcher:new("tooltip_campaign_chaotic_plans");
+	tp_chaotic_plans:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_chaotic_plans", "ui_text_replacements_localised_text_hp_campaign_description_chaotic_plans");
+
+
+	tl_imperial_gunnery_school = tooltip_listener:new(
+		"tooltip_campaign_chaotic_plans", 
+		function()
+			uim:highlight_chaotic_plans(true);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end	
+	);
+
+	--
+	-- Neferata - Web of Power
+	--
+
+	hp_web_of_power = help_page:new(
+		"script_link_campaign_web_of_power",
+		hpr_title("war.camp.hp.web_of_power.001"),
+		hpr_leader("war.camp.hp.web_of_power.002"),
+		hpr_normal("war.camp.hp.web_of_power.003"),
+		hpr_normal("war.camp.hp.web_of_power.004")
+	);
+	parser:add_record("campaign_web_of_power", "script_link_campaign_web_of_power", "tooltip_campaign_web_of_power");
+	tp_web_of_power = tooltip_patcher:new("tooltip_campaign_web_of_power");
+	tp_web_of_power:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_web_of_power", "ui_text_replacements_localised_text_hp_campaign_description_web_of_power");
+	
+	tl_web_of_power = tooltip_listener:new(
+		"tooltip_campaign_web_of_power", 
+		function() 
+			uim:highlight_web_of_power(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- Neferata - Manipulations link
+	--
+
+	parser:add_record("campaign_nef_manipulations_link", "script_link_campaign_nef_manipulations_link", "tooltip_campaign_nef_manipulations_link");
+	tp_campaign_nef_manipulations_link = tooltip_patcher:new("tooltip_campaign_nef_manipulations_link");
+	tp_campaign_nef_manipulations_link:set_layout_data("tooltip_text_only", "ui_text_replacements_localised_text_hp_campaign_title_nef_manipulations_link");
+	
+	tl_campaign_nef_manipulations_link = tooltip_listener:new(
+		"tooltip_campaign_nef_manipulations_link",
+		function() 
+			uim:highlight_nef_manipulations(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- Vampire Confederations
+	--
+
+	hp_vampire_confederation = help_page:new(
+		"script_link_campaign_vampire_confederation",
+		hpr_title("war.camp.hp.vampire_confederation.001"),
+		hpr_leader("war.camp.hp.vampire_confederation.002"),
+		hpr_normal("war.camp.hp.vampire_confederation.003"),
+		hpr_normal("war.camp.hp.vampire_confederation.004")
+	);
+	parser:add_record("campaign_vampire_confederation", "script_link_campaign_vampire_confederation", "tooltip_campaign_vampire_confederation");
+	tp_vampire_confederation = tooltip_patcher:new("tooltip_campaign_vampire_confederation");
+	tp_vampire_confederation:set_layout_data("tooltip_title_and_text", "ui_text_replacements_localised_text_hp_campaign_title_vampire_confederation", "ui_text_replacements_localised_text_hp_campaign_description_vampire_confederation");
+	
+	tl_vampire_confederation = tooltip_listener:new(
+		"tooltip_campaign_vampire_confederation", 
+		function() 
+			uim:highlight_vampire_confederation(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- undead_legions
+	--
+
+	hp_undead_legions = help_page:new(
+		"script_link_campaign_undead_legions",
+		hpr_title("war.camp.hp.undead_legions.001"),
+		hpr_image("war.camp.hp.image", "UI/help_images/undead_legions.png"),
+		hpr_leader("war.camp.hp.undead_legions.002"),
+
+		hpr_section("land_of_the_undead"),
+		hpr_normal_unfaded("war.camp.hp.undead_legions.003", "land_of_the_undead"),
+		hpr_normal("war.camp.hp.undead_legions.004", "land_of_the_undead"),
+		hpr_normal("war.camp.hp.undead_legions.005", "land_of_the_undead"),
+
+		hpr_section("black_pyramid"),
+		hpr_normal_unfaded("war.camp.hp.undead_legions.006", "black_pyramid"),
+		hpr_normal("war.camp.hp.undead_legions.007", "black_pyramid"),
+
+		hpr_section("mortarchs"),
+		hpr_normal_unfaded("war.camp.hp.undead_legions.008", "mortarchs"),
+		hpr_normal("war.camp.hp.undead_legions.009", "mortarchs"),
+
+		hpr_section("grave_call"),
+		hpr_normal_unfaded("war.camp.hp.undead_legions.010", "grave_call"),
+		hpr_normal("war.camp.hp.undead_legions.011", "grave_call"),
+
+		hpr_normal("war.camp.hp.undead_legions.012")
+	);
+	parser:add_record("campaign_undead_legions", "script_link_campaign_undead_legions", "tooltip_campaign_undead_legions");
+	tp_undead_legions = tooltip_patcher:new("tooltip_campaign_undead_legions");
+	tp_undead_legions:set_layout_data(
+		"tooltip_title_text_and_image",
+		"ui_text_replacements_localised_text_hp_campaign_title_undead_legions",
+		"ui_text_replacements_localised_text_hp_campaign_description_undead_legions",
+		"UI/help_images/undead_legions.png"
+	);
+
+	--
+	-- land_of_the_dead
+	--
+
+	hp_land_of_the_dead = help_page:new(
+		"script_link_campaign_land_of_the_dead",
+		hpr_title("war.camp.hp.land_of_the_dead.001"),
+		hpr_image("war.camp.hp.image", "UI/help_images/land_of_the_dead.png"),
+		hpr_leader("war.camp.hp.land_of_the_dead.002"),
+
+		hpr_section("how_to"),
+		hpr_normal_unfaded("war.camp.hp.land_of_the_dead.003", "how_to"),
+		hpr_normal("war.camp.hp.land_of_the_dead.004", "how_to"),
+
+		hpr_section("necromantic_energy"),
+		hpr_normal_unfaded("war.camp.hp.land_of_the_dead.005", "necromantic_energy"),
+		hpr_normal("war.camp.hp.land_of_the_dead.006", "necromantic_energy"),
+
+		hpr_section("necropolis"),
+		hpr_normal_unfaded("war.camp.hp.land_of_the_dead.007", "necropolis"),
+		hpr_normal("war.camp.hp.land_of_the_dead.008", "necropolis"),
+
+		hpr_section("other_settlements"),
+		hpr_normal_unfaded("war.camp.hp.land_of_the_dead.009", "other_settlements"),
+		hpr_normal("war.camp.hp.land_of_the_dead.010", "other_settlements")
+	);
+	parser:add_record("campaign_land_of_the_dead", "script_link_campaign_land_of_the_dead", "tooltip_campaign_land_of_the_dead");
+	tp_land_of_the_dead = tooltip_patcher:new("tooltip_campaign_land_of_the_dead");
+	tp_land_of_the_dead:set_layout_data(
+		"tooltip_title_text_and_image",
+		"ui_text_replacements_localised_text_hp_campaign_title_land_of_the_dead",
+		"ui_text_replacements_localised_text_hp_campaign_description_land_of_the_dead", 
+		"UI/help_images/land_of_the_dead.png"
+	);
+
+	--
+	-- devastation
+	--
+
+	--
+	-- necromancy
+	--
+
+	hp_necromancy = help_page:new(
+		"script_link_campaign_necromancy",
+		hpr_title("war.camp.hp.necromancy.001"),
+		hpr_leader("war.camp.hp.necromancy.002"),
+
+		hpr_normal("war.camp.hp.necromancy.003"),
+		hpr_normal("war.camp.hp.necromancy.004"),
+		hpr_normal("war.camp.hp.necromancy.005")
+	);
+	parser:add_record("campaign_necromancy", "script_link_campaign_necromancy", "tooltip_campaign_necromancy");
+	tp_necromancy = tooltip_patcher:new("tooltip_campaign_necromancy");
+	tp_necromancy:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_necromancy",
+		"ui_text_replacements_localised_text_hp_campaign_description_necromancy"
+	);
+
+	tl_necromancy = tooltip_listener:new(
+		"tooltip_campaign_necromancy", 
+		function() 
+			uim:highlight_necromancy(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- necromancy_link
+	--
+
+	script_feature_name = "necromancy";
+	parser:add_record(
+		"campaign_"..script_feature_name.."_link",
+		"script_link_campaign_"..script_feature_name.."_link",
+		"tooltip_campaign_"..script_feature_name.."_link"
+	);
+	tp_contracts = tooltip_patcher:new("tooltip_campaign_"..script_feature_name.."_link");
+	tp_contracts:set_layout_data(
+		"tooltip_text_only",
+		"ui_text_replacements_localised_text_hp_campaign_title_"..script_feature_name.."_link"
+	);
+	
+	tl_contracts_link = tooltip_listener:new(
+		"tooltip_campaign_"..script_feature_name.."_link",
+		function()
+			uim:highlight_necromancy(true, 1.5);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- black_pyramid
+	--
+
+	hp_black_pyramid = help_page:new(
+		"script_link_campaign_black_pyramid",
+		hpr_title("war.camp.hp.black_pyramid.001"),
+		hpr_leader("war.camp.hp.black_pyramid.002"),
+
+		hpr_normal("war.camp.hp.black_pyramid.003"),
+		hpr_normal("war.camp.hp.black_pyramid.004"),
+		hpr_normal("war.camp.hp.black_pyramid.005")
+	);
+	parser:add_record("campaign_black_pyramid", "script_link_campaign_black_pyramid", "tooltip_campaign_black_pyramid");
+	tp_black_pyramid = tooltip_patcher:new("tooltip_campaign_black_pyramid");
+	tp_black_pyramid:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_black_pyramid",
+		"ui_text_replacements_localised_text_hp_campaign_description_black_pyramid"
+	);
+
+	tl_black_pyramid = tooltip_listener:new(
+		"tooltip_campaign_black_pyramid", 
+		function() 
+			uim:highlight_black_pyramid(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- black_pyramid_link
+	--
+
+	script_feature_name = "black_pyramid";
+	parser:add_record(
+		"campaign_"..script_feature_name.."_link",
+		"script_link_campaign_"..script_feature_name.."_link",
+		"tooltip_campaign_"..script_feature_name.."_link"
+	);
+	tp_contracts = tooltip_patcher:new("tooltip_campaign_"..script_feature_name.."_link");
+	tp_contracts:set_layout_data(
+		"tooltip_text_only",
+		"ui_text_replacements_localised_text_hp_campaign_title_"..script_feature_name.."_link"
+	);
+	
+	tl_contracts_link = tooltip_listener:new(
+		"tooltip_campaign_"..script_feature_name.."_link",
+		function()
+			uim:highlight_black_pyramid(true, 1.5);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- books_of_nagash_nag
+	--
+
+	hp_books_of_nagash_nag = help_page:new(
+		"script_link_campaign_books_of_nagash_nag",
+		hpr_title("war.camp.hp.books_of_nagash_nag.001"),
+		hpr_leader("war.camp.hp.books_of_nagash_nag.002"),
+
+		hpr_normal("war.camp.hp.books_of_nagash_nag.003"),
+		hpr_normal("war.camp.hp.books_of_nagash_nag.004"),
+		hpr_normal("war.camp.hp.books_of_nagash_nag.005")
+	);
+	parser:add_record("campaign_books_of_nagash_nag", "script_link_campaign_books_of_nagash_nag", "tooltip_campaign_books_of_nagash_nag");
+	tp_books_of_nagash_nag = tooltip_patcher:new("tooltip_campaign_books_of_nagash_nag");
+	tp_books_of_nagash_nag:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_books_of_nagash_nag",
+		"ui_text_replacements_localised_text_hp_campaign_description_books_of_nagash_nag"
+	);
+
+	tl_books_of_nagash_nag = tooltip_listener:new(
+		"tooltip_campaign_books_of_nagash_nag", 
+		function() 
+			uim:highlight_books_of_nagash_nag(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- mortarchs
+	--
+
+	hp_mortarchs = help_page:new(
+		"script_link_campaign_mortarchs",
+		hpr_title("war.camp.hp.mortarchs.001"),
+		hpr_leader("war.camp.hp.mortarchs.002"),
+
+		hpr_normal("war.camp.hp.mortarchs.003"),
+		hpr_normal("war.camp.hp.mortarchs.004"),
+		hpr_normal("war.camp.hp.mortarchs.005")
+	);
+	parser:add_record("campaign_mortarchs", "script_link_campaign_mortarchs", "tooltip_campaign_mortarchs");
+	tp_mortarchs = tooltip_patcher:new("tooltip_campaign_mortarchs");
+	tp_mortarchs:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_mortarchs",
+		"ui_text_replacements_localised_text_hp_campaign_description_mortarchs"
+	);
+
+	tl_mortarchs = tooltip_listener:new(
+		"tooltip_campaign_mortarchs", 
+		function() 
+			uim:highlight_mortarchs(true);
+		end,
+		function() 
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- mortarchs_link
+	--
+
+	script_feature_name = "mortarchs";
+	parser:add_record(
+		"campaign_"..script_feature_name.."_link",
+		"script_link_campaign_"..script_feature_name.."_link",
+		"tooltip_campaign_"..script_feature_name.."_link"
+	);
+	tp_contracts = tooltip_patcher:new("tooltip_campaign_"..script_feature_name.."_link");
+	tp_contracts:set_layout_data(
+		"tooltip_text_only",
+		"ui_text_replacements_localised_text_hp_campaign_title_"..script_feature_name.."_link"
+	);
+	
+	tl_contracts_link = tooltip_listener:new(
+		"tooltip_campaign_"..script_feature_name.."_link",
+		function()
+			uim:highlight_mortarchs(true, 1.5);
+		end,
+		function()
+			uim:unhighlight_all_for_tooltips();
+		end
+	);
+
+	--
+	-- vampire_lairs
+	--
+
+	hp_vampire_lairs = help_page:new(
+		"script_link_campaign_vampire_lairs",
+		hpr_title("war.camp.hp.vampire_lairs.001"),
+		hpr_leader("war.camp.hp.vampire_lairs.002"),
+
+		hpr_normal("war.camp.hp.vampire_lairs.003"),
+		hpr_normal("war.camp.hp.vampire_lairs.004"),
+		hpr_normal("war.camp.hp.vampire_lairs.005")
+	);
+	parser:add_record("campaign_vampire_lairs", "script_link_campaign_vampire_lairs", "tooltip_campaign_vampire_lairs");
+	tp_vampire_lairs = tooltip_patcher:new("tooltip_campaign_vampire_lairs");
+	tp_vampire_lairs:set_layout_data(
+		"tooltip_title_and_text",
+		"ui_text_replacements_localised_text_hp_campaign_title_vampire_lairs",
+		"ui_text_replacements_localised_text_hp_campaign_description_vampire_lairs"
+	);
 end;
 
 

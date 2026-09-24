@@ -449,7 +449,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingChainRecord chain, CcoCampaignSettlement settlement"
-					context_function_id="self.Resize(self.Dimensions.x, 106 * (chain.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement - settlement.ExLandmarkBuildingList.Sort(LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement, true).FirstContext.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement), false)"/>
+					context_function_id="( building_list = settlement.ExLandmarkBuildingList,&#10;building_level_requirement = GetIfElse( building_list.IsEmpty(), 0, building_list.Sort(LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement, true).FirstContext.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement ) ) =&gt;&#10;{&#10;	self.Resize( self.Dimensions.x, 106 * (chain.LevelsList.Filter(Key.EndsWith(&quot;_ruin&quot;) == false).FirstContext.PrimarySlotBuildingLevelRequirement - building_level_requirement), false )&#10;}"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBuildingChainRecord chain, CcoCampaignSettlement settlement"

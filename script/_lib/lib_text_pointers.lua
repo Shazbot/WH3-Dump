@@ -1467,6 +1467,24 @@ function text_pointer:show(force_display)
 		return false;
 	end;
 	
+	-- clamp the label position so the panel doesn't spill off the edges of the screen (the pointer line/end stay pointing at the true target)
+	if pointer_display_mode ~= "subtitle" and not self.position_as_subtitle then
+		local screen_x, screen_y = core:get_screen_resolution()
+		local screen_edge_margin = 10
+		
+		if label_pos_x < screen_edge_margin then
+			label_pos_x = screen_edge_margin
+		elseif label_pos_x + label_size_x > screen_x - screen_edge_margin then
+			label_pos_x = screen_x - screen_edge_margin - label_size_x
+		end
+		
+		if label_pos_y < screen_edge_margin then
+			label_pos_y = screen_edge_margin
+		elseif label_pos_y + label_size_y > screen_y - screen_edge_margin then
+			label_pos_y = screen_y - screen_edge_margin - label_size_y
+		end
+	end
+	
 	-- reposition/resize text label
 	uic_text_label:MoveTo(label_pos_x, label_pos_y);
 		
@@ -2020,9 +2038,9 @@ function text_pointer:set_style(style, ...)
 		self:set_show_pointer_end_without_line(true);
 		self:set_show_close_button(true);
 
-	--- @desc <tr><td><code>minimalist</code></td><td>Sets the "minimalist" style but without a close button.</td></tr>
+	--- @desc <tr><td><code>minimalist_dont_close</code></td><td>Sets the "active" style but without a close button.</td></tr>
 	elseif style == "minimalist_dont_close" then
-		self:set_style("minimalist");
+		self:set_style("active");
 		self:set_show_close_button(false);
 
 	else

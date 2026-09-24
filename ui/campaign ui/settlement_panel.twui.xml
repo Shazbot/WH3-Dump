@@ -82,6 +82,12 @@
 						<button_txt this="4E2314FE-5070-4619-90BD687A71615046"/>
 						<dev_icon this="0AA2236F-16FC-4111-921BB159303F4D5D"/>
 					</dev_button_process_queues>
+					<find_necropolis_dev_button_holder this="339C2A11-22DE-4879-B8EB4E21486BB5FE">
+						<dev_button_find_necropolis this="9F3E26DD-43D2-4B27-BA9AF7AED358FDD9">
+							<button_txt this="FB770CB2-38DA-412E-9C9DF601FF6128A9"/>
+							<dev_icon this="443C796B-3426-4A4C-8EFB05F67A8501A8"/>
+						</dev_button_find_necropolis>
+					</find_necropolis_dev_button_holder>
 				</button_holder>
 				<winds_of_magic this="DE62FF45-0616-4E73-80F6B88585F5DB83">
 					<value_holder this="6906D3DA-55CD-442F-9A2B1A6F36F59915">
@@ -96,6 +102,7 @@
 					<frame this="C4B63E00-1522-4B49-A1616B913DA8E610"/>
 				</winds_of_magic>
 				<target_shadowy_dealings_button this="D0A934D7-89FD-4822-969FBA3E1F19954B"/>
+				<target_web_of_power_button this="D77C4B34-7D75-4E6F-B14CA359221615D0"/>
 				<building_construction_parent this="DAA31431-21F6-40B2-8B3083DA67500641"/>
 				<settlement_list this="9BB80378-5F86-4201-8095D696CAB06688">
 					<template_settlement_context this="41646171-8990-4450-85B94FE3BB7E84BD">
@@ -124,13 +131,14 @@
 							<allied_view this="35D58CBA-1F9A-472A-85A7E2B58C4B2E32">
 								<slots this="C564B30F-DA71-4E60-BD764C392132283E"/>
 							</allied_view>
+							<lair_view this="85B8B5CB-5A03-4E29-97877459A509AA84"/>
 							<toggle_button_holder this="AF2C2E07-F5D4-4192-B4610A19E34F2177">
 								<button_list this="E1D10B74-5C00-4218-894AE061472D06F2">
 									<button_default_view this="D088F80C-291F-4F63-940D10A5197AD5CF"/>
 									<button_ally_view this="372C623C-009D-4004-9FE09714201E1CEC"/>
 									<button_player_foreign_view this="1FC1C259-4364-4748-89F5BE53EAC8F573"/>
-									<button_player_foreign_trap_view this="3ABD3110-4A71-4073-9ED6CD84D30529D1"/>
 									<button_discovered_view this="6E6A9618-5DE7-4116-B17C24A64822CD38"/>
+									<button_lair_view this="FB3B9838-CC2B-4118-BAAB0C8CC0811D82"/>
 								</button_list>
 							</toggle_button_holder>
 							<discovered_holder this="E2549741-79E6-427A-AEFEFC69B205265F"/>
@@ -163,6 +171,9 @@
 								<template_resource this="092F9063-3AC9-49E5-B5979266AB033693"/>
 							</resource_list>
 							<icon_plague this="DB556C2F-D592-4783-B7ECCA0A7CE74D64"/>
+							<icon_mark this="65F4F96A-A350-4388-905E8F9718E0D983"/>
+							<icon_nurgle_rain this="E83130B4-B4B2-47DF-9CA8D4A86F659F64"/>
+							<icon_dark_fortress this="8A973592-58B8-4C93-8AF6B3AE92B2FB9F"/>
 						</icon_list>
 						<abandon_subpanel this="92663313-436B-474F-9E9A355EAC872E10"/>
 						<convert_subpanel this="CF9BFFB8-FA5D-44E1-9565015FBFEE9586"/>
@@ -171,6 +182,15 @@
 								<button_txt this="98CF18E4-D7B0-4386-B2AE190CF78FEBE9"/>
 								<dev_icon this="F9D3C77C-E83E-4836-822F9D98BD73C6F2"/>
 							</dev_button_take_control>
+							<dev_button_select_settlement_type this="BEFC7271-BB2D-4BE8-B77168245D43601E">
+								<button_txt this="B45077CC-05BF-484C-957151D00CEAC8F3"/>
+								<dev_icon this="05429287-F535-4615-908523AF4A4FE233"/>
+							</dev_button_select_settlement_type>
+							<dev_settlement_types_list this="B311926C-4F08-4F52-BD7E5C6427774E11">
+								<template_settlement_type this="C9D9C7D5-B644-4A44-87E94E3C353F4C4F">
+									<button_txt this="F19543BA-684D-4A71-ADE2B6987B26C101"/>
+								</template_settlement_type>
+							</dev_settlement_types_list>
 						</dev_take_control_parent>
 						<dev_upgrade_settlement_parent this="1A1BC208-1C85-4175-81A696DE5223ED1B">
 							<dev_button_develop_buildings this="839E6E21-AC0D-43AF-B85CD6BE187337CB">
@@ -1036,6 +1056,9 @@
 					context_object_id="CcoCampaignSettlement">
 					<child_m_user_properties>
 						<property
+							name="button_group"
+							value="^1"/>
+						<property
 							name="panel"
 							value="allied_view"/>
 						<property
@@ -1489,6 +1512,9 @@
 					context_object_id="CcoCampaignSettlement">
 					<child_m_user_properties>
 						<property
+							name="button_group"
+							value="^1"/>
+						<property
 							name="panel"
 							value="default_view"/>
 						<property
@@ -1662,6 +1688,9 @@
 					context_object_id="CcoCampaignSettlement">
 					<child_m_user_properties>
 						<property
+							name="button_group"
+							value="^1"/>
+						<property
 							name="panel"
 							value="discovered_views"/>
 						<property
@@ -1672,7 +1701,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))">
+					context_function_id="#this button is visible (and thus when clicked &quot;discovered_views&quot; can be made visible), when then there exists in this settlement an unowned-to-the-player foreign_slot that has been discovered by the player's faction#&#10;HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))">
 					<child_m_user_properties>
 						<property
 							name="update_when_parent_invisible"
@@ -1693,17 +1722,21 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnVisibilityChanged"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="DoIf(self:IsVisible &amp;&amp; IsPlayerOwned == false, self.SimulateLClick)"/>
+					context_function_id="DoIf(self.IsVisible &amp;&amp; IsPlayerOwned == false, self.SimulateLClick)"/>
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="GetIfElse(IsPlayerOwned, Loc(&quot;skaven_under_empire_button_tooltip&quot;), &quot;{{tr:foreign_slot_button_tooltip}}&quot;)">
+					context_function_id="#uses the discovered foreign-slot owner's culture/subculture text replacement keys; Vampire Lair holder is a special case#&#10;DiscoveredForeignSlotButtonTooltip">
 					<child_m_user_properties>
 						<property
 							name="suppress_localise_asserts"
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnContextSet"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="#lair icon only when the sole discovered foreign-slot entry is a vampire lair; otherwise reset to default discovered icon#&#10;(discovered = HostileSlotsGroupList.Filter(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))) =&gt;&#10;DoIfElse(&#10;  discovered.Size == 1 &amp;&amp; discovered.FirstContext.CategoryObject.FactionRecordContext.Key == &quot;wh3_main_vmp_vampire_lairs&quot;,&#10;  self.SetImage(0, &quot;UI/skins/wh_main_vmp_vampire_counts/icon_vampire_lair.png&quot;),&#10;  self.SetImage(0, &quot;ui/skins/default/icon_under_empire_discovered.png&quot;)&#10;)"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -2358,190 +2391,113 @@
 				<element value=""/>
 			</override_images>
 		</button_info>
-		<button_list
-			this="E1D10B74-5C00-4218-894AE061472D06F2"
-			id="button_list"
-			offset="-1.00,3.00"
-			docking="Bottom Center"
-			dock_offset="-5.00,-1.00"
-			component_anchor_point="0.50,1.00"
-			tooltipslocalised="true"
-			uniqueguid="E1D10B74-5C00-4218-894AE061472D06F2"
-			currentstate="CAB6E7C5-9676-4121-84F4F3ABC09F6645"
-			defaultstate="CAB6E7C5-9676-4121-84F4F3ABC09F6645">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ButtonGroupPanelSelector"
-					context_object_id="CcoCampaignSettlement">
-					<child_m_user_properties>
-						<property
-							name="Single Selection"
-							value="1"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextCommandEvent"
-					context_object_id="CcoCampaignSettlement"
-					context_function_id="DoIf(HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction &amp;&amp; CategoryObject.CultureContext.Key != &quot;wh2_main_skv_skaven&quot; &amp;&amp; CategoryObject.CultureContext.Key != &quot;wh_main_dwf_dwarfs&quot;), Do(self.SelectButton(self.ChildContext(&quot;button_player_foreign_view&quot;))), self.ParentContext(&quot;settlement_view&quot;).ParentContext.ChildContext(&quot;icon_list&quot;).SetVisible(false))">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="hostile_slot_available_event"/>
-					</child_m_user_properties>
-				</callback_with_context>
-			</callbackwithcontextlist>
-			<states>
-				<newstate
-					this="CAB6E7C5-9676-4121-84F4F3ABC09F6645"
-					name="NewState"
-					width="38"
-					height="162"
-					interactive="true"
-					uniqueguid="CAB6E7C5-9676-4121-84F4F3ABC09F6645"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true"
-				margins="0.00,10.00">
-				<columnwidths>
-					<column width="47"/>
-				</columnwidths>
-			</LayoutEngine>
-		</button_list>
-		<button_player_foreign_trap_view
-			this="3ABD3110-4A71-4073-9ED6CD84D30529D1"
-			id="button_player_foreign_trap_view"
+		<button_lair_view
+			this="FB3B9838-CC2B-4118-BAAB0C8CC0811D82"
+			id="button_lair_view"
 			template_id="round_small_button_toggle"
 			part_of_template="true"
 			uniqueguid_in_template="5E5903D5-3190-4BE4-A117AA3392596D5C"
-			uniqueguid="3ABD3110-4A71-4073-9ED6CD84D30529D1"
+			uniqueguid="FB3B9838-CC2B-4118-BAAB0C8CC0811D82"
 			dimensions="38.00,38.00"
-			is_visible="false"
-			sound_category="UI_GBL_TMP_Round_Small_Button">
+			tooltips_localised="false"
+			sound_category="UI_CAM_HUD_DLC29_VMP_Lairs_BTN_Open">
 			<state_uniqueguids>
 				<state_uniqueguid
 					name="active"
-					uniqueguid="8ED3B2B5-172C-412F-8F74D1D08DD852C6"/>
+					uniqueguid="0C47597D-96D8-43FC-901649308E2DB92B"/>
 				<state_uniqueguid
 					name="down"
-					uniqueguid="4BAB4BA5-C718-4E85-B8B9D3358C687277"/>
+					uniqueguid="918A12C4-4125-487C-A1C0E98DCC642E9D"/>
 				<state_uniqueguid
 					name="down_off"
-					uniqueguid="C5081A58-5F02-4B32-88965CE52B4DA93B"/>
+					uniqueguid="0E0528A3-000F-4756-B19174247C17E4D2"/>
 				<state_uniqueguid
 					name="hover"
-					uniqueguid="E90FC080-6341-408B-819B08C9366658C7"/>
+					uniqueguid="0C4763B2-05F9-4E0B-AFBDA63CF4CBD2CF"/>
 				<state_uniqueguid
 					name="inactive"
-					uniqueguid="4E235668-54F5-460C-85F694CB512F6597"/>
+					uniqueguid="481F529F-A542-496C-8F10F9259C4F650B"/>
 				<state_uniqueguid
 					name="selected"
-					uniqueguid="475776E7-4DEF-4456-8517126582F1096C"/>
+					uniqueguid="7FDB658D-9C92-445B-8DEB9008A19EFD70"/>
 				<state_uniqueguid
 					name="selected_down"
-					uniqueguid="2AA1BF6D-9E2D-444B-81C30A7E50A76826"/>
+					uniqueguid="DA9F0641-162F-4B55-A4F9241CF3C6FB0C"/>
 				<state_uniqueguid
 					name="selected_down_off"
-					uniqueguid="427CC46E-8B82-458F-BA64CA2BF0BCE467"/>
+					uniqueguid="390B79FF-BA2D-407F-AD0064AA7E4148F0"/>
 				<state_uniqueguid
 					name="selected_hover"
-					uniqueguid="12FE0250-EF85-4118-9F8FB7BEB8C99D38"/>
+					uniqueguid="64DB5475-8E3F-4C60-A7B177BC80204911"/>
 				<state_uniqueguid
 					name="selected_inactive"
-					uniqueguid="D5CEB868-D628-4854-BA9742D48601A5C7"/>
+					uniqueguid="8DA4A265-4AA4-4A36-AEF039D67E9C4FD1"/>
 			</state_uniqueguids>
 			<component_image_uniqueguids>
 				<component_image_uniqueguid
-					name="ui/skins/default/dlc27_nor_sayl_manipulations/icon_nor_manipulations.png"
-					uniqueguid="F88D8E60-925C-48B5-B29235AED3ECCEA3"/>
+					name="ui/skins/wh_main_vmp_vampire_counts/icon_vampire_lair_small.png"
+					uniqueguid="B3EAE87D-FD3B-4015-834DAE26060B58F9"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_pressed.png"
-					uniqueguid="DAA2A808-66AF-464F-857BB8C9744C6063"/>
+					uniqueguid="EFB2813A-6505-47E6-98AAC2CA1F41F6E6"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_selected_hover.png"
-					uniqueguid="FFF59399-CDF6-4B0D-A785706B24602C99"/>
+					uniqueguid="ECB50FC5-ECED-4FAC-AB27894C90282D15"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_hover.png"
-					uniqueguid="48A0B3C5-BDA7-415E-BA349488E61495B5"/>
+					uniqueguid="C47A3703-B1F4-44F3-8E1BCE93F54B7482"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_active.png"
-					uniqueguid="22A00FA3-0349-46FD-8E41A25B614EAA7F"/>
+					uniqueguid="DF22A6EB-D4A0-4B34-B0AF427275D066F8"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_inactive.png"
-					uniqueguid="0856CB5F-6411-4862-B5C22157E1A1C972"/>
+					uniqueguid="E7CDBAF5-02DE-4A76-A0DA32D303536335"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_selected.png"
-					uniqueguid="9E05D4C0-69BB-4E94-9CF4DD6AF5ECDE2A"/>
+					uniqueguid="0CEE78E2-D1C1-45FD-94371BA70A8755AE"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_underlay.png"
-					uniqueguid="57C7A427-1C4F-4887-87BA862427BAAD81"/>
+					uniqueguid="EF5372DF-3ABD-4B17-B1D681DDA7CD226E"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_selected_underlay.png"
-					uniqueguid="873F00B2-E423-4022-A7ED40748B959D43"/>
+					uniqueguid="7CB06516-BF24-43D0-AEBE7873D900882A"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_selected_inactive.png"
-					uniqueguid="4046DCE6-5186-47E5-A67D28B87D0105CC"/>
+					uniqueguid="42E8BF61-9530-47C0-A5AD4113BFF5C125"/>
 				<component_image_uniqueguid
 					name="ui/skins/default/button_round_small_selected_pressed.png"
-					uniqueguid="8C465198-231B-492D-BE595931712F6DD6"/>
+					uniqueguid="86A9BE34-19B7-4AE3-B082ABFCE0DCF5FE"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
-				<callback_with_context callback_id="StatePropagatorCallback">
-					<child_m_user_properties>
-						<property
-							name="target_id"
-							value="icon"/>
-						<property
-							name="use_transitions"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
 				<callback_with_context
 					callback_id="ButtonGroupButton"
 					context_object_id="CcoCampaignSettlement">
 					<child_m_user_properties>
 						<property
+							name="button_group"
+							value="^1"/>
+						<property
 							name="panel"
-							value="hostile_views"/>
+							value="lair_view"/>
 						<property
 							name="parent"
 							value="^3"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
-					callback_id="#ContextVisibilitySetter"
-					context_object_id="CcoCampaignSettlement settlement"
-					context_function_id="settlement.ExHasLureSlot || PlayersFaction.RitualManagerContext.IsAnyRitualFromCategoryValidForTarget(&quot;CIRCLE_OF_BETRAYAL_LURE&quot;, settlement)">
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="ExVampireLairs_PlayerHasVampireLair">
 					<child_m_user_properties>
-						<property
-							name="event0"
-							value="ForeignSlotAdded"/>
-						<property
-							name="event1"
-							value="ForeignSlotRemoved"/>
 						<property
 							name="update_when_parent_invisible"
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
-				<callback_with_context
-					callback_id="#ContextCommandGiverOnVisibilityChanged"
-					context_object_id="CcoStaticObject"
-					context_function_id="DoIf(StoredContextFromParent(&quot;CcoCampaignSettlement&quot;).IsPlayerOwned == false &amp;&amp; StoredContextFromParent(&quot;CcoCampaignSettlement&quot;).HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction), self.SimulateLClick)"/>
 				<callback_with_context callback_id="CallbackAnimTrigger"/>
 				<callback_with_context
-					callback_id="#ContextCommandEvent"
-					context_function_id="self.SimulateLClick">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="PanelClosed_dlc27_nor_trap_scheming"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="ContextSoundSetter"
-					context_object_id="CcoStaticObject"
-					context_function_id="&quot;UI_CAM_HUD_DLC25_EMP_GardenOfMorr_Garden_Select&quot;"/>
+					callback_id="ContextCommandLeftClick"
+					context_function_id="#hack: making a radio button work like a toggle upon repeated presses#&#10;( lair_popup_component = self.ParentContext(&quot;settlement_view&quot;).ChildContext(&quot;dlc29_vmp_vampire_lair_popup&quot;) ) =&gt;&#10;{&#10; DoIfElse( lair_popup_component.IsVisible,&#10;  Do( UiMsg(&quot;CloseLairPopup&quot;), self.SetState(&quot;hover&quot;) ),&#10;  UiMsg(&quot;OpenLairPopup&quot;) )&#10;}"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -2553,11 +2509,14 @@
 				<property
 					name="dynamic_image"
 					value="0"/>
+				<property
+					name="override_sound"
+					value="UI_CAM_HUD_DLC29_VMP_Lairs_BTN_Open"/>
 			</user_properties>
 			<localised_texts>
 				<localised_text
-					tooltip_label="wh3_dlc27_nor_cob_treacheries_tab_tooltip"
-					tooltip_text="Treacheries details"/>
+					tooltip_label="ComponentTooltip_228cdd6c"
+					tooltip_text="{{tr:ui_text_replacements_localised_text_wh3_dlc29_vmp_vampire_lair_title}}"/>
 				<localised_text
 					state="active"
 					is_text_localised="false"/>
@@ -2590,7 +2549,7 @@
 					is_text_localised="false"/>
 			</localised_texts>
 			<override_images>
-				<element value="ui/skins/default/dlc27_nor_sayl_manipulations/icon_nor_manipulations.png"/>
+				<element value="ui/skins/wh_main_vmp_vampire_counts/icon_vampire_lair_small.png"/>
 				<element value="ui/skins/default/button_round_small_pressed.png"/>
 				<element value="ui/skins/default/button_round_small_selected_hover.png"/>
 				<element value="ui/skins/default/button_round_small_hover.png"/>
@@ -2603,7 +2562,57 @@
 				<element value="ui/skins/default/button_round_small_selected_pressed.png"/>
 				<element value=""/>
 			</override_images>
-		</button_player_foreign_trap_view>
+		</button_lair_view>
+		<button_list
+			this="E1D10B74-5C00-4218-894AE061472D06F2"
+			id="button_list"
+			offset="-1.00,-35.00"
+			docking="Bottom Center"
+			dock_offset="-5.00,-1.00"
+			component_anchor_point="0.50,1.00"
+			tooltipslocalised="true"
+			uniqueguid="E1D10B74-5C00-4218-894AE061472D06F2"
+			currentstate="CAB6E7C5-9676-4121-84F4F3ABC09F6645"
+			defaultstate="CAB6E7C5-9676-4121-84F4F3ABC09F6645">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ButtonGroupPanelSelector"
+					context_object_id="CcoCampaignSettlement">
+					<child_m_user_properties>
+						<property
+							name="Single Selection"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="Do(&#10;  DoIfElse(ExVampireLairs_PlayerHasVampireLair,&#10;   SelectButton(self.ChildContext(&quot;button_lair_view&quot;)),&#10;   DoIf( HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction &amp;&amp; CategoryObject.CultureContext.Key != &quot;wh2_main_skv_skaven&quot; &amp;&amp; CategoryObject.CultureContext.Key != &quot;wh_main_dwf_dwarfs&quot;),&#10;    SelectButton(self.ChildContext(&quot;button_player_foreign_view&quot;)) ) ),&#10;  self.ParentContext(&quot;settlement_view&quot;).ParentContext.ChildContext(&quot;icon_list&quot;).SetVisible(false) )">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="hostile_slot_available_event"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="CAB6E7C5-9676-4121-84F4F3ABC09F6645"
+					name="NewState"
+					width="38"
+					height="200"
+					interactive="true"
+					uniqueguid="CAB6E7C5-9676-4121-84F4F3ABC09F6645"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true"
+				margins="0.00,10.00">
+				<columnwidths>
+					<column width="47"/>
+				</columnwidths>
+			</LayoutEngine>
+		</button_list>
 		<button_player_foreign_view
 			this="1FC1C259-4364-4748-89F5BE53EAC8F573"
 			id="button_player_foreign_view"
@@ -2697,6 +2706,9 @@
 					context_object_id="CcoCampaignSettlement">
 					<child_m_user_properties>
 						<property
+							name="button_group"
+							value="^1"/>
+						<property
 							name="panel"
 							value="hostile_views"/>
 						<property
@@ -2707,7 +2719,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction)">
+					context_function_id="ExVampireLairs_HasNonLairHostileForeignSlots(PlayersFaction)">
 					<child_m_user_properties>
 						<property
 							name="update_when_parent_invisible"
@@ -3439,7 +3451,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="RemovalCost &gt; PlayersFaction.TreasuryAmount">
+					context_function_id="RemovalCost &gt; PlayersFaction.TreasuryAmount || CanRemoveForeignSlotManager == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -3453,7 +3465,7 @@
 				<callback_with_context
 					callback_id="ContextTooltipSetter"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="Loc(&quot;destroy_foreign_slots_&quot; + FactionContext.CultureContext.Key)"/>
+					context_function_id="(&#10; culture_key = FactionContext.CultureContext.Key,&#10; action_name = Loc(&quot;destroy_foreign_slots_&quot; + culture_key),&#10; cannot_remove_msg = Loc(&quot;destroy_foreign_slots_cannot_remove_&quot; + culture_key),&#10; cannot_afford_msg = Loc(&quot;destroy_foreign_slots_cannot_afford_&quot; + culture_key)&#10;) =&gt;&#10;{&#10; GetIfElse(CanRemoveForeignSlotManager,&#10;  GetIfElse(RemovalCost &gt; PlayersFaction.TreasuryAmount,&#10;   action_name + &quot;&#10;&quot; + cannot_afford_msg,&#10;   action_name),&#10;  action_name + cannot_remove_msg)&#10;}"/>
 			</callbacks_with_context>
 			<user_properties>
 				<property
@@ -3714,6 +3726,36 @@
 			</localised_texts>
 		</button_txt>
 		<button_txt
+			this="B45077CC-05BF-484C-957151D00CEAC8F3"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="B45077CC-05BF-484C-957151D00CEAC8F3"
+			dimensions="180.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="D7AA8F10-23FA-46F8-817CC49104557A04"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					text="Take control with specific settlement type"
+					text_label="ComponentText_5df17e49"/>
+				<localised_text
+					state="active"
+					text="Take control with specific settlement type"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
 			this="B4680D53-A2EF-4787-867C6F8D01654836"
 			id="button_txt"
 			part_of_template="true"
@@ -3826,6 +3868,86 @@
 					state="active"
 					text="Spawn rebels"
 					text_label="button_txt_active_Text_e04d9abf"
+					is_text_localised="false"/>
+			</localised_texts>
+		</button_txt>
+		<button_txt
+			this="F19543BA-684D-4A71-ADE2B6987B26C101"
+			id="button_txt"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			offset="0.00,-1.00"
+			docking="Center"
+			dock_offset="0.00,-1.00"
+			component_anchor_point="0.50,0.50"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="F19543BA-684D-4A71-ADE2B6987B26C101"
+			isrelativeresize="true"
+			currentstate="6A2070BE-F66F-4E6D-88978F4CC234D718"
+			defaultstate="6A2070BE-F66F-4E6D-88978F4CC234D718">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoSettlementTypeRecord"
+					context_function_id="Key"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+				<property
+					name="suppress_localise_asserts"
+					value=""/>
+			</userproperties>
+			<states>
+				<active
+					this="6A2070BE-F66F-4E6D-88978F4CC234D718"
+					name="active"
+					width="300"
+					height="29"
+					uniqueguid="6A2070BE-F66F-4E6D-88978F4CC234D718">
+					<component_text
+						text="..."
+						textvalign="Center"
+						textxoffset="28.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_4a3be4f7"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_button_text"
+						font_colour_override_preset_key="fabulous_pink"
+						textshadervars="0.50,1.00,1.00,0.00"/>
+				</active>
+			</states>
+		</button_txt>
+		<button_txt
+			this="FB770CB2-38DA-412E-9C9DF601FF6128A9"
+			id="button_txt"
+			part_of_template="true"
+			uniqueguid_in_template="C5314C5F-DB2A-4917-835E17930F5E2573"
+			uniqueguid="FB770CB2-38DA-412E-9C9DF601FF6128A9"
+			dimensions="158.00,29.00"
+			dock_point="Center"
+			offset="0.00,-1.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="B787F71A-FE66-4AD9-97D12F470D282326"/>
+			</state_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="instance_resize"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					text="Find Necropolis"
+					text_label="StateText_d9d18e4"
 					is_text_localised="false"/>
 			</localised_texts>
 		</button_txt>
@@ -4627,6 +4749,72 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_develop_buildings>
+		<dev_button_find_necropolis
+			this="9F3E26DD-43D2-4B27-BA9AF7AED358FDD9"
+			id="dev_button_find_necropolis"
+			template_id="dev_text_button"
+			is_dev_only="true"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="9F3E26DD-43D2-4B27-BA9AF7AED358FDD9"
+			dimensions="158.00,29.00"
+			dock_point="Top Left"
+			is_visible="false"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="2E11F725-5976-4641-A4A93C8087481DCE"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="2E9560D4-0493-4412-810AB562CE1CF27C"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="E889B3ED-F8E8-4BC1-A085EAED935DAE81"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="E92E93C5-9F2B-40AE-B6CF7C6F25B84A07"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="458CD1D6-BF95-4803-9A106DB9B68B4F80"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="116EABEB-DD2C-45EC-9C62E4D03CF51C6A"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="2CFF7AF7-1077-45C2-A0244CB02DB88245"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignProvince"
+					context_function_id="SettlementList.FirstContext.ExLandOfTheDeadLinkedNecropolisSettlementContext.SelectAndZoom"/>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_find_necropolis>
 		<dev_button_process_queues
 			this="5C63594F-F1C6-4414-885A1CC390FDBA18"
 			id="dev_button_process_queues"
@@ -4830,6 +5018,80 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_remove_thralls>
+		<dev_button_select_settlement_type
+			this="BEFC7271-BB2D-4BE8-B77168245D43601E"
+			id="dev_button_select_settlement_type"
+			template_id="dev_text_button"
+			part_of_template="true"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			uniqueguid="BEFC7271-BB2D-4BE8-B77168245D43601E"
+			dimensions="180.00,29.00"
+			dock_point="Top Center External"
+			offset="0.00,-30.00"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="D23C5D0E-70C6-4846-B02E083F26EBF04B"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="BFEE99BC-F77F-4258-994FE46044A8071A"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="76B7BF7B-353C-4FCC-9CF257A27DC4ECCC"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="AF350699-AEA1-49F9-A39E520FC2A13BE2"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="5CE3563C-FB3A-4969-B0A7948C442565ED"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_rectangular_backplate.png"
+					uniqueguid="88B58CFA-B94D-43D5-ADAF3D0D926E1025"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/button_square_hover_highlight.png"
+					uniqueguid="75B6D077-8593-4320-A72F3D7838B249FD"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="Component(&quot;dev_settlement_types_list&quot;).SetVisible(true)"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsPlayerOwned == false &amp;&amp; HasMultipleDevOccupySettlementTypes">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="SettlementFactionChange"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</override_images>
+		</dev_button_select_settlement_type>
 		<dev_button_spawn_rebellion
 			this="B843619B-351F-415D-8E626AC06868BA1E"
 			id="dev_button_spawn_rebellion"
@@ -4970,6 +5232,36 @@
 				<element value="ui/skins/default/dev/button_square_hover_highlight.png"/>
 			</override_images>
 		</dev_button_take_control>
+		<dev_icon
+			this="443C796B-3426-4A4C-8EFB05F67A8501A8"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="443C796B-3426-4A4C-8EFB05F67A8501A8"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="F01FCE97-CEFA-40CC-AF5D55A894C95AED"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="838FB31F-A2CD-4CF8-A2225D550166F597"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<dev_icon
 			this="0AA2236F-16FC-4111-921BB159303F4D5D"
 			id="dev_icon"
@@ -5210,6 +5502,36 @@
 				<element value="ui/skins/default/dev/dev_icon.png"/>
 			</override_images>
 		</dev_icon>
+		<dev_icon
+			this="05429287-F535-4615-908523AF4A4FE233"
+			id="dev_icon"
+			part_of_template="true"
+			uniqueguid_in_template="0F4F9F06-4613-496B-A0F05A2B8B88B70D"
+			uniqueguid="05429287-F535-4615-908523AF4A4FE233"
+			dimensions="24.00,24.00"
+			dock_point="Center Left"
+			offset="2.00,0.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="617D6AC2-3FFE-4B3C-A07CFFE730A17D3B"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/dev/dev_icon.png"
+					uniqueguid="A450F998-218D-4A94-88BEE0200D192B9E"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/dev/dev_icon.png"/>
+			</override_images>
+		</dev_icon>
 		<dev_points_icon
 			this="6842FFB3-D1AB-47B3-B8BBDD625BF641D1"
 			id="dev_points icon"
@@ -5243,6 +5565,48 @@
 				</newstate>
 			</states>
 		</dev_points_icon>
+		<dev_settlement_types_list
+			this="B311926C-4F08-4F52-BD7E5C6427774E11"
+			id="dev_settlement_types_list"
+			offset="-149.00,1.00"
+			visible="false"
+			docking="Bottom Center External"
+			component_anchor_point="0.50,-0.00"
+			tooltipslocalised="true"
+			uniqueguid="B311926C-4F08-4F52-BD7E5C6427774E11"
+			currentstate="5EDF4868-597E-481B-9518ADE87E2DA06B"
+			defaultstate="5EDF4868-597E-481B-9518ADE87E2DA06B">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="DevOccupySettlementTypeList">
+					<child_m_user_properties>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoCampaignSettlement"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignSettlement"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="5EDF4868-597E-481B-9518ADE87E2DA06B"
+					name="default"
+					width="300"
+					height="29"
+					uniqueguid="5EDF4868-597E-481B-9518ADE87E2DA06B"/>
+			</states>
+			<LayoutEngine
+				type="List"
+				sizetocontent="true">
+				<columnwidths>
+					<column width="32"/>
+				</columnwidths>
+			</LayoutEngine>
+		</dev_settlement_types_list>
 		<dev_take_control_parent
 			this="2641C687-8C48-4D04-B17CDAC380520C8F"
 			id="dev_take_control_parent"
@@ -5858,7 +6222,6 @@
 			this="547F2FFF-AE41-499C-92CA04CBC24E6248"
 			id="discovered_list"
 			offset="204.00,80.00"
-			allowhorizontalresize="false"
 			docking="Top Right External"
 			dock_offset="0.00,150.00"
 			component_anchor_point="-0.00,1.00"
@@ -5880,7 +6243,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction == false &amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))"/>
+					context_function_id="HostileSlotsGroupList.Any(CategoryObject.IsPlayersFaction == false&#10;&amp;&amp; !GroupedList.FirstContext.ForeignSlotSetKey.Contains(&quot;wh3_dlc29_slot_set_vampire_lair&quot;)&#10;&amp;&amp; GroupedList.FirstContext.ForeignSlotDiscoveredByFaction(PlayersFaction))"/>
 				<callback_with_context callback_id="TopmostObjectCallback"/>
 				<callback_with_context
 					callback_id="ContextCommandGiverOnVisibilityChanged"
@@ -6050,6 +6413,10 @@
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignBuildingSlot"
 					context_function_id="RemovalCost"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="CanRemoveForeignSlotManager"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -6760,6 +7127,29 @@
 				</default>
 			</states>
 		</dy_winds>
+		<find_necropolis_dev_button_holder
+			this="339C2A11-22DE-4879-B8EB4E21486BB5FE"
+			id="find_necropolis_dev_button_holder"
+			offset="-8.00,-80.00"
+			docking="Top Left"
+			dock_offset="-8.00,-80.00"
+			tooltipslocalised="true"
+			uniqueguid="339C2A11-22DE-4879-B8EB4E21486BB5FE"
+			currentstate="B86A1125-A2E4-4F2F-9F464B41877C9485"
+			defaultstate="B86A1125-A2E4-4F2F-9F464B41877C9485">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignProvince"
+					context_function_id="SettlementList.FirstContext.ExLandOfTheDeadIsAffected"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="B86A1125-A2E4-4F2F-9F464B41877C9485"
+					name="default"
+					uniqueguid="B86A1125-A2E4-4F2F-9F464B41877C9485"/>
+			</states>
+		</find_necropolis_dev_button_holder>
 		<focus_components_holder
 			this="54BDFD51-DE3C-46C4-BAF4CF1F0302B9CA"
 			id="focus_components_holder"
@@ -7709,6 +8099,64 @@
 				</newstate>
 			</states>
 		</icon_attrition>
+		<icon_dark_fortress
+			this="8A973592-58B8-4C93-8AF6B3AE92B2FB9F"
+			id="icon_dark_fortress"
+			offset="0.00,124.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			uniqueguid="8A973592-58B8-4C93-8AF6B3AE92B2FB9F"
+			currentstate="98A33FFA-D94E-4B16-B0013813F678B970"
+			defaultstate="98A33FFA-D94E-4B16-B0013813F678B970">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsPlayerOwned &amp;&amp; StringStartsWith(SettlementType, &quot;wh3_dlc29_woc_glottkin_garden_of_nurgle_&quot;) &amp;&amp; BelongsToRegionGroup(&quot;wh3_dlc20_dark_fortress_region_group&quot;)"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_function_id="GetIf(&#10;    IsContextValid(DatabaseRecordContext(&quot;CcoSettlementTypeRecord&quot;, &quot;wh3_dlc29_chs_dark_fortress&quot;)), &#10;    DatabaseRecordContext(&quot;CcoSettlementTypeRecord&quot;, &quot;wh3_dlc29_chs_dark_fortress&quot;).Icon)">
+					<child_m_user_properties>
+						<property
+							name="resize_image"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="Format(Loc(&quot;tooltip_city_info_bar_dark_fortress_title&quot;), Loc(&quot;tooltip_city_info_bar_dark_fortress_description&quot;), Loc(&quot;resource_tooltip_untradeable&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="2591A933-ADF1-41C1-A1B32D595D695FA1"
+					uniqueguid="2591A933-ADF1-41C1-A1B32D595D695FA1"
+					imagepath="ui/skins/wh3_dae_main_dae_daemons/icon_dae_khorne_points.png"/>
+			</componentimages>
+			<states>
+				<wh3_main_dae_khorne
+					this="98A33FFA-D94E-4B16-B0013813F678B970"
+					name="wh3_main_dae_khorne"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="98A33FFA-D94E-4B16-B0013813F678B970">
+					<imagemetrics>
+						<image
+							this="0D88C0D9-7D0A-4CD8-8326F2C64BA3DB08"
+							uniqueguid="0D88C0D9-7D0A-4CD8-8326F2C64BA3DB08"
+							componentimage="2591A933-ADF1-41C1-A1B32D595D695FA1"
+							width="26"
+							height="26"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+				</wh3_main_dae_khorne>
+			</states>
+		</icon_dark_fortress>
 		<icon_landmark
 			this="0BE4EB8E-C031-4509-8EE05747181B6580"
 			id="icon_landmark"
@@ -7786,6 +8234,210 @@
 				</columnwidths>
 			</LayoutEngine>
 		</icon_list>
+		<icon_mark
+			this="65F4F96A-A350-4388-905E8F9718E0D983"
+			id="icon_mark"
+			offset="0.00,124.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="65F4F96A-A350-4388-905E8F9718E0D983"
+			currentstate="B6A89DB1-7BB3-436F-AB765E1575682176"
+			defaultstate="B6A89DB1-7BB3-436F-AB765E1575682176">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="InitiativeManager.ActiveInitiatives.Size &gt; 0">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RegionInitiativeActivationChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="InitiativeManager.ActiveInitiatives.FirstContext">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="RegionInitiativeActivationChanged"/>
+						<property
+							name="layout_path"
+							value="ui/campaign ui/tooltip_dlc29_chs_marks_of_nurgle"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;BLESSINGS_OF_NURGLE&quot;) == false"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="C3575378-7D84-4B2F-968BDAC56ADAB30B"
+					uniqueguid="C3575378-7D84-4B2F-968BDAC56ADAB30B"
+					imagepath="ui/skins/default/auth_nurgle_icon.png"/>
+			</componentimages>
+			<states>
+				<default
+					this="B6A89DB1-7BB3-436F-AB765E1575682176"
+					name="default"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="B6A89DB1-7BB3-436F-AB765E1575682176">
+					<imagemetrics>
+						<image
+							this="3EF08EBC-7A3F-4459-ABDE15DF7CC2B631"
+							uniqueguid="3EF08EBC-7A3F-4459-ABDE15DF7CC2B631"
+							componentimage="C3575378-7D84-4B2F-968BDAC56ADAB30B"
+							offset="-2.00,-2.00"
+							width="30"
+							height="30"
+							dockpoint="Center"/>
+					</imagemetrics>
+				</default>
+			</states>
+		</icon_mark>
+		<icon_nurgle_rain
+			this="E83130B4-B4B2-47DF-9CA8D4A86F659F64"
+			id="icon_nurgle_rain"
+			offset="0.00,124.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			visible="false"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="E83130B4-B4B2-47DF-9CA8D4A86F659F64"
+			currentstate="CC96D7E6-F3E4-490B-968BADE2363921AA"
+			defaultstate="CC96D7E6-F3E4-490B-968BADE2363921AA">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="IsEffectBundleActive(&quot;wh3_dlc29_rain_glottkin_tier_1_region&quot;) || IsEffectBundleActive(&quot;wh3_dlc29_rain_glottkin_tier_2_region&quot;)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="EffectsListUpdated"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="#ContextLayoutTooltip"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="CcoRTBundleSettlementPair(&#10;BundleContext: EffectBundleList.FirstContext(Key.StartsWith(&quot;wh3_dlc29_rain_glottkin_tier_&quot;)), &#10;SettlementContext: self.StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)&#10;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/tooltip_dlc29_chs_nurgle_rains"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoEffectBundle"
+					context_function_id="IconPath"/>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoEffectBundle"
+					context_function_id="TurnsRemaining"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="EffectBundleList.FirstContext(Key.StartsWith(&quot;wh3_dlc29_rain_glottkin_tier_&quot;))"/>
+				<callback_with_context
+					callback_id="ContextStateSetterConditional"
+					context_object_id="CcoEffectBundle">
+					<child_m_user_properties>
+						<property
+							name="t1"
+							value="Key == &quot;wh3_dlc29_rain_glottkin_tier_1_region&quot;"/>
+						<property
+							name="t2"
+							value="Key == &quot;wh3_dlc29_rain_glottkin_tier_2_region&quot;"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextLayoutTooltip"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="CcoRTBundleSettlementPair(&#10;BundleContext: EffectBundleUnfilteredList.FirstContext(Key.StartsWith(&quot;wh3_dlc29_rain_glottkin_tier_&quot;)), &#10;SettlementContext: self.StoredContextFromParent(&quot;CcoCampaignSettlement&quot;)&#10;)">
+					<child_m_user_properties>
+						<property
+							name="layout_path"
+							value="UI/Campaign UI/tooltip_dlc29_chs_nurgle_rains"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="AFE5C137-4FC9-41D4-8CCF1AE6072B568B"
+					uniqueguid="AFE5C137-4FC9-41D4-8CCF1AE6072B568B"
+					imagepath="ui/skins/default/dlc29_chs_blessings_of_nurgle/icon_nurgle_rain_t1.png"/>
+				<component_image
+					this="99529CDB-D9AE-4CE0-8D3FCED788695D0B"
+					uniqueguid="99529CDB-D9AE-4CE0-8D3FCED788695D0B"
+					imagepath="ui/skins/default/dlc29_chs_blessings_of_nurgle/icon_nurgle_rain_t2.png"/>
+			</componentimages>
+			<states>
+				<t1
+					this="CC96D7E6-F3E4-490B-968BADE2363921AA"
+					name="t1"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="CC96D7E6-F3E4-490B-968BADE2363921AA">
+					<imagemetrics>
+						<image
+							this="4C63FA0B-066F-43CE-AC795530C3DB14EF"
+							uniqueguid="4C63FA0B-066F-43CE-AC795530C3DB14EF"
+							componentimage="AFE5C137-4FC9-41D4-8CCF1AE6072B568B"
+							width="26"
+							height="26"
+							colour="#FFFFFFF1"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<component_text
+						textxoffset="34.00,16.00"
+						textyoffset="8.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</t1>
+				<t2
+					this="C3868643-F4D7-4386-8C38C852E2971F49"
+					name="t2"
+					width="26"
+					height="26"
+					interactive="true"
+					disabled="true"
+					uniqueguid="C3868643-F4D7-4386-8C38C852E2971F49">
+					<imagemetrics>
+						<image
+							this="1A74EADF-3EAB-4649-8DA50036482CCCE5"
+							uniqueguid="1A74EADF-3EAB-4649-8DA50036482CCCE5"
+							componentimage="99529CDB-D9AE-4CE0-8D3FCED788695D0B"
+							width="26"
+							height="26"
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
+					</imagemetrics>
+					<component_text
+						textxoffset="34.00,16.00"
+						textyoffset="8.00,0.00"
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</t2>
+			</states>
+		</icon_nurgle_rain>
 		<icon_plague
 			this="DB556C2F-D592-4783-B7ECCA0A7CE74D64"
 			id="icon_plague"
@@ -7848,9 +8500,10 @@
 		<icon_settlement_type
 			this="0412D7F1-E815-427B-8CB9EE4F1C32AC59"
 			id="icon_settlement_type"
-			offset="0.00,24.00"
+			offset="0.00,25.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
+			dock_offset="0.00,1.00"
 			uniqueguid="0412D7F1-E815-427B-8CB9EE4F1C32AC59"
 			currentstate="FC1E5DCA-3DE6-45A1-8CC1892D12BD7F33"
 			defaultstate="FC1E5DCA-3DE6-45A1-8CC1892D12BD7F33">
@@ -7860,326 +8513,32 @@
 					context_object_id="CcoCampaignSettlement"
 					context_function_id="IsPlayerOwned &amp;&amp; SettlementType.IsEmpty == false"/>
 				<callback_with_context
-					callback_id="ContextStateSetter"
+					callback_id="ContextImageSetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="SettlementType"/>
+					context_function_id="SettlementTypeRecordContext.Icon">
+					<child_m_user_properties>
+						<property
+							name="resize_image"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTooltipSetter"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="SettlementTypeRecordContext.Tooltip"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
 					this="E94811AF-237B-4B3B-94C0A210A3266793"
 					uniqueguid="E94811AF-237B-4B3B-94C0A210A3266793"
 					imagepath="ui/skins/wh3_dae_main_dae_daemons/icon_dae_khorne_points.png"/>
-				<component_image
-					this="2E12A4DC-72F0-4711-B80D4E484247E39E"
-					uniqueguid="2E12A4DC-72F0-4711-B80D4E484247E39E"
-					imagepath="ui/skins/wh3_dae_main_dae_daemons/icon_dae_nurgle_points.png"/>
-				<component_image
-					this="2BC6D6A9-8449-427F-80715901324CE82D"
-					uniqueguid="2BC6D6A9-8449-427F-80715901324CE82D"
-					imagepath="ui/skins/wh3_dae_main_dae_daemons/icon_dae_slaanesh_points.png"/>
-				<component_image
-					this="61FF6D84-1344-43ED-B1B8713EB88A1BCF"
-					uniqueguid="61FF6D84-1344-43ED-B1B8713EB88A1BCF"
-					imagepath="ui/skins/wh3_dae_main_dae_daemons/icon_dae_tzeentch_points.png"/>
-				<component_image
-					this="CF991CBA-9789-4650-B781503A1608CBDB"
-					uniqueguid="CF991CBA-9789-4650-B781503A1608CBDB"
-					imagepath="ui/skins/wh3_dlc23_chd_chaos_dwarfs/icon_chd_factory.png"/>
-				<component_image
-					this="6E14A6CB-0403-4F45-8467FEE822B527F6"
-					uniqueguid="6E14A6CB-0403-4F45-8467FEE822B527F6"
-					imagepath="ui/skins/wh3_dlc23_chd_chaos_dwarfs/icon_chd_outpost.png"/>
-				<component_image
-					this="344C9EAE-B5A7-431F-826395A068E4CBB0"
-					uniqueguid="344C9EAE-B5A7-431F-826395A068E4CBB0"
-					imagepath="ui/skins/wh3_dlc23_chd_chaos_dwarfs/icon_chd_tower.png"/>
-				<component_image
-					this="C59B0514-1EA4-404A-B00FB4B5B09BC531"
-					uniqueguid="C59B0514-1EA4-404A-B00FB4B5B09BC531"
-					imagepath="ui/skins/default/wh3_dlc27_dechala_pleasure_palace.png"/>
-				<component_image
-					this="1358926F-F657-454D-A72CBEC74663E1DD"
-					uniqueguid="1358926F-F657-454D-A72CBEC74663E1DD"
-					imagepath="ui/skins/default/wh3_dlc27_dechala_thrall_camp.png"/>
-				<component_image
-					this="BD6C62B8-C001-4201-B4DFAD56C908D157"
-					uniqueguid="BD6C62B8-C001-4201-B4DFAD56C908D157"
-					imagepath="ui/skins/default/wh3_dlc27_dechala_war_pit.png"/>
-				<component_image
-					this="00CC4DF4-C705-4D62-A776D22FB7DEDB60"
-					uniqueguid="00CC4DF4-C705-4D62-A776D22FB7DEDB60"
-					imagepath="ui/skins/default/dlc27_nor_allegiance/icon_nor_crow.png"/>
-				<component_image
-					this="FA557524-25EC-4E41-874E8FC6DB6C6AEE"
-					uniqueguid="FA557524-25EC-4E41-874E8FC6DB6C6AEE"
-					imagepath="ui/skins/default/dlc27_nor_allegiance/icon_nor_eagle.png"/>
-				<component_image
-					this="6E142C85-A432-4BEE-8D4E8D1E17C59BFA"
-					uniqueguid="6E142C85-A432-4BEE-8D4E8D1E17C59BFA"
-					imagepath="ui/skins/default/dlc27_nor_allegiance/icon_nor_hound.png"/>
-				<component_image
-					this="5956EFD6-A94C-460D-85F6B04AAE53FE75"
-					uniqueguid="5956EFD6-A94C-460D-85F6B04AAE53FE75"
-					imagepath="ui/skins/default/dlc27_nor_allegiance/icon_nor_serpent.png"/>
-				<component_image
-					this="B0729F30-C2D4-458B-BEFE09BA285E553B"
-					uniqueguid="B0729F30-C2D4-458B-BEFE09BA285E553B"
-					imagepath="ui/skins/default/dlc27_nor_allegiance/icon_nor_undivided.png"/>
-				<component_image
-					this="D2D2CA8C-41DA-4F28-AA6BE88765A78E25"
-					uniqueguid="D2D2CA8C-41DA-4F28-AA6BE88765A78E25"
-					imagepath="ui/skins/default/icon_norsca_outpost.png"/>
 			</componentimages>
 			<states>
-				<wh3_dlc23_chd_factory
-					this="52FAFA54-821B-4B97-B68ACFB2848281DC"
-					name="wh3_dlc23_chd_factory"
-					width="26"
-					height="26"
-					tooltip="{{tr:settlement_types_tooltip_chd_factory}}"
-					interactive="true"
-					uniqueguid="52FAFA54-821B-4B97-B68ACFB2848281DC">
-					<imagemetrics>
-						<image
-							this="02C5DA91-CF32-4662-A3C74E903F85DE78"
-							uniqueguid="02C5DA91-CF32-4662-A3C74E903F85DE78"
-							componentimage="CF991CBA-9789-4650-B781503A1608CBDB"
-							offset="-6.00,-6.00"
-							width="38"
-							height="38"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</wh3_dlc23_chd_factory>
-				<wh3_dlc23_chd_outpost
-					this="BD5FC379-23F6-48E4-986D4080CD33986A"
-					name="wh3_dlc23_chd_outpost"
-					width="26"
-					height="26"
-					tooltip="{{tr:settlement_types_tooltip_chd_outpost}}"
-					interactive="true"
-					uniqueguid="BD5FC379-23F6-48E4-986D4080CD33986A">
-					<imagemetrics>
-						<image
-							this="73554937-F9B4-4D72-8AE6C1FCF39F87A2"
-							uniqueguid="73554937-F9B4-4D72-8AE6C1FCF39F87A2"
-							componentimage="6E14A6CB-0403-4F45-8467FEE822B527F6"
-							offset="-6.00,-6.00"
-							width="38"
-							height="38"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</wh3_dlc23_chd_outpost>
-				<wh3_dlc23_chd_tower
-					this="BB497050-B6AC-47E7-9CF8898A8C7D7201"
-					name="wh3_dlc23_chd_tower"
-					width="26"
-					height="26"
-					tooltip="{{tr:settlement_types_tooltip_chd_tower}}"
-					interactive="true"
-					uniqueguid="BB497050-B6AC-47E7-9CF8898A8C7D7201">
-					<imagemetrics>
-						<image
-							this="274F4804-07B5-4D30-BAEB8422B0C67B74"
-							uniqueguid="274F4804-07B5-4D30-BAEB8422B0C67B74"
-							componentimage="344C9EAE-B5A7-431F-826395A068E4CBB0"
-							offset="-6.00,-6.00"
-							width="38"
-							height="38"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</wh3_dlc23_chd_tower>
-				<wh3_dlc27_dechala_pleasure_palace
-					this="5AE05871-CE07-45E0-914C1C13F917C744"
-					name="wh3_dlc27_dechala_pleasure_palace"
-					width="26"
-					height="26"
-					tooltip="{{tr:wh3_dlc27_sla_dechala_major_settlement_type_pleasure_palace_tooltip_tx}}"
-					tooltiplabel="StateTooltip_64f441ef"
-					interactive="true"
-					disabled="true"
-					uniqueguid="5AE05871-CE07-45E0-914C1C13F917C744">
-					<imagemetrics>
-						<image
-							this="6EC0BC65-EBB3-4748-AECB72EC0F6CAA34"
-							uniqueguid="6EC0BC65-EBB3-4748-AECB72EC0F6CAA34"
-							componentimage="C59B0514-1EA4-404A-B00FB4B5B09BC531"
-							width="26"
-							height="26"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</wh3_dlc27_dechala_pleasure_palace>
-				<wh3_dlc27_dechala_thrall_camp
-					this="70208198-37CD-4A75-A2A2A5AE455FCEFC"
-					name="wh3_dlc27_dechala_thrall_camp"
-					width="26"
-					height="26"
-					tooltip="{{tr:wh3_dlc27_sla_dechala_major_settlement_type_thrall_camp}}"
-					tooltiplabel="StateTooltip_b6d3e6f"
-					interactive="true"
-					disabled="true"
-					uniqueguid="70208198-37CD-4A75-A2A2A5AE455FCEFC">
-					<imagemetrics>
-						<image
-							this="6C3D9AA1-BA37-4777-905F4E50C26FEBFA"
-							uniqueguid="6C3D9AA1-BA37-4777-905F4E50C26FEBFA"
-							componentimage="1358926F-F657-454D-A72CBEC74663E1DD"
-							width="26"
-							height="26"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-				</wh3_dlc27_dechala_thrall_camp>
-				<wh3_dlc27_dechala_war_pit
-					this="211B233F-1AB2-46C2-AB0771A95A44B384"
-					name="wh3_dlc27_dechala_war_pit"
-					width="26"
-					height="26"
-					tooltip="{{tr:wh3_dlc27_sla_dechala_major_settlement_type_war_pit}}"
-					tooltiplabel="StateTooltip_279196db"
-					interactive="true"
-					disabled="true"
-					uniqueguid="211B233F-1AB2-46C2-AB0771A95A44B384">
-					<imagemetrics>
-						<image
-							this="EAAB85E1-DC4E-4CA0-9B670B21005D7A84"
-							uniqueguid="EAAB85E1-DC4E-4CA0-9B670B21005D7A84"
-							componentimage="BD6C62B8-C001-4201-B4DFAD56C908D157"
-							width="26"
-							height="26"
-							dockpoint="Center"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<component_text
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"/>
-				</wh3_dlc27_dechala_war_pit>
-				<wh3_dlc27_norsca_altars_kho
-					this="57841BB8-1EE4-4161-B3D4FCC367AE1023"
-					name="wh3_dlc27_norsca_altars_kho"
-					width="26"
-					height="26"
-					tooltip="{{tr:uied_component_texts_localised_string_wh3_dlc27_nor_allegiance_settlement_type_hound_tooltip}}"
-					tooltiplabel="StateTooltip_ff046497"
-					interactive="true"
-					disabled="true"
-					uniqueguid="57841BB8-1EE4-4161-B3D4FCC367AE1023">
-					<imagemetrics>
-						<image
-							this="84E83066-9DBD-474D-8A53EB4AB4C80905"
-							uniqueguid="84E83066-9DBD-474D-8A53EB4AB4C80905"
-							componentimage="6E142C85-A432-4BEE-8D4E8D1E17C59BFA"
-							width="26"
-							height="26"/>
-					</imagemetrics>
-				</wh3_dlc27_norsca_altars_kho>
-				<wh3_dlc27_norsca_altars_nur
-					this="04B8A54D-01C3-4D78-B8D2E5206F8C72D8"
-					name="wh3_dlc27_norsca_altars_nur"
-					width="26"
-					height="26"
-					tooltip="{{tr:uied_component_texts_localised_string_wh3_dlc27_nor_allegiance_settlement_type_crow_tooltip}}"
-					tooltiplabel="StateTooltip_4de342a8"
-					interactive="true"
-					disabled="true"
-					uniqueguid="04B8A54D-01C3-4D78-B8D2E5206F8C72D8">
-					<imagemetrics>
-						<image
-							this="7F38E47B-B680-4562-89D05D905FE1A682"
-							uniqueguid="7F38E47B-B680-4562-89D05D905FE1A682"
-							componentimage="00CC4DF4-C705-4D62-A776D22FB7DEDB60"
-							width="26"
-							height="26"/>
-					</imagemetrics>
-				</wh3_dlc27_norsca_altars_nur>
-				<wh3_dlc27_norsca_altars_sla
-					this="7C734538-D912-4CB9-AF70E5E520608162"
-					name="wh3_dlc27_norsca_altars_sla"
-					width="26"
-					height="26"
-					tooltip="{{tr:uied_component_texts_localised_string_wh3_dlc27_nor_allegiance_settlement_type_serpent_tooltip}}"
-					tooltiplabel="StateTooltip_6a6bfbef"
-					interactive="true"
-					disabled="true"
-					uniqueguid="7C734538-D912-4CB9-AF70E5E520608162">
-					<imagemetrics>
-						<image
-							this="0C40A64F-BE19-4685-9CAD26138F438DD6"
-							uniqueguid="0C40A64F-BE19-4685-9CAD26138F438DD6"
-							componentimage="5956EFD6-A94C-460D-85F6B04AAE53FE75"
-							width="26"
-							height="26"/>
-					</imagemetrics>
-				</wh3_dlc27_norsca_altars_sla>
-				<wh3_dlc27_norsca_altars_tze
-					this="7B6B37FE-8A38-4D56-AA220D0484D1374C"
-					name="wh3_dlc27_norsca_altars_tze"
-					width="26"
-					height="26"
-					tooltip="{{tr:uied_component_texts_localised_string_wh3_dlc27_nor_allegiance_settlement_type_eagle_tooltip}}"
-					tooltiplabel="StateTooltip_55170f81"
-					interactive="true"
-					disabled="true"
-					uniqueguid="7B6B37FE-8A38-4D56-AA220D0484D1374C">
-					<imagemetrics>
-						<image
-							this="B0366BCF-9A9D-4B4C-932FBE3A63AD1A69"
-							uniqueguid="B0366BCF-9A9D-4B4C-932FBE3A63AD1A69"
-							componentimage="FA557524-25EC-4E41-874E8FC6DB6C6AEE"
-							width="26"
-							height="26"/>
-					</imagemetrics>
-				</wh3_dlc27_norsca_altars_tze>
-				<wh3_dlc27_norsca_altars_und
-					this="9E01DD17-5BAD-46A5-8617E0E09BD02623"
-					name="wh3_dlc27_norsca_altars_und"
-					width="26"
-					height="26"
-					tooltip="{{tr:uied_component_texts_localised_string_wh3_dlc27_nor_allegiance_settlement_type_undivided_tooltip}}"
-					tooltiplabel="StateTooltip_b15ae687"
-					interactive="true"
-					disabled="true"
-					uniqueguid="9E01DD17-5BAD-46A5-8617E0E09BD02623">
-					<imagemetrics>
-						<image
-							this="FA1BD435-2688-447A-8A0A44E2E38D3549"
-							uniqueguid="FA1BD435-2688-447A-8A0A44E2E38D3549"
-							componentimage="B0729F30-C2D4-458B-BEFE09BA285E553B"
-							width="26"
-							height="26"/>
-					</imagemetrics>
-				</wh3_dlc27_norsca_altars_und>
-				<wh3_dlc27_norsca_core_settlement
-					this="6FA45172-D718-45BF-9422D1967B12C2EB"
-					name="wh3_dlc27_norsca_core_settlement"
-					width="26"
-					height="26"
-					tooltip="{{tr:ui_text_replacements_localised_text_wh3_dlc27_nor_established_spoils_settlement_type_tooltip}}"
-					tooltiplabel="StateTooltip_6e7fb684"
-					interactive="true"
-					disabled="true"
-					uniqueguid="6FA45172-D718-45BF-9422D1967B12C2EB">
-					<imagemetrics>
-						<image
-							this="61591E2D-3038-4246-9A288A25B5BDF109"
-							uniqueguid="61591E2D-3038-4246-9A288A25B5BDF109"
-							componentimage="D2D2CA8C-41DA-4F28-AA6BE88765A78E25"
-							width="26"
-							height="26"/>
-					</imagemetrics>
-				</wh3_dlc27_norsca_core_settlement>
 				<wh3_main_dae_khorne
 					this="FC1E5DCA-3DE6-45A1-8CC1892D12BD7F33"
 					name="wh3_main_dae_khorne"
 					width="26"
 					height="26"
-					tooltip="{{tr:settlement_types_tooltip_khorne}}"
-					tooltiplabel="StateTooltip_ed9126f2"
 					interactive="true"
 					uniqueguid="FC1E5DCA-3DE6-45A1-8CC1892D12BD7F33">
 					<imagemetrics>
@@ -8189,66 +8548,11 @@
 							componentimage="E94811AF-237B-4B3B-94C0A210A3266793"
 							width="26"
 							height="26"
-							dockpoint="Center"/>
+							dockpoint="Center"
+							canresizeheight="false"
+							canresizewidth="false"/>
 					</imagemetrics>
 				</wh3_main_dae_khorne>
-				<wh3_main_dae_nurgle
-					this="409F2DF4-836A-4A21-BB27950AC90DB26F"
-					name="wh3_main_dae_nurgle"
-					width="26"
-					height="26"
-					tooltip="{{tr:settlement_types_tooltip_nurgle}}"
-					tooltiplabel="StateTooltip_6160d784"
-					interactive="true"
-					uniqueguid="409F2DF4-836A-4A21-BB27950AC90DB26F">
-					<imagemetrics>
-						<image
-							this="C7F3BC3F-69D0-4A04-A037B92EF831E4EC"
-							uniqueguid="C7F3BC3F-69D0-4A04-A037B92EF831E4EC"
-							componentimage="2E12A4DC-72F0-4711-B80D4E484247E39E"
-							width="26"
-							height="26"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</wh3_main_dae_nurgle>
-				<wh3_main_dae_slaanesh
-					this="29702045-544C-4A20-9B5D81859F286647"
-					name="wh3_main_dae_slaanesh"
-					width="26"
-					height="26"
-					tooltip="{{tr:settlement_types_tooltip_slaanesh}}"
-					tooltiplabel="StateTooltip_be42642b"
-					interactive="true"
-					uniqueguid="29702045-544C-4A20-9B5D81859F286647">
-					<imagemetrics>
-						<image
-							this="0F94894E-697A-4ACB-9124C29D0FE32917"
-							uniqueguid="0F94894E-697A-4ACB-9124C29D0FE32917"
-							componentimage="2BC6D6A9-8449-427F-80715901324CE82D"
-							width="26"
-							height="26"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</wh3_main_dae_slaanesh>
-				<wh3_main_dae_tzeentch
-					this="F06087ED-5391-4C39-9688B098F9BBE72C"
-					name="wh3_main_dae_tzeentch"
-					width="26"
-					height="26"
-					tooltip="{{tr:settlement_types_tooltip_tzeentch}}"
-					tooltiplabel="StateTooltip_9c257c48"
-					interactive="true"
-					uniqueguid="F06087ED-5391-4C39-9688B098F9BBE72C">
-					<imagemetrics>
-						<image
-							this="145AF88C-FF6C-4AE3-A01C99F313799C7B"
-							uniqueguid="145AF88C-FF6C-4AE3-A01C99F313799C7B"
-							componentimage="61FF6D84-1344-43ED-B1B8713EB88A1BCF"
-							width="26"
-							height="26"
-							dockpoint="Center"/>
-					</imagemetrics>
-				</wh3_main_dae_tzeentch>
 			</states>
 		</icon_settlement_type>
 		<icon_wall_integrity
@@ -8426,6 +8730,99 @@
 				</newstate>
 			</states>
 		</label_tx>
+		<lair_view
+			this="85B8B5CB-5A03-4E29-97877459A509AA84"
+			id="lair_view"
+			offset="2.00,23.00"
+			allowverticalresize="false"
+			visible="false"
+			docking="Top Center"
+			dock_offset="0.00,23.00"
+			component_anchor_point="0.50,0.00"
+			tooltipslocalised="true"
+			uniqueguid="85B8B5CB-5A03-4E29-97877459A509AA84"
+			currentstate="C67C2E8D-5439-4BAD-A39FE4B0A3369138"
+			defaultstate="C67C2E8D-5439-4BAD-A39FE4B0A3369138">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="ComponentVisibilityChangeReporter">
+					<child_m_user_properties>
+						<property
+							name="hidden_event"
+							value="lair_panel_hidden"/>
+						<property
+							name="shown_event"
+							value="lair_panel_shown"/>
+						<property
+							name="update_when_invisible"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="ResizeToFitParent"/>
+				<callback_with_context callback_id="ComponentCreator">
+					<child_m_user_properties>
+						<property
+							name="layout"
+							value="ui/campaign ui/dlc29_vmp_vampire_lair_popup"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="#show lair hostile views and lair-popup#&#10;ExVampireLairs_LairView_LairPanelShown">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="lair_panel_shown"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="#hide lair hostile views and lair-popup#&#10;ExVampireLairs_LairView_LairPanelHidden">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="lair_panel_hidden"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="Do( self.ChildContext(&quot;lair_building_browser&quot;).SetVisible(false), self.ChildContext(&quot;dlc29_vmp_vampire_lair_popup&quot;).SetVisible(false) )">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CloseLairPopup"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_function_id="self.ChildContext(&quot;dlc29_vmp_vampire_lair_popup&quot;).SetVisible(true)">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="OpenLairPopup"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandEvent"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="DoIf(!IsSelected, UiMsg(&quot;CloseLairPopup&quot;))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CampaignSettlementSelectedAny"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<states>
+				<newstate
+					this="C67C2E8D-5439-4BAD-A39FE4B0A3369138"
+					name="NewState"
+					width="204"
+					height="154"
+					uniqueguid="C67C2E8D-5439-4BAD-A39FE4B0A3369138"/>
+			</states>
+		</lair_view>
 		<land
 			this="A3BD4597-9FEF-4E9A-92E452A268EAF6D1"
 			id="land"
@@ -9108,7 +9505,6 @@
 			id="panorama"
 			offset="9.00,51.00"
 			allowverticalresize="false"
-			visible="false"
 			clipimagestocomponent="true"
 			docking="Top Center"
 			dock_offset="0.00,51.00"
@@ -9117,18 +9513,30 @@
 			uniqueguid="F4102124-B8BA-4D17-BCA49CA5B1FE858D"
 			isrelativeresize="true"
 			currentstate="B57582AE-8D28-498B-92EFFCAE4B5BE6CE"
-			defaultstate="B57582AE-8D28-498B-92EFFCAE4B5BE6CE"
-			marked_for_deletion="true">
+			defaultstate="B57582AE-8D28-498B-92EFFCAE4B5BE6CE">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="ResizeToFitParent"/>
 				<callback_with_context
 					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignProvince"
-					context_function_id="CapitalSettlementContext.OriginalSubcultureContext.Culture.UiBackgroundImage">
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="FactionContext.CultureContext.UiBackgroundImage">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="CampaignSelectionChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="!SettlementPanelBackgroundsEnabled"/>
+				<callback_with_context callback_id="ContextInitSelectedSettlement">
+					<child_m_user_properties>
+						<property
+							name="dont_clear_on_empty"
+							value=""/>
+						<property
+							name="init_self"
+							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -9954,6 +10362,19 @@
 							value=""/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context callback_id="ContextInitSelectedSettlement">
+					<child_m_user_properties>
+						<property
+							name="dont_clear_on_empty"
+							value=""/>
+						<property
+							name="init_self"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoCampaignSettlement"/>
 				<callback_with_context callback_id="ResizeToFitTarget">
 					<child_m_user_properties>
 						<property
@@ -10096,18 +10517,6 @@
 						<property
 							name="event1"
 							value="garrison_view_enabled"/>
-					</child_m_user_properties>
-				</callback_with_context>
-				<callback_with_context
-					callback_id="#SettlementViewCallback"
-					context_object_id="CcoCampaignSettlement">
-					<child_m_user_properties>
-						<property
-							name="faction_overlay"
-							value="other_faction_overlay"/>
-						<property
-							name="parent_id"
-							value="^1"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context callback_id="ResizeToFitTarget">
@@ -10342,7 +10751,6 @@
 			offset="692.00,10.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
-			visible="false"
 			docking="Top Right"
 			dock_offset="-122.00,10.00"
 			component_anchor_point="1.00,0.00"
@@ -10663,6 +11071,360 @@
 				</inactive>
 			</states>
 		</target_shadowy_dealings_button>
+		<target_web_of_power_button
+			this="D77C4B34-7D75-4E6F-B14CA359221615D0"
+			id="target_web_of_power_button"
+			offset="783.00,-30.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Right"
+			dock_offset="-31.00,-30.00"
+			component_anchor_point="1.00,0.00"
+			priority="50"
+			tooltipslocalised="true"
+			componentleveltooltip="Click to target the selected settlement in the Web of Power"
+			tooltiplabel="wh3_dlc29_vmp_web_of_power_settlement_target_button_tooltip"
+			soundcategory="UI_GBL_TMP_Round_Small_Button"
+			uniqueguid="D77C4B34-7D75-4E6F-B14CA359221615D0"
+			currentstate="F1F53CA6-BCC3-40EA-9D77392F6E352911"
+			defaultstate="F1F53CA6-BCC3-40EA-9D77392F6E352911">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Button"/>
+				<callback_with_context
+					callback_id="ContextTrashOnCondition"
+					context_function_id="CanUseUiFeature(&quot;WEB_OF_POWER&quot;) == false"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_function_id="ShowAlternativeExtendedRitualTargetingPanel"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+			</userproperties>
+			<componentimages>
+				<component_image
+					this="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+					uniqueguid="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+					imagepath="ui/skins/default/dlc29_vmp_web_of_power/icon_web_of_power_button.png"/>
+				<component_image
+					this="DFC7551C-807B-4B5A-8E8E28D93EB1585E"
+					uniqueguid="DFC7551C-807B-4B5A-8E8E28D93EB1585E"
+					imagepath="ui/skins/default/button_round_small_active.png"/>
+				<component_image
+					this="65FD4C59-1077-45B9-9C7544F9CFFB615F"
+					uniqueguid="65FD4C59-1077-45B9-9C7544F9CFFB615F"
+					imagepath="ui/skins/default/ability_frame_battle.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="F1F53CA6-BCC3-40EA-9D77392F6E352911"
+					name="active"
+					width="30"
+					height="30"
+					interactive="true"
+					uniqueguid="F1F53CA6-BCC3-40EA-9D77392F6E352911"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="C3E694B5-C429-41BC-9705C4E0D0A02181"
+							uniqueguid="C3E694B5-C429-41BC-9705C4E0D0A02181"
+							componentimage="65FD4C59-1077-45B9-9C7544F9CFFB615F"
+							offset="1.00,0.00"
+							width="28"
+							height="42"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,12.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="1.57079637"/>
+						<image
+							this="19A7296D-8B06-42BE-9ABA4D79A43974DB"
+							uniqueguid="19A7296D-8B06-42BE-9ABA4D79A43974DB"
+							componentimage="DFC7551C-807B-4B5A-8E8E28D93EB1585E"
+							offset="-4.00,-4.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+						<image
+							this="F136238D-B976-4FAF-8C8F97DB0F901218"
+							uniqueguid="F136238D-B976-4FAF-8C8F97DB0F901218"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="932E1880-FA12-4293-8B28F74E0FF5BDC6"
+							uniqueguid="932E1880-FA12-4293-8B28F74E0FF5BDC6"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="62D01E88-811E-46E1-BD2FC98A4E1DC4DF"
+							uniqueguid="62D01E88-811E-46E1-BD2FC98A4E1DC4DF"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							shadertechnique_vars="0.50,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="F5791462-32DC-4FEF-BB5B65E85D0280CD"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</active>
+				<down
+					this="1D689917-DE0E-426C-A375AD2506BFA08B"
+					name="down"
+					width="30"
+					height="30"
+					interactive="true"
+					shadervars="-0.40,0.00,0.00,0.00"
+					uniqueguid="1D689917-DE0E-426C-A375AD2506BFA08B"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="1BF40163-85DF-4741-B4E84BB3CB6760D6"
+							uniqueguid="1BF40163-85DF-4741-B4E84BB3CB6760D6"
+							componentimage="65FD4C59-1077-45B9-9C7544F9CFFB615F"
+							offset="1.00,0.00"
+							width="28"
+							height="42"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,12.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="1.57079637"/>
+						<image
+							this="E7D0B917-4586-4952-A89505AEDC6D8984"
+							uniqueguid="E7D0B917-4586-4952-A89505AEDC6D8984"
+							componentimage="DFC7551C-807B-4B5A-8E8E28D93EB1585E"
+							offset="-4.00,-2.00"
+							width="38"
+							height="38"
+							dockpoint="Center"
+							dock_offset="0.00,2.00"
+							shadertechnique_vars="-0.40,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+						<image
+							this="5270689D-FFF6-48AE-932A409162948E67"
+							uniqueguid="5270689D-FFF6-48AE-932A409162948E67"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							offset="0.00,3.00"
+							width="30"
+							height="30"
+							colour="#6E6E6EFF"
+							dockpoint="Center"
+							dock_offset="0.00,3.00"
+							shadertechnique_vars="-0.40,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="A9191622-DAAA-4D1B-955ED02201698A14"/>
+						<transition
+							index="3"
+							transition_m_target_state="F5791462-32DC-4FEF-BB5B65E85D0280CD"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</down>
+				<down_off
+					this="A9191622-DAAA-4D1B-955ED02201698A14"
+					name="down_off"
+					width="30"
+					height="30"
+					interactive="true"
+					uniqueguid="A9191622-DAAA-4D1B-955ED02201698A14"
+					stateeditordisplaypos="40.00,319.00">
+					<imagemetrics>
+						<image
+							this="0600DC6A-DF07-4D52-93D0ADB721306F1D"
+							uniqueguid="0600DC6A-DF07-4D52-93D0ADB721306F1D"
+							componentimage="65FD4C59-1077-45B9-9C7544F9CFFB615F"
+							offset="1.00,0.00"
+							width="28"
+							height="42"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,12.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="1.57079637"/>
+						<image
+							this="AB47D1FD-21F7-4C3B-94EC3ACE1B4E9723"
+							uniqueguid="AB47D1FD-21F7-4C3B-94EC3ACE1B4E9723"
+							componentimage="DFC7551C-807B-4B5A-8E8E28D93EB1585E"
+							offset="-4.00,-4.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+						<image
+							this="A90D1B15-5F88-4CC5-AE18F4C32FE6EE10"
+							uniqueguid="A90D1B15-5F88-4CC5-AE18F4C32FE6EE10"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							dockpoint="Center"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="1D689917-DE0E-426C-A375AD2506BFA08B"/>
+						<transition
+							index="8"
+							transition_m_target_state="F1F53CA6-BCC3-40EA-9D77392F6E352911"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</down_off>
+				<hover
+					this="F5791462-32DC-4FEF-BB5B65E85D0280CD"
+					name="hover"
+					width="30"
+					height="30"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="0.60,0.00,0.00,0.00"
+					uniqueguid="F5791462-32DC-4FEF-BB5B65E85D0280CD"
+					stateeditordisplaypos="137.00,126.00">
+					<imagemetrics>
+						<image
+							this="EDD24C7A-3A57-40DB-90B92E35FF91B36D"
+							uniqueguid="EDD24C7A-3A57-40DB-90B92E35FF91B36D"
+							componentimage="65FD4C59-1077-45B9-9C7544F9CFFB615F"
+							offset="1.00,0.00"
+							width="28"
+							height="42"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,12.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="1.57079637"/>
+						<image
+							this="14234BF2-764D-4E51-B6B033F1FBF49F24"
+							uniqueguid="14234BF2-764D-4E51-B6B033F1FBF49F24"
+							componentimage="DFC7551C-807B-4B5A-8E8E28D93EB1585E"
+							offset="-4.00,-4.00"
+							width="38"
+							height="38"
+							dockpoint="Center"/>
+						<image
+							this="7E610E2C-B6F2-41B3-AD549F8F1D44B90B"
+							uniqueguid="7E610E2C-B6F2-41B3-AD549F8F1D44B90B"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="DB4D917C-11AD-423C-973C89EAD5A81AAC"
+							uniqueguid="DB4D917C-11AD-423C-973C89EAD5A81AAC"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							colour="#FFFFFF00"
+							dockpoint="Center"
+							shader_name="brighten_t0"/>
+						<image
+							this="D3293FD5-8BC9-4681-948B9A9818094C60"
+							uniqueguid="D3293FD5-8BC9-4681-948B9A9818094C60"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							dockpoint="Center"
+							shadertechnique_vars="0.50,0.00,0.00,0.00"
+							shader_name="brighten_t0"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="F1F53CA6-BCC3-40EA-9D77392F6E352911"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="1D689917-DE0E-426C-A375AD2506BFA08B"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</hover>
+				<inactive
+					this="C90863E7-4B06-4017-B3E1773C91B58C2D"
+					name="inactive"
+					width="30"
+					height="30"
+					interactive="true"
+					disabled="true"
+					shadervars="1.00,1.00,0.00,0.00"
+					uniqueguid="C90863E7-4B06-4017-B3E1773C91B58C2D">
+					<imagemetrics>
+						<image
+							this="8D406CF5-4C82-4868-91FD069B04F2529A"
+							uniqueguid="8D406CF5-4C82-4868-91FD069B04F2529A"
+							componentimage="65FD4C59-1077-45B9-9C7544F9CFFB615F"
+							offset="1.00,0.00"
+							width="28"
+							height="42"
+							dockpoint="Bottom Center"
+							dock_offset="0.00,12.00"
+							canresizeheight="false"
+							canresizewidth="false"
+							rotation_angle="1.57079637"/>
+						<image
+							this="A001CE75-B988-4D6E-945FB29392FC5BC1"
+							uniqueguid="A001CE75-B988-4D6E-945FB29392FC5BC1"
+							componentimage="DFC7551C-807B-4B5A-8E8E28D93EB1585E"
+							offset="-4.00,-4.00"
+							width="38"
+							height="38"
+							colour="#FFFFFFC8"
+							dockpoint="Center"
+							shadertechnique_vars="1.00,1.00,0.00,0.00"
+							shader_name="set_greyscale_t0"/>
+						<image
+							this="6DEA1C4F-360B-4F1B-84DC05FCD3339420"
+							uniqueguid="6DEA1C4F-360B-4F1B-84DC05FCD3339420"
+							componentimage="3D4155F9-527A-4419-B1E917E5A3E16BFD"
+							width="30"
+							height="30"
+							colour="#FFFFFFC8"
+							dockpoint="Center"
+							shadertechnique_vars="1.00,1.00,0.00,0.00"
+							shader_name="set_greyscale_t0"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</inactive>
+			</states>
+		</target_web_of_power_button>
 		<template_discovered_entry
 			this="36739DDF-8049-47B5-8AEC86065E434D2B"
 			id="template_discovered_entry"
@@ -10683,10 +11445,6 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoGroupList"
 					context_function_id="GroupedList.FirstContext"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoGroupList"
-					context_function_id="CategoryObject"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignFaction">
@@ -11110,13 +11868,7 @@
 				<callback_with_context
 					callback_id="ContextStateSetter"
 					context_object_id="CcoCampaignSettlement"
-					context_function_id="GetIfElse(IsSelected, &quot;selected&quot;, &quot;active&quot;)">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value=""/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_function_id="GetIfElse(IsSelected, &quot;selected&quot;, &quot;active&quot;)"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -11149,6 +11901,191 @@
 				</selected>
 			</states>
 		</template_settlement_context>
+		<template_settlement_type
+			this="C9D9C7D5-B644-4A44-87E94E3C353F4C4F"
+			id="template_settlement_type"
+			uniqueguid_in_template="715902FD-2442-4210-8831AAF520A41055"
+			allowverticalresize="false"
+			priority="100"
+			soundcategory="UI_GBL_TMP_Square_Large_Text_Button_Toggle"
+			uniqueguid="C9D9C7D5-B644-4A44-87E94E3C353F4C4F"
+			currentstate="4BF6FCAC-381E-44AF-82268E49E58FD25C"
+			defaultstate="4BF6FCAC-381E-44AF-82268E49E58FD25C">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoSettlementTypeRecord record, CcoCampaignSettlement settlement"
+					context_function_id="Do(settlement.SelectAndZoom, settlement.DevTakeControl(record.Key), self.ParentContext.SetVisible(false))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="F8561D1F-C474-4907-8B486C0E9411C58F"
+					uniqueguid="F8561D1F-C474-4907-8B486C0E9411C58F"
+					imagepath="ui/skins/default/dev/button_rectangular_backplate.png"/>
+				<component_image
+					this="B70A3300-6118-415F-A9176D811BB56799"
+					uniqueguid="B70A3300-6118-415F-A9176D811BB56799"
+					imagepath="ui/skins/default/dev/button_square_hover_highlight.png"/>
+			</componentimages>
+			<states>
+				<active
+					this="4BF6FCAC-381E-44AF-82268E49E58FD25C"
+					name="active"
+					width="300"
+					height="29"
+					interactive="true"
+					uniqueguid="4BF6FCAC-381E-44AF-82268E49E58FD25C"
+					stateeditordisplaypos="40.00,24.00">
+					<imagemetrics>
+						<image
+							this="81938F15-F6A8-4320-8DB38CC78EACB60B"
+							uniqueguid="81938F15-F6A8-4320-8DB38CC78EACB60B"
+							componentimage="F8561D1F-C474-4907-8B486C0E9411C58F"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							transition_m_target_state="CEF998D4-069B-4789-BF6D1C9DE3B1FACD"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</active>
+				<down
+					this="D2755DF9-D004-4FE4-9B2AE791C5BF248B"
+					name="down"
+					width="300"
+					height="29"
+					interactive="true"
+					uniqueguid="D2755DF9-D004-4FE4-9B2AE791C5BF248B"
+					stateeditordisplaypos="145.00,219.00">
+					<imagemetrics>
+						<image
+							this="9BF1FD11-8473-4D75-BECE15B54E88DF76"
+							uniqueguid="9BF1FD11-8473-4D75-BECE15B54E88DF76"
+							componentimage="F8561D1F-C474-4907-8B486C0E9411C58F"
+							width="300"
+							height="29"/>
+						<image
+							this="0FD2E07D-6232-4DEB-AA444ADF96BA913F"
+							uniqueguid="0FD2E07D-6232-4DEB-AA444ADF96BA913F"
+							componentimage="B70A3300-6118-415F-A9176D811BB56799"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="C07B876A-78E6-4441-B44C9FE849ACB681"/>
+						<transition
+							index="3"
+							transition_m_target_state="CEF998D4-069B-4789-BF6D1C9DE3B1FACD"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</down>
+				<down_off
+					this="C07B876A-78E6-4441-B44C9FE849ACB681"
+					name="down_off"
+					width="300"
+					height="29"
+					interactive="true"
+					uniqueguid="C07B876A-78E6-4441-B44C9FE849ACB681"
+					stateeditordisplaypos="40.00,319.00">
+					<imagemetrics>
+						<image
+							this="2C3989B6-BD0E-4BF1-B709AD3539B671E3"
+							uniqueguid="2C3989B6-BD0E-4BF1-B709AD3539B671E3"
+							componentimage="F8561D1F-C474-4907-8B486C0E9411C58F"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition transition_m_target_state="D2755DF9-D004-4FE4-9B2AE791C5BF248B"/>
+						<transition
+							index="3"
+							transition_m_target_state="4BF6FCAC-381E-44AF-82268E49E58FD25C"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</down_off>
+				<hover
+					this="CEF998D4-069B-4789-BF6D1C9DE3B1FACD"
+					name="hover"
+					width="300"
+					height="29"
+					interactive="true"
+					shader_name="brighten_t0"
+					shadervars="1.00,0.00,0.00,0.00"
+					uniqueguid="CEF998D4-069B-4789-BF6D1C9DE3B1FACD"
+					stateeditordisplaypos="137.00,126.00">
+					<imagemetrics>
+						<image
+							this="4526E94B-0F87-412E-A51DC5E7731A983D"
+							uniqueguid="4526E94B-0F87-412E-A51DC5E7731A983D"
+							componentimage="F8561D1F-C474-4907-8B486C0E9411C58F"
+							width="300"
+							height="29"/>
+						<image
+							this="D6F2CFE1-FBC2-4FDF-AB41663D57D319BC"
+							uniqueguid="D6F2CFE1-FBC2-4FDF-AB41663D57D319BC"
+							componentimage="B70A3300-6118-415F-A9176D811BB56799"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<transitionmap>
+						<transition
+							index="1"
+							transition_m_target_state="4BF6FCAC-381E-44AF-82268E49E58FD25C"
+							transition_m_transition_time="200"
+							transition_m_interpolation_property_mask="64"/>
+						<transition
+							index="2"
+							transition_m_target_state="D2755DF9-D004-4FE4-9B2AE791C5BF248B"/>
+					</transitionmap>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"
+						textshadervars="0.30,0.00,0.00,0.00"/>
+				</hover>
+				<inactive
+					this="404AEE5C-1677-495E-85B6B54DA9551111"
+					name="inactive"
+					width="300"
+					height="29"
+					interactive="true"
+					disabled="true"
+					uniqueguid="404AEE5C-1677-495E-85B6B54DA9551111">
+					<imagemetrics>
+						<image
+							this="CF0A8A03-3A78-45F2-B023B481D8D55600"
+							uniqueguid="CF0A8A03-3A78-45F2-B023B481D8D55600"
+							componentimage="F8561D1F-C474-4907-8B486C0E9411C58F"
+							width="300"
+							height="29"/>
+					</imagemetrics>
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</inactive>
+			</states>
+		</template_settlement_type>
 		<theshold
 			this="05B600D9-559F-4592-A5E0DF5D2D07F657"
 			id="theshold"

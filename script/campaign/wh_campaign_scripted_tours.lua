@@ -57,7 +57,17 @@ function start_scripted_tours()
 		if cm:are_any_factions_human(nil, "wh2_main_hef_high_elves") then
 			in_hef_patrons_of_ulthuan_tour:start()
 			in_hef_patrons_of_ulthuan_text_pointer_tour:start()
-		end 	
+		end
+
+		if cm:are_any_factions_human(nil, "wh_main_vmp_vampire_counts") then
+			in_vmp_vampire_lairs_foreign:start()
+			in_vmp_vampire_lairs_occupied:start()
+			in_vmp_confederation_text_pointer:start()
+			in_vmp_confederation_tour:start()
+			in_vmp_bloodlines_text_pointer:start()
+			in_vmp_bloodlines_tour:start()
+			in_vmp_provinces_tour:start()
+		end
 
 		-- factions
 
@@ -166,6 +176,46 @@ function start_scripted_tours()
 			in_tiger_warriors_armies_of_shang_yang:start()
 			in_tiger_court_text_pointer:start()
 			in_armies_of_shang_yang_text_pointer:start()
+		end
+
+		local thanquol_interface = cm:get_faction("wh3_dlc29_skv_clan_scruten")
+		if thanquol_interface and thanquol_interface:is_human() and thanquol_interface:is_null_interface() == false then
+			in_chaotic_plans:start()
+			in_chaotic_plans_military_plan:start() 
+			in_chaotic_plans_clan_secrets:start()
+		end
+
+		local glottkin_interface = cm:get_faction("wh3_dlc29_chs_host_of_the_triplets")
+		if glottkin_interface and glottkin_interface:is_human() and glottkin_interface:is_null_interface() == false then
+			in_blessings_of_nurgle:start()
+			in_blessings_of_nurgle_rotborne_rituals:start()
+			in_blessings_of_nurgle_gardens_of_nurgle:start()
+			in_gardens_of_nurgle_tour:start()
+		end
+	
+		local middenland_interface = cm:get_faction("wh_main_emp_middenland")
+		if middenland_interface and middenland_interface:is_null_interface() == false and middenland_interface:is_human() then	
+			in_the_great_temple_of_ulric_highlights:start()
+			in_the_great_temple_of_ulric:start()
+		end
+
+		local nagash_interface = cm:get_faction("wh3_dlc29_nag_host_of_nagash")
+		if nagash_interface and nagash_interface:is_null_interface() == false and nagash_interface:is_human() then
+			in_nag_necromancy_scripted_tour:start()
+			in_nag_mortarchs_scripted_tour:start()
+			in_nag_land_of_the_dead_tour:start()
+			in_nag_land_of_the_dead_disconnected_tour:start()
+			in_nag_land_of_the_dead_major_occupation_tour:start()
+			in_nag_land_of_the_dead_minor_occupation_tour:start()
+			in_nag_pyramid_scripted_tour:start()
+			in_nag_books_of_nagash_scripted_tour:start()
+			in_nag_available_books_of_nagash_scripted_tour:start()
+		end
+
+		local neferata_interface = cm:get_faction("wh3_dlc29_vmp_neferata")
+		if neferata_interface and neferata_interface:is_null_interface() == false and neferata_interface:is_human() then
+			in_vmp_web_of_power_text_pointer:start()
+			in_vmp_web_of_power_tour:start()
 		end
 	end
 end
@@ -6379,7 +6429,7 @@ scripted_grn_da_plan_tour = {
 			size = 350,
 			length = 50
 		},
-		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "CcoCampaignInitiativeSet152wh3_dlc26_force_initiative_grn_da_plan")	end,
+		click_on_navigate = function() return get_grn_da_plan_initiative_component() end,
 	},
 	{
 		id = "grn_da_plan_4",
@@ -6467,6 +6517,20 @@ scripted_grn_da_plan_tour = {
 		}
 	}
 }
+
+-- CcoCampaignInitiativeSet::UniqueIdString includes the CQI so it needs to be looked up every time -_-
+function get_grn_da_plan_initiative_component()
+	local parent = find_uicomponent(core:get_ui_root(), "dlc26_da_plan", "parent_army_slots")
+	if parent then
+		for i = 0, parent:ChildCount() - 1 do
+			local child = find_child_uicomponent_by_index(parent, i)
+			if child and child:Visible() and string.find(child:Id(), "wh3_dlc26_force_initiative_grn_da_plan") then
+				return child
+			end
+		end
+	end
+	return false
+end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -6855,7 +6919,7 @@ in_hef_patrons_of_ulthuan_tour:add_trigger_condition(
 
 scripted_hef_patrons_of_ulthuan_tour = {
 	id = "in_hef_patrons_of_ulthuan_tour",
-	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_patrons_of_ulthuan",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_patrons_of_the_realms",
 
 	{
 		id = "in_hef_patrons_of_ulthuan_tour_1",
@@ -6905,7 +6969,7 @@ scripted_hef_patrons_of_ulthuan_tour = {
 		},
 		text_box = {
 			text = "wh3_dlc27_text_pointer_hef_patrons_of_ulthuan_4",
-			direction = "left",
+			direction = "right",
 			size = 350,
 			length = 25
 		},
@@ -7501,7 +7565,10 @@ scripted_sla_major_settlement_pleasure_palace_tour = {
 	{
 		id = "in_sla_major_settlement_pleasure_palace_tour_2",
 		highlight = {
-			function() return find_uicomponent(core:get_ui_root(), "CcoCampaignBuildingSlotregion_slot_695") end, 
+			function()
+				local uic = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlementwh3_main_combi_region_gateway_to_khuresh", "default_slots_list")
+				return UIComponent(uic:Find(1))
+			end, 
 		},
 		text_box = {
 			text = "wh3_dlc27_text_pointer_sla_pleasure_palace_2",
@@ -8716,6 +8783,7 @@ scripted_tiger_warriors_armies_of_shang_yang = {
 
 }
 
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----  Tiger Court Textpointer
@@ -8851,6 +8919,2864 @@ end
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Chaotic Plans (Thanquol)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_chaotic_plans = intervention:new(
+	"in_chaotic_plans",			 					-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function() 															-- trigger callback
+			local new_plan_button_holder = find_uicomponent(core:get_ui_root(), "dlc29_skv_chaotic_plans", "plans_main_panel")
+			if new_plan_button_holder and new_plan_button_holder:Visible() then
+				out("#### "..scripted_chaotic_plans.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_chaotic_plans, in_chaotic_plans)
+			elseif not new_plan_button_holder or not new_plan_button_holder:Visible() then
+				in_chaotic_plans:cancel()
+			end
+		end, 0.1)
+	end,
+
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_chaotic_plans:add_precondition(function() return not common.get_advice_history_string_seen("in_chaotic_plans") end)
+in_chaotic_plans:set_wait_for_fullscreen_panel_dismissed(false)
+in_chaotic_plans:set_should_lock_ui(false)
+in_chaotic_plans:set_reduce_pause_before_triggering(true)
+in_chaotic_plans:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "dlc29_skv_chaotic_plans" then
+			common.set_advice_history_string_seen("in_chaotic_plans")
+			cm:dismiss_advice()
+			return true
+		end 
+	end
+)
+
+scripted_chaotic_plans = {
+	id = "in_chaotic_plans",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_thanquol_chaotic_plans_title",
+
+	{
+		id = "in_chaotic_plans_1", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "schemers_list") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_4",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		
+	},
+
+	{
+		id = "in_chaotic_plans_2", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_schemers") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_7",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		
+	},
+
+	{
+		id = "in_chaotic_plans_3", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "new_plan_button") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_8",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+		
+	},
+
+	{
+		id = "in_chaotic_plans_4", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "shop_button_toggle") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_9",
+			direction = "right",
+			size = 350,
+			length = 50,
+			label_offset_y = 30
+		},
+
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "new_plan_button") end, 
+		
+	},
+
+	{
+		id = "in_chaotic_plans_5", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "plan_type_holder") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+		click_on_navigate_backwards = function() return find_uicomponent(core:get_ui_root(), "plans_main_panel", "button_close") end,
+	},
+
+	{
+		id = "in_chaotic_plans_6", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "military_plan_button") end,
+			function() return find_uicomponent(core:get_ui_root(), "military_plan_button", "plan_type_tx") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_10",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_7", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "economy_plan_button") end,
+			function() return find_uicomponent(core:get_ui_root(), "economy_plan_button", "plan_type_tx") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_11",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_8", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "magic_plan_button") end,
+			function() return find_uicomponent(core:get_ui_root(), "magic_plan_button", "plan_type_tx") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_12",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_9", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "target_holder") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_10", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "establish_plan_button") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_text_pointer_13",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+in_chaotic_plans_military_plan = intervention:new(
+	"in_chaotic_plans_military_plan",			 					-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function() 											-- trigger callback
+			local military_plan_button_holder = find_uicomponent(core:get_ui_root(), "center_holder", "military_plan_board_holder")
+			if military_plan_button_holder and military_plan_button_holder:Visible() then
+				out("#### "..scripted_chaotic_plans_military_plan.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_chaotic_plans_military_plan, in_chaotic_plans_military_plan)
+				common.set_advice_history_string_seen("in_chaotic_plans_military_plan")
+			elseif not military_plan_button_holder or not military_plan_button_holder:Visible() then
+				in_chaotic_plans_military_plan:cancel()
+			end
+		end, 0.1)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_chaotic_plans_military_plan:add_precondition(function() return not common.get_advice_history_string_seen("in_chaotic_plans_military_plan") end)
+in_chaotic_plans_military_plan:set_wait_for_fullscreen_panel_dismissed(false)
+in_chaotic_plans_military_plan:set_should_lock_ui(false)
+in_chaotic_plans_military_plan:set_reduce_pause_before_triggering(true)
+in_chaotic_plans_military_plan:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		return context.string == "establish_plan_button" and uicomponent_descended_from(UIComponent(context.component), "dlc29_skv_chaotic_plans")
+	end
+)
+
+scripted_chaotic_plans_military_plan = {
+	id = "in_chaotic_plans_military_plan",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_thanquol_chaotic_plans_military_plan_title",
+
+	
+
+	{
+		id = "in_chaotic_plans_military_plan_1", -- step 1
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_designs") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_2", -- step 2
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "military_plan_board_holder") end,
+			function() return find_uicomponent(core:get_ui_root(), "modifications_stack") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_1",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_2_1", -- step 2,1
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_tactics") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_1_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_3", -- step 3
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "military_plan_board_holder", "resources_holder") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_3_2",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_4", -- step 4
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "left_holder") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_5", -- step 5
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "drawn_chips_summary_holder") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_5",
+			direction = "right",
+			size = 350,
+			length = 50,
+			y_offset = -200
+		},
+		click_on_navigate = function() return find_uicomponent(core:get_ui_root(), "log_btn") end, 
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_5_1", -- step 5_1
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "drawn_chips_summary_holder") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_5_1",
+			direction = "right",
+			size = 350,
+			length = 50,
+			y_offset = -200
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_6", -- step 6
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "trigger_plan_button") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_6",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_military_plan_7", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "abandon_button") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_chaotic_plans_military_plan_text_pointer_7",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+
+}
+
+in_chaotic_plans_clan_secrets = intervention:new(
+	"in_chaotic_plans_clan_secrets",			 					-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		out("#### "..scripted_chaotic_plans_clan_secrets.id.." ####")
+		common.set_advice_history_string_seen("in_chaotic_plans_clan_secrets")
+		ui_scripted_tour:construct_tour(scripted_chaotic_plans_clan_secrets, in_chaotic_plans_clan_secrets)
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_chaotic_plans_clan_secrets:add_precondition(function() return not common.get_advice_history_string_seen("in_chaotic_plans_clan_secrets") end)
+in_chaotic_plans_clan_secrets:set_wait_for_fullscreen_panel_dismissed(false)
+in_chaotic_plans_clan_secrets:set_should_lock_ui(false)
+in_chaotic_plans_clan_secrets:set_reduce_pause_before_triggering(true)
+in_chaotic_plans_clan_secrets:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		return context.string == "shop_button_toggle" and uicomponent_descended_from(UIComponent(context.component), "dlc29_skv_chaotic_plans")
+	end
+)
+
+scripted_chaotic_plans_clan_secrets = {
+	id = "in_chaotic_plans_clan_secrets",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_thanquol_chaotic_plans_clan_secrets_title",
+
+	{
+		id = "in_chaotic_plans_clan_secrets_1", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc29_skv_token_shop", "tab_buttons_list") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_thanquol_chaotic_plans_clan_secrets_text_pointer_1",
+			direction = "top",
+			size = 350,
+			length = 50
+		},
+	
+	},
+
+	{
+		id = "in_chaotic_plans_clan_secrets_3", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "designs_container") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_thanquol_chaotic_plans_clan_secrets_text_pointer_3",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_chaotic_plans_clan_secrets_4", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "info_section") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_thanquol_chaotic_plans_clan_secrets_text_pointer_4",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Blessings of Nurgle (Glottkin)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+core:add_listener(
+	"faction_start_blessings_of_nurgle_button_highlight",
+	"FactionTurnStart",
+	function(context)
+		return is_table(glottkin_gardens_of_nurgle_config) and context:faction():name() == glottkin_gardens_of_nurgle_config.faction_key and cm:turn_number() >= 3 and not common.get_advice_history_string_seen("in_blessings_of_nurgle")
+	end,
+	function(context)
+		highlight_component(true, false, "hud_campaign", "faction_buttons_docker", "button_group_management", "button_blessings_of_nurgle")
+			cm:callback(function()
+			highlight_component(false, false, "hud_campaign", "faction_buttons_docker", "button_group_management", "button_blessings_of_nurgle")
+			end, 3)
+	end,
+	false
+)
+
+in_blessings_of_nurgle = intervention:new(
+	"in_blessings_of_nurgle",			 					-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function() 															-- trigger callback
+			local blessings_of_nurgle_holder = find_uicomponent(core:get_ui_root(), "dlc29_chs_blessings_of_nurgle_panel_main", "content_holder")
+			if blessings_of_nurgle_holder and blessings_of_nurgle_holder:Visible() then
+				out("#### "..scripted_blessings_of_nurgle.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_blessings_of_nurgle, in_blessings_of_nurgle)
+			elseif not blessings_of_nurgle_holder or not blessings_of_nurgle_holder:Visible() then
+				in_blessings_of_nurgle:cancel()
+			end
+		end, 0.1)
+	end,
+
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_blessings_of_nurgle:add_precondition(function() return not common.get_advice_history_string_seen("in_blessings_of_nurgle") end)
+in_blessings_of_nurgle:set_wait_for_fullscreen_panel_dismissed(false)
+in_blessings_of_nurgle:set_should_lock_ui()
+in_blessings_of_nurgle:set_reduce_pause_before_triggering(true)
+in_blessings_of_nurgle:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "dlc29_chs_blessings_of_nurgle_panel_main" then
+			common.set_advice_history_string_seen("in_blessings_of_nurgle")
+			return true
+		end 
+	end
+)
+
+scripted_blessings_of_nurgle = {
+	id = "in_blessings_of_nurgle",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_blessings_of_nurgle_title",
+	{
+		id = "in_blessings_of_nurgle_1", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_souls_bar_tab_buttons") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_marks_of_nurgle_text_pointer_1",
+			direction = "top",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_blessings_of_nurgle_2", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_marks") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_marks_of_nurgle_text_pointer_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_blessings_of_nurgle_3", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_marks_info") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_marks_of_nurgle_text_pointer_3",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_blessings_of_nurgle_4", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_marks_effects") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_marks_of_nurgle_text_pointer_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_blessings_of_nurgle_5", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_marks_requirements") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_marks_of_nurgle_text_pointer_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+in_blessings_of_nurgle_rotborne_rituals = intervention:new(
+	"in_blessings_of_nurgle_rotborne_rituals",			 					-- string name
+	0, 																		-- cost
+	function()
+	cm:callback(function() 														-- trigger callback
+			local blessings_of_nurgle_holder = find_uicomponent(core:get_ui_root(), "dlc29_chs_blessings_of_nurgle_panel_main", "content_holder")
+			if blessings_of_nurgle_holder and blessings_of_nurgle_holder:Visible() then
+				out("#### "..scripted_blessings_of_nurgle_rotborne_rituals.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_blessings_of_nurgle_rotborne_rituals, in_blessings_of_nurgle_rotborne_rituals)
+				common.set_advice_history_string_seen("in_blessings_of_nurgle_rotborne_rituals")
+			elseif not blessings_of_nurgle_holder or not blessings_of_nurgle_holder:Visible() then
+				in_blessings_of_nurgle_rotborne_rituals:cancel()
+			end
+		end, 0.1)
+	end,
+
+	BOOL_INTERVENTIONS_DEBUG	 											-- show debug output
+)
+
+in_blessings_of_nurgle_rotborne_rituals:add_precondition(function() return not common.get_advice_history_string_seen("in_blessings_of_nurgle_rotborne_rituals") end)
+in_blessings_of_nurgle_rotborne_rituals:set_wait_for_fullscreen_panel_dismissed(false)
+in_blessings_of_nurgle_rotborne_rituals:set_should_lock_ui()
+in_blessings_of_nurgle_rotborne_rituals:set_reduce_pause_before_triggering(true)
+in_blessings_of_nurgle_rotborne_rituals:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		return context.string == "tab_button_rotborne_rituals" and uicomponent_descended_from(UIComponent(context.component), "dlc29_chs_blessings_of_nurgle_panel_main")
+	end
+)
+
+scripted_blessings_of_nurgle_rotborne_rituals = {
+	id = "in_blessings_of_nurgle_rotborne_rituals",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_rotborne_rituals_title",
+	{
+		id = "rotborne_ritual_1", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_ritual_holders") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_rituals_of_decay_text_pointer_1",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "rotborne_ritual_2", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_ritual_target_information") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_rituals_of_decay_text_pointer_2",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "rotborne_ritual_3", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_ritual_upgrades") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_rituals_of_decay_text_pointer_3",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+in_blessings_of_nurgle_gardens_of_nurgle = intervention:new(
+	"in_blessings_of_nurgle_gardens_of_nurgle",			 					-- string name
+	0, 																		-- cost
+	function()
+	cm:callback(function() 														-- trigger callback
+			local blessings_of_nurgle_holder = find_uicomponent(core:get_ui_root(), "dlc29_chs_blessings_of_nurgle_panel_main", "content_holder")
+			if blessings_of_nurgle_holder and blessings_of_nurgle_holder:Visible() then
+				out("#### "..scripted_blessings_of_nurgle_gardens_of_nurgle.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_blessings_of_nurgle_gardens_of_nurgle, in_blessings_of_nurgle_gardens_of_nurgle)
+				common.set_advice_history_string_seen("in_blessings_of_nurgle_gardens_of_nurgle")
+			elseif not blessings_of_nurgle_holder or not blessings_of_nurgle_holder:Visible() then
+				in_blessings_of_nurgle_gardens_of_nurgle:cancel()
+			end
+		end, 0.1)
+	end,
+
+	BOOL_INTERVENTIONS_DEBUG	 											-- show debug output
+)
+
+in_blessings_of_nurgle_gardens_of_nurgle:add_precondition(function() return not common.get_advice_history_string_seen("in_blessings_of_nurgle_gardens_of_nurgle") end)
+in_blessings_of_nurgle_gardens_of_nurgle:set_wait_for_fullscreen_panel_dismissed(false)
+in_blessings_of_nurgle_gardens_of_nurgle:set_should_lock_ui()
+in_blessings_of_nurgle_gardens_of_nurgle:set_reduce_pause_before_triggering(true)
+in_blessings_of_nurgle_gardens_of_nurgle:add_trigger_condition(
+	"ComponentLClickUp",
+	function(context)
+		return context.string == "tab_button_gardens_of_nurgle" and uicomponent_descended_from(UIComponent(context.component), "dlc29_chs_blessings_of_nurgle_panel_main")
+	end
+)
+
+scripted_blessings_of_nurgle_gardens_of_nurgle = {
+	id = "in_blessings_of_nurgle_gardens_of_nurgle",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_gardens_of_nurgle_title",
+	{
+		id = "gardens_of_nurgle_1", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "garden_list") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_gardens_of_nurgle_text_pointer_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "gardens_of_nurgle_2", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "scripted_tour_garden_item") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_blessings_of_nurgle_gardens_of_nurgle_text_pointer_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+in_gardens_of_nurgle_tour = intervention:new(
+	"in_gardens_of_nurgle_tour",
+	0,
+	function()
+		cm:callback(function()
+			local establish_garden_of_nurgle_minor_settlement = find_uicomponent(core:get_ui_root(), "554730390", "option_button")
+			local establish_garden_of_nurgle_major_settlement = find_uicomponent(core:get_ui_root(), "339049739", "option_button")
+			local establish_garden_of_nurgle_minor_settlement_razed = find_uicomponent(core:get_ui_root(), "187743477", "option_button")
+			local establish_garden_of_nurgle_major_settlement_razed = find_uicomponent(core:get_ui_root(), "2035182464", "option_button")
+			if establish_garden_of_nurgle_minor_settlement and establish_garden_of_nurgle_minor_settlement:Visible() then 
+				out("#### "..scripted_woc_gardens_of_nurgle_tour .id.." ####")
+				ui_scripted_tour:construct_tour(scripted_woc_gardens_of_nurgle_tour, in_gardens_of_nurgle_tour)
+				common.set_advice_history_string_seen("in_gardens_of_nurgle_tour")
+			elseif establish_garden_of_nurgle_major_settlement and establish_garden_of_nurgle_major_settlement:Visible() then
+				out("#### "..scripted_woc_gardens_of_nurgle_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_woc_gardens_of_nurgle_tour, in_gardens_of_nurgle_tour)
+				common.set_advice_history_string_seen("in_gardens_of_nurgle_tour")			
+			elseif establish_garden_of_nurgle_minor_settlement_razed and establish_garden_of_nurgle_minor_settlement_razed:Visible() then
+				out("#### "..scripted_woc_gardens_of_nurgle_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_woc_gardens_of_nurgle_tour, in_gardens_of_nurgle_tour)
+				common.set_advice_history_string_seen("in_gardens_of_nurgle_tour")
+			elseif establish_garden_of_nurgle_major_settlement_razed and establish_garden_of_nurgle_major_settlement_razed:Visible() then
+				out("#### "..scripted_woc_gardens_of_nurgle_tour.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_woc_gardens_of_nurgle_tour, in_gardens_of_nurgle_tour)
+				common.set_advice_history_string_seen("in_gardens_of_nurgle_tour")
+			else
+				in_gardens_of_nurgle_tour:cancel()
+			end 
+		end, 0.1)
+	end,
+	BOOL_INTERVENTIONS_DEBUG
+)
+
+in_gardens_of_nurgle_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_gardens_of_nurgle_tour") end)
+in_gardens_of_nurgle_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_gardens_of_nurgle_tour:set_wait_for_battle_complete(false)
+in_gardens_of_nurgle_tour:set_should_lock_ui()
+in_gardens_of_nurgle_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "settlement_captured" then
+			local establish_garden_of_nurgle_minor_settlement = find_uicomponent(core:get_ui_root(), "554730390", "option_button")
+			local establish_garden_of_nurgle_major_settlement = find_uicomponent(core:get_ui_root(), "339049739", "option_button")
+			local establish_garden_of_nurgle_minor_settlement_razed = find_uicomponent(core:get_ui_root(), "187743477", "option_button")
+			local establish_garden_of_nurgle_major_settlement_razed = find_uicomponent(core:get_ui_root(), "2035182464", "option_button")
+			if establish_garden_of_nurgle_minor_settlement and establish_garden_of_nurgle_minor_settlement:Visible() and establish_garden_of_nurgle_minor_settlement:CurrentState() == "active" then
+				return true
+			elseif establish_garden_of_nurgle_major_settlement and establish_garden_of_nurgle_major_settlement:Visible() and establish_garden_of_nurgle_major_settlement:CurrentState() == "active" then
+				return true
+			elseif establish_garden_of_nurgle_minor_settlement_razed and establish_garden_of_nurgle_minor_settlement_razed:Visible() and establish_garden_of_nurgle_minor_settlement_razed:CurrentState() == "active" then
+				return true
+			elseif establish_garden_of_nurgle_major_settlement_razed and establish_garden_of_nurgle_major_settlement_razed:Visible() and establish_garden_of_nurgle_major_settlement_razed:CurrentState() == "active" then
+				return true
+			end	
+			return false
+		end
+	end
+)
+
+scripted_woc_gardens_of_nurgle_tour = {
+	id = "in_gardens_of_nurgle_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_gardens_of_nurgle_title",
+
+	{
+		id = "in_glottkin_garden_occupation_option_tour_1",
+		highlight = {
+			function()
+				local establish_garden_of_nurgle_minor_settlement = find_uicomponent(core:get_ui_root(), "554730390", "picture_parent")
+				local establish_garden_of_nurgle_major_settlement = find_uicomponent(core:get_ui_root(), "339049739", "picture_parent")
+				local establish_garden_of_nurgle_minor_settlement_razed = find_uicomponent(core:get_ui_root(), "187743477", "picture_parent")
+				local establish_garden_of_nurgle_major_settlement_razed = find_uicomponent(core:get_ui_root(), "2035182464", "picture_parent")
+				if establish_garden_of_nurgle_minor_settlement and establish_garden_of_nurgle_minor_settlement:Visible() then 
+					return find_uicomponent(core:get_ui_root(), "554730390", "picture_parent")
+				elseif establish_garden_of_nurgle_major_settlement and establish_garden_of_nurgle_major_settlement:Visible() then
+					return find_uicomponent(core:get_ui_root(), "339049739", "picture_parent")
+				elseif establish_garden_of_nurgle_minor_settlement_razed and establish_garden_of_nurgle_minor_settlement_razed:Visible() then
+					return find_uicomponent(core:get_ui_root(), "187743477", "picture_parent")
+				elseif establish_garden_of_nurgle_major_settlement_razed and establish_garden_of_nurgle_major_settlement_razed:Visible() then
+					return find_uicomponent(core:get_ui_root(), "2035182464", "picture_parent")
+				end
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_gardens_of_nurgle_text_pointer_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_glottkin_garden_occupation_option_tour_2",
+		highlight = {
+			function()
+				local establish_garden_of_nurgle_minor_settlement = find_uicomponent(core:get_ui_root(), "554730390", "option_button")
+				local establish_garden_of_nurgle_major_settlement = find_uicomponent(core:get_ui_root(), "339049739", "option_button")
+				local establish_garden_of_nurgle_minor_settlement_razed = find_uicomponent(core:get_ui_root(), "187743477", "option_button")
+				local establish_garden_of_nurgle_major_settlement_razed = find_uicomponent(core:get_ui_root(), "2035182464", "option_button")
+				if establish_garden_of_nurgle_minor_settlement and establish_garden_of_nurgle_minor_settlement:Visible() then 
+					return find_uicomponent(core:get_ui_root(), "554730390", "option_button")
+				elseif establish_garden_of_nurgle_major_settlement and establish_garden_of_nurgle_major_settlement:Visible() then
+					return find_uicomponent(core:get_ui_root(), "339049739", "option_button")
+				elseif establish_garden_of_nurgle_minor_settlement_razed and establish_garden_of_nurgle_minor_settlement_razed:Visible() then 
+					return find_uicomponent(core:get_ui_root(), "187743477", "option_button")
+				elseif establish_garden_of_nurgle_major_settlement_razed and establish_garden_of_nurgle_major_settlement_razed:Visible() then
+					return find_uicomponent(core:get_ui_root(), "2035182464", "option_button")
+				end
+			end	
+		},
+		text_box = {
+			text = "wh3_dlc29_gardens_of_nurgle_text_pointer_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- The Great Temple of Ulric
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_the_great_temple_of_ulric_highlights = intervention:new(
+	"in_the_great_temple_of_ulric_highlights",				 						-- string name
+	0, 																	-- cost
+	function()
+		the_great_temple_of_ulric_incident()
+	end,
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_the_great_temple_of_ulric_highlights:add_precondition(function() return not in_the_great_temple_of_ulric_highlights:has_ever_triggered() end)
+in_the_great_temple_of_ulric_highlights:set_wait_for_fullscreen_panel_dismissed(true)
+in_the_great_temple_of_ulric_highlights:add_trigger_condition(
+	"PooledResourceChanged",
+	function(context)
+		local pr = context:resource()
+		local faction = context:faction()
+		return pr:key() == "wh3_dlc29_emp_fervour" and pr:value() >= 400 and faction:is_human()
+	end
+)
+
+function the_great_temple_of_ulric_incident()
+	cm:trigger_incident("wh_main_emp_middenland", "wh3_dlc29_emp_middenland_the_great_temple_of_ulric_unlocked", true);
+	highlight_component(true, false, "button_temple_of_ulric")
+	cm:callback(function()
+		highlight_component(false, false, "button_temple_of_ulric")
+	end, 10)
+	in_the_great_temple_of_ulric_highlights:complete()
+	common.set_advice_history_string_seen("the_great_temple_of_ulric_highlights")
+end
+
+in_the_great_temple_of_ulric = intervention:new(
+	"in_the_great_temple_of_ulric",			 					-- string name
+	0, 																	-- cost
+	function()
+		cm:callback(function() 															-- trigger callback
+			local the_great_temple_of_ulric_frame = find_uicomponent(core:get_ui_root(), "dlc29_emp_great_temple_of_ulric", "panel_frame")
+			if the_great_temple_of_ulric_frame and the_great_temple_of_ulric_frame:Visible() then
+				out("#### "..scripted_the_great_temple_of_ulric.id.." ####")
+				ui_scripted_tour:construct_tour(scripted_the_great_temple_of_ulric, in_the_great_temple_of_ulric)
+			elseif not the_great_temple_of_ulric_frame or not the_great_temple_of_ulric_frame:Visible() then
+				in_the_great_temple_of_ulric:cancel()
+			end
+		end, 0.1)
+	end,
+
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_the_great_temple_of_ulric:add_precondition(function() return not common.get_advice_history_string_seen("in_the_great_temple_of_ulric") end)
+in_the_great_temple_of_ulric:set_wait_for_fullscreen_panel_dismissed(false)
+in_the_great_temple_of_ulric:set_should_lock_ui(false)
+in_the_great_temple_of_ulric:set_reduce_pause_before_triggering(true)
+in_the_great_temple_of_ulric:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "dlc29_emp_great_temple_of_ulric" then
+			common.set_advice_history_string_seen("in_the_great_temple_of_ulric")
+			return true
+		end 
+	end
+)
+
+scripted_the_great_temple_of_ulric = {
+	id = "in_the_great_temple_of_ulric",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_the_great_temple_of_ulric_title",
+
+	{
+		id = "in_the_great_temple_of_ulric_1", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "sanctuary_list") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_the_great_temple_of_ulric_text_pointer_1",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+
+	{
+		id = "in_the_great_temple_of_ulric_2", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "sanctuary_holder") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_the_great_temple_of_ulric_text_pointer_2",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_the_great_temple_of_ulric_3", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "requirement_holder") end,
+			function() return find_uicomponent(core:get_ui_root(), "construct_button") end,			 
+		},
+		text_box = {
+			text = "wh3_dlc29_the_great_temple_of_ulric_text_pointer_3",
+			direction = "right",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_the_great_temple_of_ulric_4", 
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "progress_ornaments", "progress_ring") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_the_great_temple_of_ulric_text_pointer_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Vampire Lairs - Foreign Settlement
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_vampire_lairs_foreign = intervention:new(
+	"in_vmp_vampire_lairs_foreign",			 					-- string name
+	0, 																	-- cost
+	function() 															-- trigger callback
+		out("#### "..scripted_vampire_lairs_foreign.id.." ####")
+		ui_scripted_tour:construct_tour(scripted_vampire_lairs_foreign, in_vmp_vampire_lairs_foreign)
+		common.set_advice_history_string_seen("in_vmp_vampire_lairs_foreign")
+	end,					
+	BOOL_INTERVENTIONS_DEBUG	 										-- show debug output
+)
+
+in_vmp_vampire_lairs_foreign:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_vampire_lairs_foreign") end)
+in_vmp_vampire_lairs_foreign:set_wait_for_fullscreen_panel_dismissed(true)
+in_vmp_vampire_lairs_foreign:set_should_lock_ui(false)
+in_vmp_vampire_lairs_foreign:set_reduce_pause_before_triggering(true)
+in_vmp_vampire_lairs_foreign:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		if  common.get_advice_history_string_seen("in_vmp_provinces_tour") then
+			local province = context:garrison_residence():region():province()
+			local region_list = province:regions()
+			for i = 0, region_list:num_items() - 1 do
+				local region = region_list:item_at(i)
+				local fsm = region:foreign_slot_manager_for_faction("wh3_main_vmp_vampire_lairs")
+				if not fsm:is_null_interface() and fsm:slot_set_key() == "wh3_dlc29_slot_set_vampire_lair_foreign" then
+					return true
+				end
+			end
+			return false
+		end
+	end
+)
+
+scripted_vampire_lairs_foreign = {
+	id = "in_vmp_vampire_lairs_foreign",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_vmp_vampire_lairs_title",
+
+	{
+		id = "in_vampire_lairs_foreign_1",
+		highlight = {
+			function() 
+				local region = ui_scripted_tour:get_region_with_foreign_vampire_lairs_in_selected_province()
+				local region_key = region:name()
+				return find_uicomponent(core:get_ui_root(), "settlement_panel", "settlement_list", "CcoCampaignSettlement"..region_key) 
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_vmp_vampire_lairs_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	
+	},
+ 
+	{
+		id = "in_vampire_lairs_foreign_2",
+		highlight = {
+			function() 
+				local region = ui_scripted_tour:get_region_with_foreign_vampire_lairs_in_selected_province()
+				local region_key = region:name()
+				return find_uicomponent(core:get_ui_root(), "settlement_panel", "settlement_list", "CcoCampaignSettlement"..region_key, "wh3_dlc29_vmp_vampire_lair", "major_slot") 
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_vmp_vampire_lairs_2",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	
+	},
+
+	{
+		id = "in_vampire_lairs_foreign_3",
+		highlight = {
+			function() 
+				local region = ui_scripted_tour:get_region_with_foreign_vampire_lairs_in_selected_province()
+				local region_key = region:name()
+				return find_uicomponent(core:get_ui_root(), "settlement_panel", "settlement_list", "CcoCampaignSettlement"..region_key, "wh3_dlc29_vmp_vampire_lair")
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_vmp_vampire_lairs_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	
+	},
+
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Vampire Lairs - Occupied Settlement
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+local function get_selected_region_with_occupied_vampire_lair()
+	local selected_region_key = cuim:get_selected_settlement_region()
+
+	if not selected_region_key or selected_region_key == "" then
+		return 
+	end
+
+	local region = cm:get_region(selected_region_key)
+
+	if not region or region:is_null_interface() then
+		return 
+	end
+
+
+	local province = region:province()
+
+	local region_list = province:regions()
+	for i = 0, region_list:num_items() - 1 do
+		local region = region_list:item_at(i)
+		local fsm = region:foreign_slot_manager_for_faction(cm:get_local_faction_name(true))
+		if not fsm:is_null_interface() and fsm:slot_set_key() == "wh3_dlc29_slot_set_vampire_lair" and cm:model():faction_is_local(region:owning_faction():name()) then
+			return region
+		end
+	end
+end
+
+in_vmp_vampire_lairs_occupied = intervention:new(
+	"in_vmp_vampire_lairs_occupied",				 			-- string name
+	0, 																	-- cost
+	function() 														-- trigger callback
+		local uic_settlement_panel = find_uicomponent(core:get_ui_root(), "settlement_panel")
+		core:progress_on_uicomponent_animation_finished(
+			uic_settlement_panel,		
+			function()
+				local region = get_selected_region_with_occupied_vampire_lair()
+				
+				if not region or region:is_null_interface() then 
+					cm:steal_escape_key(false)
+					in_vmp_vampire_lairs_occupied:cancel()
+					return 
+				end
+
+				local uic = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlement"..region:name(), "button_list", "button_lair_view")
+				if uic and uic:VisibleFromRoot() then
+					out("#### "..scripted_vampire_lairs_occupied.id.." ####")
+					ui_scripted_tour:construct_tour(scripted_vampire_lairs_occupied, in_vmp_vampire_lairs_occupied)
+					common.set_advice_history_string_seen("in_vmp_vampire_lairs_occupied")
+				elseif not uic or not uic:VisibleFromRoot() then
+					cm:steal_escape_key(false)
+					in_vmp_vampire_lairs_occupied:cancel()
+				end
+			end
+		)
+		
+	end,
+	BOOL_INTERVENTIONS_DEBUG	 									-- show debug output
+)
+
+in_vmp_vampire_lairs_occupied:add_advice_key_precondition("in_vmp_vampire_lairs_occupied")
+in_vmp_vampire_lairs_occupied:add_player_subculture_precondition("wh_main_sc_vmp_vampire_counts")
+in_vmp_vampire_lairs_occupied:set_wait_for_fullscreen_panel_dismissed(false)
+in_vmp_vampire_lairs_occupied:set_should_lock_ui(true)
+in_vmp_vampire_lairs_occupied:set_reduce_pause_before_triggering(true)
+in_vmp_vampire_lairs_occupied:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		return get_selected_region_with_occupied_vampire_lair() ~= nil
+	end
+)
+
+scripted_vampire_lairs_occupied = {
+	id = "in_vmp_vampire_lairs_occupied",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_vmp_vampire_lairs_title",
+
+	{
+		id = "in_vampire_lairs_occupied_1",
+		highlight = {
+			function()
+				local region = get_selected_region_with_occupied_vampire_lair()
+				if region and not region:is_null_interface() then
+					local region_name = region:name()
+					local lair_view = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlement" .. region_name, "lair_view")
+					local occupied_lair_button = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlement" .. region_name, "button_list", "button_lair_view")
+					if not lair_view or not lair_view:VisibleFromRoot() then
+						occupied_lair_button:SimulateLClick()
+					end
+					return occupied_lair_button
+				end
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_vmp_vampire_lairs_occupied_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "in_vampire_lairs_occupied_2",
+		highlight = {
+			function()
+				local region = get_selected_region_with_occupied_vampire_lair()
+				local major_slot = find_uicomponent(core:get_ui_root(),"settlement_panel", "CcoCampaignSettlement"..region:name(), "dlc29_vmp_vampire_lair_popup", "major_slot")
+				return major_slot
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_vmp_vampire_lairs_occupied_2",
+			direction = "right",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "in_vampire_lairs_occupied_3",
+		highlight = {
+			function()
+				local region = get_selected_region_with_occupied_vampire_lair()
+				local empower = find_uicomponent(core:get_ui_root(), "CcoCampaignSettlement"..region:name(), "minor_slots_holder", "minor_slot_6")
+				return empower
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_vmp_vampire_lairs_occupied_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		},
+	},
+	{
+		id = "in_vampire_lairs_occupied_4",
+		highlight = {
+			function()
+				local region = get_selected_region_with_occupied_vampire_lair()
+				local awaken = find_uicomponent(core:get_ui_root(),"settlement_panel", "CcoCampaignSettlement"..region:name(), "dlc29_vmp_vampire_lair_popup", "awaken_button")
+				return awaken
+			end,
+		},
+		text_box = {
+			text = "wh3_dlc29_vmp_vampire_lairs_occupied_4",
+			direction = "left",
+			size = 350,
+			length = 50
+		},
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Necromancy - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_necromancy_scripted_tour = intervention:new(
+    "in_nag_necromancy_scripted_tour",		-- string name
+    0,										-- cost
+    function()
+        uic = find_uicomponent(core:get_ui_root(), "necro_spend_tracker")
+        if uic and uic:VisibleFromRoot() then
+			out("#### "..nag_necromancy_scripted_tour.id.." ####")
+			ui_scripted_tour:construct_tour(nag_necromancy_scripted_tour, in_nag_necromancy_scripted_tour)
+			local facion_list = {
+				"wh3_dlc29_nag_host_of_nagash"
+				}
+			for i = 1, #facion_list do
+				local faction_key = facion_list[i]
+				local faction = cm:get_faction(faction_key):name()
+				local faction_interface = cm:get_faction(faction_key)
+				if faction and faction_interface:is_null_interface() == false then 
+					stop_moving_all_player_characters(faction)
+				end 	
+			end 			
+		else
+			in_nag_necromancy_scripted_tour:cancel()
+		end
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_nag_necromancy_scripted_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_necromancy_scripted_tour") end)
+in_nag_necromancy_scripted_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nag_necromancy_scripted_tour:set_should_lock_ui()
+in_nag_necromancy_scripted_tour:set_reduce_pause_before_triggering(true)
+in_nag_necromancy_scripted_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "necro_spend_tracker")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_nag_necromancy_scripted_tour")
+			return true
+		end
+    end
+)
+
+nag_necromancy_scripted_tour = {
+	id = "in_nag_necromancy_scripted_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_necromancy_tour",
+	reposition_controls = function() return find_uicomponent(core:get_ui_root(), "dlc29_nag_necromancy", "top_bar", "tx_header") end,
+
+	{
+		id = "in_nag_necromancy_scripted_tour_1",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_necromancy", "CcoCampaignRitual2wh3_dlc29_ritual_nag_unit_capacity_polearm_inf") end,
+			function() return find_uicomponent("dlc29_nag_necromancy", "CcoCampaignRitual2wh3_dlc29_ritual_nag_unit_capacity_tomb_guard") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_necromancy_tour_1",
+			direction = "top",
+			size = 300,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_nag_necromancy_scripted_tour_2",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_necromancy", "CcoCampaignRitual2wh3_dlc29_ritual_nag_unit_capacity_polearm_inf") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_necromancy_tour_2",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_nag_necromancy_scripted_tour_3",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_necromancy", "CcoCampaignRitual2wh3_dlc29_ritual_nag_unit_capacity_polearm_inf", "increase_cap_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_necromancy_tour_3",
+			direction = "top",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_nag_necromancy_scripted_tour_4",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_necromancy", "button_list") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_necromancy_tour_4",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{ 
+		id = "in_nag_necromancy_scripted_tour_5",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_necromancy", "necro_spend_tracker") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_necromancy_tour_5",
+			direction = "left",
+			size = 600,
+			length = 25
+		},
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Mortarchs - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_mortarchs_scripted_tour = intervention:new(
+    "in_nag_mortarchs_scripted_tour",		-- string name
+    0,										-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "dlc29_nag_mortarchs", "mortarchs")
+        if uic and uic:VisibleFromRoot() then
+			out("#### "..nag_mortarchs_scripted_tour.id.." ####")
+			ui_scripted_tour:construct_tour(nag_mortarchs_scripted_tour, in_nag_mortarchs_scripted_tour)
+			local facion_list = {
+				"wh3_dlc29_nag_host_of_nagash"
+				}
+			for i = 1, #facion_list do
+				local faction_key = facion_list[i]
+				local faction = cm:get_faction(faction_key):name()
+				local faction_interface = cm:get_faction(faction_key)
+				if faction and faction_interface:is_null_interface() == false then 
+					stop_moving_all_player_characters(faction)
+				end 	
+			end
+		else
+			in_nag_mortarchs_scripted_tour:cancel()
+		end
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_nag_mortarchs_scripted_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_mortarchs_scripted_tour") end)
+in_nag_mortarchs_scripted_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nag_mortarchs_scripted_tour:set_should_lock_ui()
+in_nag_mortarchs_scripted_tour:set_reduce_pause_before_triggering(true)
+in_nag_mortarchs_scripted_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "dlc29_nag_mortarchs", "mortarchs")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_nag_mortarchs_scripted_tour")
+			return true
+		end
+    end
+)
+
+nag_mortarchs_scripted_tour = {
+	id = "in_nag_mortarchs_scripted_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_mortarchs_tour",
+
+	{
+		id = "in_nag_mortarchs_scripted_tour_1",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_mortarchs", "lords_list") end,
+			function() return find_uicomponent("dlc29_nag_mortarchs", "mortarch_details", "tx_name") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_mortarchs_tour_1",
+			direction = "top",
+			size = 350,
+			length = 25
+		}
+	},
+
+	{
+		id = "in_nag_mortarchs_scripted_tour_2",
+		
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_mortarchs", "objectives_list") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_mortarchs_tour_3",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_nag_mortarchs_scripted_tour_3",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_mortarchs", "effects_list") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_mortarchs_tour_2",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_nag_mortarchs_scripted_tour_4",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_mortarchs", "button_dominate") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_mortarchs_tour_4",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Land of the Dead - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_land_of_the_dead_tour = intervention:new(
+	"in_nag_land_of_the_dead_tour",			-- string name
+	0,										-- cost
+	function()
+		cm:callback(function()
+			local uic = find_uicomponent(core:get_ui_root(), "frame_necrotic_power", "CcoCampaignRitual2wh3_dlc29_ritual_nag_devastate_province")
+			if uic and uic:VisibleFromRoot() then
+				out("#### "..nag_land_of_the_dead_tour.id.." ####")
+				ui_scripted_tour:construct_tour(nag_land_of_the_dead_tour, in_nag_land_of_the_dead_tour)
+				local facion_list = {
+					"wh3_dlc29_nag_host_of_nagash"
+					}
+				for i = 1, #facion_list do
+					local faction_key = facion_list[i]
+					local faction = cm:get_faction(faction_key):name()
+					local faction_interface = cm:get_faction(faction_key)
+					if faction and faction_interface:is_null_interface() == false then
+						stop_moving_all_player_characters(faction)
+					end
+				end
+			else
+				in_nag_land_of_the_dead_tour:cancel()
+			end
+		end,
+		0.2)
+	end,
+	BOOL_INTERVENTIONS_DEBUG				-- show debug output
+)
+
+in_nag_land_of_the_dead_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_land_of_the_dead_tour") end)
+in_nag_land_of_the_dead_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_nag_land_of_the_dead_tour:set_should_lock_ui()
+in_nag_land_of_the_dead_tour:set_reduce_pause_before_triggering(true)
+in_nag_land_of_the_dead_tour:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local settlement = context:garrison_residence():settlement_interface()
+		local is_necropolis = settlement:settlement_type_key() == "wh3_dlc29_nag_necropolis"
+		if settlement and is_necropolis then
+			common.set_advice_history_string_seen("in_nag_land_of_the_dead_tour")
+			return true
+		end
+	end
+)
+
+nag_land_of_the_dead_tour = {
+	id = "in_nag_land_of_the_dead_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_land_of_the_dead_tour",
+	
+	{
+		id = "nag_land_of_the_dead_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "frame_necrotic_power", "header_frame") end,
+			function() return find_uicomponent(core:get_ui_root(), "frame_necrotic_power", "land_of_the_dead") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_tour_1",
+			direction = "left",
+			size = 350,
+			length = 25
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "info_panel_holder", "resource_necromantic_power") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_tour_2",
+			direction = "left",
+			size = 350,
+			length = 25
+		}																																																				
+	},
+
+	{
+		id = "nag_land_of_the_dead_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "info_panel_holder", "land_of_the_dead", "ritual_buttonset") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_tour_3",
+			direction = "left",
+			size = 350,
+			length = 25
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Land of the Dead - Disconnected - Text Pointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_land_of_the_dead_disconnected_tour = intervention:new(
+	"in_nag_land_of_the_dead_disconnected_tour",			-- string name
+	0,														-- cost
+	function()
+		local uic = find_uicomponent(core:get_ui_root(), "frame_necrotic_power", "not_land_of_the_dead")
+		if uic and uic:VisibleFromRoot() then
+			nag_land_of_the_dead_disconnected_tour()
+			local facion_list = {
+				"wh3_dlc29_nag_host_of_nagash"
+				}
+			for i = 1, #facion_list do
+				local faction_key = facion_list[i]
+				local faction = cm:get_faction(faction_key):name()
+				local faction_interface = cm:get_faction(faction_key)
+				if faction and faction_interface:is_null_interface() == false then
+					stop_moving_all_player_characters(faction)
+				end
+			end
+		end
+	end,
+	BOOL_INTERVENTIONS_DEBUG				-- show debug output
+)
+
+in_nag_land_of_the_dead_disconnected_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_land_of_the_dead_disconnected_tour")	end)
+in_nag_land_of_the_dead_disconnected_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_nag_land_of_the_dead_disconnected_tour:set_should_lock_ui()
+in_nag_land_of_the_dead_disconnected_tour:set_reduce_pause_before_triggering(true)
+in_nag_land_of_the_dead_disconnected_tour:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local region = context:garrison_residence():region()
+		local faction = cm:get_faction("wh3_dlc29_nag_host_of_nagash")
+		if faction:is_null_interface() == false and faction:is_human() then
+			if region:owning_faction() == faction and not land_of_the_dead:is_province_affected(region:province():key()) then
+				common.set_advice_history_string_seen("in_nag_land_of_the_dead_disconnected_tour")
+				return true
+			end
+		end
+	end
+)
+
+function nag_land_of_the_dead_disconnected_tour()
+	local uic_header = find_uicomponent(core:get_ui_root(), "frame_necrotic_power", "header_frame")
+	local uic_main = find_uicomponent(core:get_ui_root(), "frame_necrotic_power", "not_land_of_the_dead")
+	local uic_land_of_the_dead = {uic_header, uic_main}
+	cm:callback(function()
+		core:show_fullscreen_highlight_around_components(10, false, false, unpack(uic_land_of_the_dead))
+	end, 0.2)
+	
+	local tp = text_pointer:new_from_component(
+		"tp_scripted_tour",
+		"left",
+		50, 
+		uic_main,
+		1, 
+		0.25
+	)	
+	tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc29_text_pointer_nag_land_of_the_dead_disconnected")
+	tp:set_style("semitransparent")
+	tp:set_topmost(true)
+	tp:set_highlight_close_button(0.5)
+	tp:set_close_button_callback(
+		function()
+			core:hide_fullscreen_highlight()
+			tp:hide()
+			in_nag_land_of_the_dead_disconnected_tour:complete()
+		end
+	)
+	tp:show()
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Land of the Dead - Major Occupation - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_land_of_the_dead_major_occupation_tour = intervention:new(
+	"in_nag_land_of_the_dead_major_occupation_tour",		-- string name
+	0,														-- cost
+	function()
+		local uic_tomb = find_uicomponent(core:get_ui_root(), "settlement_captured", "1170481443")
+		local uic_cove = find_uicomponent(core:get_ui_root(), "settlement_captured", "733745098")
+		if uic_tomb and uic_tomb:VisibleFromRoot() then
+			out("#### "..nag_land_of_the_dead_major_occupation_tour_land.id.." ####")
+			ui_scripted_tour:construct_tour(nag_land_of_the_dead_major_occupation_tour_land, in_nag_land_of_the_dead_major_occupation_tour)
+		elseif uic_cove and uic_cove:VisibleFromRoot() then
+			out("#### "..nag_land_of_the_dead_major_occupation_tour_water.id.." ####")
+			ui_scripted_tour:construct_tour(nag_land_of_the_dead_major_occupation_tour_water, in_nag_land_of_the_dead_major_occupation_tour)
+		end
+	end,
+	BOOL_INTERVENTIONS_DEBUG	 							-- show debug output
+)
+
+in_nag_land_of_the_dead_major_occupation_tour:add_precondition(function() 
+	return not common.get_advice_history_string_seen("in_nag_land_of_the_dead_major_occupation_tour") end)
+in_nag_land_of_the_dead_major_occupation_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_nag_land_of_the_dead_major_occupation_tour:set_should_lock_ui()
+in_nag_land_of_the_dead_major_occupation_tour:set_wait_for_battle_complete(false)
+in_nag_land_of_the_dead_major_occupation_tour:set_reduce_pause_before_triggering(true)
+in_nag_land_of_the_dead_major_occupation_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "settlement_captured" and common.get_advice_history_string_seen("post_siege_battle_victory_options") then
+			if find_uicomponent(core:get_ui_root(), "settlement_captured", "1899057904") then
+				common.set_advice_history_string_seen("in_nag_land_of_the_dead_major_occupation_tour")
+				return true
+			end
+		end
+	end
+)
+
+nag_land_of_the_dead_major_occupation_tour_land = {
+	id = "nag_land_of_the_dead_major_occupation_tour_land",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_land_of_the_dead_tour",
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1899057904") end,
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1170481443") end,
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1235803466") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1899057904") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc29_nag_necropolis_limit_holder", "nag_necropolis_limit") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_3",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1170481443") end,
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1235803466") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+nag_land_of_the_dead_major_occupation_tour_water = {
+	id = "nag_land_of_the_dead_major_occupation_tour_water",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_land_of_the_dead_tour",
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1899057904") end,
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "733745098") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1899057904") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "dlc29_nag_necropolis_limit_holder", "nag_necropolis_limit") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_3",
+			direction = "top",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_major_occupation_tour_4",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "733745098") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_major_occupation_tour_5",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Land of the Dead - Minor Occupation - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_land_of_the_dead_minor_occupation_tour = intervention:new(
+	"in_nag_land_of_the_dead_minor_occupation_tour",		-- string name
+	0,														-- cost
+	function()
+		local uic_tomb = find_uicomponent(core:get_ui_root(), "settlement_captured", "1170481443")
+		local uic_cove = find_uicomponent(core:get_ui_root(), "settlement_captured", "733745098")
+		if uic_tomb and uic_tomb:VisibleFromRoot() then
+			out("#### "..nag_land_of_the_dead_minor_occupation_tour_land.id.." ####")
+			ui_scripted_tour:construct_tour(nag_land_of_the_dead_minor_occupation_tour_land, in_nag_land_of_the_dead_minor_occupation_tour)
+		elseif uic_cove and uic_cove:VisibleFromRoot() then
+			out("#### "..nag_land_of_the_dead_minor_occupation_tour_water.id.." ####")
+			ui_scripted_tour:construct_tour(nag_land_of_the_dead_minor_occupation_tour_water, in_nag_land_of_the_dead_minor_occupation_tour)
+		end
+	end,
+	BOOL_INTERVENTIONS_DEBUG	 							-- show debug output
+)
+
+in_nag_land_of_the_dead_minor_occupation_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_land_of_the_dead_minor_occupation_tour") end)
+in_nag_land_of_the_dead_minor_occupation_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_nag_land_of_the_dead_minor_occupation_tour:set_should_lock_ui()
+in_nag_land_of_the_dead_minor_occupation_tour:set_wait_for_battle_complete(false)
+in_nag_land_of_the_dead_minor_occupation_tour:add_trigger_condition(
+	"PanelOpenedCampaign",
+	function(context)
+		if context.string == "settlement_captured" then
+			local uic_necro = find_uicomponent(core:get_ui_root(), "settlement_captured", "1899057904")
+			local uic_tomb = find_uicomponent(core:get_ui_root(), "settlement_captured", "1170481443")
+			local uic_cove = find_uicomponent(core:get_ui_root(), "settlement_captured", "733745098")
+			if (uic_tomb or uic_cove) and not uic_necro then
+				common.set_advice_history_string_seen("in_nag_land_of_the_dead_minor_occupation_tour")
+				return true
+			end
+		end
+	end
+)
+
+nag_land_of_the_dead_minor_occupation_tour_land = {
+	id = "nag_land_of_the_dead_minor_occupation_tour_land",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_land_of_the_dead_tour",
+
+	{
+		id = "nag_land_of_the_dead_minor_occupation_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1170481443") end,
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1235803466") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_minor_occupation_tour_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_minor_occupation_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1170481443") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_minor_occupation_tour_2",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_minor_occupation_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1235803466") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_minor_occupation_tour_3",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+nag_land_of_the_dead_minor_occupation_tour_water = {
+	id = "nag_land_of_the_dead_minor_occupation_tour_water",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_land_of_the_dead_tour",
+
+	{
+		id = "nag_land_of_the_dead_minor_occupation_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "733745098") end,
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "1264917555") end,
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "802537361") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_minor_occupation_tour_1",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "nag_land_of_the_dead_minor_occupation_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "settlement_captured", "733745098") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_land_of_the_dead_minor_occupation_tour_4",
+			direction = "bottom",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Vampire Confederation - Text Pointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_confederation_text_pointer = intervention:new(
+    "in_vmp_confederation_text_pointer",		-- string name
+    0,											-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "button_vmp_confederatations")
+        if uic and uic:Visible() and uic:CurrentState() == "active" then
+            ui_scripted_tour:toggle_shortcuts(false)
+            vmp_confederation_text_pointer()
+        else
+            in_vmp_confederation_text_pointer:complete()
+        end
+    end,
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_vmp_confederation_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_confederation_text_pointer")
+																and not common.get_advice_history_string_seen("in_vmp_confederation_tour") end)
+in_vmp_confederation_text_pointer:set_wait_for_fullscreen_panel_dismissed(false)
+in_vmp_confederation_text_pointer:set_should_lock_ui()
+in_vmp_confederation_text_pointer:add_trigger_condition(
+    "FactionTurnStart",
+    function(context)
+        if cm:turn_number() == 5 then
+			common.set_advice_history_string_seen("in_vmp_confederation_text_pointer")
+            return true
+        end
+    end
+)
+
+function vmp_confederation_text_pointer()
+    local uic = find_uicomponent(core:get_ui_root(), "button_vmp_confederatations")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position()
+    if uic and uic:Visible() then
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+ 		local tp = text_pointer:new("tp_vmp_confederation", "right", 60, info_pos_x + (info_size_x / 2) - 25, (info_pos_y + (info_size_y / 2)) + 1)
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc29_text_pointer_vmp_confederation_button")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight()
+            tp:hide()
+            in_vmp_confederation_text_pointer:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      
+    end
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Vampire Confederation - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_confederation_tour = intervention:new(
+    "in_vmp_confederation_tour",			-- string name
+    0,										-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "dlc29_vmp_confederation", "vmp_confederation")
+        if uic and uic:VisibleFromRoot() then
+			out("#### "..vmp_confederation_tour.id.." ####")
+			ui_scripted_tour:construct_tour(vmp_confederation_tour, in_vmp_confederation_tour)
+		else
+			in_vmp_confederation_tour:cancel()
+		end
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_vmp_confederation_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_confederation_tour") end)
+in_vmp_confederation_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_vmp_confederation_tour:set_should_lock_ui()
+in_vmp_confederation_tour:set_reduce_pause_before_triggering(true)
+in_vmp_confederation_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "dlc29_vmp_confederation", "vmp_confederation")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_vmp_confederation_tour")
+			return true
+		end
+    end
+)
+
+vmp_confederation_tour = {
+	id = "in_vmp_confederation_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_vmp_confederation_tour",
+
+	{
+		id = "in_vmp_confederation_tour_1",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_confederation", "lords_list") end,
+			function() return find_uicomponent("dlc29_vmp_confederation", "lord_details", "tx_name") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_confederation_tour_1",
+			direction = "top",
+			size = 350,
+			length = 25
+		}
+	},
+
+	{
+		id = "in_vmp_confederation_tour_2",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_confederation", "effects_list") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_confederation_tour_2",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_vmp_confederation_tour_3",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_confederation", "objectives", "title") end,
+			function() return find_uicomponent("dlc29_vmp_confederation", "details_panel", "button_confederate") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_confederation_tour_3",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_vmp_confederation_tour_4",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_confederation", "details_panel", "button_confederate") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_confederation_tour_4",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Vampire Bloodlines - Text Pointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_bloodlines_text_pointer = intervention:new(
+    "in_vmp_bloodlines_text_pointer",		-- string name
+    0,											-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "button_bloodlines")
+        if uic and uic:Visible() and uic:CurrentState() == "active" then
+            ui_scripted_tour:toggle_shortcuts(false)
+            vmp_bloodlines_text_pointer()
+        else
+            in_vmp_bloodlines_text_pointer:complete()
+        end
+    end,
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_vmp_bloodlines_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_bloodlines_text_pointer")
+																and not common.get_advice_history_string_seen("in_vmp_bloodlines_tour") end)
+in_vmp_bloodlines_text_pointer:set_wait_for_fullscreen_panel_dismissed(false)
+in_vmp_bloodlines_text_pointer:set_should_lock_ui()
+in_vmp_bloodlines_text_pointer:add_trigger_condition(
+    "FactionTurnStart",
+    function(context)
+        if cm:turn_number() == 5 then
+			common.set_advice_history_string_seen("in_vmp_bloodlines_text_pointer")
+            return true
+        end
+    end
+)
+
+function vmp_bloodlines_text_pointer()
+    local uic = find_uicomponent(core:get_ui_root(), "button_bloodlines")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position()
+    if uic and uic:Visible() then
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+ 		local tp = text_pointer:new("tp_vmp_bloodlines", "right", 60, info_pos_x + (info_size_x / 2) - 25, (info_pos_y + (info_size_y / 2)) + 1)
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc29_text_pointer_vmp_bloodlines_button")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight()
+            tp:hide()
+            in_vmp_bloodlines_text_pointer:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      
+    end
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Vampire Bloodlines - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_bloodlines_tour = intervention:new(
+    "in_vmp_bloodlines_tour",			-- string name
+    0,										-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "bloodlines_panel", "bloodlines_list")
+        if uic and uic:VisibleFromRoot() then
+			out("#### "..vmp_bloodlines_tour.id.." ####")
+			ui_scripted_tour:construct_tour(vmp_bloodlines_tour, in_vmp_bloodlines_tour)
+		else
+			in_vmp_bloodlines_tour:cancel()
+		end
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_vmp_bloodlines_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_bloodlines_tour") end)
+in_vmp_bloodlines_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_vmp_bloodlines_tour:set_should_lock_ui()
+in_vmp_bloodlines_tour:set_reduce_pause_before_triggering(true)
+in_vmp_bloodlines_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "bloodlines_panel", "bloodlines_list")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_vmp_bloodlines_tour")
+			return true
+		end
+    end
+)
+
+vmp_bloodlines_tour = {
+	id = "in_vmp_bloodlines_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_vmp_bloodlines_tour",
+
+	{
+		id = "in_vmp_bloodlines_tour_1",
+		highlight = {
+			function() return find_uicomponent("bloodlines_panel", "wh2_dlc11_ritual_bloodlines_blood_dragon", "dy_title") end,
+			function() return find_uicomponent("bloodlines_panel", "wh2_dlc11_ritual_bloodlines_blood_dragon", "TextView") end,
+			function() return find_uicomponent("bloodlines_panel", "wh2_dlc11_ritual_bloodlines_necrarch", "dy_title") end,
+			function() return find_uicomponent("bloodlines_panel", "wh2_dlc11_ritual_bloodlines_necrarch", "TextView") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_bloodlines_tour_1",
+			direction = "top",
+			size = 350,
+			length = 25
+		}
+	},
+
+	{
+		id = "in_vmp_bloodlines_tour_2",
+		highlight = {
+			function() return find_uicomponent("bloodlines_panel", "wh2_dlc11_ritual_bloodlines_blood_dragon", "listview_effects", "section_title") end,
+			function() return find_uicomponent("bloodlines_panel", "wh2_dlc11_ritual_bloodlines_blood_dragon", "listview_effects", "list_box") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_bloodlines_tour_2",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_vmp_bloodlines_tour_3",
+		highlight = {
+			function() return find_uicomponent("bloodlines_panel", "wh2_dlc11_ritual_bloodlines_blood_dragon", "button_awaken") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_bloodlines_tour_3",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Black Pyramid - Text Pointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_pyramid_text_pointer = intervention:new(
+    "in_nag_pyramid_text_pointer",		-- string name
+    0,											-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "button_lord_of_undeath_panel")
+        if uic and uic:Visible() and uic:CurrentState() == "active" then
+            ui_scripted_tour:toggle_shortcuts(false)
+            nag_pyramid_text_pointer()
+        else
+            in_nag_pyramid_text_pointer:complete()
+        end
+    end,
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_nag_pyramid_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_pyramid_text_pointer")
+																and not common.get_advice_history_string_seen("in_nag_pyramid_scripted_tour") end)
+in_nag_pyramid_text_pointer:set_wait_for_fullscreen_panel_dismissed(false)
+in_nag_pyramid_text_pointer:set_should_lock_ui()
+in_nag_pyramid_text_pointer:add_trigger_condition(
+    "FactionTurnStart",
+    function(context)
+        if cm:turn_number() == 3 then
+			common.set_advice_history_string_seen("in_nag_pyramid_text_pointer")
+            return true
+        end
+    end
+)
+
+function nag_pyramid_text_pointer()
+    local uic = find_uicomponent(core:get_ui_root(), "button_lord_of_undeath_panel")
+    if uic and uic:Visible() then
+		local info_size_x, info_size_y = uic:Dimensions()
+		local info_pos_x, info_pos_y = uic:Position()
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+ 		local tp = text_pointer:new("tp_nag_pyramid", "right", 60, info_pos_x + (info_size_x / 2) - 25, (info_pos_y + (info_size_y / 2)) + 1)
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc29_text_pointer_nag_pyramid_button")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight()
+            tp:hide()
+            in_nag_pyramid_text_pointer:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      
+    end
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Black Pyramid - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_pyramid_scripted_tour = intervention:new(
+    "in_nag_pyramid_scripted_tour",		-- string name
+    0,										-- cost
+    function()
+		out("#### "..nag_pyramid_scripted_tour.id.." ####")
+		ui_scripted_tour:construct_tour(nag_pyramid_scripted_tour, in_nag_pyramid_scripted_tour)
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_nag_pyramid_scripted_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_pyramid_scripted_tour") end)
+in_nag_pyramid_scripted_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nag_pyramid_scripted_tour:set_should_lock_ui()
+in_nag_pyramid_scripted_tour:set_reduce_pause_before_triggering(true)
+in_nag_pyramid_scripted_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "dlc29_nag_black_pyramid")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_nag_pyramid_scripted_tour")
+			return true
+		end
+    end
+)
+
+nag_pyramid_scripted_tour = {
+	id = "in_nag_pyramid_scripted_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_pyramid_tour",
+	reposition_controls = function() return find_uicomponent(core:get_ui_root(), "dlc29_nag_black_pyramid", "top_bar", "tx_header") end,
+	controls_lock_priority = true,
+
+	{
+		id = "in_nag_pyramid_scripted_tour_1",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "CcoUiGraphNodeRecordwh3_dlc29_r0-c5-cell4-2") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_1",
+			direction = "right",
+			size = 350,
+			length = 25
+		},
+		navigation_delay = 0.5,
+	},
+
+	{
+		id = "in_nag_pyramid_scripted_tour_2",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "CcoUiGraphNodeRecordwh3_dlc29_r0-c5-cell1-2") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_2",
+			direction = "right",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function()
+			local selected_nodes_holder = find_uicomponent("dlc29_nag_black_pyramid", "selected_nodes_holder")
+			if not selected_nodes_holder or not selected_nodes_holder:Visible() then
+				return find_uicomponent("dlc29_nag_black_pyramid", "CcoUiGraphNodeRecordwh3_dlc29_r0-c5-cell1-2")
+			else
+				return false
+			end
+		end
+	},
+
+	{
+		id = "in_nag_pyramid_scripted_tour_3",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "selected_nodes_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_3",
+			direction = "right",
+			size = 350,
+			length = 25
+		},
+		navigation_delay = 0.1,
+		click_on_navigate = function()
+			local selected_nodes_holder = find_uicomponent("dlc29_nag_black_pyramid", "selected_nodes_holder")
+			if not selected_nodes_holder or not selected_nodes_holder:Visible() then
+				return find_uicomponent("dlc29_nag_black_pyramid", "CcoUiGraphNodeRecordwh3_dlc29_r0-c5-cell1-2")
+			else
+				return false
+			end
+		end
+	},
+
+	{
+		id = "in_nag_pyramid_scripted_tour_4",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "node_action_buttons") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_4",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function()
+			local node_actions_holder = find_uicomponent("dlc29_nag_black_pyramid", "node_action_buttons")
+			if node_actions_holder and node_actions_holder:Visible() then
+				return find_uicomponent("dlc29_nag_black_pyramid", "CcoUiGraphNodeRecordwh3_dlc29_r0-c5-cell1-2")
+			else
+				return false
+			end
+		end,
+		navigation_delay = 0.3,
+	},
+
+	{
+		id = "in_nag_pyramid_scripted_tour_5",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "dlc29_nag_necromancy_bar") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_5",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function()
+			local node_actions_holder = find_uicomponent("dlc29_nag_black_pyramid", "node_action_buttons")
+			if not node_actions_holder or not node_actions_holder:Visible() then
+				return find_uicomponent("dlc29_nag_black_pyramid", "CcoUiGraphNodeRecordwh3_dlc29_r0-c5-cell1-2")
+			else
+				return false
+			end
+		end
+	},
+	
+	{
+		id = "in_nag_pyramid_scripted_tour_6",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "button_active_effects") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_6",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function()
+			local panel_effect_list = find_uicomponent("dlc29_nag_black_pyramid", "effects_side_panel_holder")
+			if not panel_effect_list or not panel_effect_list:Visible() then
+				return find_uicomponent("dlc29_nag_black_pyramid", "button_active_effects") 
+			else
+				return false
+			end
+		end,
+		click_on_navigate_backwards = function()
+			local panel_effect_list = find_uicomponent("dlc29_nag_black_pyramid", "effects_side_panel_holder")
+			if panel_effect_list and panel_effect_list:Visible() then
+				return find_uicomponent("dlc29_nag_black_pyramid", "button_active_effects") 
+			else
+				return false
+			end
+		end,
+	},
+
+	{
+		id = "in_nag_pyramid_scripted_tour_7",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "panel_effects_list") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_7",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_nag_pyramid_scripted_tour_8",
+		highlight = {
+			function() return find_uicomponent("dlc29_nag_black_pyramid", "button_edit_mode") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_pyramid_tour_8",
+			direction = "right",
+			size = 350,
+			length = 25
+		},
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Books of Nagash - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_books_of_nagash_scripted_tour = intervention:new(
+    "in_nag_books_of_nagash_scripted_tour",		-- string name
+    0,										-- cost
+    function()
+		out("#### "..nag_books_of_nagash_scripted_tour.id.." ####")
+		ui_scripted_tour:construct_tour(nag_books_of_nagash_scripted_tour, in_nag_books_of_nagash_scripted_tour)
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_nag_books_of_nagash_scripted_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_books_of_nagash_scripted_tour") end)
+in_nag_books_of_nagash_scripted_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nag_books_of_nagash_scripted_tour:set_should_lock_ui()
+in_nag_books_of_nagash_scripted_tour:set_reduce_pause_before_triggering(true)
+in_nag_books_of_nagash_scripted_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "books_of_nagash")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_nag_books_of_nagash_scripted_tour")
+			return true
+		end
+    end
+)
+
+nag_books_of_nagash_scripted_tour = {
+	id = "in_nag_books_of_nagash_scripted_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_books_tour",
+
+	{
+		id = "in_nag_books_of_nagash_scripted_tour_1",
+		highlight = {
+			function() return find_uicomponent("books_of_nagash", "side_book_list_container") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_books_tour_1",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_nag_books_of_nagash_scripted_tour_2",
+		highlight = {
+			function() return find_uicomponent("books_of_nagash", "map") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_books_tour_2",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+		
+	},
+
+	{
+		id = "in_nag_books_of_nagash_scripted_tour_3",
+		highlight = {
+			function() return find_uicomponent("books_of_nagash", "mission_info_panel") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_books_tour_3",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function()
+
+			-- we check if the panel is expanded. If it isn't, we click the button to expand it. If it is, we don't click the button and just carry on.
+			local spells_panel = find_uicomponent("books_of_nagash", "spell_panel_clipper")
+			if not spells_panel or not spells_panel:Visible() then
+				return find_uicomponent("books_of_nagash", "button_nagash_spells_toggle")
+			else 
+				return false
+			end
+		end
+	},
+
+	{
+		id = "in_nag_books_of_nagash_scripted_tour_4",
+		highlight = {
+			function() return find_uicomponent("books_of_nagash", "container_lores") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_books_tour_4",
+			direction = "right",
+			size = 350,
+			length = 25
+		},
+		navigation_delay = 0.5,
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Books of Nagash Available Book - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_nag_available_books_of_nagash_scripted_tour = intervention:new(
+    "in_nag_available_books_of_nagash_scripted_tour",		-- string name
+    0,										-- cost
+    function()
+		out("#### "..nag_available_books_of_nagash_scripted_tour.id.." ####")
+		ui_scripted_tour:construct_tour(nag_available_books_of_nagash_scripted_tour, in_nag_available_books_of_nagash_scripted_tour)
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_nag_available_books_of_nagash_scripted_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_nag_available_books_of_nagash_scripted_tour") end)
+in_nag_available_books_of_nagash_scripted_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_nag_available_books_of_nagash_scripted_tour:set_should_lock_ui()
+in_nag_available_books_of_nagash_scripted_tour:set_reduce_pause_before_triggering(true)
+in_nag_available_books_of_nagash_scripted_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "books_of_nagash")
+		if panel and panel:Visible() then
+			local books_list = find_uicomponent(core:get_ui_root(), "books_of_nagash", "side_book_list", "side_book_list_container")
+			if books_list then
+				for i = 0, books_list:ChildCount() - 1 do
+					local curr_child = UIComponent(books_list:Find(i))
+					local is_owned = UIComponent(curr_child:Find("book_owned"))
+					if is_owned and is_owned:Visible() then
+						common.set_advice_history_string_seen("in_nag_available_books_of_nagash_scripted_tour")
+						return true
+					end
+				end
+			end
+		end
+    end
+)
+
+nag_available_books_of_nagash_scripted_tour = {
+	id = "in_nag_available_books_of_nagash_scripted_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_nag_available_books_tour",
+
+	{
+		id = "in_nag_available_books_of_nagash_scripted_tour_1",
+		highlight = {
+			function() return find_uicomponent("books_of_nagash", "lore_4") end,
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_available_books_tour_1",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_nag_available_books_of_nagash_scripted_tour_2",
+		highlight = {
+			function() return find_uicomponent("books_of_nagash", "spell_slot") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_available_books_tour_2",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+		
+	},
+
+	{
+		id = "in_nag_available_books_of_nagash_scripted_tour_3",
+		highlight = {
+			function() return find_uicomponent("books_of_nagash", "side_book_list_container") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_nag_available_books_tour_3",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Neferata Web of Power - Text Pointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_web_of_power_text_pointer = intervention:new(
+    "in_vmp_web_of_power_text_pointer",		-- string name
+    0,											-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "button_nef_web_of_power")
+        if uic and uic:Visible() and uic:CurrentState() == "active" then
+            ui_scripted_tour:toggle_shortcuts(false)
+            vmp_web_of_power_text_pointer()
+        else
+            in_vmp_web_of_power_text_pointer:complete()
+        end
+    end,
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_vmp_web_of_power_text_pointer:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_web_of_power_text_pointer")
+																and not common.get_advice_history_string_seen("in_vmp_web_of_power_tour") end)
+in_vmp_web_of_power_text_pointer:set_wait_for_fullscreen_panel_dismissed(false)
+in_vmp_web_of_power_text_pointer:set_should_lock_ui()
+in_vmp_web_of_power_text_pointer:add_trigger_condition(
+    "FactionTurnStart",
+    function(context)
+        if cm:turn_number() == 3 then
+			common.set_advice_history_string_seen("in_vmp_web_of_power_text_pointer")
+            return true
+        end
+    end
+)
+
+function vmp_web_of_power_text_pointer()
+    local uic = find_uicomponent(core:get_ui_root(), "button_nef_web_of_power")
+	local info_size_x, info_size_y = uic:Dimensions()
+	local info_pos_x, info_pos_y = uic:Position()
+    if uic and uic:Visible() then
+        core:show_fullscreen_highlight_around_components(25, false, false, uic)
+ 		local tp = text_pointer:new("tp_vmp_web_of_power", "right", 60, info_pos_x + (info_size_x / 2) - 25, (info_pos_y + (info_size_y / 2)) + 1)
+        tp:add_component_text("text", "ui_text_replacements_localised_text_wh3_dlc29_text_pointer_vmp_web_of_power_button")
+        tp:set_style("semitransparent")
+        tp:set_topmost(true)
+        tp:set_highlight_close_button(0.5)
+        tp:set_close_button_callback(function() core:hide_fullscreen_highlight()
+            tp:hide()
+            in_vmp_web_of_power_text_pointer:complete()
+            ui_scripted_tour:toggle_shortcuts(true)
+        end)
+        tp:show()      
+    end
+end
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Neferata Web of Power - Scripted Tour
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_web_of_power_tour = intervention:new(
+    "in_vmp_web_of_power_tour",			-- string name
+    0,										-- cost
+    function()
+        local uic = find_uicomponent(core:get_ui_root(), "dlc29_vmp_nef_web_of_power")
+        if uic and uic:VisibleFromRoot() then
+			out("#### "..vmp_web_of_power_tour.id.." ####")
+			ui_scripted_tour:construct_tour(vmp_web_of_power_tour, in_vmp_web_of_power_tour)
+		else
+			in_vmp_web_of_power_tour:cancel()
+		end
+    end,                    
+    BOOL_INTERVENTIONS_DEBUG			-- show debug output
+)
+
+in_vmp_web_of_power_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_web_of_power_tour") end)
+in_vmp_web_of_power_tour:set_wait_for_fullscreen_panel_dismissed(false)
+in_vmp_web_of_power_tour:set_should_lock_ui()
+in_vmp_web_of_power_tour:set_reduce_pause_before_triggering(true)
+in_vmp_web_of_power_tour:add_trigger_condition(
+    "PanelOpenedCampaign",
+    function(context)
+        local panel = find_uicomponent(core:get_ui_root(), "dlc29_vmp_nef_web_of_power")
+		if panel and panel:Visible() then
+			common.set_advice_history_string_seen("in_vmp_web_of_power_tour")
+			return true
+		end
+    end
+)
+
+vmp_web_of_power_tour = {
+	id = "in_vmp_web_of_power_tour",
+	localised_name = "ui_text_replacements_localised_text_wh3_dlc29_vmp_web_of_power_tour",
+
+	{
+		id = "in_vmp_web_of_power_tour_1",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "actions_tab", "tx_actions_title") end,
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "actions_tab", "listview") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_web_of_power_tour_1",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "action_list", "wh3_dlc29_neferata_actions_t1_steal_treasury") end,
+	},
+
+	{
+		id = "in_vmp_web_of_power_tour_2",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "character_list_holder", "tx_chars_title") end,
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "character_list_holder", "list_box") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_web_of_power_tour_2",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+		click_on_navigate = function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "character_list_holder", "list_clip", "302", "agent_button") end,
+	},
+
+	{
+		id = "in_vmp_web_of_power_tour_3",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "collective_info", "actions_info", "selected_mission") end,
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "collective_info", "target_parent") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_web_of_power_tour_3",
+			direction = "left",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_vmp_web_of_power_tour_4",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "collective_info", "target_parent") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_web_of_power_tour_4",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_vmp_web_of_power_tour_5",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "actions_character_section", "holder_show_tab") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_web_of_power_tour_5",
+			direction = "right",
+			size = 350,
+			length = 25
+		},
+	},
+
+	{
+		id = "in_vmp_web_of_power_tour_6",
+		highlight = {
+			function() return find_uicomponent("dlc29_vmp_nef_web_of_power", "middle_section", "buttons_holder") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_web_of_power_tour_6",
+			direction = "bottom",
+			size = 350,
+			length = 25
+		},
+	},
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---- Vampires - Provinces - Text Pointer
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+in_vmp_provinces_tour = intervention:new(
+	"in_vmp_provinces_tour",			-- string name
+	0,														-- cost
+	function()
+		local corpses_frame = find_uicomponent(core:get_ui_root(), "info_panel_holder", "frame_corpses")
+		if not corpses_frame or not corpses_frame:VisibleFromRoot() then
+			in_vmp_provinces_tour:cancel()
+			return
+		end
+
+		local tour = scripted_vmp_provinces_tour
+		if cm:model():faction_is_local("wh3_dlc29_vmp_neferata") then
+			tour = scripted_vmp_provinces_tour_neferata
+		end
+		out("#### "..tour.id.." ####")
+		ui_scripted_tour:construct_tour(tour, in_vmp_provinces_tour)
+	end,
+	BOOL_INTERVENTIONS_DEBUG				-- show debug output
+)
+
+in_vmp_provinces_tour:add_precondition(function() return not common.get_advice_history_string_seen("in_vmp_provinces_tour")	end)
+in_vmp_provinces_tour:set_wait_for_fullscreen_panel_dismissed(true)
+in_vmp_provinces_tour:set_should_lock_ui()
+in_vmp_provinces_tour:set_reduce_pause_before_triggering(true)
+in_vmp_provinces_tour:add_trigger_condition(
+	"SettlementSelected",
+	function(context)
+		local region = context:garrison_residence():region()
+		if region and region:owning_faction():subculture() == "wh_main_sc_vmp_vampire_counts" then
+			common.set_advice_history_string_seen("in_vmp_provinces_tour")
+			return true
+		end
+	end
+)
+
+scripted_vmp_provinces_tour = {
+	id = "in_vmp_provinces_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_province_management",
+
+	{
+		id = "in_vmp_provinces_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "info_panel_holder", "frame_corpses") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_province_corpses",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	
+	{
+		id = "in_vmp_provinces_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "info_panel_holder", "frame_shyish") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_province_dictats",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+scripted_vmp_provinces_tour_neferata = {
+	id = "in_vmp_provinces_tour",
+	localised_name = "ui_text_replacements_localised_text_hp_campaign_title_province_management",
+	
+	{
+		id = "in_vmp_provinces_tour_1",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "info_panel_holder", "frame_corpses") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_province_corpses",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+
+	{
+		id = "in_vmp_provinces_tour_2",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "info_panel_holder", "frame_shyish") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_province_dictats",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	},
+	
+	{
+		id = "in_vmp_provinces_tour_3",
+		highlight = {
+			function() return find_uicomponent(core:get_ui_root(), "delete_placeholder_concealment") end
+		},
+		text_box = {
+			text = "wh3_dlc29_text_pointer_vmp_province_conceal",
+			direction = "left",
+			size = 350,
+			length = 50
+		}
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---- Common Functions
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -8869,6 +11795,8 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 	if tour.reposition_controls then
 		nt:set_interval_before_tour_controls_visible(0)
 	end
+
+	local uic_tour_controls_pos_x, uic_tour_controls_pos_y -- used to restore tour controls to their previous position, if moved
 	
 	nt:start_action(
 		function()
@@ -8883,7 +11811,9 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 			-- Re-position the controls if needed
 			if tour.reposition_controls then
 				-- Get components
-				local uic_scripted_tour_controls = find_uicomponent("under_advisor_docker", "scripted_tour_controls")
+				local uic_scripted_tour_controls = find_uicomponent("under_advisor_docker")
+				uic_tour_controls_pos_x, uic_tour_controls_pos_y = uic_scripted_tour_controls:Position() -- cache original position
+
 				local uic_target = tour.reposition_controls()
 				
 				if not uic_target then
@@ -8899,6 +11829,10 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 
 				-- Move beside target component
 				uic_scripted_tour_controls:MoveTo((uic_target_pos_x + uic_target_width), uic_target_pos_y)
+			end
+			
+			if tour.controls_lock_priority then
+				ui_scripted_tour:lock_advice_controls_priority(true)
 			end
 			
 			-- Disable escape key and shortcuts.
@@ -9037,9 +11971,20 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 				end,
 				true
 				);			
-			end 
+			end
 
 			nt:restore_scripted_tour_controls_priority()
+
+			if tour.reposition_controls then -- restore controls to their original position
+				-- Get components
+				local uic_scripted_tour_controls = find_uicomponent("under_advisor_docker")
+				uic_scripted_tour_controls:MoveTo(uic_tour_controls_pos_x, uic_tour_controls_pos_y)
+			end
+
+			if tour.controls_lock_priority then
+				ui_scripted_tour:lock_advice_controls_priority(false)
+			end
+
 			intervention:complete()
 		end,
 		0
@@ -9074,6 +12019,20 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 				local pos, width, height = ui_scripted_tour:get_highlighted_size_and_position(stage.highlight.components)
 				local tp = ui_scripted_tour:display_text_pointer(stage.text_box.text, stage.text_box.direction, stage.text_box.size, stage.text_box.length, pos, width, height, stage.text_box.x_offset, stage.text_box.y_offset, stage.text_box.label_offset_x, stage.text_box.label_offset_y)
 
+				local wmp = nil
+
+				if stage.windowed_movie then
+					wmp = windowed_movie_player:new_from_advisor(stage.windowed_movie.name, stage.windowed_movie.path, 1)
+					wmp:set_width(378)
+					wmp:set_should_steal_esc_key_focus(false)
+					wmp:set_show_close_button(false)
+					wmp:show()
+				end
+
+				if stage.infotext then
+					cm:add_infotext(stage.infotext.title, stage.infotext.description)
+				end
+
 				-- Responsible for cleaning up the action after the player moves forward.
 				nts_stage:add_skip_action(
 					function(is_tour_ending, is_skipping_backwards)
@@ -9086,14 +12045,41 @@ function ui_scripted_tour:construct_tour(tour, intervention)
 						if stage.click_on_navigate and not is_skipping_backwards then
 							local result = stage.click_on_navigate()
 							if result then
-								result:SimulateLClick()
+								if tour.controls_lock_priority then
+									ui_scripted_tour:lock_advice_controls_priority(false)
+									result:SimulateLClick()
+									ui_scripted_tour:lock_advice_controls_priority(true)
+								else
+									result:SimulateLClick()
+								end
 							end
 						-- Open the relevant panel when skipping backwards
-						elseif is_skipping_backwards and tour[i - 2] and tour[i - 2].click_on_navigate then
-							local result = tour[i - 2].click_on_navigate()
-							if result then
-								result:SimulateLClick()
+						elseif is_skipping_backwards then
+							local result = nil
+
+							if stage.click_on_navigate_backwards then
+								result = stage.click_on_navigate_backwards()
+							elseif tour[i - 2] and tour[i - 2].click_on_navigate then
+								result = tour[i - 2].click_on_navigate()
 							end
+
+							if result then
+								if tour.controls_lock_priority then
+									ui_scripted_tour:lock_advice_controls_priority(false)
+									result:SimulateLClick()
+									ui_scripted_tour:lock_advice_controls_priority(true)
+								else
+									result:SimulateLClick()
+								end
+							end
+						end
+
+						if stage.infotext then
+							cm:clear_infotext()
+						end
+
+						if wmp ~= nil then
+							wmp:hide()
 						end
 						
 						-- Steal input to block actions during transition.
@@ -9282,6 +12268,31 @@ function ui_scripted_tour:find_valid_child_component(parent_component, ignore_co
 		end
 	end
 	return false
+end
+
+function ui_scripted_tour:get_region_with_foreign_vampire_lairs_in_selected_province()
+	local selected_region_key = cuim:get_selected_settlement_region()
+	local province = cm:get_region(selected_region_key):province()
+	local region_list = province:regions()
+	local region_key = ""
+	for i = 0, region_list:num_items() - 1 do
+		local region = region_list:item_at(i)
+		local fsm = region:foreign_slot_manager_for_faction("wh3_main_vmp_vampire_lairs")
+		if not fsm:is_null_interface() and fsm:slot_set_key() == "wh3_dlc29_slot_set_vampire_lair_foreign" then
+			return region
+		end
+	end
+end
+
+function ui_scripted_tour:lock_advice_controls_priority(lock)
+	local uic_scripted_tour_controls = find_uicomponent("under_advisor_docker")
+	if uic_scripted_tour_controls then
+		if lock then
+			uic_scripted_tour_controls:LockPriority()
+		else
+			uic_scripted_tour_controls:UnLockPriority()
+		end
+	end
 end
 
 -- Additional Listeners 

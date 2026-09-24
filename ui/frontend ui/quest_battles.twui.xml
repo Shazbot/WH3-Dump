@@ -118,16 +118,27 @@
 								<label_faction_name this="E6DCF6F5-C8DE-4669-B5A56ABD8AF4F5A3">
 									<tx_reinforcements this="F6A4F77F-9A06-4811-A7C1D2AE302E5352"/>
 								</label_faction_name>
-								<unit_list this="1BB33F63-2C01-4273-BB50ADC6CDACA4F5">
-									<template_unit this="44E6D8C0-5AC8-4178-83837E94E106F198">
-										<unit_cat_frame this="243038E1-58DE-4C92-86C0A2D9209B2035">
-											<unit_category_icon this="CD8D190F-D869-4EA4-AC63715C29BAA179"/>
-										</unit_cat_frame>
-									</template_unit>
-									<hidden_army_question_mark_container this="90A16278-29D0-4283-959E328695078079">
-										<hidden_army_question_mark this="04598036-FA6B-416C-B88C14BCA8DEBEDE"/>
-									</hidden_army_question_mark_container>
-								</unit_list>
+								<listview this="1BB33F63-2C01-4273-BB50ADC6CDACA4F5">
+									<list_clip this="0776C1A6-2B8F-4CF9-92D647C9BAF186BC">
+										<list_box this="1DD05185-81BB-41AB-B93F6CBC7437AF2C">
+											<template_unit this="44E6D8C0-5AC8-4178-83837E94E106F198">
+												<unit_cat_frame this="243038E1-58DE-4C92-86C0A2D9209B2035">
+													<unit_category_icon this="CD8D190F-D869-4EA4-AC63715C29BAA179"/>
+												</unit_cat_frame>
+											</template_unit>
+											<hidden_army_question_mark_container this="90A16278-29D0-4283-959E328695078079">
+												<hidden_army_question_mark this="04598036-FA6B-416C-B88C14BCA8DEBEDE"/>
+											</hidden_army_question_mark_container>
+										</list_box>
+									</list_clip>
+									<vslider this="65ABC216-BD1F-4779-8ED3B9E6BA146629">
+										<frame_top this="A08200B1-E799-4669-BDEBCBB9E1A6ACCF"/>
+										<frame_bottom this="A6904199-FA4C-4591-BB21E002D274FA1E"/>
+										<handle this="EAB0F416-09CE-4361-961360D419728BA0"/>
+										<top this="94117435-1B77-4B9B-98B10753BF2BF070"/>
+										<bottom this="E6D3350D-D21B-46EC-B04AA964F6343CBA"/>
+									</vslider>
+								</listview>
 							</enemy_army_info>
 						</army_parent>
 						<pic_holder this="B11CD071-0967-451C-ACE4F59163BAE07F">
@@ -149,6 +160,7 @@
 			this="700867C4-1982-4EA3-83306252369ECAD0"
 			id="army_parent"
 			offset="0.00,211.00"
+			allowhorizontalresize="false"
 			docking="Top Left"
 			dock_offset="0.00,211.00"
 			tooltipslocalised="true"
@@ -165,14 +177,10 @@
 				<default
 					this="2859E2B6-8991-4489-A3AC95E75CB0FA07"
 					name="default"
-					width="296"
-					height="253"
+					width="1048"
+					height="437"
 					uniqueguid="2859E2B6-8991-4489-A3AC95E75CB0FA07"/>
 			</states>
-			<LayoutEngine
-				type="HorizontalList"
-				spacing="12.00,0.00"
-				sizetocontent="true"/>
 		</army_parent>
 		<backgraund_gradients
 			this="A2D71003-7457-48F8-BCAC1B5E4BE876E0"
@@ -430,6 +438,83 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/slider_vertical_bottom_hover.png"
 					uniqueguid="0D3B7396-778D-4E36-81FB0AD3F54FDE6D"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderIncrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="10"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_bottom_active.png"/>
+				<element value="ui/skins/default/slider_vertical_bottom_pressed.png"/>
+				<element value="ui/skins/default/slider_vertical_bottom_hover.png"/>
+			</override_images>
+		</bottom>
+		<bottom
+			this="E6D3350D-D21B-46EC-B04AA964F6343CBA"
+			id="bottom"
+			part_of_template="true"
+			uniqueguid_in_template="14EE31B8-28AF-4A50-93B1E0AF78E85719"
+			uniqueguid="E6D3350D-D21B-46EC-B04AA964F6343CBA"
+			dimensions="15.00,22.00"
+			dock_point="Bottom Center"
+			offset="1.00,21.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="E2E0479D-27A9-4FB5-B7BF9433FF84884B"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="6B363842-689D-4108-B79A6183A9D4CBCB"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="1A59BB69-CACA-45BE-82D0DBA70193D75D"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="720CF8CA-2E36-4549-84F2116AFDA369A0"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="7E45A6C1-61EC-406B-B262C7E2DABF6E66"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_bottom_active.png"
+					uniqueguid="C24CD25F-B66D-4B18-812FD9BF25EA7144"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_bottom_pressed.png"
+					uniqueguid="9BD95007-B508-4232-A5C458CB1A343F09"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_bottom_hover.png"
+					uniqueguid="2814A02E-A83B-48E2-B5004995DD2F5000"/>
 			</component_image_uniqueguids>
 			<callbacks_with_context>
 				<callback_with_context callback_id="SliderIncrementButton"/>
@@ -1678,7 +1763,8 @@
 		<enemy_army_info
 			this="B34938C3-FA88-4D07-9CF800FF0A3FC706"
 			id="enemy_army_info"
-			offset="178.00,0.00"
+			offset="554.00,0.00"
+			allowhorizontalresize="false"
 			tooltipslocalised="true"
 			uniqueguid="B34938C3-FA88-4D07-9CF800FF0A3FC706"
 			currentstate="2F81691B-D34D-4BA9-911C201E6B438A39"
@@ -1693,17 +1779,10 @@
 				<default
 					this="2F81691B-D34D-4BA9-911C201E6B438A39"
 					name="default"
-					width="118"
-					height="167"
+					width="494"
+					height="437"
 					uniqueguid="2F81691B-D34D-4BA9-911C201E6B438A39"/>
 			</states>
-			<LayoutEngine
-				type="List"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="276"/>
-				</columnwidths>
-			</LayoutEngine>
 		</enemy_army_info>
 		<faction_holder
 			this="67E13D38-2F9F-4663-B8BF7512DF5B82E3"
@@ -1861,6 +1940,44 @@
 			</override_images>
 		</frame_bottom>
 		<frame_bottom
+			this="A6904199-FA4C-4591-BB21E002D274FA1E"
+			id="frame_bottom"
+			part_of_template="true"
+			uniqueguid_in_template="7C0BF9D5-3175-4CEA-AAA912149CDA2D7D"
+			uniqueguid="A6904199-FA4C-4591-BB21E002D274FA1E"
+			dimensions="19.00,24.00"
+			dock_point="Bottom Center"
+			offset="0.00,24.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="DD437364-1C1E-4BE9-A82A520E2C71446E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_bottom.png"
+					uniqueguid="71F6940B-8AEA-4B87-B7E92518FA9C4208"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_bottom.png"/>
+			</override_images>
+		</frame_bottom>
+		<frame_bottom
 			this="CED8318B-C88F-482D-A7D4E404E6FEAA91"
 			id="frame_bottom"
 			part_of_template="true"
@@ -1898,6 +2015,44 @@
 				<element value="ui/skins/default/slider_vertical_bottom.png"/>
 			</override_images>
 		</frame_bottom>
+		<frame_top
+			this="A08200B1-E799-4669-BDEBCBB9E1A6ACCF"
+			id="frame_top"
+			part_of_template="true"
+			uniqueguid_in_template="7CE59DB6-48EA-4C97-9ED6752EE53823C3"
+			uniqueguid="A08200B1-E799-4669-BDEBCBB9E1A6ACCF"
+			dimensions="20.00,24.00"
+			dock_point="Top Center"
+			offset="1.00,-24.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="NewState"
+					uniqueguid="6EE6300C-CF72-4C39-BEEDACF45447C60C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_top.png"
+					uniqueguid="1ED32645-71AF-4FF3-95C80E896F54763D"/>
+			</component_image_uniqueguids>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="NewState"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_top.png"/>
+			</override_images>
+		</frame_top>
 		<frame_top
 			this="1E52199F-2F5B-405B-A1C731622F0EB4DA"
 			id="frame_top"
@@ -2094,6 +2249,66 @@
 				<element value="ui/skins/default/slider_vertical_handle_underlay.png"/>
 			</override_images>
 		</handle>
+		<handle
+			this="EAB0F416-09CE-4361-961360D419728BA0"
+			id="handle"
+			part_of_template="true"
+			uniqueguid_in_template="6B2825FF-80AB-4E6D-9AAD032FDA71D153"
+			uniqueguid="EAB0F416-09CE-4361-961360D419728BA0"
+			dimensions="18.00,39.00"
+			offset="2.00,0.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Handle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="3EADA77F-9A64-45F3-97214224CBFA8405"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="81C8F1A7-DBEA-4897-81C168963285733D"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="3BDAE656-1122-49EA-A5500915F723E9DB"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="1911D1F7-DC38-41DC-A0E6C27FF3A1661E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_handle.png"
+					uniqueguid="64D44129-C38C-4932-800B1D8E22D216AF"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_handle_underlay.png"
+					uniqueguid="C15AEEC0-7BBA-4F99-92A8B79DDE4D171A"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="VSliderHandle"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="min_size"
+					value="39"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_handle.png"/>
+				<element value="ui/skins/default/slider_vertical_handle_underlay.png"/>
+			</override_images>
+		</handle>
 		<hard
 			this="2D1E2EA5-4C5E-47E5-816D44D27D38ABE7"
 			id="hard"
@@ -2251,7 +2466,7 @@
 		<hidden_army_question_mark
 			this="04598036-FA6B-416C-B88C14BCA8DEBEDE"
 			id="hidden_army_question_mark"
-			offset="203.00,158.00"
+			offset="208.00,158.00"
 			allowhorizontalresize="false"
 			allowverticalresize="false"
 			docking="Center"
@@ -2280,7 +2495,8 @@
 							uniqueguid="9A224583-14FB-464E-934A94F5F3D5605C"
 							componentimage="F80BCFFB-74F4-4C31-A36EEA78C824EC0A"
 							width="74"
-							height="74"/>
+							height="74"
+							dockpoint="Center"/>
 					</imagemetrics>
 				</newstate>
 			</states>
@@ -2289,6 +2505,8 @@
 			this="90A16278-29D0-4283-959E328695078079"
 			id="hidden_army_question_mark_container"
 			offset="62.00,0.00"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
 			visible="false"
 			priority="10"
 			tooltipslocalised="true"
@@ -2305,7 +2523,7 @@
 				<default
 					this="D6ED0A33-3BD1-49DB-B3A8B9019D936586"
 					name="default"
-					width="480"
+					width="490"
 					height="390"
 					uniqueguid="D6ED0A33-3BD1-49DB-B3A8B9019D936586"/>
 			</states>
@@ -2313,9 +2531,12 @@
 		<icon
 			this="A9A9F057-EC95-4A50-9CA3DD3B7DFE1754"
 			id="icon"
-			offset="130.00,210.00"
+			offset="506.00,210.00"
 			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Center"
 			dock_offset="0.00,210.00"
+			component_anchor_point="0.50,0.00"
 			tooltipslocalised="true"
 			uniqueguid="A9A9F057-EC95-4A50-9CA3DD3B7DFE1754"
 			currentstate="94BF0B03-195E-46BF-AAB507878DF9C07E"
@@ -2772,6 +2993,7 @@
 			this="E6DCF6F5-C8DE-4669-B5A56ABD8AF4F5A3"
 			id="label_faction_name"
 			allowverticalresize="false"
+			docking="Top Left"
 			priority="10"
 			tooltipslocalised="true"
 			uniqueguid="E6DCF6F5-C8DE-4669-B5A56ABD8AF4F5A3"
@@ -2998,6 +3220,31 @@
 				<element value="ui/skins/default/mask_line_smoke.png"/>
 			</override_images>
 		</line_smoke2>
+		<listview
+			this="1BB33F63-2C01-4273-BB50ADC6CDACA4F5"
+			id="listview"
+			offset="0.00,37.00"
+			allowhorizontalresize="false"
+			docking="Top Left"
+			dock_offset="0.00,37.00"
+			priority="10"
+			tooltipslocalised="true"
+			uniqueguid="1BB33F63-2C01-4273-BB50ADC6CDACA4F5"
+			currentstate="855F266E-016A-46C9-B90D21A58DDC6313"
+			defaultstate="855F266E-016A-46C9-B90D21A58DDC6313">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="Listview"/>
+			</callbackwithcontextlist>
+			<states>
+				<default
+					this="855F266E-016A-46C9-B90D21A58DDC6313"
+					name="default"
+					width="500"
+					height="400"
+					interactive="true"
+					uniqueguid="855F266E-016A-46C9-B90D21A58DDC6313"/>
+			</states>
+		</listview>
 		<list_box
 			this="49CEB73B-1883-4E5A-AF66F009E12AC269"
 			id="list_box"
@@ -3065,6 +3312,88 @@
 				</columnwidths>
 			</LayoutEngine>
 		</list_box>
+		<list_box
+			this="1DD05185-81BB-41AB-B93F6CBC7437AF2C"
+			id="list_box"
+			uniqueguid_in_template="11778914-9716-4A27-805B79AC6989F774"
+			docking="Top Left"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="1DD05185-81BB-41AB-B93F6CBC7437AF2C"
+			updatewhennotvisible="true"
+			currentstate="7E2362BB-7B21-48A3-90E88627DD1A221A">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextList"
+					context_object_id="CcoBattleSetupArmy"
+					context_function_id="UnitList(true)"/>
+				<callback_with_context
+					callback_id="ContextObjectStore"
+					context_object_id="CcoFactionRecord"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoBattleSetupArmy"
+					context_function_id="BattleSetupFactionContext.FactionRecordContext"/>
+				<callback_with_context callback_id="List"/>
+			</callbackwithcontextlist>
+			<userproperties>
+				<property
+					name="disable_keys"
+					value="1"/>
+			</userproperties>
+			<states>
+				<newstate
+					this="7E2362BB-7B21-48A3-90E88627DD1A221A"
+					name="NewState"
+					width="60"
+					height="135"
+					interactive="true"
+					uniqueguid="7E2362BB-7B21-48A3-90E88627DD1A221A">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+			<LayoutEngine
+				type="List"
+				spacing="2.00,2.00"
+				itemsperrow="8"
+				sizetocontent="true"
+				margins="0.00,5.00">
+				<columnwidths>
+					<column width="42"/>
+				</columnwidths>
+			</LayoutEngine>
+		</list_box>
+		<list_clip
+			this="0776C1A6-2B8F-4CF9-92D647C9BAF186BC"
+			id="list_clip"
+			uniqueguid_in_template="FFA4E0F5-A62E-4595-8396308477FD4348"
+			allowhorizontalresize="false"
+			clipchildren="true"
+			docking="Top Left"
+			priority="60"
+			tooltipslocalised="true"
+			uniqueguid="0776C1A6-2B8F-4CF9-92D647C9BAF186BC"
+			currentstate="07C4B97F-2717-47F7-8FAF69A5715869DB">
+			<states>
+				<newstate
+					this="07C4B97F-2717-47F7-8FAF69A5715869DB"
+					name="NewState"
+					width="500"
+					height="404"
+					shadervars="0.00,10.00,0.00,10.00"
+					uniqueguid="07C4B97F-2717-47F7-8FAF69A5715869DB">
+					<component_text
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</list_clip>
 		<list_clip
 			this="9550A521-779F-44DF-8DAED94ECE4F0C7E"
 			id="list_clip"
@@ -3773,6 +4102,9 @@
 		<player_army_info
 			this="3BE3CD01-8259-416D-B680465B29F402BB"
 			id="player_army_info"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			docking="Top Left"
 			tooltipslocalised="true"
 			uniqueguid="3BE3CD01-8259-416D-B680465B29F402BB"
 			currentstate="A3FE98B3-0720-497C-B88D891C424471B0"
@@ -3787,7 +4119,7 @@
 				<default
 					this="A3FE98B3-0720-497C-B88D891C424471B0"
 					name="default"
-					width="118"
+					width="494"
 					height="167"
 					uniqueguid="A3FE98B3-0720-497C-B88D891C424471B0"/>
 			</states>
@@ -3947,7 +4279,6 @@
 			tooltipslocalised="true"
 			soundcategory="UI_FE_POPUP_Generic"
 			uniqueguid="A26D56B3-198F-4544-830A4E5DAB9CC38C"
-			isrelativeresize="true"
 			currentstate="5E5FC327-E6A3-45A0-A0661E6662671B90">
 			<callbackwithcontextlist>
 				<callback_with_context callback_id="FrontendQuestBattles"/>
@@ -4152,6 +4483,7 @@
 			this="4C9A53CF-EAF9-497D-9FE22796E268633E"
 			id="selected_battle_parent"
 			offset="522.00,182.00"
+			allowhorizontalresize="false"
 			docking="Top Left"
 			dock_offset="522.00,182.00"
 			priority="10"
@@ -6118,6 +6450,83 @@
 				<element value="ui/skins/default/slider_vertical_top_hover.png"/>
 			</override_images>
 		</top>
+		<top
+			this="94117435-1B77-4B9B-98B10753BF2BF070"
+			id="top"
+			part_of_template="true"
+			uniqueguid_in_template="BEE2A27D-90CE-46BB-A4B29AD04E9B9ED0"
+			uniqueguid="94117435-1B77-4B9B-98B10753BF2BF070"
+			dimensions="15.00,22.00"
+			dock_point="Top Center"
+			offset="1.00,-23.00"
+			priority="60"
+			sound_category="UI_GBL_TMP_Slider_Arrows">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="BE5D0F71-BE52-4A12-9100FE910106E53F"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="941E984C-4E5C-4AED-BF86C23B67AF0B97"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="353CDA38-A57E-41A5-8008F947BD23A4B3"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="1B64EE34-BFE7-4173-AF343E389F79B50F"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="155DE464-9459-48CD-9A28A1F2F71AFE0E"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_top_active.png"
+					uniqueguid="09065F3E-4D94-4A49-8493E6F5AD53E993"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_top_pressed.png"
+					uniqueguid="9B3834B2-0250-4B8E-950881652130E2A6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_top_hover.png"
+					uniqueguid="EAE1C608-05B2-4ADE-87FC1F4E4C12B60D"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="SliderDecrementButton"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="position"/>
+				<property
+					name="disable_override0"
+					value="resizable"/>
+				<property
+					name="stepSize"
+					value="10"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_top_active.png"/>
+				<element value="ui/skins/default/slider_vertical_top_pressed.png"/>
+				<element value="ui/skins/default/slider_vertical_top_hover.png"/>
+			</override_images>
+		</top>
 		<tx
 			this="C68154A9-ED73-451F-B892A39F6959A954"
 			id="tx"
@@ -6819,46 +7228,6 @@
 				</columnwidths>
 			</LayoutEngine>
 		</unit_list>
-		<unit_list
-			this="1BB33F63-2C01-4273-BB50ADC6CDACA4F5"
-			id="unit_list"
-			offset="0.00,37.00"
-			priority="10"
-			tooltipslocalised="true"
-			uniqueguid="1BB33F63-2C01-4273-BB50ADC6CDACA4F5"
-			currentstate="855F266E-016A-46C9-B90D21A58DDC6313"
-			defaultstate="855F266E-016A-46C9-B90D21A58DDC6313">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextList"
-					context_object_id="CcoBattleSetupArmy"
-					context_function_id="UnitList(true)"/>
-				<callback_with_context
-					callback_id="ContextObjectStore"
-					context_object_id="CcoFactionRecord"/>
-				<callback_with_context
-					callback_id="ContextPropagator"
-					context_object_id="CcoBattleSetupArmy"
-					context_function_id="BattleSetupFactionContext.FactionRecordContext"/>
-			</callbackwithcontextlist>
-			<states>
-				<default
-					this="855F266E-016A-46C9-B90D21A58DDC6313"
-					name="default"
-					width="60"
-					height="130"
-					uniqueguid="855F266E-016A-46C9-B90D21A58DDC6313"/>
-			</states>
-			<LayoutEngine
-				type="List"
-				spacing="2.00,2.00"
-				itemsperrow="8"
-				sizetocontent="true">
-				<columnwidths>
-					<column width="42"/>
-				</columnwidths>
-			</LayoutEngine>
-		</unit_list>
 		<very_hard
 			this="32ADAD29-50CB-4114-A9F5C2949E8D6435"
 			id="very_hard"
@@ -7013,6 +7382,60 @@
 				</unselected>
 			</states>
 		</very_hard>
+		<vslider
+			this="65ABC216-BD1F-4779-8ED3B9E6BA146629"
+			id="vslider"
+			template_id="parchment_slider_vertical"
+			part_of_template="true"
+			uniqueguid_in_template="6C253EE7-62DB-42FC-967ED9468F399339"
+			uniqueguid="65ABC216-BD1F-4779-8ED3B9E6BA146629"
+			dimensions="20.00,372.00"
+			dock_point="Top Right"
+			offset="20.00,0.00"
+			priority="60">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="812934BC-6902-4145-9CAC73004B91BE43"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="5AE1B68B-464B-49A8-B3E3A881C267D1FD"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/slider_vertical_mid.png"
+					uniqueguid="279B6F3D-7272-42C3-90FC4DD35036366D"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="VSlider"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="Notify"
+					value=""/>
+				<property
+					name="Value"
+					value="0"/>
+				<property
+					name="maxValue"
+					value="100"/>
+				<property
+					name="minValue"
+					value="0"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/slider_vertical_mid.png"/>
+			</override_images>
+		</vslider>
 		<vslider
 			this="BC2BDC59-A3C6-4EC3-BCF2528CE72F6AB2"
 			id="vslider"

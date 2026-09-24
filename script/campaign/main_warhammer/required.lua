@@ -11,7 +11,9 @@
 package.path = package.path .. ";data/script/campaign/?.lua"
 package.path = package.path .. ";data/script/campaign/main_warhammer/?.lua"
 package.path = package.path .. ";data/script/campaign/main_warhammer/minor_cults/?.lua"
-
+package.path = package.path .. ";data/script/campaign/main_warhammer/episodes/?.lua"
+package.path = package.path .. ";data/script/campaign/main_warhammer/lua_payloads/?.lua"
+package.path = package.path .. ";data/script/campaign/main_warhammer/narratives/?.lua"
 -- general campaign behaviour
 force_require("wh_campaign_setup")
 
@@ -32,6 +34,8 @@ require("wh3_ie_narrative_events");
 require("wh_first_turn")
 require("wh_start")
 ---- game-wide features
+require("victory_objectives_config_utils")
+require("victory_objectives_config")
 require("victory_objectives")
 require("wh3_sea_lanes")
 require("corruption_swing")
@@ -63,11 +67,14 @@ require("wh3_campaign_faction_initiative_unlocks")
 require("wh3_campaign_ai")
 require("wh3_campaign_set_piece_battle_abilities")
 require("wh3_campaign_sally_out_garrisons")
+require("wh3_campaign_mutually_exclusive_techs")
+require("wh3_campaign_climate_change_manager")
+require("wh3_campaign_devastation_manager")
+require("wh3_campaign_innate_trait_reset")
 
 ---- faction and race features
 require("wh2_campaign_blessed_spawnings")
 require("wh2_campaign_names_of_power")
-require("wh2_vampire_bloodlines")
 require("wh2_slann_selection")
 require("wh3_campaign_slaanesh_devotees")
 require("wh3_campaign_slaanesh_seductive_influence")
@@ -86,7 +93,15 @@ require("wh3_campaign_chd_convoy_events");
 require("wh3_campaign_great_bastion")
 require("wh3_campaign_belakor")
 require("wh3_campaign_harmony")
-require("endgames")
+require("wh3_crisis_scenarios")
+require("episodes_manager")
+require("lua_payloads_executor")
+require("episode_nagash_sandbox")
+require("episode_vermintide")
+require("episode_nagash_narrative")
+require("episode_chaos_invasion")
+require("episode_nagash_endgame")
+require("wh3_dlc29_episode_narrative_thanquol")
 require("wh3_main_volkmar_elector_units")
 require("wh3_campaign_def_slaves")
 require("wh3_campaign_grudges")
@@ -98,6 +113,10 @@ require("wh3_campaign_forge")
 require("wh3_campaign_underdeep")
 require("wh3_campaign_subjugation")
 require("wh3_campaign_unholy_manifestations")
+require("wh3_dlc29_verminlords")
+require("wh3_dlc29_middenland_narrative")
+require("episode_neferata")  
+require("episode_glottkin")
 
 -- Intro Logic (Often best to load this after other functionality has been loaded)
 require("faction_intro")
@@ -281,9 +300,41 @@ require("wh3_dlc27_dechala_daemonic_units")
 
 -- CP1
 require("wh3_cp1_tiger_mercenaries")
+
 require("wh3_cp1_tiger_court")
 require("wh3_cp1_iron_favour")
 require("wh3_cp1_bhashiva")
+
+-- DLC29
+require("wh3_dlc29_vampire_lairs")
+require("wh3_dlc29_vampire_covens")
+require("wh3_dlc29_vampire_handmaidens")
+require("wh3_dlc29_vampire_bloodlines")
+require("wh3_dlc29_vampire_concealment")
+require("wh3_dlc29_vampire_technology")
+require("wh3_dlc29_vampire_corpses")
+require("wh3_dlc29_vampire_web_of_power")
+require("wh3_campaign_dragon_graves")
+require("wh3_dlc29_campaign_devastation")
+require("wh3_dlc29_ulric_decrees")
+require("wh3_dlc29_middenland_fervour")
+require("wh3_dlc29_thanquol_schemers")
+require("wh3_dlc29_thanquol_chaotic_plans")
+require("wh3_dlc29_glottkin_blessings_of_nurgle")
+require("wh3_dlc29_glottkin_nurgle_rains")
+require("wh3_dlc29_glottkin_marks_of_nurgle")
+require("wh3_dlc29_glottkin_gardens_of_nurgle")
+require("wh3_dlc29_glottkin_rotborne_rituals")
+require("wh3_dlc29_land_of_the_dead")
+require("wh3_dlc29_nag_mortarchs")
+require("wh3_dlc29_thanquol_chaotic_plans_missions")
+require("wh3_dlc29_thanquol_chaotic_plans_token_payloads")
+require("wh3_dlc29_vampire_corpses_distribution")
+require("wh3_dlc29_archaon_subjugation")
+require("wh3_dlc29_nag_black_pyramid")
+require("wh3_dlc29_archaon_narrative")
+require("wh3_dlc29_nagash_rors")
+require("wh3_dlc29_morbidex_nurglings_spawn")
 
 -- Minor Cults
 require("wh3_campaign_minor_cults");

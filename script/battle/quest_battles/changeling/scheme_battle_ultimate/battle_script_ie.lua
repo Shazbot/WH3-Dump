@@ -672,3 +672,12 @@ ga_ai_start_emp:force_victory_on_message("changeling_dead", 5000);
 ga_ai_start_emp:force_victory_on_message("all_casters_dead", 5000);
 
 ga_player_01:force_victory_on_message("ritual_completed", 5000);
+
+-- force victory on alliance
+gb:message_on_time_offset("force_victory", 10000, "ritual_completed");
+gb:add_listener(
+	"force_victory",
+	function()
+		ga_player_01:get_alliance():force_battle_victory();
+	end
+);

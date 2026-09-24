@@ -147,7 +147,8 @@ grudge_cycle = {
 		undead = {
 			["wh2_dlc09_tmb_tomb_kings"] = true,
 			["wh2_dlc11_cst_vampire_coast"] = true,
-			["wh_main_vmp_vampire_counts"] = true
+			["wh_main_vmp_vampire_counts"] = true,
+			["wh3_dlc29_nag_undead_legions"] = true
 		}
 	},
 
@@ -245,6 +246,7 @@ grudge_cycle = {
 			["wh2_dlc09_tmb_tomb_kings"] = "undead_actions",
 			["wh2_dlc11_cst_vampire_coast"] = "undead_actions",
 			["wh_main_vmp_vampire_counts"] = "undead_actions",
+			["wh3_dlc29_nag_undead_legions"] = "undead_actions",
 			["wh2_main_skv_skaven"] = "skaven_actions",
 			["wh3_main_ogr_ogre_kingdoms"] = "ogre_actions",
 			["wh_main_grn_greenskins"] = "greenskin_actions"
@@ -256,7 +258,8 @@ grudge_cycle = {
 		["wh2_main_def_dark_elves"] = grudge_modifiers.high, 
 		["wh_dlc08_nor_norsca"] = grudge_modifiers.high,
 		["wh_main_vmp_vampire_counts"] = grudge_modifiers.high, 
-		["wh2_dlc11_cst_vampire_coast"] = grudge_modifiers.high, 
+		["wh2_dlc11_cst_vampire_coast"] = grudge_modifiers.high,
+		["wh3_dlc29_nag_undead_legions"] = grudge_modifiers.high,
 		
 		["wh_main_grn_greenskins"] = grudge_modifiers.ultra, 
 		["wh3_dlc23_chd_chaos_dwarfs"] = grudge_modifiers.ultra, 
@@ -1320,6 +1323,16 @@ function grudge_cycle:cycle_timer()
 
 							self.faction_times[faction_key] = self.cycle_time
 							self.cycle_grudges[faction_key] = 0
+
+							
+							-- Short Victory Condition event trigger
+							core:trigger_event("ScriptEventGrudgeCycleFinished", level)
+							
+							-- Short Victory Thorgrim reward: Grant bonus percentage after cycle reset
+							local bonus_percentage = cm:get_factions_bonus_value(faction_key, "dwf_grudge_cycle_reset_starting_percent")
+							if bonus_percentage > 0 and not self.delayed_factions[faction_key] then
+								self.cycle_grudges[faction_key] = math.floor(self.target_grudge_value[faction_key] * bonus_percentage / 100)
+							end
 						end
 
 						if cm:get_local_faction_name(true) == faction_key then
@@ -1357,7 +1370,7 @@ function grudge_cycle:delay_cycles()
 				out.design("NEW AGE BEGINS FOR: "..faction_name)
 				out.design("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 			elseif context:choice() == 1 then
-				self:set_grudge_target(target_faction, self.faction_levels[faction_key], 0)
+				self:set_grudge_target(target_faction, self.faction_levels[faction_name], 0)
 				self.delayed_factions[faction_name] = true
 
 				out.design("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")

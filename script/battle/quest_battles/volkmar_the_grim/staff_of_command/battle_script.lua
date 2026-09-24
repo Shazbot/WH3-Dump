@@ -59,7 +59,23 @@ ga_ai_03:reinforce_on_message("enemy_low",100);
 
 
 
-ga_ai_01:message_on_commander_dead_or_routing("enemy_commander_dies",1000);
+-- ga_ai_01:message_on_commander_dead_or_routing("enemy_commander_dies",1000);
+-- Changed how we calculate enemy general to be defeated as it is now a dignitary agent subtype
+gb:add_listener(
+	"battle_start",
+	function()
+        bm:repeat_callback(
+            function()
+                if ga_ai_01.sunits:item(1).unit:unary_hitpoints() <= 0 then
+                    sm:trigger_message("enemy_commander_dies")
+					bm:remove_callback("end_countdown");
+                end
+            end,
+            1000,
+            "end_countdown"
+        )
+	end
+);
 ga_player_02:reinforce_on_message("enemy_commander_dies",1000);
 ga_ai_02:reinforce_on_message("enemy_commander_dies",1000);
 

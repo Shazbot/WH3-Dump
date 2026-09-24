@@ -23,7 +23,8 @@ faction_start = {
 	force_intro_cutscene_playback = false,
 	have_faded_to_black = false,
 	delay_before_fade_to_picture = 0.5,
-	fade_to_picture_duration = 1
+	fade_to_picture_duration = 1,
+	suppress_post_intro_event = false
 };
 
 
@@ -324,7 +325,8 @@ function faction_start:set_camera_to_default()
 end;
 
 
-
-
+function faction_start:set_post_intro_event_suppressed(value)
+	self.suppress_post_intro_event = value
+end
 
 

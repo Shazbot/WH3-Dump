@@ -4891,7 +4891,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoMultiplayerCampaignSettingRecord"
-					context_function_id="RecordList.Filter(IsPerPlayerSetting == false &amp;&amp; Key != &quot;campaign_difficulty&quot; &amp;&amp; Key != &quot;character_loading&quot; &amp;&amp; Key != &quot;realm_of_chaos&quot; &amp;&amp; Key != &quot;enable_sea_lanes&quot; &amp;&amp; Key != &quot;enable_end_game&quot; &amp;&amp; Key != &quot;ironman_mode&quot; &amp;&amp; Key != &quot;ai_minor_faction_potential&quot; &amp;&amp; Key != &quot;ai_extra_aggro&quot; &amp;&amp; Key != &quot;ai_anti_player_bias&quot;)"/>
+					context_function_id="RecordList.Filter(IsPerPlayerSetting == false &amp;&amp; Key != &quot;campaign_difficulty&quot; &amp;&amp; Key != &quot;character_loading&quot; &amp;&amp; Key != &quot;realm_of_chaos&quot; &amp;&amp; Key != &quot;enable_sea_lanes&quot; &amp;&amp; Key != &quot;enable_crisis&quot; &amp;&amp; Key != &quot;ironman_mode&quot; &amp;&amp; Key != &quot;ai_minor_faction_potential&quot; &amp;&amp; Key != &quot;ai_extra_aggro&quot; &amp;&amp; Key != &quot;ai_anti_player_bias&quot;)"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoMPCampaignSettings"/>
@@ -5338,16 +5338,15 @@
 				<newstate
 					this="209DCC7A-3775-44D5-BC0C331CD22EF224"
 					name="NewState"
-					width="178"
+					width="184"
 					height="16"
 					interactive="true"
 					uniqueguid="209DCC7A-3775-44D5-BC0C331CD22EF224">
 					<component_text
-						text="Enable endgame scenarios"
+						text="{{tr:frontend_toggle_crisis}}"
 						textvalign="Center"
 						texthalign="Right"
 						texthbehaviour="Resize"
-						textlocalised="true"
 						textlabel="StateText_7be254d3"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
@@ -6073,7 +6072,7 @@
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoMPCampaignLobby"
-					context_function_id="FindContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;, &quot;enable_end_game&quot;)"/>
+					context_function_id="FindContext(&quot;CcoMultiplayerCampaignSettingRecord&quot;, &quot;enable_crisis&quot;)"/>
 			</callbacks_with_context>
 			<localised_texts>
 				<localised_text/>
@@ -14051,6 +14050,9 @@
 			uniqueguid="CEA17CB7-58FC-42F5-AA3DDEE4BFB16482"
 			currentstate="01BDAEF5-7806-4EC8-B7F6C9F17732ACDD"
 			defaultstate="01BDAEF5-7806-4EC8-B7F6C9F17732ACDD">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="LayoutStallerCallback"/>
+			</callbackwithcontextlist>
 			<states>
 				<default
 					this="01BDAEF5-7806-4EC8-B7F6C9F17732ACDD"

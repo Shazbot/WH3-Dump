@@ -215,6 +215,10 @@
 				<callback_with_context
 					callback_id="ContextCustomTooltipStore"
 					context_object_id="CcoUnitAbility"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoBattleArmy"
+					context_function_id="!ExHasRyseAbility"/>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -1943,6 +1947,7 @@
 			uniqueguid="F7287755-2A3B-4DDC-B2CA85942F6B9356"
 			dimensions="61.00,29.00"
 			dock_point="Bottom Right"
+			is_visible="false"
 			tooltips_localised="false"
 			priority="100"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
@@ -2012,6 +2017,7 @@
 			uniqueguid="7C7B0EB7-9331-4691-B72D37ED67E7DE72"
 			dimensions="70.00,29.00"
 			dock_point="Top Right"
+			is_visible="false"
 			tooltips_localised="false"
 			priority="100"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
@@ -2148,6 +2154,7 @@
 			uniqueguid="375F8AA3-D3B6-4379-8C9AC81D06B96469"
 			dimensions="61.00,29.00"
 			dock_point="Top Left"
+			is_visible="false"
 			priority="100"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
 			<state_uniqueguids>
@@ -2216,6 +2223,7 @@
 			uniqueguid="4D37B6A4-905A-4B4A-856716EB9B10CDB6"
 			dimensions="61.00,29.00"
 			dock_point="Bottom Left"
+			is_visible="false"
 			tooltips_localised="false"
 			priority="100"
 			sound_category="UI_GBL_TMP_Square_Large_Text_Button_Toggle">
@@ -2280,6 +2288,7 @@
 			id="dev_end_battle"
 			is_dev_only="true"
 			offset="1910.00,0.00"
+			visible="false"
 			tooltipslocalised="true"
 			uniqueguid="678AEEAF-06F6-4635-A7F80459157D5350"
 			currentstate="B02392C3-DCAF-4397-9FFCFC7EC9B56832"
@@ -2643,7 +2652,7 @@
 		<docked_holder
 			this="ACC5D87B-26DD-4BE0-96DEC1D2A17DD8A5"
 			id="docked_holder"
-			offset="-868.00,12.00"
+			offset="-798.00,12.00"
 			allowverticalresize="false"
 			docking="Top Center"
 			dock_offset="0.00,12.00"
@@ -2673,7 +2682,7 @@
 				<newstate
 					this="B360758B-FB1F-4ABE-B46206C61628F261"
 					name="NewState"
-					width="2180"
+					width="2040"
 					height="29"
 					pixelcollision="true"
 					uniqueguid="B360758B-FB1F-4ABE-B46206C61628F261">
@@ -2683,7 +2692,7 @@
 							uniqueguid="4CE95040-1B9D-4A46-B03F63473DA3E15A"
 							componentimage="FD4F4453-1BEE-4F15-A07A8AF101627C8F"
 							offset="0.00,-14.00"
-							width="2180"
+							width="2040"
 							height="67"
 							tile="true"
 							dockpoint="Top Center"
@@ -3902,7 +3911,7 @@
 				<component_image
 					this="4EFFFE68-282F-4E3F-9BFC8423B0C8A903"
 					uniqueguid="4EFFFE68-282F-4E3F-9BFC8423B0C8A903"
-					imagepath="ui/skins/warhammer2/realm_of_souls_bar_bg.png"/>
+					imagepath="ui/skins/default/realm_of_souls_bar_bg.png"/>
 			</componentimages>
 			<states>
 				<newstate
@@ -5908,11 +5917,11 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleArmy"
-					context_function_id="HasRealmOfSouls"/>
+					context_function_id="HasRealmOfSouls || ExHasUnitWithAbility(&quot;wh2_dlc09_faction_passive_realm_of_souls_tier_1&quot;)"/>
 				<callback_with_context
 					callback_id="ContextTrashOnCondition"
 					context_object_id="CcoBattleArmy"
-					context_function_id="HasRealmOfSouls == false"/>
+					context_function_id="(HasRealmOfSouls || ExHasUnitWithAbility(&quot;wh2_dlc09_faction_passive_realm_of_souls_tier_1&quot;)) == false"/>
 				<callback_with_context callback_id="ContextInitPlayerArmy"/>
 			</callbackwithcontextlist>
 			<userproperties>

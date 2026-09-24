@@ -133,7 +133,6 @@ end;
 -------------------------------------------------------------------------------------------------
 ------------------------------------------ ARMY SETUP -------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 ga_defender_01 = gb:get_army(gb:get_player_alliance_num(), 1);
 ga_defender_02 = gb:get_army(gb:get_player_alliance_num(), 2,"ally_tyrion_west");
 ga_defender_03 = gb:get_army(gb:get_player_alliance_num(), 2,"ally_tyrion_east");
@@ -142,23 +141,9 @@ ga_attacker_01 = gb:get_army(gb:get_non_player_alliance_num(), "enemy_main_army"
 ga_attacker_02 = gb:get_army(gb:get_non_player_alliance_num(), "enemy_expendable");
 ga_malekith = gb:get_army(gb:get_non_player_alliance_num(), "enemy_malekith");
 
-
---[[
-if gb:get_army(gb:get_non_player_alliance_num(), 1):are_unit_types_in_army("wh2_main_def_cha_dreadlord_0") then
-	ga_attacker_01 = gb:get_army(gb:get_non_player_alliance_num(), 1,"enemy_main_army");
-	ga_attacker_02 = gb:get_army(gb:get_non_player_alliance_num(), 2,"enemy_expendable");
-	ga_malekith = gb:get_army(gb:get_non_player_alliance_num(), 3,"enemy_malekith");
-else
-	ga_attacker_01 = gb:get_army(gb:get_non_player_alliance_num(), 2,"enemy_main_army");
-	ga_attacker_02 = gb:get_army(gb:get_non_player_alliance_num(), 1,"enemy_expendable");
-	ga_malekith = gb:get_army(gb:get_non_player_alliance_num(), 3,"enemy_malekith");
-end
-]]
-
 -------------------------------------------------------------------------------------------------
 -------------------------------------------- ORDERS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 ga_defender_01:goto_location_offset_on_message("battle_started", 0, 50, false);
 ga_attacker_01:goto_location_offset_on_message("battle_started", 0, 50, false);
 ga_attacker_02:goto_location_offset_on_message("battle_started", 0, 50, false);
@@ -169,47 +154,40 @@ ga_defender_02:set_always_visible_on_message("battle_started", true, false);
 ga_defender_01:message_on_casualties("reinforcements", 0.3); 
 gb:message_on_time_offset("reinforcements", 360000);
 ga_defender_02:reinforce_on_message("reinforcements");
-ga_defender_02:release_on_message("reinforcements");
+ga_defender_02:message_on_any_deployed("def_02_in");
+ga_defender_02:rush_on_message("def_02_in");
 ga_defender_03:reinforce_on_message("reinforcements");
-ga_defender_03:release_on_message("reinforcements");
-
-
+ga_defender_03:message_on_any_deployed("def_03_in");
+ga_defender_03:rush_on_message("def_03_in");
 
 ga_attacker_01:halt();
 ga_attacker_02:release_on_message("01_intro_cutscene_end");
 ga_attacker_02:message_on_casualties("assault", 0.4); 
 ga_attacker_01:message_on_casualties("assault", 0.05); --back up if player deals a lot of damage to main army from range.
-ga_attacker_01:release_on_message("assault");
-
+ga_attacker_01:rush_on_message("assault");
 
 ga_attacker_01:message_on_casualties("malekith_advance", 0.25); 
 ga_malekith:reinforce_on_message("malekith_advance");
-ga_malekith:release_on_message("malekith_advance");
-
+ga_malekith:message_on_any_deployed("malekith_in");
+ga_malekith:rush_on_message("malekith_in");
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- OBJECTIVES ------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 gb:set_locatable_objective_on_message("01_intro_cutscene_end", "wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_hints_main_objective", 100, v(-13, 544, -403), v(-42, 515, -173), 2);      
-
 
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- HINTS ---------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 gb:queue_help_on_message("reinforcements", "wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_hints_reinforcements");
 gb:queue_help_on_message("01_intro_cutscene_end", "wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_hints_tactics", 6000, nil, 5000);
 gb:add_ping_icon_on_message("01_intro_cutscene_end", v(-11, 515, -308), 1, 6000, 7000);
 gb:queue_help_on_message("malekith_advance", "wh2_main_qb_hef_teclis_sword_of_teclis_stage_vauls_anvil_3_hints_malekith");
 
-
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- MISC ----------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-
 -------------------------------------------------------------------------------------------------
 --------------------------------------------- VICTORY ----------------------------------------------
 -------------------------------------------------------------------------------------------------
-

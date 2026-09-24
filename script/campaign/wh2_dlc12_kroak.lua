@@ -86,6 +86,9 @@ function kroak:setup_mission_listeners()
 				local faction_name = context:faction():name()
 				self:spawn_kroak(faction_name)
 
+				-- Short Victory Condition Trigger
+				core:trigger_event("ScriptEventUnlockKroakComplete", self.mission_keys[faction_name])
+
 				for k, v in pairs(self.mission_factions) do
 					if v ~= faction_name and self.factions_on_mission[v] == true then
 						cm:cancel_custom_mission(self.factions_on_mission[v], self.mission_keys[self.factions_on_mission[v]])

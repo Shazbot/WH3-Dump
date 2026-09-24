@@ -331,7 +331,7 @@ function active_pointer:new(name, orientation, uic_specifier, localised_text_key
 
 	-- listen for this text pointer hiding and cancel listeners
 	core:add_listener(
-		process_name,
+		process_name .. "_hiding",
 		"ScriptEventTextPointerHiding",
 		function(context) return context.string == name end,
 		function(context)

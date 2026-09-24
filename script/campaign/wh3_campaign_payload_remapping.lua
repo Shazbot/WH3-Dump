@@ -350,6 +350,7 @@ payload.add_money_equivalence_mapping("wh3_dlc20_chs_sigvald", warriors_of_chaos
 payload.add_money_equivalence_mapping("wh3_main_chs_shadow_legion", warriors_of_chaos_souls_money_equivalence_mapping);
 payload.add_money_equivalence_mapping("wh3_dlc20_chs_valkia", warriors_of_chaos_souls_money_equivalence_mapping);
 payload.add_money_equivalence_mapping("wh3_dlc20_chs_kholek", warriors_of_chaos_souls_money_equivalence_mapping);
+payload.add_money_equivalence_mapping("wh3_dlc29_chs_host_of_the_triplets", warriors_of_chaos_souls_money_equivalence_mapping);
 
 
 
@@ -460,3 +461,21 @@ local function dechala_thrall_money_equivalence_mapping(money_value, faction_key
 end
 
 payload.add_money_equivalence_mapping("wh3_dlc27_sla_the_tormentors", dechala_thrall_money_equivalence_mapping);
+
+-------------------------------------------------
+-------------------------------------------------
+-- WARPSTONE
+-- For Thanquol faction
+-------------------------------------------------
+-------------------------------------------------
+
+local function thanquol_warpstone_money_equivalence_mapping(money_value, faction_key, params)
+
+	-- 1/20 of the money is re-allocated to warpstone 
+	local warpstone_value = money_value * 0.05;
+	money_value = money_value * 0.95;
+	
+	return payload.money_direct(money_value) .. ";" .. payload.warpstone(warpstone_value)
+end
+
+payload.add_money_equivalence_mapping("wh3_dlc29_skv_clan_scruten", thanquol_warpstone_money_equivalence_mapping);

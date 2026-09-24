@@ -1704,7 +1704,7 @@ function navigable_tour:start(section_name)
 			);
 
 			core:add_listener(
-				"navigable_tour_cinematic_ui_listener",
+				"navigable_tour_cinematic_ui_listener_disabled",
 				"CinematicUIDisabled",
 				true,
 				function()
@@ -1752,24 +1752,23 @@ end;
 -- Internal function which skips the current section, and start the ending section
 function navigable_tour:begin_exit()
 
+	if self.is_exiting then
+		return true;
+	end
+
 	if not self.st.is_running then
 		script_error(self.name .. " ERROR: begin_exit() called but this navigable tour is not running");
 		return false;
 	end;
 
-	if self.is_exiting then
-		return;
-	end;
-
 	self.is_exiting = true;
-
 	-- skip the current section
 	self:skip_current_section(true);
-
 	-- start the end sequence
 	self.st:start("end_actions");
-end;
 
+	return true;
+end
 
 -- Internal function to activate the tour controls (called during playback of each section)
 function navigable_tour:enable_tour_controls_for_current_section()
@@ -2091,6 +2090,7 @@ function navigable_tour:hide_tour_controls(immediate)
 	core:remove_listener("scripted_tour_back_button");
 	core:remove_listener("scripted_tour_skip_button");
 	core:remove_listener("navigable_tour_cinematic_ui_listener");
+	core:remove_listener("navigable_tour_cinematic_ui_listener_disabled");
 
 	self.unhide_scripted_tour_controls_when_cinematic_ui_disabled = false;
 

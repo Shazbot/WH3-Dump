@@ -3821,6 +3821,33 @@ function campaign_ui_manager:load_ui_overrides()
 		end
 	)
 
+	------------------------------
+	-- disable_bloodlines_button
+	-------------------------------
+	ui_overrides.disable_bloodlines_button = ui_override:new(
+		"disable_bloodlines_button",
+		function()
+			cm:override_ui("disable_bloodlines_button", true);
+		end,
+		function()
+			cm:override_ui("disable_bloodlines_button", false);
+		end
+	)
+
+	------------------------------
+	-- disable_vmp_confederations_button
+	-------------------------------
+	ui_overrides.disable_vmp_confederations_button = ui_override:new(
+		"disable_vmp_confederations_button",
+		function()
+			cm:override_ui("disable_vmp_confederations_button", true);
+		end,
+		function()
+			cm:override_ui("disable_vmp_confederations_button", false);
+		end
+	)
+
+
 	--------------------------------------
 	-- aethyr_winds_progress_bar 
 	--------------------------------------

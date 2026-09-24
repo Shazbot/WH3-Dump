@@ -189,7 +189,10 @@ local function define_script_documentation_cluster_data(path_from_binaries_to_sc
 		{path = path_from_binaries_to_script_folder .. "campaign/_narrative/wh3_narrative_trigger_templates.lua",						is_script = true},
 
 		-- scripted tour helper functions
-		{path = path_from_binaries_to_script_folder .. "battle/scripted_tours/scripted_tour_helper_functions.lua",						is_script = true}
+		{path = path_from_binaries_to_script_folder .. "battle/scripted_tours/scripted_tour_helper_functions.lua",						is_script = true},
+		
+		-- mission objectives
+		{path = path_from_binaries_to_script_folder .. "campaign/main_warhammer/victory_objectives_config_utils.lua",					is_script = true},
 	};
 
 
@@ -206,6 +209,7 @@ local function define_script_documentation_cluster_data(path_from_binaries_to_sc
 		path_from_binaries_to_common_folder .. "EmpireCampaign/Source/Scripting/EmpireCampaignArmoryScriptInterface.cpp",
 		path_from_binaries_to_common_folder .. "EmpireCampaign/Source/Scripting/EmpireCampaignBonusValuesScriptInterface.cpp",
 		path_from_binaries_to_common_folder .. "EmpireCampaign/Source/Scripting/InitiativeScriptInterface.cpp",
+		path_from_binaries_to_common_folder .. "EmpireCampaign/Source/Scripting/MercenaryPoolScriptInterface.cpp",
 		path_from_binaries_to_common_folder .. "EmpireCampaign/Source/Scripting/EmpireCampaignCookingSystemScriptInterfaces.cpp",
 		path_from_binaries_to_common_folder .. "EmpireCampaign/Source/Scripting/EmpireCampaignEffectScriptInterfaces.cpp",
 		path_from_binaries_to_common_folder .. "EmpireCampaign/Source/Scripting/EmpireCampaignFactionCharacterTaggingScriptInterface.cpp",

@@ -74,11 +74,11 @@ gb:add_listener(
 -------------------------------------------------------------------------------------------------
 sz_spiderlings_1 = bm:get_spawn_zone_collection_by_name("spiderlings_zone_01");
 sz_spiderlings_2 = bm:get_spawn_zone_collection_by_name("spiderlings_zone_02");
-sz_spider_queen_3 = bm:get_spawn_zone_collection_by_name("spider_queen_01");
+sz_spider_queen_3 = bm:get_spawn_zone_collection_by_name("spider_queen_zone_01");
 
-ga_ai_spider_01:assign_to_spawn_zone_from_collection_on_message("goblin_weak_01", sz_spiderlings_1, false);
-ga_ai_spider_02:assign_to_spawn_zone_from_collection_on_message("goblin_weak_02", sz_spiderlings_2, false);
-ga_ai_spider_03:assign_to_spawn_zone_from_collection_on_message("spiders_enter_03", sz_spider_queen_3, false);
+ga_ai_spider_01:assign_to_spawn_zone_from_collection_on_message("gobbos_start", sz_spiderlings_1, false);
+ga_ai_spider_02:assign_to_spawn_zone_from_collection_on_message("gobbos_start", sz_spiderlings_2, false);
+ga_ai_spider_03:assign_to_spawn_zone_from_collection_on_message("gobbos_start", sz_spider_queen_3, false);
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------- ENEMY ORDERS ---------------------------------------

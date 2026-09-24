@@ -8,7 +8,17 @@ item_fusing_pairings = {
 		item1 = "wh3_main_anc_enchanted_item_scrap_upgraded",
 		item2 = "wh3_main_anc_enchanted_item_scrap_upgraded",
 		result = "RANDOM_UNIQUE"
-	}
+	},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_1", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_2"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_2", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_3"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_3", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_4"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_4", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_5"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_5", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_6"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_6", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_7"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_7", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_8"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_8", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_9"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_9", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_10"},
+	{item1 = "wh3_main_anc_arcane_item_grimoire_necronium_10", item2 = "wh3_main_anc_arcane_item_necromantic_tome", result = "wh3_main_anc_arcane_item_grimoire_necronium_11"}
 };
 base_chance_to_fuse_unique_item = 10;
 local fuse_fail_item = "wh3_main_anc_enchanted_item_scrap";

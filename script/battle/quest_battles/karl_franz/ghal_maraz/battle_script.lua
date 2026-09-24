@@ -21,11 +21,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_empire = gb:get_army(gb:get_player_alliance_num(0), 1);
@@ -53,7 +49,6 @@ ga_greenskins_03:reinforce_on_message("summon_wave_03", 0);
 gb:set_objective_on_message("battle_started", "wh_main_qb_emp_karl_franz_ghal_maraz_stage_4_main_objective");
 
 -------HINTS-------
-gb:play_sound_on_message("army_routing", Orc_Horn, nil, 3000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_karl_franz_ghal_maraz_stage_4_hint_objective", 5000, 2000, 1000);
 gb:queue_help_on_message("army_routing", "wh_main_qb_emp_karl_franz_ghal_maraz_stage_4_hint_allied_reinforcements", 5000, 2000, 4000);
 gb:queue_help_on_message("summon_wave_02", "wh_main_qb_emp_karl_franz_ghal_maraz_stage_4_hint_enemy_reinforcements_01", 5000, 2000, 25000);

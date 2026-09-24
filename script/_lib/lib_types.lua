@@ -832,6 +832,24 @@ function is_regionlist(value)
 end;
 
 
+--- @function is_region_group_dynamic_data
+--- @desc Returns true if the supplied value is a region group dynamic data interface, false otherwise.
+--- @p value value
+--- @r @boolean is region group dynamic data
+function is_region_group_dynamic_data(value)
+	return string.sub(tostring(value), 1, 28) == "REGION_GROUP_DYNAMIC_DATA_SCRIPT_INTERFACE";
+end;
+
+
+--- @function is_region_group_dynamic_system
+--- @desc Returns true if the supplied value is a region group dynamic system interface, false otherwise.
+--- @p value value
+--- @r @boolean is region group dynamic system
+function is_region_group_dynamic_system(value)
+	return string.sub(tostring(value), 1, 28) == "REGION_GROUP_DYNAMIC_SYSTEM_SCRIPT_INTERFACE";
+end;
+
+
 --- @function is_garrisonresidence
 --- @desc Returns true if the supplied value is a campaign garrison residence interface, false otherwise.
 --- @p value value
@@ -931,6 +949,15 @@ function is_campaignai(value)
 end;
 
 
+--- @function is_region_group_pooled_resource_managers_system
+--- @desc Returns true if the supplied value is a region group pooled resource managers system interface, false otherwise.
+--- @p value value
+--- @r @boolean is region group pooled resource managers system
+function is_region_group_pooled_resource_managers_system(value)
+	return string.sub(tostring(value), 1, 28) == "REGION_GROUP_POOLED_RESOURCE_MANAGERS_SYSTEM_SCRIPT_INTERFACE";
+end;
+
+
 --- @function is_buildinglist
 --- @desc Returns true if the supplied value is a building list object, false otherwise.
 --- @p value value
@@ -968,12 +995,20 @@ function is_foreignslot(value)
 end;
 
 
+
 --- @function is_pooledresourcemanager
 --- @desc Returns true if the supplied value is a pooled resource manager interface, false otherwise.
---- @p value value
 --- @r @boolean is pooled resource manager
 function is_pooledresourcemanager(value)
 	return string.sub(tostring(value), 1, 40) == "POOLED_RESOURCE_MANAGER_SCRIPT_INTERFACE";
+end;
+
+--- @function is_initiative_set
+--- @desc Returns true if the supplied value is an initiative set interface, false otherwise.
+--- @p value value
+--- @r @boolean is initiative set
+function is_initiative_set(value)
+	return string.sub(tostring(value), 1, 31) == "INITIATIVE_SET_SCRIPT_INTERFACE";
 end;
 
 

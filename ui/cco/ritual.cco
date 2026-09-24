@@ -1,0 +1,80 @@
+CcoCampaignRitual
+{
+	ExConfederationRitual_TargetFaction
+	{
+		VampireCountsConfederationRitualsToMissionContext.TargetFactionContext
+	}
+	
+	ExConfederationRitual_IsHumanTarget
+	{
+		(faction_to_confederate = ExConfederationRitual_TargetFaction) =>
+		{
+			faction_to_confederate.IsHuman || faction_to_confederate.IsIdleHuman
+		}
+	}
+	
+	ExConfederationRitual_IsOwnedByOtherPlayer
+	{
+		(faction_to_confederate = ExConfederationRitual_TargetFaction) =>
+		{
+			faction_to_confederate.IsHuman || faction_to_confederate.IsIdleHuman || (faction_to_confederate.WasConfederated && !faction_to_confederate.WasConfederatedByFaction(PlayersFaction))
+		}
+	}
+	
+	ExConfederationRitual_CanPerform
+	{
+		CanPerformRitual && !ExConfederationRitual_IsOwnedByOtherPlayer
+	}
+
+	ExConfederationRitual_WasFactionConfederated
+	{
+		VampireCountsConfederationRitualsToMissionContext.TargetFactionContext.WasConfederated
+	}
+
+	ExConfederationRitual_IsUnavailableForConfederation
+	{
+		(mission = PlayersFaction.MissionForRecordContext(VampireCountsConfederationRitualsToMissionContext.MissionContext)) => 
+		{ ExConfederationRitual_IsHumanTarget || 
+			ExConfederationRitual_WasFactionConfederated || 
+			(IsContextValid(mission) && mission.IsCancelled) 
+		}
+	}
+
+	ExNagashConfederationRitual_TargetFaction
+	{
+		NagashConfederationRitualsToMissionContext.TargetFactionContext
+	}
+	
+	ExNagashConfederationRitual_IsHumanTarget
+	{
+		(faction_to_confederate = ExNagashConfederationRitual_TargetFaction) =>
+		{
+			IsContextValid(faction_to_confederate) && (faction_to_confederate.IsHuman || faction_to_confederate.IsIdleHuman)
+		}
+	}
+	
+	ExNagashConfederationRitual_IsOwnedByOtherPlayer
+	{
+		(faction_to_confederate = ExNagashConfederationRitual_TargetFaction) =>
+		{
+			IsContextValid(faction_to_confederate) && (faction_to_confederate.IsHuman || faction_to_confederate.IsIdleHuman || (faction_to_confederate.WasConfederated && !faction_to_confederate.WasConfederatedByFaction(PlayersFaction)))
+		}
+	}
+
+	ExNagashConfederationRitual_WasFactionConfederated
+	{
+		(faction_to_confederate = ExNagashConfederationRitual_TargetFaction) =>
+		{
+			IsContextValid(faction_to_confederate) && faction_to_confederate.WasConfederated
+		}
+	}
+
+	ExNagashConfederationRitual_IsUnavailableForConfederation
+	{
+		(mission = PlayersFaction.MissionForRecordContext(NagashConfederationRitualsToMissionContext.MissionContext)) => 
+		{ ExNagashConfederationRitual_IsHumanTarget || 
+			ExNagashConfederationRitual_WasFactionConfederated || 
+			(IsContextValid(mission) && mission.IsCancelled) 
+		}
+	}
+}

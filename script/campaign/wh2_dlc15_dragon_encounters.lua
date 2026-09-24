@@ -103,7 +103,7 @@ function add_dragon_encounters_listeners()
 		if cm:is_new_game() then
 			---add dragons to AI Imrik merc pool with small random chance of replenishment.
 			for k, dragon in pairs(unit_details) do
-				cm:add_unit_to_faction_mercenary_pool(imrik_interface, dragon, "renown", 0, ai_dragon_replen_chance, ai_dragon_cap, ai_dragon_max_replen, "", "", "", false, dragon);
+				cm:add_unit_to_faction_mercenary_pool(imrik_interface, dragon, "imrik_dragon_units", 0, ai_dragon_replen_chance, ai_dragon_cap, ai_dragon_max_replen, "", "", "", false, dragon);
 			end
 		end
 		return;
@@ -286,19 +286,19 @@ function add_dragon_encounters_listeners()
 			local mission_key = context:mission():mission_record_key();
 			
 			if mission_key == "wh2_dlc15_ME_hef_imrik_black_dragon_stage_1" then
-				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_black_dragon_imrik", "renown", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_black_dragon_imrik");
+				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_black_dragon_imrik", "imrik_dragon_units", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_black_dragon_imrik");
 				dragon_mission_completed = dragon_mission_completed + 1;
 			elseif mission_key == "wh2_dlc15_ME_hef_imrik_forest_dragon_stage_1" then
-				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_forest_dragon_imrik", "renown", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_forest_dragon_imrik");
+				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_forest_dragon_imrik", "imrik_dragon_units", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_forest_dragon_imrik");
 				dragon_mission_completed = dragon_mission_completed + 1;
 			elseif mission_key == "wh2_dlc15_ME_hef_imrik_moon_dragon_stage_1" then
-				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_moon_dragon_imrik", "renown", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_moon_dragon_imrik");
+				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_moon_dragon_imrik", "imrik_dragon_units", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_moon_dragon_imrik");
 				dragon_mission_completed = dragon_mission_completed + 1;
 			elseif mission_key == "wh2_dlc15_ME_hef_imrik_star_dragon_stage_1" then
-				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_star_dragon_imrik", "renown", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_star_dragon_imrik");
+				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_star_dragon_imrik", "imrik_dragon_units", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_star_dragon_imrik");
 				dragon_mission_completed = dragon_mission_completed + 1;
 			elseif mission_key == "wh2_dlc15_ME_hef_imrik_sun_dragon_stage_1" then
-				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_sun_dragon_imrik", "renown", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_sun_dragon_imrik");
+				cm:add_unit_to_faction_mercenary_pool(imrik_interface, "wh2_dlc15_hef_mon_sun_dragon_imrik", "imrik_dragon_units", 1, 100, 1, 0.1, "", "", "", true, "wh2_dlc15_hef_mon_sun_dragon_imrik");
 				dragon_mission_completed = dragon_mission_completed + 1;
 			end;
 			

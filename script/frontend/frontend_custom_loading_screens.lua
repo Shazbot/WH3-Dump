@@ -107,7 +107,12 @@ custom_loading_screens_no_intro = {
 	["2092142160"] = "wh3_dlc27_hef_aislinn_gc",
 	["1176817909"] = "wh3_dlc27_nor_sayl_gc",
 	["1017046606"] = "wh3_cp1_cth_tiger_warriors_gc",
-	
+	["86256063"] = "wh3_main_chs_glottkin_gc", --replace this with faction-specific screen for Glottkin
+	["1767351587"] = "wh3_dlc29_nag_host_of_nagash_gc", -- replace this if the key ends up being different
+	["1854977645"] = "wh_main_emp_middenland_gc",
+	["720436296"] = "wh3_dlc29_skv_clan_scruten_gc",
+	["80531321"] = "wh3_dlc29_vmp_neferata_gc",
+
 	-- chaos map
 	["780864164"] = "wh3_main_ksl_the_ice_court",
 	["1685308422"] = "wh3_main_ksl_the_great_orthodoxy",

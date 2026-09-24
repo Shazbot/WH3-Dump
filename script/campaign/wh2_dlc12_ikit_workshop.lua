@@ -113,7 +113,13 @@ local workshop_rite_details = {
 	["wh2_dlc12_ikit_workshop_nuke_part_2"] = {category = "", researched = false},
 	["wh2_dlc12_ikit_workshop_nuke_part_3"] = {category = "", researched = false},
 	["wh2_dlc12_ikit_workshop_nuke_part_4"] = {category = "", researched = false},
-	["wh2_dlc12_ikit_workshop_nuke_part_5"] = {category = "", researched = false}
+	["wh2_dlc12_ikit_workshop_nuke_part_5"] = {category = "", researched = false},
+	["wh3_dlc29_ikit_workshop_stormfiend_melee_type_0"] = {category = workshop_category_keys.weapon_team, researched = false},
+	["wh3_dlc29_ikit_workshop_stormfiend_melee_type_1"] = {category = workshop_category_keys.weapon_team, researched = false},
+	["wh3_dlc29_ikit_workshop_stormfiend_melee_type_2"] = {category = workshop_category_keys.weapon_team, researched = false},
+	["wh3_dlc29_ikit_workshop_stormfiend_ranged_type_0"] = {category = workshop_category_keys.weapon_team, researched = false},
+	["wh3_dlc29_ikit_workshop_stormfiend_ranged_type_1"] = {category = workshop_category_keys.weapon_team, researched = false},
+	["wh3_dlc29_ikit_workshop_stormfiend_ranged_type_2"] = {category = workshop_category_keys.weapon_team, researched = false}
 };
 
 -- Each upgrade requires a workshop level of the corresponding index to be researched.
@@ -131,7 +137,9 @@ local workshop_rite_keys = {
 		"wh2_dlc12_ikit_workshop_doomflayer_part_9",
 		"wh2_dlc12_ikit_workshop_poison_wind_globaldier_0",
 		"wh2_dlc12_ikit_workshop_poison_wind_mortar_0",
-		"wh2_dlc12_ikit_workshop_warpgrinder_0"
+		"wh2_dlc12_ikit_workshop_warpgrinder_0",
+		"wh3_dlc29_ikit_workshop_stormfiend_melee_type_0",
+		"wh3_dlc29_ikit_workshop_stormfiend_ranged_type_0",
 	},
 	{	"wh2_dlc12_ikit_workshop_gatling_part_2",
 		"wh2_dlc12_ikit_workshop_jezail_part_2", 
@@ -144,7 +152,9 @@ local workshop_rite_keys = {
 		"wh2_dlc12_ikit_workshop_doomflayer_part_7",
 		"wh2_dlc12_ikit_workshop_poison_wind_globaldier_1",
 		"wh2_dlc12_ikit_workshop_poison_wind_mortar_1",
-		"wh2_dlc12_ikit_workshop_warpgrinder_1"
+		"wh2_dlc12_ikit_workshop_warpgrinder_1",
+		"wh3_dlc29_ikit_workshop_stormfiend_ranged_type_1",
+		"wh3_dlc29_ikit_workshop_stormfiend_melee_type_1",
 	},
 	{	"wh2_dlc12_ikit_workshop_gatling_part_0", 
 		"wh2_dlc12_ikit_workshop_jezail_part_1", 
@@ -155,7 +165,9 @@ local workshop_rite_keys = {
 		"wh2_dlc12_ikit_workshop_doomflayer_part_8",
 		"wh2_dlc12_ikit_workshop_poison_wind_globaldier_2",
 		"wh2_dlc12_ikit_workshop_poison_wind_mortar_2",
-		"wh2_dlc12_ikit_workshop_warpgrinder_2"
+		"wh2_dlc12_ikit_workshop_warpgrinder_2",
+		"wh3_dlc29_ikit_workshop_stormfiend_ranged_type_2",
+		"wh3_dlc29_ikit_workshop_stormfiend_melee_type_2",
 	},
 	{	"wh2_dlc12_ikit_workshop_doomwheel_part_3", 
 		"wh2_dlc12_ikit_workshop_doomflayer_part_4"

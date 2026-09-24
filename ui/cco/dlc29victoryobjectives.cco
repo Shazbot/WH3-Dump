@@ -1,0 +1,48 @@
+VictoryObjectives
+{
+	DefaultSubObjectiveOffset
+	{
+		ToVector(22, -7)
+	}
+
+	GetShortVictorySubObjectiveIndices
+	{
+		PlayersFaction.EntitySharedStateReadString("short_victory_mission_sub_objectives_index_list")
+	}
+
+	GetLongVictorySubObjectiveIndices
+	{
+		PlayersFaction.EntitySharedStateReadString("long_victory_mission_sub_objectives_index_list")
+	}
+
+	IsShortVictoryMissionSelected
+	{
+		(current_selected_tab = Component("subpanel_victory_conditions").CurrentSelectedTabName) => 
+		{
+			current_selected_tab.IsEmpty == false && current_selected_tab == "wh3_combi_victory_type_faction"
+		}
+	}
+
+	IsLongVictoryMissionSelected
+	{
+		(current_selected_tab = Component("subpanel_victory_conditions").CurrentSelectedTabName) => 
+			{
+				current_selected_tab.IsEmpty == false && current_selected_tab == "wh3_combi_victory_type_subculture"
+			}
+	}
+
+	IsShortSubObjective
+	{
+		StringContains(VictoryObjectives.GetShortVictorySubObjectiveIndices, FormatNumber(self.ChildIndex))
+	}
+
+	IsLongSubObjective
+	{
+		StringContains(VictoryObjectives.GetLongVictorySubObjectiveIndices, FormatNumber(self.ChildIndex))
+	}
+
+	GetObjectiveComponentOffset
+	{
+		GetIf((IsShortSubObjective && IsShortVictoryMissionSelected) || (IsLongSubObjective && IsLongVictoryMissionSelected), DefaultSubObjectiveOffset)
+	}
+}

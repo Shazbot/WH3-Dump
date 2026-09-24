@@ -585,6 +585,8 @@ function khorne_spawned_armies:spawn_army(character, spawned_by_bonus_value, spa
 			end
 		);
 
+		core:trigger_event("ScriptEventBloodHostSpawned", faction)
+
 		-- remove the skull throne bonus if it's active
 		if faction:has_effect_bundle("wh3_dlc26_ritual_kho_the_skull_throne_1_2") then
 			cm:remove_effect_bundle("wh3_dlc26_ritual_kho_the_skull_throne_1_2", faction_key)

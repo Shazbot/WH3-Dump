@@ -176,6 +176,7 @@ function treasure_map_listeners()
 			local current_mission = context:mission():mission_record_key()
 			local faction = context:faction()
 			local faction_name = faction:name()
+			local treasury_bonus = cm:get_factions_bonus_value(faction, "treasure_map_treasury_bonus_mod")
 			
 			if is_treasure_map_mission(current_mission) then
 				set_treasure_map_end_variables(get_treasure_map_mission_category(current_mission))
@@ -195,30 +196,42 @@ function treasure_map_listeners()
 				
 				-- generate the incident and its payload
 				local incident_payload = cm:create_payload();
+				local recalculate_treasury = function(value)
+					local final_value = value + (value * treasury_bonus / 100)
+					return final_value
+				end
 				
 				if get_treasure_map_mission_category(current_mission) == "starting" then
-					incident_payload:treasury_adjustment(2000)
+					local treasury = recalculate_treasury(2000)
+					incident_payload:treasury_adjustment(treasury)
 					incident_payload:faction_pooled_resource_transaction("cst_infamy", "missions", 150, false)
 				elseif get_treasure_map_mission_category(current_mission) == "unique" then
-					incident_payload:treasury_adjustment(5000)
+					local treasury = recalculate_treasury(5000)
+					incident_payload:treasury_adjustment(treasury)
 					incident_payload:faction_pooled_resource_transaction("cst_infamy", "missions", 150, false)
 					incident_payload:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"))
 				elseif treasure_map_payload_mapping.reward_5[current_mission] then
-					incident_payload:treasury_adjustment(4000)
+					local treasury = recalculate_treasury(4000)
+					incident_payload:treasury_adjustment(treasury)
 					incident_payload:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "rare"))
 				elseif treasure_map_payload_mapping.reward_4[current_mission] then
-					incident_payload:treasury_adjustment(3000)
+					local treasury = recalculate_treasury(3000)
+					incident_payload:treasury_adjustment(treasury)
 					incident_payload:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"))
 				elseif treasure_map_payload_mapping.reward_3[current_mission] then
-					incident_payload:treasury_adjustment(2500)
+					local treasury = recalculate_treasury(2500)
+					incident_payload:treasury_adjustment(treasury)
 					incident_payload:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "uncommon"))
 				elseif treasure_map_payload_mapping.reward_2[current_mission] then
-					incident_payload:treasury_adjustment(2000)
+					local treasury = recalculate_treasury(2000)
+					incident_payload:treasury_adjustment(treasury)
 					incident_payload:faction_ancillary_gain(faction, get_random_ancillary_key_for_faction(faction_name, false, "common"))
 				elseif treasure_map_payload_mapping.reward_1[current_mission] then
-					incident_payload:treasury_adjustment(1500)
+					local treasury = recalculate_treasury(1500)
+					incident_payload:treasury_adjustment(treasury)
 				else
-					incident_payload:treasury_adjustment(1000)
+					local treasury = recalculate_treasury(1000)
+					incident_payload:treasury_adjustment(treasury)
 				end
 				
 				cm:trigger_custom_incident(faction_name, "wh2_dlc11_incident_cst_found_treasure", true, incident_payload)

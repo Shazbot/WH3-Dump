@@ -166,7 +166,7 @@
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoCampaignPlagueComposition"
-					context_function_id="CombinedEffectsAndTypeList(true, PlayersFaction)"/>
+					context_function_id="CombinedEffectsAndTypeList(true, PlayersFaction).Filter(EffectListWithSourceList.Transform(EffectList).IsEmpty == false)"/>
 				<callback_with_context
 					callback_id="ContextPropagator"
 					context_object_id="CcoCampaignPlagueInfection"
@@ -634,10 +634,33 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_object_id="any"
-					context_function_id="Name"/>
+					context_object_id="CcoCampaignPlagueComposition"
+					context_function_id="GetIfElse(BasePlagueContext.Key.Contains(&quot;hidden&quot;), PlagueIngredientList.FirstContext(IsMutation == false).Name, Name)"/>
+				<callback_with_context
+					callback_id="ContextPropagator"
+					context_object_id="CcoCampaignPlagueInfection"
+					context_function_id="PlagueCompositionContext"/>
 			</callbackwithcontextlist>
 			<states>
+				<brewing_plague
+					this="A2A06F43-16D3-4B55-B9D0CAD53EF6804D"
+					name="brewing_plague"
+					width="434"
+					height="35"
+					uniqueguid="A2A06F43-16D3-4B55-B9D0CAD53EF6804D">
+					<component_text
+						text="{{tr:ui_text_replacements_localised_text_wh3_dlc29_gardens_of_nurgle_brewing_plague_title}}"
+						textvalign="Center"
+						texthalign="Center"
+						textxoffset="10.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="StateText_f866d934"
+						font_m_font_name="brand_header"
+						font_m_size="14"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_14"/>
+				</brewing_plague>
 				<default
 					this="4D023A6C-E38E-40C0-AE20C2EC49E22704"
 					name="default"

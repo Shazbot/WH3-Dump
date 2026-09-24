@@ -16,7 +16,8 @@ imperial_authority = {
 			["wh_main_emp_wissenland"] = {settlement_culture = "wh_main_emp_empire", active = true},
 			["wh2_dlc13_emp_golden_order"] = {settlement_culture = "wh_main_emp_empire", active = false},
 			["wh2_dlc13_emp_the_huntmarshals_expedition"] = {settlement_culture = "wh_main_emp_empire", active = false},
-			["wh3_main_emp_cult_of_sigmar"] = {settlement_culture = "wh_main_emp_empire", active = false}
+			["wh3_main_emp_cult_of_sigmar"] = {settlement_culture = "wh_main_emp_empire", active = false},
+			["wh_main_emp_middenland"] = {settlement_culture = "wh_main_emp_empire", active = true},
 		},
 		["wh3_main_chaos"] = {
 			["wh_main_emp_wissenland"] = {settlement_culture = "wh_main_emp_empire", active = true},

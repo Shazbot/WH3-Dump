@@ -158,9 +158,7 @@
 													<traits_subpanel this="8333B4B7-1DAB-4B70-8744E11821F2C8F2">
 														<tx_title this="05DC6AE1-A106-4A02-AF11B00383247B84"/>
 														<list_box this="83A692E6-D457-46E7-AFE8C708774DCE01">
-															<background_skill this="E226FDB8-655E-42A0-81BEBA3A87FF92E1">
-																<dy_trait this="8C9AA494-E5A1-4D30-B19DA3EECDB6AB71"/>
-															</background_skill>
+															<background_skill this="E226FDB8-655E-42A0-81BEBA3A87FF92E1"/>
 															<traits_list this="0620AA80-0158-4661-BB7750B0A7D49AB6">
 																<template_entry this="21A86AFE-7F75-4479-BA98A9EF5C2A93EB">
 																	<dy_trait this="4AC11252-F312-4F5B-97E91F94C535A4DD"/>
@@ -931,6 +929,7 @@
 			this="E226FDB8-655E-42A0-81BEBA3A87FF92E1"
 			id="background_skill"
 			offset="10.00,10.00"
+			allowhorizontalresize="false"
 			priority="60"
 			uniqueguid="E226FDB8-655E-42A0-81BEBA3A87FF92E1"
 			currentstate="4EE0A2A4-92B4-4075-98B31106FA85F703">
@@ -958,6 +957,20 @@
 							value="-15"/>
 					</child_m_user_properties>
 				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextTextLabel"
+					context_object_id="CcoCampaignCharacterSkill"
+					context_function_id="Name"/>
+				<callback_with_context
+					callback_id="ContextImageSetter"
+					context_object_id="CcoCampaignCharacterSkill"
+					context_function_id="ImagePath">
+					<child_m_user_properties>
+						<property
+							name="image_index"
+							value="1"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -969,13 +982,17 @@
 					this="805EFE69-487F-4511-B81133BF3EC6B7E7"
 					uniqueguid="805EFE69-487F-4511-B81133BF3EC6B7E7"
 					imagepath="ui/skins/default/selectable_non_button_hover_gradient.png"/>
+				<component_image
+					this="CA4ED9A1-6187-4C57-AB2A37558F7B71E8"
+					uniqueguid="CA4ED9A1-6187-4C57-AB2A37558F7B71E8"
+					imagepath="ui/campaign ui/skills/character_movement.png"/>
 			</componentimages>
 			<states>
 				<newstate
 					this="4EE0A2A4-92B4-4075-98B31106FA85F703"
 					name="NewState"
 					width="276"
-					height="38"
+					height="36"
 					interactive="true"
 					uniqueguid="4EE0A2A4-92B4-4075-98B31106FA85F703">
 					<imagemetrics>
@@ -984,11 +1001,27 @@
 							uniqueguid="B2B16B07-1DA0-4A30-9965013C7354229C"
 							componentimage="805EFE69-487F-4511-B81133BF3EC6B7E7"
 							width="276"
-							height="38"
-							colour="#FFFFFF32"/>
+							height="36"
+							colour="#FFFFFF32"
+							canresizewidth="false"/>
+						<image
+							this="8E3BFD1E-3766-4D6C-BE2955F2880BBB7F"
+							uniqueguid="8E3BFD1E-3766-4D6C-BE2955F2880BBB7F"
+							componentimage="CA4ED9A1-6187-4C57-AB2A37558F7B71E8"
+							offset="0.00,7.00"
+							width="24"
+							height="24"
+							dockpoint="Top Left"
+							dock_offset="0.00,7.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
 					</imagemetrics>
 					<component_text
-						texthbehaviour="Never split"
+						text="dy_trait"
+						textxoffset="28.00,20.00"
+						textyoffset="10.00,10.00"
+						texthbehaviour="Resize"
+						textlabel="StateText_86c51836"
 						font_m_size="12"
 						font_m_colour="#FFF8D7FF"
 						font_m_leading="3"
@@ -1188,7 +1221,7 @@
 		<battle_effects
 			this="14EEF43D-412C-4285-B97007C0E8F6BEEB"
 			id="battle_effects"
-			offset="0.00,369.00"
+			offset="0.00,367.00"
 			allowhorizontalresize="false"
 			priority="20"
 			tooltipslocalised="true"
@@ -4905,7 +4938,7 @@
 		<campaign_effects
 			this="21ED41F1-4BBD-4AAD-B644F18E58B939D2"
 			id="campaign_effects"
-			offset="0.00,421.00"
+			offset="0.00,419.00"
 			allowhorizontalresize="false"
 			priority="40"
 			tooltipslocalised="true"
@@ -6029,7 +6062,7 @@
 					this="143CBA57-C049-4332-87051EAC710A9059"
 					name="default"
 					width="300"
-					height="441"
+					height="439"
 					uniqueguid="143CBA57-C049-4332-87051EAC710A9059"/>
 			</states>
 			<LayoutEngine
@@ -6057,7 +6090,7 @@
 					this="8DE57497-407F-4F77-A0C6D598139AF9CF"
 					name="NewState"
 					width="300"
-					height="369"
+					height="367"
 					interactive="true"
 					uniqueguid="8DE57497-407F-4F77-A0C6D598139AF9CF"/>
 			</states>
@@ -6625,69 +6658,6 @@
 							this="7AE998F6-1B5E-4277-9A4306BAACCBE4FB"
 							uniqueguid="7AE998F6-1B5E-4277-9A4306BAACCBE4FB"
 							componentimage="167FA66A-804B-433D-9DC89F39E16F2D18"
-							offset="0.00,4.00"
-							width="24"
-							height="24"
-							dockpoint="Center Left"
-							canresizeheight="false"
-							canresizewidth="false"/>
-					</imagemetrics>
-					<component_text
-						text="dy_trait"
-						textvalign="Center"
-						textxoffset="28.00,2.00"
-						textyoffset="8.00,0.00"
-						texthbehaviour="Resize"
-						textlabel="dy_trait_NewState_Text_180020"
-						font_m_size="12"
-						font_m_colour="#FFF8D7FF"
-						font_m_leading="3"
-						fontcat_name="body_12"
-						font_colour_override_preset_key="ui_font_faded_grey_beige"/>
-				</newstate>
-			</states>
-		</dy_trait>
-		<dy_trait
-			this="8C9AA494-E5A1-4D30-B19DA3EECDB6AB71"
-			id="dy_trait"
-			offset="10.00,3.00"
-			allowhorizontalresize="false"
-			priority="60"
-			tooltipslocalised="true"
-			uniqueguid="8C9AA494-E5A1-4D30-B19DA3EECDB6AB71"
-			currentstate="6897822C-42EB-4662-A3FE974C74616587">
-			<callbackwithcontextlist>
-				<callback_with_context
-					callback_id="ContextTextLabel"
-					context_object_id="CcoCampaignCharacterSkill"
-					context_function_id="Name"/>
-				<callback_with_context
-					callback_id="ContextImageSetter"
-					context_object_id="CcoCampaignCharacterSkill"
-					context_function_id="ImagePath"/>
-			</callbackwithcontextlist>
-			<userproperties>
-				<property
-					name="max_text_width"
-					value="273"/>
-			</userproperties>
-			<componentimages>
-				<component_image
-					this="97EB1E4E-8B2F-4EFF-84801B1ECF67BF13"
-					uniqueguid="97EB1E4E-8B2F-4EFF-84801B1ECF67BF13"
-					imagepath="ui/skins/default/construction_positive.png"/>
-			</componentimages>
-			<states>
-				<newstate
-					this="6897822C-42EB-4662-A3FE974C74616587"
-					name="NewState"
-					width="266"
-					uniqueguid="6897822C-42EB-4662-A3FE974C74616587">
-					<imagemetrics>
-						<image
-							this="9E453C2D-63B1-4130-A5B29A9B23CB490B"
-							uniqueguid="9E453C2D-63B1-4130-A5B29A9B23CB490B"
-							componentimage="97EB1E4E-8B2F-4EFF-84801B1ECF67BF13"
 							offset="0.00,4.00"
 							width="24"
 							height="24"
@@ -7912,8 +7882,8 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
-					context_object_id="CcoCampaignFaction"
-					context_function_id="CharacterList.Filter(CanOpenDetails)">
+					context_object_id="CcoCampaignFaction faction, CcoCampaignCharacter character"
+					context_function_id="GetIfElse(character.HasChaoticPlanSchemerForce(), faction.CharacterList.Filter(CanOpenDetailsAndIsChaoticPlanSchemer),faction.CharacterList.Filter(CanOpenDetails))">
 					<child_m_user_properties>
 						<property
 							name="Single Selection"
@@ -9112,7 +9082,7 @@
 					this="B43B367C-420E-43D4-BEA39CDA15A37869"
 					name="NewState"
 					width="300"
-					height="739"
+					height="737"
 					uniqueguid="B43B367C-420E-43D4-BEA39CDA15A37869">
 					<component_text
 						texthbehaviour="Never split"
@@ -9150,7 +9120,7 @@
 					this="D5A2F6CA-48B7-458D-8856658DB8B9EB69"
 					name="NewState"
 					width="260"
-					height="111"
+					height="109"
 					interactive="true"
 					uniqueguid="D5A2F6CA-48B7-458D-8856658DB8B9EB69"/>
 			</states>
@@ -9182,7 +9152,7 @@
 					this="B18C8DA8-B74A-4B22-AEC4564B2B61E8FD"
 					name="NewState"
 					width="300"
-					height="335"
+					height="333"
 					interactive="true"
 					uniqueguid="B18C8DA8-B74A-4B22-AEC4564B2B61E8FD"/>
 			</states>
@@ -11792,7 +11762,7 @@
 		<sla_eternal_dance_subpanel
 			this="455DAC25-48EC-4DF5-BA675233E6F4D627"
 			id="sla_eternal_dance_subpanel"
-			offset="1910.00,150.00"
+			offset="320.00,150.00"
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="455DAC25-48EC-4DF5-BA675233E6F4D627"
@@ -12011,7 +11981,7 @@
 		<stats_effects_holder
 			this="58F0006A-43C6-4364-951D79F29C74598C"
 			id="stats_effects_holder"
-			offset="1600.00,150.00"
+			offset="10.00,150.00"
 			allowhorizontalresize="false"
 			priority="60"
 			tooltipslocalised="true"
@@ -13124,7 +13094,7 @@
 		<traits_list
 			this="0620AA80-0158-4661-BB7750B0A7D49AB6"
 			id="traits_list"
-			offset="10.00,53.00"
+			offset="10.00,51.00"
 			priority="60"
 			tooltipslocalised="true"
 			uniqueguid="0620AA80-0158-4661-BB7750B0A7D49AB6"
@@ -13173,7 +13143,7 @@
 					this="F0F0BB4F-D91F-4C51-92601AAC9DCBA4D0"
 					name="NewState"
 					width="260"
-					height="145"
+					height="143"
 					uniqueguid="F0F0BB4F-D91F-4C51-92601AAC9DCBA4D0"/>
 			</states>
 			<LayoutEngine

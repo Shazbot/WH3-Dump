@@ -21,11 +21,8 @@ gb = generated_battle:new(
 );
 
 gb:set_cutscene_during_deployment(true);
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -34,8 +31,6 @@ ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), "enemy_main");
 ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), "bst_enemy");
 ga_ai_03 = gb:get_army(gb:get_non_player_alliance_num(), "spawn_1");
 ga_ai_04 = gb:get_army(gb:get_non_player_alliance_num(), "spawn_2");
-
-
 
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_defeat_army");

@@ -20120,11 +20120,14 @@
 				<callback_with_context
 					callback_id="ContextFillBar"
 					context_object_id="CcoBattleArmy"
-					context_function_id="CurrentPercentToArmyAbility(Floor(ToNumber(self.Component(&quot;^2&quot;).GetProperty(&quot;ability_index&quot;)))-1)">
+					context_function_id="CurrentPercentToArmyAbility(Floor(ToNumber(self.Component(&quot;^2&quot;).GetProperty(&quot;ability_index&quot;)))-1, ExHasRyseAbility)">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="army_ability_bar_fill"/>
+						<property
+							name="event1"
+							value="ryze_ability_bar_fill"/>
 						<property
 							name="update_constant"
 							value=""/>
@@ -20219,11 +20222,14 @@
 				<callback_with_context
 					callback_id="ContextFillBar"
 					context_object_id="CcoBattleArmy"
-					context_function_id="CurrentPercentToArmyAbility(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey))">
+					context_function_id="CurrentPercentToArmyAbility(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey, ExHasRyseAbility), ExHasRyseAbility)">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="army_ability_bar_fill"/>
+						<property
+							name="event1"
+							value="ryze_ability_bar_fill"/>
 						<property
 							name="update_constant"
 							value=""/>
@@ -20240,11 +20246,14 @@
 							name="event0"
 							value="army_ability_bar_fill"/>
 						<property
+							name="event1"
+							value="ryze_ability_bar_fill"/>
+						<property
 							name="fallback_state"
 							value="default"/>
 						<property
 							name="just_unlocked"
-							value="IsArmyAbilityUnlocked(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey))"/>
+							value="IsArmyAbilityUnlocked(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey, ExHasRyseAbility), ExHasRyseAbility)"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -20376,11 +20385,14 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleArmy"
-					context_function_id="IsAbilityWithCost(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey)">
+					context_function_id="IsAbilityWithCost(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey, ExHasRyseAbility)">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="army_ability_bar_fill"/>
+						<property
+							name="event1"
+							value="ryze_ability_bar_fill"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -28798,11 +28810,14 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleArmy"
-					context_function_id="(x = Floor(ToNumber(self.ParentContext.GetProperty(&quot;ability_index&quot;)))) =&gt; { CurrentPercentToArmyAbility(x-1) == 0 &amp;&amp; (x != 1 &amp;&amp; ArmyAbilityIndexCost(x-2) &gt; 0) &amp;&amp; BattleRoot.IsTrial == false }">
+					context_function_id="(x = Floor(ToNumber(self.ParentContext.GetProperty(&quot;ability_index&quot;)))) =&gt; { CurrentPercentToArmyAbility(x-1, ExHasRyseAbility) == 0 &amp;&amp; (x != 1 &amp;&amp; ArmyAbilityIndexCost(x-2, ExHasRyseAbility) &gt; 0) &amp;&amp; BattleRoot.IsTrial == false }">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="army_ability_bar_fill"/>
+						<property
+							name="event1"
+							value="ryze_ability_bar_fill"/>
 						<property
 							name="update_constant"
 							value=""/>
@@ -28886,11 +28901,14 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleArmy"
-					context_function_id="IsAbilityWithCost(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey) &amp;&amp; ((IsArmyAbilityUnlocked(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey) ) == false) &amp;&amp; (IsArmyAbilityUnlocked(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey) -1) == false)) &amp;&amp; BattleRoot.IsTrial == false">
+					context_function_id="IsAbilityWithCost(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey, ExHasRyseAbility) &amp;&amp; ((IsArmyAbilityUnlocked(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey, ExHasRyseAbility), ExHasRyseAbility ) == false) &amp;&amp; (IsArmyAbilityUnlocked(ArmyAbilityIndex(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey, ExHasRyseAbility) -1, ExHasRyseAbility) == false)) &amp;&amp; BattleRoot.IsTrial == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="army_ability_bar_fill"/>
+						<property
+							name="event1"
+							value="ryze_ability_bar_fill"/>
 						<property
 							name="update_constant"
 							value=""/>
@@ -31991,6 +32009,9 @@
 							name="event0"
 							value="army_ability_bar_fill"/>
 						<property
+							name="event1"
+							value="ryze_ability_bar_fill"/>
+						<property
 							name="update_constant"
 							value=""/>
 					</child_m_user_properties>
@@ -33767,14 +33788,14 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleArmy"
-					context_function_id="(x = Floor(ToNumber(self.Component(&quot;^3&quot;).GetProperty(&quot;ability_index&quot;)))) =&gt; { CurrentPercentToArmyAbility(x-1) == 0 &amp;&amp; (x != 1 &amp;&amp; ArmyAbilityIndexCost(x-2) &gt; 0) }">
+					context_function_id="(x = Floor(ToNumber(self.Component(&quot;^3&quot;).GetProperty(&quot;ability_index&quot;)))) =&gt; { CurrentPercentToArmyAbility(x-1, ExHasRyseAbility) == 0 &amp;&amp; (x != 1 &amp;&amp; ArmyAbilityIndexCost(x-2, ExHasRyseAbility) &gt; 0) }">
 					<child_m_user_properties>
 						<property
 							name="event0"
 							value="army_ability_bar_fill"/>
 						<property
 							name="event1"
-							value=""/>
+							value="ryze_ability_bar_fill"/>
 						<property
 							name="update_constant"
 							value=""/>
@@ -40572,7 +40593,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleArmy"
-					context_function_id="IsAbilityWithCost(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey) &amp;&amp; BattleRoot.IsTrial == false"/>
+					context_function_id="IsAbilityWithCost(StoredContext(&quot;CcoUnitAbility&quot;).RecordKey, ExHasRyseAbility) &amp;&amp; BattleRoot.IsTrial == false"/>
 				<callback_with_context
 					callback_id="ContextObjectStore"
 					context_object_id="CcoUnitAbility"/>
@@ -40631,7 +40652,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoBattleArmy"
-					context_function_id="(x = Floor(ToNumber(self.Component(&quot;^2&quot;).GetProperty(&quot;ability_index&quot;)))) =&gt; { (CurrentPercentToArmyAbility(x-1) == 0 &amp;&amp; x != 1) == false }">
+					context_function_id="(x = Floor(ToNumber(self.Component(&quot;^2&quot;).GetProperty(&quot;ability_index&quot;)))) =&gt; { (CurrentPercentToArmyAbility(x-1, ExHasRyseAbility) == 0 &amp;&amp; x != 1) == false }">
 					<child_m_user_properties>
 						<property
 							name="event0"

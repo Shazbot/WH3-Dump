@@ -129,6 +129,17 @@ rare_items = {
 		faction_culture_override = nil,
 		item_restrictions = nil,
 		effect_bundle_restriction = nil
+	},
+	{
+		item = "wh_main_anc_follower_undead_librarian",
+		weight = 10,
+		culture_requirement = "wh_main_vmp_vampire_counts",
+		culture_restriction = nil,
+		faction_culture_override = nil,
+		item_restrictions = {"wh3_main_anc_arcane_item_grimoire_necronium_1", "wh3_main_anc_arcane_item_grimoire_necronium_2", "wh3_main_anc_arcane_item_grimoire_necronium_3", "wh3_main_anc_arcane_item_grimoire_necronium_4", "wh3_main_anc_arcane_item_grimoire_necronium_5",
+		"wh3_main_anc_arcane_item_grimoire_necronium_6", "wh3_main_anc_arcane_item_grimoire_necronium_7", "wh3_main_anc_arcane_item_grimoire_necronium_8", "wh3_main_anc_arcane_item_grimoire_necronium_9", "wh3_main_anc_arcane_item_grimoire_necronium_10", "wh3_main_anc_arcane_item_grimoire_necronium_11",
+		"wh3_main_anc_arcane_item_necromantic_tome", "wh_main_anc_follower_undead_librarian_upgraded"},
+		effect_bundle_restriction = nil
 	}
 };
 

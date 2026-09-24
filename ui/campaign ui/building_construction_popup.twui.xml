@@ -226,6 +226,11 @@
 									<button_convert_outpost this="4CD3EBBC-E782-464A-AF75B72241FB5833"/>
 									<button_convert_warpit this="11CFE637-1BEB-47AE-A788382EE882CE58"/>
 									<button_convert_pleasurepalace this="817133AA-09DB-4D6B-8EB9B7CA68DC9E72"/>
+									<button_destroy_garden_of_nurgle this="574147AE-B400-48D7-AA60F0C770F1E06F"/>
+									<convert_necropolis this="9966C76A-98B4-4892-95926398977456D5"/>
+									<convert_mausoleum this="B5B7A9CD-9A3C-4599-B15B46A21E9289D2"/>
+									<convert_burial_chambers this="5128380B-9C87-46CC-B0BE9B8288865939"/>
+									<convert_pirate_cove this="88FE2D0B-0A42-44E6-87C666F10210B843"/>
 								</options_list>
 							</options_buttons>
 						</options_parent>
@@ -1444,6 +1449,9 @@
 						<property
 							name="event0"
 							value="CharacterCreatedAny"/>
+						<property
+							name="event1"
+							value="CampaignSelectionChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -1534,6 +1542,9 @@
 						<property
 							name="event0"
 							value="CharacterCreatedAny"/>
+						<property
+							name="event1"
+							value="CampaignSelectionChanged"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -2565,6 +2576,7 @@
 			uniqueguid="817133AA-09DB-4D6B-8EB9B7CA68DC9E72"
 			dimensions="38.00,38.00"
 			tooltips_localised="false"
+			offset="1.00,0.00"
 			priority="60"
 			sound_category="UI_CAM_HUD_Building_Convert">
 			<state_uniqueguids>
@@ -2885,6 +2897,117 @@
 				<element value=""/>
 			</override_images>
 		</button_convert_warpit>
+		<button_destroy_garden_of_nurgle
+			this="574147AE-B400-48D7-AA60F0C770F1E06F"
+			id="button_destroy_garden_of_nurgle"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="574147AE-B400-48D7-AA60F0C770F1E06F"
+			dimensions="38.00,38.00"
+			is_visible="false"
+			tooltips_localised="false"
+			priority="60"
+			sound_category="UI_CAM_HUD_Building_Convert">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="D338FE6B-A96E-42A6-98AB3C4558782856"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="92F147C1-9CFB-4C31-88F24BF6231158B7"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="E3487BC7-EFD7-4293-BB6E714AC82F5505"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="51D996F2-4DEB-49CE-84AB969E74B57272"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="9F0809B7-6465-410B-994F0B7780BB9D2B"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/icon_foreign_slot_settlement.png"
+					uniqueguid="D3F64CD7-0F15-417E-BCD29FDCA2C00F66"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="5C7A3C91-991E-41A3-8F36BA01E279FEC8"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="DCAD5561-4842-43B5-AE59BC2C31B0B778"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="8717B3F5-AB65-4DE2-9FF5D30A7829F933"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="6658F877-03AB-4FBD-9C9A599767C1B11B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="169759F5-A8A7-49AC-ADFC950E500B9D99"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignBuildingSlot slot, CcoCampaignSettlement settlement"
+					context_function_id="slot.IsPrimary &amp;&amp; PlayersFaction.FactionRecordContext.Key == &quot;wh3_dlc29_chs_host_of_the_triplets&quot; &amp;&amp; settlement.SettlementType !=  &quot;wh3_dlc29_chs_dark_fortress&quot; &amp;&amp;&#10;(settlement.SettlementType == &quot;wh3_dlc29_woc_glottkin_garden_of_nurgle_major&quot; || settlement.SettlementType == &quot;wh3_dlc29_woc_glottkin_garden_of_nurgle_minor&quot;) &amp;&amp; (settlement.CanConvertToSettlementType(&quot;wh3_dlc29_chs_dark_fortress&quot;) || settlement.CanConvertToSettlementType(&quot;wh3_dlc29_chs_altar&quot;))"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="MarkForTypeConversion(GetIfElse(BelongsToRegionGroup(&quot;wh3_dlc20_dark_fortress_region_group&quot;), &quot;wh3_dlc29_chs_dark_fortress&quot;, &quot;wh3_dlc29_chs_altar&quot;), PrimarySlotContext.BuildingContext.BuildingLevelRecordContext.Level)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_11353602"
+					tooltip_text="{{tr:ui_text_replacements_localised_text_wh3_dlc29_generic_convert_to_settlement_tooltip}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/icon_foreign_slot_settlement.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</button_destroy_garden_of_nurgle>
 		<button_expand_slot
 			this="5E6571E3-E3C8-48B2-B428A236DEF0582B"
 			id="button_expand_slot"
@@ -3228,7 +3351,7 @@
 				<callback_with_context
 					callback_id="ContextInactiveStateSetter"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="PlayersFaction.PooledResourceManagerContext.CanAfford(RepairResourceContext) &amp;&amp; PlayersFaction.TreasuryAmount &gt;= RepairCost"/>
+					context_function_id="CanAffordRepair"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -5186,6 +5309,446 @@
 				</newstate>
 			</states>
 		</construction_building_tree>
+		<convert_burial_chambers
+			this="5128380B-9C87-46CC-B0BE9B8288865939"
+			id="convert_burial_chambers"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="5128380B-9C87-46CC-B0BE9B8288865939"
+			dimensions="38.00,38.00"
+			tooltips_localised="false"
+			priority="60"
+			sound_category="UI_CAM_HUD_Building_Convert">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="1AD9E65A-DA18-44C1-960A09758D456F65"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="67A70875-B705-4F79-838401B2CC576AE0"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="B04385BC-F95D-4206-848E321D8BA9CA53"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="469670FB-FC63-47BB-8889DBF6CD96D0BA"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="62B676DA-81E9-4F0B-BAF7A6B1F4603236"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_burial_chambers.png"
+					uniqueguid="5EEFE5AD-C93F-47FE-84041B485011FBD9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="F6102559-EB8D-46B4-BD3E07DC39A4739F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="05309C52-E019-4D32-9AADAC5DA9F716DC"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="89ABE280-4E51-481A-A81905B2B38941C3"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="8F561553-931B-46DF-97DDC281F8503703"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="894E5274-6A4B-4CC8-B58A940CF5132F50"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="IsPrimary &amp;&amp; SettlementContext.HasPort == false &amp;&amp; BuildingContext.BuildingLevelRecordContext.Level &gt; 0 &amp;&amp; BuildingContext.IsDamaged == false &amp;&amp; SettlementContext.SettlementType !=  &quot;wh3_dlc29_nag_chambers&quot; &amp;&amp; SettlementContext.CanConvertToSettlementType(&quot;wh3_dlc29_nag_chambers&quot;)"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="MarkForTypeConversion(&quot;wh3_dlc29_nag_chambers&quot;, 1)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_8eda8c56"
+					tooltip_text="{{tr:ui_text_replacements_localised_text_nag_settlement_tooltip_burial_chambers}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_burial_chambers.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</convert_burial_chambers>
+		<convert_mausoleum
+			this="B5B7A9CD-9A3C-4599-B15B46A21E9289D2"
+			id="convert_mausoleum"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="B5B7A9CD-9A3C-4599-B15B46A21E9289D2"
+			dimensions="38.00,38.00"
+			tooltips_localised="false"
+			priority="60"
+			sound_category="UI_CAM_HUD_Building_Convert">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="A6D00084-55FC-41A5-BE2FE63C7C596274"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="2671AD8E-3334-4193-936B4EB601670627"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="B19F2D88-9089-4511-B685EA6AAE35F354"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="3070EEEE-8B49-403E-BF7BA390CDEDE993"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="16ADAC13-4505-4E9B-979CD55E1ECDAE6C"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_mausoleum.png"
+					uniqueguid="FF3365B0-9148-4A37-ABD6840254A829F0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="9E7C338F-274F-4BC9-90B2F175850EAA28"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="E7C0A26F-A3E2-498E-8AF67F0BEFED7BB9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="5E997158-4AAF-427A-BB664FE709C7EFE0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="FE520CB3-9C19-46BB-B63094F8E472B51F"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="DA762436-3551-42F9-B0AD51FFCE3E88C0"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="IsPrimary &amp;&amp; SettlementContext.HasPort == false &amp;&amp; BuildingContext.BuildingLevelRecordContext.Level &gt; 0 &amp;&amp; BuildingContext.IsDamaged == false &amp;&amp; SettlementContext.SettlementType !=  &quot;wh3_dlc29_nag_mausoleum&quot; &amp;&amp; SettlementContext.CanConvertToSettlementType(&quot;wh3_dlc29_nag_mausoleum&quot;)"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="MarkForTypeConversion(&quot;wh3_dlc29_nag_mausoleum&quot;, 1)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_1901dda7"
+					tooltip_text="{{tr:ui_text_replacements_localised_text_nag_settlement_tooltip_mausoleum}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_mausoleum.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</convert_mausoleum>
+		<convert_necropolis
+			this="9966C76A-98B4-4892-95926398977456D5"
+			id="convert_necropolis"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="9966C76A-98B4-4892-95926398977456D5"
+			dimensions="38.00,38.00"
+			tooltips_localised="false"
+			priority="60"
+			sound_category="UI_CAM_HUD_Building_Convert">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="0128CBD8-C8B0-40CF-AA890871F7F1643A"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="E1A41042-F45F-4B21-A159ECAF530AE4EA"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="7E10ED38-C547-40A6-9F34E0C9E988A6CB"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="2DB76D23-3F69-49E2-BDAEB63FB43E3EF6"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="D7650946-35DB-460C-9C4D563DC9C7FB79"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_necropolis.png"
+					uniqueguid="C49C69F7-A12B-4348-B743484420791FBE"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="F5F349BB-25CD-4B64-B25BDB15BB41F8A6"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="91E899DE-CE84-45FB-AB34B04299535757"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="07401A56-7614-4E12-B544AC59F35C1DB9"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="8076EC38-763B-484E-8B0D7DE225ED64C0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="C74A9ADB-1CDE-4531-89778A57B762EE75"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="IsPrimary &amp;&amp; BuildingContext.BuildingLevelRecordContext.Level &gt; 0 &amp;&amp; BuildingContext.IsDamaged == false &amp;&amp; SettlementContext.SettlementType !=  &quot;wh3_dlc29_nag_necropolis&quot; &amp;&amp; SettlementContext.IsProvinceCapital &amp;&amp; SettlementContext.CanConvertToSettlementType(&quot;wh3_dlc29_nag_necropolis&quot;)"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="MarkForTypeConversion(&quot;wh3_dlc29_nag_necropolis&quot;, 1)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_7468a7d9"
+					tooltip_text="{{tr:ui_text_replacements_localised_text_nag_settlement_tooltip_necropolis}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_necropolis.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</convert_necropolis>
+		<convert_pirate_cove
+			this="88FE2D0B-0A42-44E6-87C666F10210B843"
+			id="convert_pirate_cove"
+			template_id="round_small_button"
+			part_of_template="true"
+			uniqueguid_in_template="82F58892-7F49-4844-B36443AED497BEEF"
+			uniqueguid="88FE2D0B-0A42-44E6-87C666F10210B843"
+			dimensions="38.00,38.00"
+			tooltips_localised="false"
+			priority="60"
+			sound_category="UI_CAM_HUD_Building_Convert">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="C56389A7-816F-4B60-B7297F1011506ECD"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="8A1A19E4-1DDA-4767-9C4141A9F46F98DB"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="FFD739F4-6CC1-4401-92677B5B5815C87C"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="DD047FE6-A7A1-4101-B3368B177DD754F2"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="D66F7247-5498-40D9-8CFF68FC4E4AD87F"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_pirate_cove.png"
+					uniqueguid="F1BD2051-5AC7-4FAC-8D7A43412F7E9A42"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_pressed.png"
+					uniqueguid="ED3EF784-FADC-4960-99EA66A324255529"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_hover.png"
+					uniqueguid="CB381745-5803-43DE-B05AFCA1EE8D72D5"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_active.png"
+					uniqueguid="C2717548-B69A-4CE8-9DE9BC262E304E87"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_inactive.png"
+					uniqueguid="D27A9ADB-291C-49E9-A00FB4E975CDFC8C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/button_round_small_underlay.png"
+					uniqueguid="9226E45C-7E32-4863-A1965A0B2D3C25A5"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="StatePropagatorCallback">
+					<child_m_user_properties>
+						<property
+							name="use_transitions"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context callback_id="CallbackAnimTrigger"/>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoCampaignBuildingSlot"
+					context_function_id="IsPrimary &amp;&amp; SettlementContext.HasPort &amp;&amp; BuildingContext.BuildingLevelRecordContext.Level &gt; 0 &amp;&amp; BuildingContext.IsDamaged == false &amp;&amp; SettlementContext.SettlementType !=  &quot;wh3_dlc29_nag_cove&quot; &amp;&amp; SettlementContext.CanConvertToSettlementType(&quot;wh3_dlc29_nag_cove&quot;)"/>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoCampaignSettlement"
+					context_function_id="MarkForTypeConversion(&quot;wh3_dlc29_nag_cove&quot;, 1)"/>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="resizable"/>
+				<property
+					name="disable_override0"
+					value="CallbackAnimTrigger"/>
+				<property
+					name="dynamic_image"
+					value="0"/>
+				<property
+					name="override_sound"
+					value=""/>
+			</user_properties>
+			<localised_texts>
+				<localised_text
+					tooltip_label="ComponentTooltip_e7f624c7"
+					tooltip_text="{{tr:ui_text_replacements_localised_text_nag_settlement_tooltip_pirate_cove}}"/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/wh3_dlc29_nag_host_of_nagash/icon_pirate_cove.png"/>
+				<element value="ui/skins/default/button_round_small_pressed.png"/>
+				<element value="ui/skins/default/button_round_small_hover.png"/>
+				<element value="ui/skins/default/button_round_small_active.png"/>
+				<element value="ui/skins/default/button_round_small_inactive.png"/>
+				<element value="ui/skins/default/button_round_small_underlay.png"/>
+				<element value=""/>
+			</override_images>
+		</convert_pirate_cove>
 		<cost_list
 			this="C8A7236E-888E-464C-A5C2C6BE7E8668FB"
 			id="cost_list"
@@ -5257,12 +5820,12 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnContextSet"
 					context_object_id="CcoBuildingChainRecord"
-					context_function_id="self.Resize( (BuildingSetContext.MaximumChainBuildings(GetIfElse(IsContextValid( StoredContext(&quot;CcoCampaignSettlement&quot;)), StoredContext(&quot;CcoCampaignSettlement&quot;), StoredContext(&quot;CcoCampaignCharacter&quot;) )) / 2) * 100 + ToNumber( self.GetProperty(&quot;extra_padding&quot;)), (BuildingSetContext.MaximumChainBuildings(GetIfElse(IsContextValid( StoredContext(&quot;CcoCampaignSettlement&quot;)), StoredContext(&quot;CcoCampaignSettlement&quot;), StoredContext(&quot;CcoCampaignCharacter&quot;) )) / 2) * 100 + ToNumber(self.GetProperty(&quot;extra_padding&quot;)), true)"/>
+					context_function_id="self.Resize(&#10; ((MaximumLevel + 1) / 2)&#10;  * 100&#10;  + ToNumber( self.GetProperty(&quot;extra_padding&quot;))&#10; , ((MaximumLevel + 1 )/ 2)&#10;  * 100&#10;  + ToNumber(self.GetProperty(&quot;extra_padding&quot;))&#10; , true&#10;)"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
 					name="extra_padding"
-					value="60"/>
+					value="70"/>
 			</userproperties>
 			<states>
 				<newstate
@@ -7331,7 +7894,7 @@
 		<options_list
 			this="9E7C2D73-C647-4AE2-85A59A549A2CACD7"
 			id="options_list"
-			offset="-83.00,20.00"
+			offset="-159.00,20.00"
 			allowverticalresize="false"
 			docking="Center"
 			component_anchor_point="0.50,0.50"
@@ -7344,7 +7907,7 @@
 				<newstate
 					this="08669FE8-E6A7-42DB-BE6D778720C879E1"
 					name="NewState"
-					width="266"
+					width="418"
 					height="39"
 					interactive="true"
 					uniqueguid="08669FE8-E6A7-42DB-BE6D778720C879E1"/>
@@ -7631,7 +8194,7 @@
 					<child_m_user_properties>
 						<property
 							name="left_padding"
-							value="-30"/>
+							value="100"/>
 						<property
 							name="right_padding"
 							value="-5"/>
@@ -8258,7 +8821,7 @@
 				<callback_with_context
 					callback_id="ContextRadialListEngineRadiusSetter"
 					context_object_id="CcoBuildingChainRecord"
-					context_function_id="20 * BuildingSetContext.MaximumChainBuildings(GetIfElse(IsContextValid( StoredContext(&quot;CcoCampaignSettlement&quot;)), StoredContext(&quot;CcoCampaignSettlement&quot;), StoredContext(&quot;CcoCampaignCharacter&quot;) ))">
+					context_function_id="20 * (MaximumLevel + 1)">
 					<child_m_user_properties>
 						<property
 							name="object_store_events"
@@ -11305,7 +11868,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="GetIfElse(CanRepair || ConstructionItemContext.IsPaused, &quot;&quot;, ConstructionItemContext.TurnsToCompletion)"/>
+					context_function_id="GetIfElse(CanRepair || !IsContextValid(ConstructionItemContext) || ConstructionItemContext.IsPaused, &quot;&quot;, ConstructionItemContext.TurnsToCompletion)"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoCampaignBuildingSlot">
@@ -11415,7 +11978,7 @@
 				<callback_with_context
 					callback_id="ContextTextLabel"
 					context_object_id="CcoCampaignBuildingSlot"
-					context_function_id="GetIfElse(CanRepair || ConstructionItemContext.IsPaused, &quot;&quot;, ConstructionItemContext.TurnsToCompletion)"/>
+					context_function_id="GetIfElse(CanRepair || !IsContextValid(ConstructionItemContext) || ConstructionItemContext.IsPaused, &quot;&quot;, ConstructionItemContext.TurnsToCompletion)"/>
 				<callback_with_context
 					callback_id="ContextStateSetterConditional"
 					context_object_id="CcoCampaignBuildingSlot">

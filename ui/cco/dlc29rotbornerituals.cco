@@ -1,0 +1,95 @@
+CcoCampaignRitual
+{
+	ExRotborneRituals_GetAllUpgradesForRitual(CcoCampaignRitual ritual)
+	{
+		(key = ritual.RitualContext.Key,
+			family_prefix = key.Replace("_no_upgrade", "").Replace("_upgrade_1_dummy", "").Replace("_upgrade_2_dummy", "").Replace("_upgrade_3_dummy", "").Replace("_upgrade_1", "").Replace("_upgrade_2", "").Replace("_upgrade_3", "")) =>
+		{
+			FactionContext.RitualManagerContext.UnlockableRitualList
+				.Filter((upgrade) => upgrade.RitualContext.Category == "GLOTTKIN_ROTBORNE_RITUALS_UPGRADES" && upgrade.RitualContext.Key.StartsWith(family_prefix + "_upgrade_") && upgrade.RitualContext.Key.EndsWith("_dummy"))
+		}
+	}
+	
+	ExRotborneRituals_GetNextUpgradeForRitual(CcoCampaignRitual ritual)
+	{
+		(key = ritual.RitualContext.Key,
+			family_prefix = key.Replace("_no_upgrade", "").Replace("_upgrade_1_dummy", "").Replace("_upgrade_2_dummy", "").Replace("_upgrade_3_dummy", "").Replace("_upgrade_1", "").Replace("_upgrade_2", "").Replace("_upgrade_3", ""),
+			count = ritual.RitualContext.ExRotborneRituals_PurchasedUpgradesCount,
+			next_key = family_prefix + "_upgrade_" + (count + 1) + "_dummy") =>
+		{
+			FactionContext.RitualManagerContext.UnlockableRitualList
+				.Filter((upgrade) => upgrade.RitualContext.Key == next_key)
+		}
+	}
+
+	ExRotborneRituals_NotificationSharedStateKey
+	{
+		RitualContext.Key.Replace("_upgrade_1_dummy", "_no_upgrade")
+			.Replace("_upgrade_2_dummy", "_no_upgrade")
+			.Replace("_upgrade_3_dummy", "_no_upgrade")
+			.Replace("_upgrade_1", "_no_upgrade")
+			.Replace("_upgrade_2", "_no_upgrade")
+			.Replace("_upgrade_3", "_no_upgrade") + "_notification"
+	}
+
+	ExRotborneRituals_NoValidTargetsText
+	{
+		(base = RitualContext.ExRotborneRituals_GetBaseKey,
+			count = RitualContext.ExRotborneRituals_PurchasedUpgradesCount,
+			loc_base = GetIfElse(
+				count == 0,
+				base.Replace("garden_cycle_no_upgrade", "garden_cycle_small_no_upgrade"),
+				base
+			)) =>
+		{
+			Loc(loc_base + "_no_valid_targets")
+		}
+	}
+}
+
+CcoRitualRecord
+{
+	ExRotborneRituals_GetBaseKey
+	{
+		Key.Replace("_upgrade_1_dummy", "_no_upgrade")
+			.Replace("_upgrade_2_dummy", "_no_upgrade")
+			.Replace("_upgrade_3_dummy", "_no_upgrade")
+			.Replace("_upgrade_1", "_no_upgrade")
+			.Replace("_upgrade_2", "_no_upgrade")
+			.Replace("_upgrade_3", "_no_upgrade")
+	}
+
+	ExRotborneRituals_GetRitualContextForLevel(Int level)
+	{
+		(base_key = ExRotborneRituals_GetBaseKey,
+			prefix = base_key.Replace("_no_upgrade", ""),
+			cast_key = GetIfElse(level == 0, base_key, prefix + "_upgrade_" + level)) =>
+		{
+			PlayersFaction.RitualContextForKey(cast_key, true)
+		}
+	}
+
+	ExRotborneRituals_PurchasedUpgradesCount
+	{
+		Floor(Clamp(PlayersFaction.EntitySharedStateReadFloat("upgrades_count_" + ExRotborneRituals_GetBaseKey), 0, 9999))
+	}
+
+	ExRotborneRituals_UpgradesLocked
+	{
+		!PlayersFaction.EntitySharedStateReadBool("has_cast_" + ExRotborneRituals_GetBaseKey)
+	}
+}
+
+CcoString
+{
+	ExRotborneRituals_GetActiveCastRitualFromBaseKey
+	{
+		(base_key = Value,
+			count = Floor(Clamp(PlayersFaction.EntitySharedStateReadFloat("upgrades_count_" + base_key), 0, 9999)),
+			prefix = base_key.Replace("_no_upgrade", ""),
+			cast_key = GetIfElse(count == 0, base_key, prefix + "_upgrade_" + count)) =>
+		{
+			PlayersFaction.RitualContextForKey(cast_key, true)
+		}
+	}
+}

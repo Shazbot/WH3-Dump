@@ -1,0 +1,360 @@
+GreatTempleOfUlric
+{
+	InitiativesActivated
+	{
+		Floor(PlayersFaction.InitiativeManager.InitiativeSetList("DLC29_GREAT_TEMPLE_OF_ULRIC").Sum(GetIfElse(ActiveInitiatives.IsEmpty, 0, ActiveInitiatives.FirstContext.ExGreatTempleOfUlric_GetLevel)))
+	}
+	
+	InitiativesCount
+	{
+		Floor(PlayersFaction.InitiativeManager.InitiativeSetList("DLC29_GREAT_TEMPLE_OF_ULRIC").Sum(InitiativeList.Size))
+	}
+
+	UnlockedInitiativesCount
+	{
+		Floor(PlayersFaction.InitiativeManager.InitiativeSetList("DLC29_GREAT_TEMPLE_OF_ULRIC").Count(IsContextValid(ExGreatTempleOfUlric_GetNextInitiative) && !ExGreatTempleOfUlric_GetNextInitiative.IsScriptLocked))
+	}
+	
+	IsThereUninspectedUnlockedSanctuaryLevel
+	{
+		!PlayersFaction.InitiativeManager.InitiativeSetList("DLC29_GREAT_TEMPLE_OF_ULRIC").All(ExGreatTempleOfUlric_NextInitiativeHasBeenInspectedWhenUnlocked)
+	}
+	
+	IsFeatureUILocked
+	{
+		"T:\branches\warhammer3\cowboy\warhammer\working_data\UI\cco\DLC29GreatTempleOfUlric.cco"
+	}
+
+	CheapestLevel1SanctuaryCost
+	{
+		-PlayersFaction.InitiativeManager.InitiativeSetList("DLC29_GREAT_TEMPLE_OF_ULRIC")
+			.Transform((set) => set.InitiativeListSorted.LastContext)
+			.MinValue((initiative) => initiative.CostContext.TotalResourceChange(PlayersFaction.PooledResourceContext("wh3_dlc29_emp_fervour")))
+	}
+	
+	GetInitiativeSetThatUnlocksRitual(CcoRitualRecord ritual)
+	{
+		PlayersFaction.InitiativeManager.InitiativeSetList("DLC29_GREAT_TEMPLE_OF_ULRIC").FirstContext((set) => set.ExGreatTempleOfUlric_UnlocksRitual(ritual))
+	}
+	
+	GetSanctuaryTierComponent(CcoCampaignInitiative init)
+	{
+		Component("sanctuary_info", "dlc29_emp_great_temple_of_ulric").ChildContext("tiers_list").ChildList.FirstContext((tier) => (tier.ContextsList.Contains(init)))
+	}
+	
+	TriggerSanctuaryLevelPointerAnimation(CcoCampaignInitiative init)
+	{
+		(tier = GreatTempleOfUlric.GetSanctuaryTierComponent(init),
+			pointer = tier.ChildContext("initiative_pointer"),
+			glow = tier.ChildContext("initiative_glow")) =>
+		{
+			Do(
+				pointer.SetVisible(true),
+				glow.SetVisible(true),
+				pointer.TriggerAnimation("bounce"),
+				glow.TriggerAnimation("bounce"))
+		}
+	}
+	
+	GetLevelFromKey(String key)
+	{
+		GetIfElse(
+			key.EndsWith("_1"),
+			1,
+			GetIfElse(
+				key.EndsWith("_2"),
+				2,
+				GetIfElse(
+					key.EndsWith("_3"),
+					3,
+					GetIfElse(
+						key.EndsWith("_4"),
+						4,
+						GetIfElse(
+							key.EndsWith("_5"),
+							5,
+							GetIfElse(
+								key.EndsWith("_6"),
+								6,
+								0))))))
+	}
+	
+	GetRewardBundleLowerBound(CcoCampaignPooledResource res, CcoEffectBundle bundle)
+	{
+		res.EffectList("ABSOLUTE_VALUE").At(GreatTempleOfUlric.GetLevelFromKey(bundle.Key.Replace("_effect_bundle", "")) - 1).LowerBound
+	}
+	
+	GetFestivalsToShow
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList
+			.Filter((ritual) => ritual.RitualContext.Category == "MIDDENLAND_FACTION_RITUALS")
+			.Filter((ritual, level = ritual.ExGreatTempleOfUlric_GetRitualLevel) => GetIfElse(level == 2, ritual.IsAvailable, !ExGreatTempleOfUlric_GetTier2.IsAvailable))
+			.Sort(RitualContext.SortOrder).Reverse()
+	}
+	
+	GetArmyRitualsToShow(CcoCampaignCharacter c)
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList
+			.Filter((ritual) => ritual.RitualContext.Category == "MIDDENLAND_ARMY_RITUALS")
+			.Filter((ritual, level = ritual.ExGreatTempleOfUlric_GetRitualLevel, level1_on_cooldown = ritual.ExGreatTempleOfUlric_GetTier1.ExGreatTempleOfUlric_IsOnIndividualCooldown(c), level2_locked = ritual.ExGreatTempleOfUlric_GetTier2.IsScriptLocked)
+				=> GetIfElse(
+					level == 2,
+					!level2_locked && !level1_on_cooldown,
+					level2_locked || level1_on_cooldown))
+			.Sort(RitualContext.SortOrder, true)
+	}
+	
+	HudButtonTooltip(CcoCampaignSettlement settlement)
+	{
+		Loc("wh3_dlc29_emp_great_temple_of_ulric_title")
+			+ GetIfElse(
+				settlement.FactionContext != PlayersFaction,
+				Loc("wh3_dlc29_emp_great_temple_of_ulric_middenheim_lost"),
+				GetIfElse(
+					!SharedStateReadBool("great_temple_of_ulric_unlocked"),
+					Format(Loc("wh3_dlc29_emp_great_temple_of_ulric_initial_lock"), Floor(GreatTempleOfUlric.CheapestLevel1SanctuaryCost)),
+					""))
+	}
+	
+	AnyArmyRitualsUnlocked
+	{
+		PlayersFaction.RitualManagerContext.UnlockableRitualList.Any((ritual) => ritual.RitualContext.Category == "MIDDENLAND_ARMY_RITUALS" && !ritual.IsScriptLocked)
+	}
+	
+	HudArmyRitualsButtonTooltip
+	{
+		Loc("wh3_dlc29_middenland_army_rituals_tooltip_tx")
+			+ GetIfElse(
+				!GreatTempleOfUlric.AnyArmyRitualsUnlocked,
+				Loc("wh3_dlc29_emp_winter_rites_no_sanctuary"),
+				"")
+	}
+	
+	PlayOpenSanctuariesAnimation
+	{
+		Do(Component("tab_festivals").ParentContext("panel_frame").ChildContext("festivals_list").TriggerAnimation("hide"),
+			Component("tab_sanctuaries").ParentContext("panel_frame").ChildContext("sanctuary_list").TriggerAnimation("show"))
+	}
+	
+	PlayOpenFestivalsAnimation
+	{
+		Do(Component("tab_sanctuaries").ParentContext("panel_frame").ChildContext("sanctuary_list").TriggerAnimation("hide"),
+			Component("tab_festivals").ParentContext("panel_frame").ChildContext("festivals_list").TriggerAnimation("show"))
+	}
+}
+
+CcoCampaignInitiative
+{
+	ExGreatTempleOfUlric_GetLevel
+	{
+		(current_key = InitiativeContext.Key) =>
+		{
+			GreatTempleOfUlric.GetLevelFromKey(current_key)
+		}
+	}
+
+	ExGreatTempleOfUlric_GetNextInitiative
+	{
+		InitiativeSetContext.InitiativeListSorted.Reverse.At(ExGreatTempleOfUlric_GetLevel)
+	}
+	
+	ExGreatTempleOfUlric_GetPrevInitiative
+	{
+		InitiativeSetContext.InitiativeListSorted.Reverse.At(ExGreatTempleOfUlric_GetLevel - 2)
+	}
+	
+	ExGreatTempleOfUlric_CanActivate
+	{
+		!IsScriptLocked && CanAfford
+	}
+	
+	ExGreatTempleOfUlric_CanActivateNextInitiative
+	{
+		(next = ExGreatTempleOfUlric_GetNextInitiative) =>
+		{
+			next.ExGreatTempleOfUlric_CanActivate
+		}
+	}
+	
+	ExGreatTempleOfUlric_IsThisOrHigherLevelActivated
+	{
+		(active = InitiativeSetContext.ActiveInitiatives.FirstContext) =>
+		{
+			IsContextValid(active) && active.ExGreatTempleOfUlric_GetLevel >= ExGreatTempleOfUlric_GetLevel
+		}
+	}
+	
+	ExGreatTempleOfUlric_GetRitualEffect(String ritual_category)
+	{
+		EffectsProvided.FirstContext((effect) => ((RitualContext.Category == ritual_category) && (effect.GetRitualBonusValue(effect.RitualContext, "enable") > 0)))
+	}
+	
+	ExGreatTempleOfUlric_UnlocksAnyRitual
+	{
+		(my_effect = ExGreatTempleOfUlric_GetRitualEffect("MIDDENLAND_FACTION_RITUALS"),
+			prev_effect = ExGreatTempleOfUlric_GetPrevInitiative.ExGreatTempleOfUlric_GetRitualEffect("MIDDENLAND_FACTION_RITUALS")) =>
+		{
+			IsContextValid(my_effect) && my_effect != prev_effect
+		}
+	}
+	
+	ExGreatTempleOfUlric_UnlocksRitual(CcoRitualRecord ritual)
+	{
+		IsContextValid(EffectsProvided.FirstContext((effect) => (effect.GetRitualBonusValue(ritual, "enable") > 0)))
+	}
+	
+	ExGreatTempleOfUlric_Activate
+	{
+		Do(Activate,
+			DoIf(ExGreatTempleOfUlric_UnlocksAnyRitual,
+				SharedStateWriteBool("unlock_ritual_" + ExGreatTempleOfUlric_GetRitualEffect("MIDDENLAND_FACTION_RITUALS").RitualContext.Key, true),
+				SharedStateWriteBool("great_temple_of_ulric_new_ritual_unlocked", true)))
+	}
+	
+	ExGreatTempleOfUlric_GetKeyOfRitualUnlockedByThisInitiative(String ritual_category)
+	{
+		(my_effect = ExGreatTempleOfUlric_GetRitualEffect(ritual_category),
+			prev_effect = ExGreatTempleOfUlric_GetPrevInitiative.ExGreatTempleOfUlric_GetRitualEffect(ritual_category)) =>
+		{
+			GetIfElse(IsContextValid(my_effect) && my_effect != prev_effect, my_effect.RitualContext.Key, "")
+		}
+	}
+	
+	ExGreatTempleOfUlric_UnlocksAnyLevel1RitualFromCategory(String category_name)
+	{
+		(ritual = PlayersFaction.RitualContextForKey(this.ExGreatTempleOfUlric_GetKeyOfRitualUnlockedByThisInitiative(category_name), true)) =>
+		{
+			IsContextValid(ritual) && ritual.ExGreatTempleOfUlric_GetRitualLevel == 1 && ritual.ExGreatTempleOfUlric_BothThisRitualAndTier2Locked
+		}
+	}
+	
+	ExGreatTempleOfUlric_UnlocksAnyLevel1FactionRitual
+	{
+		ExGreatTempleOfUlric_UnlocksAnyLevel1RitualFromCategory("MIDDENLAND_FACTION_RITUALS")
+	}
+	
+	ExGreatTempleOfUlric_UnlocksAnyLevel1ArmyRitual
+	{
+		ExGreatTempleOfUlric_UnlocksAnyLevel1RitualFromCategory("MIDDENLAND_ARMY_RITUALS")
+	}
+}
+
+CcoCampaignInitiativeSet
+{
+	ExGreatTempleOfUlric_GetInitiativeThatUnlocksRitual(CcoRitualRecord ritual)
+	{
+		InitiativeListSorted.Reverse.FirstContext((initiative) => (initiative.ExGreatTempleOfUlric_UnlocksRitual(ritual)))
+	}
+
+	ExGreatTempleOfUlric_UnlocksRitual(CcoRitualRecord ritual)
+	{
+		IsContextValid(ExGreatTempleOfUlric_GetInitiativeThatUnlocksRitual(ritual))
+	}
+	
+	ExGreatTempleOfUlric_GetNextInitiative
+	{
+		GetIfElse(ActiveInitiatives.IsEmpty, InitiativeListSorted.Reverse.At(0), ActiveInitiatives.FirstContext.ExGreatTempleOfUlric_GetNextInitiative)
+	}
+	
+	ExGreatTempleOfUlric_GetCurrentInitiativeLevel
+	{
+		Floor(GetIfElse(ActiveInitiatives.IsEmpty, 0, ActiveInitiatives.FirstContext.ExGreatTempleOfUlric_GetLevel))
+	}
+	
+	ExGreatTempleOfUlric_GetNextInitiativeLevel
+	{
+		Floor(ExGreatTempleOfUlric_GetCurrentInitiativeLevel + 1)
+	}
+	
+	ExGreatTempleOfUlric_CanActivateNextInitiative
+	{
+		(next = ExGreatTempleOfUlric_GetNextInitiative) =>
+		{
+			IsContextValid(next) && next.ExGreatTempleOfUlric_CanActivate
+		}
+	}
+	
+	ExGreatTempleOfUlric_OnSanctuarySelectedByPlayer
+	{
+		SharedStateWriteFloat(
+			"middenland_last_inspected_sanctuary_next_level_" + this.InitiativeSetContext.Key,
+			GetIfElse(
+				IsContextValid(this.ExGreatTempleOfUlric_GetNextInitiative) && !this.ExGreatTempleOfUlric_GetNextInitiative.IsScriptLocked,
+				this.ExGreatTempleOfUlric_GetNextInitiativeLevel,
+				this.ExGreatTempleOfUlric_GetCurrentInitiativeLevel
+			)
+		)
+	}
+	
+	ExGreatTempleOfUlric_NextInitiativeHasBeenInspectedWhenUnlocked
+	{
+		ExGreatTempleOfUlric_GetNextInitiative.IsScriptLocked
+		|| (this.ExGreatTempleOfUlric_GetNextInitiativeLevel > 4)
+		|| (Floor(SharedStateReadFloat("middenland_last_inspected_sanctuary_next_level_" + this.InitiativeSetContext.Key)) == this.ExGreatTempleOfUlric_GetNextInitiativeLevel)
+	}
+}
+
+CcoCampaignRitual
+{
+	ExGreatTempleOfUlric_GetTier2
+	{
+		PlayersFaction.RitualContextForKey(RitualContext.Key.Replace("_1", "_2"), true)
+	}
+	
+	ExGreatTempleOfUlric_GetTier1
+	{
+		PlayersFaction.RitualContextForKey(RitualContext.Key.Replace("_2", "_1"), true)
+	}
+	
+	ExGreatTempleOfUlric_BothThisRitualAndTier2Locked
+	{
+		IsScriptLocked && ExGreatTempleOfUlric_GetTier2.IsScriptLocked
+	}
+	
+	ExGreatTempleOfUlric_GetRitualLevel
+	{
+		GreatTempleOfUlric.GetLevelFromKey(this.RitualContext.Key)
+	}
+	
+	ExGreatTempleOfUlric_HighlightUnlockingInitiative
+	{
+		(set = GreatTempleOfUlric.GetInitiativeSetThatUnlocksRitual(this.RitualContext),
+			initiative = set.ExGreatTempleOfUlric_GetInitiativeThatUnlocksRitual(this.RitualContext)) =>
+		{
+			Do(
+				DoIfElse(
+					IsPanelOpen("dlc29_emp_great_temple_of_ulric"),
+					Do(
+						Component("tab_sanctuaries", "dlc29_emp_great_temple_of_ulric").Select(true),
+						GreatTempleOfUlric.PlayOpenSanctuariesAnimation),
+					OpenPanel("dlc29_emp_great_temple_of_ulric")),
+				Component(Format("%s%s", "CcoCampaignInitiativeSet", ContextObjectId(set)), "dlc29_emp_great_temple_of_ulric").Select,
+				GreatTempleOfUlric.TriggerSanctuaryLevelPointerAnimation(initiative)
+			)
+		}
+	}
+	
+	ExGreatTempleOfUlric_RemainingCooldownForCharacter(CcoCampaignCharacter c)
+	{
+		Floor(MaxNumericValue(this.RemainingRitualCooldownForTarget(c.MilitaryForceContext), this.RemainingCategoryCooldownForTarget(c.MilitaryForceContext)))
+	}
+	
+	ExGreatTempleOfUlric_IsOnIndividualCooldown(CcoCampaignCharacter c)
+	{
+		Floor(this.RemainingRitualCooldownForTarget(c.MilitaryForceContext)) > Floor(this.RemainingCategoryCooldownForTarget(c.MilitaryForceContext))
+	}
+	
+	ExGreatTempleOfUlric_RemainingEffectBundleDurationForCharacter(CcoCampaignCharacter c)
+	{
+		c.MilitaryForceContext.EffectBundleList.FirstContext((bundle) => bundle.Key == this.RitualContext.CompletionPayloadEffectBundleList[0].Key).TurnsRemaining
+	}
+}
+
+CcoEffectBundle
+{
+	ExGreatTempleOfUlric_GetRewardUnits
+	{
+		EffectList.Filter(EffectKey.StartsWith("wh3_dlc29_middenland_unlock_state_troops_scripted_")).Transform(UnitsFromEffectNotExcluded).Distinct(UnmountedUnitRecordContext)
+	}
+}
+

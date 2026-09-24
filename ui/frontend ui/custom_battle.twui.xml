@@ -250,6 +250,7 @@
 																<unit_list this="644ED00C-B0E9-4438-93803CF58BCD572E">
 																	<template_unit_card this="4B9A1BE0-4BF3-4C6E-A169F56C7CF9EDAD">
 																		<unit_card this="B56B2644-92E1-4538-9681865D117298CD">
+																			<unit_cap_change_frame this="0F9C3C7B-585B-4755-8994271C0D9F105D"/>
 																			<label_num_entities this="4C62F429-C29D-4E9A-A174F04F7C0CC025"/>
 																			<label_cost_parent this="E8EE53DE-4D29-4716-B0347800AB1E4178">
 																				<label_cost this="9888C850-10BB-412E-A16787A2F67C3F92"/>
@@ -759,7 +760,7 @@
 					this="DD4EB125-4F94-47C7-AFA8D738066CC3D7"
 					name="default"
 					width="300"
-					height="68"
+					height="78"
 					uniqueguid="DD4EB125-4F94-47C7-AFA8D738066CC3D7"/>
 			</states>
 			<LayoutEngine
@@ -11705,7 +11706,13 @@
 				</callback_with_context>
 				<callback_with_context
 					callback_id="ContextObjectStore"
-					context_object_id="CcoCultureRecord"/>
+					context_object_id="CcoCultureRecord">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CustomBattleOnUnitCardMouseOn"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<componentimages>
 				<component_image
@@ -13595,7 +13602,7 @@
 					this="EC0F2A0D-EF27-4A2F-966BAE87A2EB174D"
 					name="default"
 					width="300"
-					height="456"
+					height="514"
 					interactive="true"
 					uniqueguid="EC0F2A0D-EF27-4A2F-966BAE87A2EB174D">
 					<imagemetrics>
@@ -13604,14 +13611,14 @@
 							uniqueguid="3FAB18A0-C2F4-4374-B1D4BAD72B1BA142"
 							componentimage="2626D3DD-5175-4E5D-A2A98F0262CC14D2"
 							width="300"
-							height="456"
+							height="514"
 							colour="#FFFFFF00"/>
 						<image
 							this="85B31259-3522-4045-8CC61CC5260C183A"
 							uniqueguid="85B31259-3522-4045-8CC61CC5260C183A"
 							componentimage="59FA7D3D-CBB7-4DB4-98BA7F67B9BF0C76"
 							width="300"
-							height="456"
+							height="514"
 							margin="10.00,10.00,10.00,10.00"/>
 					</imagemetrics>
 				</default>
@@ -16308,7 +16315,7 @@
 					this="6F1BF9B3-0A0D-43DC-929154AEE4FAF24E"
 					name="NewState"
 					width="794"
-					height="456"
+					height="518"
 					interactive="true"
 					uniqueguid="6F1BF9B3-0A0D-43DC-929154AEE4FAF24E">
 					<component_text
@@ -16563,7 +16570,7 @@
 					this="5213E9BA-877F-4AFA-A3F8E33A8EF1BABD"
 					name="NewState"
 					width="766"
-					height="456"
+					height="518"
 					shadervars="0.00,10.00,0.00,10.00"
 					uniqueguid="5213E9BA-877F-4AFA-A3F8E33A8EF1BABD">
 					<component_text
@@ -17509,7 +17516,6 @@
 			this="5F4A51BA-E6AE-4020-BAE26A921598869D"
 			id="popup_menu"
 			offset="-42.00,31.00"
-			visible="false"
 			docking="Bottom Right External"
 			dock_offset="-242.00,-15.00"
 			priority="65"
@@ -17538,7 +17544,7 @@
 					this="C2FF2A52-E7A9-4D0F-BD08429D0617DB72"
 					name="NewState"
 					width="1134"
-					height="488"
+					height="550"
 					interactive="true"
 					uniqueguid="C2FF2A52-E7A9-4D0F-BD08429D0617DB72">
 					<imagemetrics>
@@ -17547,7 +17553,7 @@
 							uniqueguid="944ED4FB-F4DE-421F-A468838ED697E164"
 							componentimage="A34F0869-C994-4F52-A5FB264455105D21"
 							width="1134"
-							height="488"
+							height="550"
 							tile="true"
 							margin="16.00,16.00,16.00,16.00"/>
 					</imagemetrics>
@@ -18936,6 +18942,9 @@
 						<property
 							name="object_store_events"
 							value=""/>
+						<property
+							name="stored_object_to_pass0"
+							value="CcoCustomBattlePlayerSlot"/>
 						<property
 							name="template_layout"
 							value="ui/frontend ui/custom_battle_unit_card"/>
@@ -24925,7 +24934,9 @@
 							width="30"
 							height="30"
 							dockpoint="Center Left"
-							dock_offset="10.00,0.00"/>
+							dock_offset="10.00,0.00"
+							canresizeheight="false"
+							canresizewidth="false"/>
 					</imagemetrics>
 					<component_text
 						text="dy_army_ability"
@@ -27198,6 +27209,82 @@
 				</joining_game>
 			</states>
 		</tx_waiting>
+		<unit_cap_change_frame
+			this="0F9C3C7B-585B-4755-8994271C0D9F105D"
+			id="unit_cap_change_frame"
+			offset="0.00,1.00"
+			tooltipslocalised="true"
+			uniqueguid="0F9C3C7B-585B-4755-8994271C0D9F105D"
+			currentstate="4727EA01-1CF1-42BA-A2B0FF17689DC5DF"
+			defaultstate="1E7A82DA-65EB-4D16-AF5D5F0C921793FC">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCustomBattlePlayerSlot slot, CcoMainUnitRecord record"
+					context_function_id="(unit_cap_delta = slot.AffectedByAnyUnitCap(record)) =&gt; {&#10;GetIfElse(unit_cap_delta &gt; 0, &quot;positive&quot;, GetIfElse(unit_cap_delta &lt; 0, &quot;negative&quot;, &quot;not_affected&quot;))&#10;}">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CustomBattleOnUnitCardMouseOn"/>
+						<property
+							name="event1"
+							value="CustomBattleOnUnitCardMouseOff"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="BFD2A35C-6C59-4550-A4D71F8E150777CE"
+					uniqueguid="BFD2A35C-6C59-4550-A4D71F8E150777CE"
+					imagepath="ui/skins/default/dlc27_sla_decadence/corrupt_units_unit_card_mask.png"/>
+			</componentimages>
+			<states>
+				<negative
+					this="4727EA01-1CF1-42BA-A2B0FF17689DC5DF"
+					name="negative"
+					width="45"
+					height="108"
+					uniqueguid="4727EA01-1CF1-42BA-A2B0FF17689DC5DF">
+					<imagemetrics>
+						<image
+							this="547BC8FB-FCFD-4453-80D4AF8500BF46D5"
+							uniqueguid="547BC8FB-FCFD-4453-80D4AF8500BF46D5"
+							componentimage="BFD2A35C-6C59-4550-A4D71F8E150777CE"
+							width="45"
+							height="108"
+							colour="#FF2D2DC8"
+							shadertechnique_vars="1.00,2.00,2.00,0.00"
+							ui_colour_preset_type_key="red"
+							shader_name="glow_pulse_t0"/>
+					</imagemetrics>
+				</negative>
+				<not_affected
+					this="1E7A82DA-65EB-4D16-AF5D5F0C921793FC"
+					name="not_affected"
+					width="45"
+					height="108"
+					uniqueguid="1E7A82DA-65EB-4D16-AF5D5F0C921793FC"/>
+				<positive
+					this="88EB2575-FB30-436F-BD4238176CF01A78"
+					name="positive"
+					width="45"
+					height="108"
+					uniqueguid="88EB2575-FB30-436F-BD4238176CF01A78">
+					<imagemetrics>
+						<image
+							this="5F967572-18F1-41C9-BF626483E618158D"
+							uniqueguid="5F967572-18F1-41C9-BF626483E618158D"
+							componentimage="BFD2A35C-6C59-4550-A4D71F8E150777CE"
+							width="45"
+							height="108"
+							colour="#A0FF3778"
+							shadertechnique_vars="1.00,2.00,2.00,0.00"
+							ui_colour_preset_type_key="green"
+							shader_name="glow_pulse_t0"/>
+					</imagemetrics>
+				</positive>
+			</states>
+		</unit_cap_change_frame>
 		<unit_card
 			this="B56B2644-92E1-4538-9681865D117298CD"
 			id="unit_card"
@@ -27331,6 +27418,14 @@
 					callback_id="ContextSkinOverrideSetter"
 					context_object_id="CcoUnitsCustomBattlePermissionRecord"
 					context_function_id="FactionContext.FactionSkin"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOn"
+					context_object_id="CcoCustomBattlePlayerSlot"
+					context_function_id="OnMouseOn(StoredContext(&quot;CcoMainUnitRecord&quot;))"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOff"
+					context_object_id="CcoCustomBattlePlayerSlot"
+					context_function_id="OnMouseOff()"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -28309,6 +28404,9 @@
 							name="object_store_events"
 							value=""/>
 						<property
+							name="stored_object_to_pass0"
+							value="CcoCustomBattlePlayerSlot"/>
+						<property
 							name="template_layout"
 							value="ui/frontend ui/custom_battle_unit_card"/>
 					</child_m_user_properties>
@@ -29143,7 +29241,7 @@
 			part_of_template="true"
 			uniqueguid_in_template="6C253EE7-62DB-42FC-967ED9468F399339"
 			uniqueguid="A988F100-B427-4014-BAE02130116C849C"
-			dimensions="20.00,416.00"
+			dimensions="20.00,478.00"
 			dock_point="Center Right"
 			offset="8.00,0.00"
 			priority="65">

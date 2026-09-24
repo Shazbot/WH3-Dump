@@ -25,7 +25,6 @@ gb = generated_battle:new(
 gb:set_cutscene_during_deployment(true);
 
 -------AUDIO-------
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num());
@@ -43,7 +42,6 @@ ga_ai_04:get_army():suppress_reinforcement_adc();
 gb:set_objective_on_message("deployment_started", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4_main_objective");
 
 -------HINTS-------
-gb:play_sound_on_message("summon_wave_01", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4_hint_objective", 4000, 2000, 1000);
 gb:queue_help_on_message("summon_wave_01", "wh_main_qb_emp_balthasar_gelt_amulet_of_sea_gold_stage_4_hint_enemy_reinforcements_01", 3000, 2000, 20000);
 

@@ -59,6 +59,12 @@ cm:add_first_tick_callback_new(
 				);
 			end
 		else
+
+			-- Suppress post intro event after first intro cutscene to let another cutscene play
+			if not cm:is_multiplayer() then
+				faction_start:set_post_intro_event_suppressed(true)
+			end
+
 			-- Perform the start-of-campaign dressing for all players.
 			local human_factions = cm:get_human_factions();
 			if #human_factions > 0 then
@@ -68,11 +74,7 @@ cm:add_first_tick_callback_new(
 			end;
 
 			if campaign_ai_script then
-				campaign_ai_script:kislev_background_income()
-				campaign_ai_script:aislinn_background_income()
-				campaign_ai_script:teclis_background_income()
-				campaign_ai_script:throgg_background_income()
-				campaign_ai_script:dechala_background_income()
+				campaign_ai_script:start_background_incomes()
 			end
 			
 		end;
@@ -155,6 +157,12 @@ function start_game_all_factions()
 		custom_starts:add_campaign_custom_start_listeners();
 
 		add_starting_corruption();
+
+		-- Hide the endgame related buildings
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_1" , "");
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_2a" , "");
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_2b" , "");
+		cm:add_event_restricted_building_record("wh3_main_foreign_slot_endgame_2c" , "");
 	end
 	
 	start_narrative_events();
@@ -200,8 +208,8 @@ function start_game_all_factions()
 	-- DLC09 Tomb Kings Features
 	out("==== Tomb Kings ====");
 	add_tomb_kings_listeners();
-	add_nagash_books_listeners();
-	add_nagash_books_effects_listeners();
+	initialise_books_of_nagash();
+	bon_effects:add_listeners();
 	add_dynasty_tree_listeners();
 	
 	-- DLC10 Queen & Crone Features
@@ -221,7 +229,6 @@ function start_game_all_factions()
 	lohkir_arks:add_lokhir_listeners()
 	add_ship_upgrade_listeners();
 	setup_encounters_at_sea_listeners();
-	vampire_bloodlines:add_bloodlines_listeners();
 	
 	-- DLC12 Prophet & Warlock Features
 	out("==== Prophet & Warlock ====");
@@ -304,8 +311,10 @@ function start_game_all_factions()
 	belakor_daemon_prince_creation:start();
 	add_volkmar_elector_count_units_listener();
 	victory_objectives_ie:add_scripted_victory_listeners()
+	_victory_objectives_ie:add_scripted_victory_listeners()
 	scripted_occupation_options:initialise()
 	scripted_technology_tree:start_technology_listeners()
+	mutually_exclusive_techs:initialise()
 	caravans:initialise()
 	harmony:initialise()
 	campaign_ai_script:setup_listeners()
@@ -316,6 +325,9 @@ function start_game_all_factions()
 	ancillary_item_forge:initialise()
 	subjugation:initialise()
 	unholy_manifestations:initialise()
+	add_underdeep_listeners();
+	add_minor_cults_listeners();
+	innate_trait_reset:initialise();
 
 	---Champions of Chaos
 	CUS:initialise()
@@ -382,6 +394,7 @@ function start_game_all_factions()
 	sayl_manipulation:initialise()
 	secrets_of_the_white_tower:initialise()
 	dechala_narrative:initialise()
+
 	marks_of_cruelty:initialise()
 	wulfrik_campaign_start:initialise()
 	wulfrik_start:initialise()
@@ -395,11 +408,45 @@ function start_game_all_factions()
 	iron_favour:initialise()
 	bhashiva_campaign:initialise()
 
+	-- dlc29
+	out("==== DLC 29 | Vampires ====")
+	vampire_lairs:initialise()
+	vampire_covens:initialise()
+	vampire_handmaidens:initialise()
+	vampire_bloodlines:initialise()
+	vampire_concealment:initialise()
+	vampire_corpses:initialise()
+	vampire_technology:initialise()
+	web_of_power_actions:initialise()
+	vampire_corpses_distribution:initialise()
+	dragon_graves:initialise()
+	out("==== DLC 29 | Boris =====")
+	ulric_decrees:initialise()
+	fervour:initialise()
+	middenland_narrative:initialise()
+	out("==== DLC 29 | Nagash =====")
+	nag_mortarchs:initialise()
+	cataclysmic_events:initialise()
+	add_verminlord_selection_listeners()
+	add_verminlord_occupation_listeners()
+	thanquol_schemers:initialise()
+	thanquol_chaotic_plans:initialise()
+	thanquol_chaotic_plans_missions:initialise()
+	thanquol_chaotic_plans_token_payloads:initialise()
+	land_of_the_dead:initialise()
+	out("==== DLC 29 | Glottkin =====")
+	glottkin_blessings_of_nurgle:initialise()
+	glottkin_nurgle_rains:initialise()
+	glottkin_marks_of_nurgle:initialise()
+	glottkin_rotborne_rituals:initialise()
+	glottkin_gardens_of_nurgle:initialise()
+	episode_glottkin:initialise()
+	out("==== DLC 29 | Archaon Subjugation ====")
+	archaon_subjugation:initialise()
+	black_pyramid:initialise()
+	archaon_narrative:initialise()
+	nagash_rors:nagash_rors_initialise()
 
-	-- Update 5.2
-	add_underdeep_listeners();
-	add_minor_cults_listeners();
-	
 	out.dec_tab();
 end;
 

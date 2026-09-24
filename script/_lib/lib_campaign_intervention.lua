@@ -1136,7 +1136,7 @@ function intervention_manager:start_context_change_monitor()
 	
 	-- detect the player ending the turn
 	core:add_listener(
-		"intervention_manager_context_change_monitor",
+		"intervention_manager_context_change_monitor_end_turn",
 		"FactionTurnEnd",
 		function(context) return context:faction():name() == cm:get_local_faction_name(true) end,
 		function()
@@ -1147,7 +1147,7 @@ function intervention_manager:start_context_change_monitor()
 	
 	-- detect an attack being launched
 	core:add_listener(
-		"intervention_manager_context_change_monitor",
+		"intervention_manager_context_change_monitor_battle_started",
 		"ScriptEventPlayerBattleStarted",
 		true,
 		function()
@@ -1163,7 +1163,7 @@ function intervention_manager:start_context_change_monitor()
 		local current_character_cqi = character_list:item_at(i):cqi();
 		
 		cm:notify_on_character_movement(
-			"intervention_manager_context_change_monitor",
+			"intervention_manager_context_change_monitor_current_character",
 			current_character_cqi,
 			function()
 				local char = cm:get_character_by_cqi(current_character_cqi);
@@ -1192,8 +1192,9 @@ function intervention_manager:stop_context_change_monitor(reason)
 		self:out("");
 	end;
 
-	core:remove_listener("intervention_manager_context_change_monitor");
-	cm:stop_notify_on_character_movement("intervention_manager_context_change_monitor");
+	cm:stop_notify_on_character_movement("intervention_manager_context_change_monitor_current_character");
+	core:remove_listener("intervention_manager_context_change_monitor_end_turn");
+	core:remove_listener("intervention_manager_context_change_monitor_battle_started");
 end;
 
 
@@ -1228,19 +1229,26 @@ function intervention_manager:suppress_all_event_feed_messages(value)
 	end;
 end;
 
-
 -- lock/unlock the ui
 function intervention_manager:lock_ui(value)
 	local local_faction = cm:get_local_faction_name();
 
 	if value then
 		if not self.has_locked_ui then
+			if not cm:is_local_players_turn() then
+				if self.intervention_system_debug then
+					self:out("*** intervention postponed - not local player's turn");
+				end;
+
+				return;
+			end;
+
 			-- It can be dangerous to lock the ui while a battle sequence is active, so wait until it is finished
 			if cm:is_processing_battle() then
 				if not self.will_lock_ui_on_battle_sequence_completed then
 					self.will_lock_ui_on_battle_sequence_completed = true;
 					cm:progress_on_battle_completed(
-						"intervention_manager_lock_ui", 
+						"intervention_manager_lock_ui",
 						function(context)
 							self:lock_ui(false);
 						end
@@ -1254,20 +1262,21 @@ function intervention_manager:lock_ui(value)
 			if self.intervention_system_debug then
 				self:out("*** locking ui");
 			end;
-			
-			cm:disable_movement_for_faction(cm:get_local_faction_name());
-			
+
+			cm:disable_movement_for_faction(local_faction);
+
 			cuim:lock_ui();
-			
+
 			-- prevent the player from hiding the ui - this can cause problems with the advisor
 			if not cm:is_ui_hiding_enabled() then
 				self.allow_ui_hiding_on_completion = false;
 			end;
+
 			cm:enable_ui_hiding(false);
-			
-			-- This context value sets the tooltip key for the end-turn and skip-notification buttons to the supplied "end_turn_button_disabled_for_advice" key (from the campaign_localisation_strings table)
+
+			-- This context value sets the tooltip key for the end-turn and skip-notification buttons
 			common.set_context_value("end_turn_button_tooltip_key", "end_turn_button_disabled_for_advice");
-						
+
 			self.has_locked_ui = true;
 		end;
 	else
@@ -1277,29 +1286,27 @@ function intervention_manager:lock_ui(value)
 			end;
 
 			cm:cancel_progress_on_battle_completed("intervention_manager_lock_ui");
-			
-			-- Unset the context value which overrides the end-turn/skip-notification button tooltips that appear in red text
+
 			common.set_context_value("end_turn_button_tooltip_key", "");
-			
-			cm:enable_movement_for_faction(cm:get_local_faction_name());
-			
+
+			cm:enable_movement_for_faction(local_faction);
+
 			cuim:unlock_ui();
-			
+
 			-- allow the player to hide ui again, if we should
 			if self.allow_ui_hiding_on_completion then
 				cm:enable_ui_hiding(true);
 			end;
-			
-			-- restore this value to default
+
+			-- restore this value to default	
 			self.allow_ui_hiding_on_completion = true;
-			
+
 			self.has_locked_ui = false;
 
 			self.will_lock_ui_on_battle_sequence_completed = false;
 		end;
 	end;
 end;
-
 
 -- called when an intervention completes
 function intervention_manager:intervention_completed(intervention)
@@ -3390,7 +3397,7 @@ end;
 
 --- @function scroll_camera_for_intervention
 --- @desc Scrolls the camera to a supplied position on the campaign map during an intervention, showing advice and optionally showing infotext and a mission. This should only be called while this intervention is actually running after having been triggered.
---- @p [opt=nil] string region key, Target region key. If a region is supplied here the shroud over it will be lifted while the intervention is playing.
+--- @p [opt=nil] string region key, Key of the target region or region_data (for sea areas). If a region or region_data is supplied here the shroud over it will be lifted while the intervention is playing.
 --- @p number x, Display x co-ordinate of position to scroll to.
 --- @p number y, Display y co-ordinate of position to scroll to.
 --- @p string advice key, Advice key.
@@ -3399,6 +3406,7 @@ end;
 --- @p [opt=nil] number duration, Duration of camera scroll in seconds. If no duration is specified then @campaignui:ZoomToSmooth is used for the camera movement, which produces a smoother movement than @campaign_manager:scroll_camera_with_direction.
 --- @p [opt=nil] function scroll callback, Callback to call when the camera movement is complete.
 --- @p [opt=nil] function continuation callback, If supplied, this callback will be called when the intervention would usually complete. It will be passed this intervention object as a single argument, and takes on the responsibility for calling @intervention:complete to relinquish control.
+--- @r @boolean - if the scroll was successful or not
 function intervention:scroll_camera_for_intervention(targ_region, targ_x, targ_y, advice_key, infotext, mm, duration, scroll_complete_callback, continuation_callback)
 	
 	if targ_region then
@@ -3407,7 +3415,7 @@ function intervention:scroll_camera_for_intervention(targ_region, targ_x, targ_y
 			return false;
 		end;
 		
-		if not cm:get_region(targ_region) then
+		if not cm:get_region(targ_region) and not cm:get_region_data(targ_region) then
 			script_error("scroll_camera_for_intervention() called but no region with supplied key [" .. targ_region .. "] could be found");
 			return false;
 		end;
@@ -3478,6 +3486,7 @@ function intervention:scroll_camera_for_intervention(targ_region, targ_x, targ_y
 	else
 		self:scroll_camera_for_intervention_action(targ_region, targ_x, targ_y, advice_key, infotext, mm, duration, scroll_complete_callback, continuation_callback);
 	end;	
+	return true;
 end;
 
 

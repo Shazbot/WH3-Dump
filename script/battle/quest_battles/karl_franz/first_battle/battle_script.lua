@@ -32,14 +32,9 @@ end
 
 gb:set_cutscene_during_deployment(true);
 
-
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
 
-
 -------ARMY SETUP-------
-
 player_army = gb:get_army(gb:get_player_alliance_num(), 1) -- Player army
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1); -- Initial Force of Middenheim
 ga_ai_02 = gb:get_army(gb:get_non_player_alliance_num(), 2); -- Reinforcements Secessionists
@@ -51,9 +46,7 @@ gb:complete_objective_on_message("initial_army_defeated", "wh_main_qb_emp_karl_f
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_karl_franz_intro_hint_objective", 8000, 2000, 1000);
 
-gb:play_sound_on_message("initial_army_defeated", Orc_Horn, v(-300, 100, -660), 8000);
 gb:queue_help_on_message("initial_army_defeated", "wh_main_qb_emp_karl_franz_intro_hint_reinforcements", 8000, 2000, 1000);
-
 
 -------ORDERS-------
 ga_ai_01:message_on_rout_proportion("initial_army_defeated", 0.7);

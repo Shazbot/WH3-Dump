@@ -92,6 +92,40 @@ function setup_wh_campaign(generic_battle_script_path_override)
 	
 	-- skaven menace below army ability
 	menace_below_monitor();
+
+	if cm:model():campaign_name("wh3_main_combi") == true and cm:is_new_game() == true then
+		local thanquol_faction = cm:get_faction("wh3_dlc29_skv_clan_scruten")
+		
+		if thanquol_faction and not thanquol_faction:is_null_interface() then
+			local community_character = cm:spawn_character_to_pool("wh3_dlc29_skv_clan_scruten", "names_name_1711397983", "names_name_395246711", "", "", 30, true, "general", "wh2_main_skv_grey_seer_ruin", true, "", true);
+			if community_character and not community_character:is_null_interface() then
+				cm:character_details_add_skill_point(community_character, "wh3_main_skill_innate_skv_clawmark_scribe");
+				add_community_character_trait_listener();
+			end
+			
+			local thanquol_engine_building_levels = {
+				"wh3_dlc29_skv_special_morskittar_engine_1",
+				"wh3_dlc29_skv_special_morskittar_engine_2",
+				"wh3_dlc29_skv_special_morskittar_engine_3",
+				"wh3_dlc29_skv_special_morskittar_engine_4",
+				"wh3_dlc29_skv_special_morskittar_engine_5",
+			}
+			
+			for _, building_key in ipairs(thanquol_engine_building_levels) do
+				cm:add_event_restricted_building_record_for_faction(building_key, thanquol_faction:name(), "wh3_dlc29_tooltip_morskittar_engine_lvl_1_unlock")
+			end
+		end
+
+		local nagash_faction = cm:get_faction("wh3_dlc29_nag_host_of_nagash")
+		
+		if nagash_faction and not nagash_faction:is_null_interface() then
+			local nagashposter = cm:spawn_character_to_pool("wh3_dlc29_nag_host_of_nagash", "names_name_2130147775", "names_name_1606431726", "", "", 30, true, "general", "wh2_dlc09_tmb_tomb_king", true, "", true);
+			if nagashposter and not nagashposter:is_null_interface() then			
+				cm:character_details_add_skill_point(nagashposter, "wh3_main_skill_innate_nag_herald");
+				add_nagashposter_trait_listener();
+			end
+		end
+	end
 	
 	-- open geomantic web help page when geomantic web screen opened
 	--show_geomantic_web_help_page_on_screen_open();
@@ -162,6 +196,13 @@ function setup_wh_campaign(generic_battle_script_path_override)
 	-- ogre features
 	setup_ogre_meat_rework_listener()
 	setup_path_of_the_butcher()
+
+	-- Chaos Glottkin listeners 
+	setup_glottkin_souls_listener()
+	setup_glottkin_start_enemy()
+
+	-- Vampire corpses conversion
+	setup_vampire_corpses_conversion_listener()
 
 	start_achievement_listeners();
 	
@@ -733,6 +774,8 @@ function start_confederation_listeners()
 			local faction_subculture = faction:subculture();
 			local faction_human = faction:is_human();
 			local confederation_timeout = 5;
+			local source_faction = context:faction();
+			local source_faction_name = source_faction:name();
 			
 			local not_limited_confederation_factions = {
 				--cultures or subcultures which are not limited when the player
@@ -744,6 +787,7 @@ function start_confederation_listeners()
 				wh_main_sc_grn_greenskins = true,
 				wh3_main_sc_ksl_kislev = true,
 				wh2_dlc14_brt_chevaliers_de_lyonesse = true,
+				wh_main_sc_vmp_vampire_counts = true,
 				--Specific factions within a subculture that are limited
 
 			}
@@ -755,13 +799,11 @@ function start_confederation_listeners()
 					confederation_timeout = 10;
 				end
 
-				out("Restricting confederation between [faction:" .. faction_name .. "] and [subculture:" .. faction_subculture .. "]");
+				--out("Restricting confederation between [faction:" .. faction_name .. "] and [subculture:" .. faction_subculture .. "]");
 				cm:force_diplomacy("faction:" .. faction_name, "subculture:" .. faction_subculture, "form confederation", false, true, false);
 				cm:add_turn_countdown_event(faction_name, confederation_timeout, "ScriptEventConfederationExpired", faction_name);
 			end
 			
-			local source_faction = context:faction();
-			local source_faction_name = source_faction:name();
 			
 			-- remove deathhag after confederating/being confedrated with cult of pleasure
 			if source_faction:culture() == "wh2_main_def_dark_elves" and faction_name == "wh2_main_def_cult_of_pleasure" then
@@ -889,6 +931,55 @@ function start_confederation_listeners()
 	);
 end;
 
+function add_community_character_trait_listener()
+	core:add_listener(
+		"community_character_trait",
+		"CharacterRankUp", 
+		function(context)
+			return context:character():character_subtype_key() == "wh3_dlc29_skv_thanquol";
+		end,
+		function(context)
+			local faction = context:character():faction();
+			local character_list = faction:character_list();
+	
+			for i = 0, character_list:num_items() - 1 do
+				local character = character_list:item_at(i);
+				local bg_skill = character:character_details():background_skill();
+				
+				if bg_skill == "wh3_main_skill_innate_skv_clawmark_scribe" then
+					cm:add_agent_experience(cm:char_lookup_str(character), cm:random_number(5,10)*100);
+					break;
+				end
+			end
+		end,
+		true
+	);
+end
+
+function add_nagashposter_trait_listener()
+	core:add_listener(
+		"nagashposter_trait",
+		"CharacterRankUp", 
+		function(context)
+			return context:character():character_subtype_key() == "wh3_dlc29_nag_nagash";
+		end,
+		function(context)
+			local faction = context:character():faction();
+			local character_list = faction:character_list();
+	
+			for i = 0, character_list:num_items() - 1 do
+				local character = character_list:item_at(i);
+				local bg_skill = character:character_details():background_skill();
+				
+				if bg_skill == "wh3_main_skill_innate_nag_herald" then
+					cm:add_agent_experience(cm:char_lookup_str(character), cm:random_number(5,10)*100);
+					break;
+				end
+			end
+		end,
+		true
+	);
+end
 
 ---Listen for creation/breakage of vassal agreements and prevent people from declaring war on player's vassals directly.
 --- Also force discovery of vassal masters upon meeting the vassal so that the AI always has the option to declare war on the master
@@ -1352,7 +1443,6 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		local secondary_detail = "";
 		local pic = nil;
 		
-		
 		if faction_name == "wh_main_grn_greenskins" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_greenskins_secondary_detail";
 			pic = 593;
@@ -1362,6 +1452,9 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh_main_vmp_vampire_counts" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_drakenhof_secondary_detail";
 			pic = 594;
+		elseif faction_name == "wh3_dlc29_vmp_neferata" then
+			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_neferata_secondary_detail";
+			pic = 998;
 		elseif faction_name == "wh_main_dwf_dwarfs" or faction_name == "wh3_main_dwf_the_ancestral_throng" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_dwarfs_secondary_detail";
 			pic = 592;
@@ -1372,7 +1465,10 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_malakai_secondary_detail";
 			pic = 592;
-		elseif faction_name == "wh_main_chs_chaos" or faction_name == "wh3_dlc20_chs_kholek" or faction_name == "wh3_dlc20_chs_sigvald" or faction_name == "wh3_main_chs_shadow_legion" then
+		elseif faction_name == "wh_main_chs_chaos" then
+			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_warriors_of_chaos_archaon_secondary_detail";
+			pic = 595;
+		elseif faction_name == "wh3_dlc20_chs_kholek" or faction_name == "wh3_main_chs_shadow_legion" then
 			secondary_detail = "event_feed_strings_text_wh_main_event_feed_string_scripted_event_intro_warriors_of_chaos_secondary_detail";
 			pic = 595;
 		
@@ -1397,6 +1493,7 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh2_dlc13_emp_the_huntmarshals_expedition" then
 			secondary_detail = "event_feed_strings_text_wh2_scripted_event_how_they_play_huntsmarshals_expedition_secondary_detail";
 			pic = 591;
+		-- Elspeth von Draken
 		elseif faction_name == "wh_main_emp_wissenland" then
 			title = "event_feed_strings_text_wh3_scripted_event_path_to_victory_title";
 			if cm:model():campaign_name_key() == "wh3_main_chaos" then
@@ -1405,6 +1502,10 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 				secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_wissenland_secondary_detail_ie";
 			end
 			pic = 591;
+		-- Boris Todbringer
+		elseif faction_name == "wh_main_emp_middenland" then
+			secondary_detail = "event_feed_strings_text_wh3_dlc29_scripted_event_how_they_play_middenland_secondary_detail";
+			pic = 590;
 		--
 		-- WH1 DLC
 		--
@@ -1664,6 +1765,11 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh2_main_skv_clan_moulder" then
 			secondary_detail = "event_feed_strings_text_wh2_scripted_event_how_they_play_clan_moulder_secondary_detail";
 			pic = 799;
+
+		-- Thanquol
+		elseif faction_name == "wh3_dlc29_skv_clan_scruten" then
+			secondary_detail = "event_feed_strings_text_wh3_dlc29_scripted_event_how_they_play_clan_scruten_secondary_detail";
+			pic = 802;
 		
 		-----------------------
 		-- Tomb Kings
@@ -1815,7 +1921,7 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		-- Champions
 		------------------------
 
-		elseif faction_name == "wh3_dlc20_chs_azazel" then
+		elseif faction_name == "wh3_dlc20_chs_azazel" or faction_name == "wh3_dlc20_chs_sigvald" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_champions_of_chaos_azazel_secondary_detail";
 			pic = 595;
 		elseif faction_name == "wh3_dlc20_chs_festus" then
@@ -1827,6 +1933,10 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_dlc20_chs_vilitch" then
 			secondary_detail = "event_feed_strings_text_wh3_scripted_event_how_they_play_champions_of_chaos_vilitch_secondary_detail";
 			pic = 595;
+		-- Glottkin
+		elseif faction_name == "wh3_dlc29_chs_host_of_the_triplets" then
+			secondary_detail = "event_feed_strings_text_wh3_dlc29_scripted_event_how_they_play_host_of_the_triplets_secondary_detail";
+			pic = 803;
 
 		------------------------
 		-- Chaos Dwarfs
@@ -1846,6 +1956,15 @@ function show_how_to_play_event(faction_name, end_callback, delay)
 		elseif faction_name == "wh3_dlc27_sla_masque_of_slaanesh" then
 			secondary_detail = "event_feed_strings_text_wh3_dlc27_scripted_event_how_they_play_masque_secondary_detail";
 			pic = 13;
+
+		------------------------
+		-- Undead Legions
+		------------------------
+
+		elseif faction_name == "wh3_dlc29_nag_host_of_nagash" then
+		secondary_detail = "event_feed_strings_text_wh3_dlc29_scripted_event_how_they_play_host_of_nagash_secondary_detail";
+		pic = 999;
+
 		else
 			script_error("ERROR: show_how_to_play_event() called but couldn't recognise supplied faction name [" .. faction_name .. "]. Please add it to script/campaign/wh_campaign_setup.lua");
 			
@@ -1981,7 +2100,14 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 			current_y = current_cco:Call("LocationY");
 		end;
 		
-		local current_region_key = current_quest_record[6];
+		local current_region_key = false;
+		local log_x, log_y = cm:dis_to_log(current_x, current_y)
+		local current_region = cm:get_region_data_at_position(log_x, log_y);
+
+		if not current_region:is_null_interface() then
+			current_region_key = current_region:key();
+		end
+
 		local current_intervention_name = false;
 		local current_saved_name = false;
 
@@ -2044,7 +2170,7 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 					out.design("\tscrolling the camera with advice");
 					
 					-- we have advice to deliver and a position
-					current_intervention:scroll_camera_for_intervention(
+					local success = current_intervention:scroll_camera_for_intervention(
 						current_region_key,
 						current_x,
 						current_y,
@@ -2053,6 +2179,9 @@ function set_up_rank_up_listener(quests, subtype, infotext)
 						mm,
 						4
 					);
+					if not success then
+						current_intervention:complete();
+					end
 				elseif current_advice_key then
 					-- we have advice, but no position
 					out.design("\tplaying advice with no camera movement");
@@ -2778,6 +2907,24 @@ function apply_default_diplomacy()
 	for _, faction in model_pairs(factions_with_vassals) do
 		cm:force_diplomacy("faction:" .. faction:name(), "all", "vassal", true, true, false);
 	end;
+
+	if cm:model():campaign_name("wh3_main_combi") == true then
+		-- Nagash / Undead Legions can offer vassalage to other undead only,
+		-- except for Settra which is handled below
+		local nagash_vassal_target_cultures = {
+			"wh_main_vmp_vampire_counts",
+			"wh2_dlc11_cst_vampire_coast",
+			"wh2_dlc09_tmb_tomb_kings",
+		};
+		for _, culture in ipairs(nagash_vassal_target_cultures) do
+			cm:force_diplomacy(
+				"culture:wh3_dlc29_nag_undead_legions",
+				"culture:" .. culture,
+				"vassal",
+				true, true, false
+			);
+		end;
+	end
 	
 	-- sentinels cannot do diplomacy with anyone, but anyone can declare war on the sentinels
 	if cm:get_faction("wh2_dlc09_tmb_the_sentinels") then
@@ -2788,6 +2935,10 @@ function apply_default_diplomacy()
 	if cm:get_faction("wh2_dlc09_tmb_khemri") then
 		cm:force_diplomacy("all", "faction:wh2_dlc09_tmb_khemri", "vassal", false, false, false);
 	end;
+	-- or Nagash
+	if cm:get_faction("wh3_dlc29_nag_host_of_nagash") then
+		cm:force_diplomacy("all", "faction:wh3_dlc29_nag_host_of_nagash", "vassal", false, false, false)
+	end
 	-- nobody can vassalize the HEF faction that owns Aislinn confederations. HEF Faction and Aislinn can't declare war on each other
 	if cm:get_faction("wh3_dlc27_hef_aislinn_confederation_owner") then
 		cm:force_diplomacy("all", "faction:wh3_dlc27_hef_aislinn_confederation_owner", "form confederation", false, false, false);
@@ -2804,6 +2955,9 @@ function apply_default_diplomacy()
 	if cm:get_faction("wh3_dlc27_sla_masque_of_slaanesh") then
 		cm:force_diplomacy("faction:wh3_dlc27_sla_masque_of_slaanesh", "faction:wh3_dlc27_rogue_unholy_pageant", "all", false, false, false)
 	end
+
+	-- Vampire Counts now only do confederation within their feature
+	cm:force_diplomacy("culture:wh_main_vmp_vampire_counts", "culture:wh_main_vmp_vampire_counts", "form confederation", false, false, true);
 
 	-- Restrict HEF playable factions from confederating with each other
 	local hef_playable_factions = world:lookup_factions_from_faction_set("hef_playable_factions")
@@ -2898,6 +3052,32 @@ function setup_ogre_meat_rework_listener()
 	)
 end
 
+function setup_vampire_corpses_conversion_listener()
+	local region_group_resource_key = "wh3_dlc29_vmp_corpses"
+	local faction_resource_key = "wh3_dlc29_vmp_corpses_CAI"
+	
+	core:add_listener(
+		"VampireCorpsesConversionCAI",
+		"PooledResourceChanged",
+		function(context)
+			return context:has_faction() and context:resource():key() == region_group_resource_key and  not context:faction():is_human()	
+		end,
+		function(context)
+			local faction = context:faction()
+			local faction_key = faction:name()
+			local resource = context:resource()
+			local amount = context:amount()
+			local factor = context:factor():key()
+			
+			local check_resource = faction:pooled_resource_manager():resource(faction_resource_key)
+			if check_resource then
+				cm:faction_add_pooled_resource(faction_key, faction_resource_key, factor, amount)
+			end
+		end,
+		true
+	)
+end
+
 function setup_path_of_the_butcher()
 	core:add_listener(
 		"path_of_the_butcher_offer_made",
@@ -2924,6 +3104,208 @@ function setup_path_of_the_butcher()
 	)
 end
 
+function setup_glottkin_souls_listener()
+	local glottkin_faction_key = "wh3_dlc29_chs_host_of_the_triplets"
+	local glottkin_souls_key = "wh3_dlc20_chs_souls"
+	local glottkin_souls_progression_key = "wh3_dlc29_glott_souls"
+
+	local glottkin_souls_default_factor_key = "other"
+
+	local glottkin_souls_building_construction_factor_key = "buildings"
+	local glottkin_predicted_souls_progression_total_key = "glottkin_predicted_souls_progression_total"
+	local glottkin_predicted_souls_progression_next_turn_key = "glottkin_predicted_souls_progression_next_turn"
+	local glottkin_souls_garden_factor_key = "wh3_dlc29_woc_glottkin_nurgle_garden_buildings_positive"
+	local glottkin_are_predicted_souls_enabled = false -- disabled after the last rework. Leaving it in case it is needed in future iterations because it also contains UI work
+	
+	local function is_glottkin_faction(faction)
+		return faction and faction:name() == glottkin_faction_key
+	end
+	
+	local function refresh_glottkin_predicted_souls_progression(faction)
+		if not is_glottkin_faction(faction) then
+			return
+		end
+
+		cm:callback(function()		
+			local total_predicted = 0
+			local next_turn_predicted = 0
+			local region_list = faction:region_list()
+			
+			for i = 0, region_list:num_items() - 1 do
+				local slot_list = region_list:item_at(i):slot_list()
+				
+				for j = 0, slot_list:num_items() - 1 do
+					local slot = slot_list:item_at(j)
+					
+					if slot:is_working() then
+						local resource_transaction = slot:construction_resource_transaction()
+						
+						if not resource_transaction:is_null_interface() then
+							local souls_amount = math.abs(resource_transaction:absolute_resource_change(glottkin_souls_key))
+							
+							if souls_amount > 0 then
+								total_predicted = total_predicted + souls_amount
+								
+								if slot:turns_to_completion() == 1 then
+									next_turn_predicted = next_turn_predicted + souls_amount
+								end
+							end
+						end
+					end
+				end
+			end
+			
+			cm:set_script_state(glottkin_predicted_souls_progression_total_key, total_predicted)
+			cm:set_script_state(glottkin_predicted_souls_progression_next_turn_key, next_turn_predicted)
+		end, 0.1)
+	end
+	
+	local function add_glottkin_souls_progression(faction, factor, amount)
+		if amount <= 0 then
+			return
+		end
+		
+		local check_resource = faction:pooled_resource_manager():resource(glottkin_souls_progression_key)
+		if check_resource then
+			cm:faction_add_pooled_resource(glottkin_faction_key, glottkin_souls_progression_key, factor, amount)
+		end
+	end
+	
+	core:add_listener(
+		"glottkin_souls_progression_listener",
+		"PooledResourceChanged",
+		function(context)
+			return context:has_faction() and 
+				context:faction():name() == glottkin_faction_key and
+				context:resource():key() == glottkin_souls_key and
+				context:amount() > 0 and
+				not context:factor():is_null_interface() and
+				context:factor():key() ~= glottkin_souls_building_construction_factor_key -- souls spent for buildings are rewarded after the building construction has completed
+		end,
+		function(context)
+			local factor = glottkin_souls_default_factor_key
+			local faction = context:faction()
+			local is_factor_present_in_progression = nil
+			local check_resource = faction:pooled_resource_manager():resource(glottkin_souls_progression_key)
+		
+			if check_resource then
+				is_factor_present_in_progression = check_resource:factor_by_key(context:factor():key())
+				
+				if is_factor_present_in_progression then
+					factor = context:factor():key()
+				end
+			end
+			
+			add_glottkin_souls_progression(context:faction(), factor, math.abs(context:amount()))
+		end,
+		true
+	)
+
+	if glottkin_are_predicted_souls_enabled then
+		core:add_listener(
+			"glottkin_souls_progression_building_completed_listener",
+			"BuildingCompleted",
+			function(context)
+				local building = context:building()
+				if building:is_null_interface() or building:faction():name() ~= glottkin_faction_key then
+					return false
+				end
+				
+				local resource_transaction = context:construction_resource_transaction()
+				if resource_transaction:is_null_interface() then
+					return false
+				end
+				
+				return resource_transaction:absolute_resource_change(glottkin_souls_key) < 0
+			end,
+			function(context)
+				local resource_transaction = context:construction_resource_transaction()
+				local amount = resource_transaction:absolute_resource_change(glottkin_souls_key)
+				local faction = context:building():faction()
+				add_glottkin_souls_progression(faction, glottkin_souls_garden_factor_key, math.abs(amount))
+				refresh_glottkin_predicted_souls_progression(faction)
+			end,
+			true
+		)
+
+		core:add_listener(
+			"glottkin_predicted_souls_progression_construction_issued",
+			"BuildingConstructionIssued",
+			function(context)
+				return is_glottkin_faction(context:garrison_residence():faction())
+			end,
+			function(context)
+				refresh_glottkin_predicted_souls_progression(context:garrison_residence():faction())
+			end,
+			true
+		)
+		
+		core:add_listener(
+			"glottkin_predicted_souls_progression_building_cancelled",
+			"RegionBuildingCancelled",
+			function(context)
+				local slot = context:slot()
+				return not slot:is_null_interface() and is_glottkin_faction(slot:faction())
+			end,
+			function(context)
+				refresh_glottkin_predicted_souls_progression(context:slot():faction())
+			end,
+			true
+		)
+
+		core:add_listener(
+			"glottkin_predicted_souls_progression_faction_turn_start",
+			"FactionTurnStart",
+			function(context)
+				return is_glottkin_faction(context:faction())
+			end,
+			function(context)
+				refresh_glottkin_predicted_souls_progression(context:faction())
+			end,
+			true
+		)
+
+		local glottkin_faction = cm:get_faction(glottkin_faction_key)
+		if glottkin_faction and not glottkin_faction:is_null_interface() and not glottkin_faction:is_dead() then
+			refresh_glottkin_predicted_souls_progression(glottkin_faction)
+		end
+	else
+		cm:set_script_state(glottkin_predicted_souls_progression_total_key, 0)
+		cm:set_script_state(glottkin_predicted_souls_progression_next_turn_key, 0)
+	end
+end
+
+function setup_glottkin_start_enemy()
+	
+	local glottkin_faction_key = "wh3_dlc29_chs_host_of_the_triplets"
+
+	-- Listener to disable movement on the Naglfarling enemy target next to Katam when playing the Glottkin. Re-enable movement on turn 3 and remove listener on turn 4
+	core:add_listener(
+		"Glottkin_Start_Lock_Naglfarling_Target",
+		"FactionTurnStart",
+		function(context)
+			local faction = context:faction();
+			return context:faction():name() == glottkin_faction_key and faction:is_human() and cm:turn_number() < 5
+		end,
+		function(context)
+			local frozen_general = cm:get_character_by_startpos_id("355112669")
+			if frozen_general and frozen_general:has_military_force() then
+				cm:force_character_force_into_stance(cm:char_lookup_str(frozen_general), "MILITARY_FORCE_ACTIVE_STANCE_TYPE_LAND_RAID")
+				if cm:turn_number() < 3 then
+					-- Freeze the Naglfarling general next to Katam to guide the player
+				cm:disable_movement_for_character(cm:char_lookup_str(frozen_general))
+			end
+				if cm:turn_number() == 3 then
+				cm:enable_movement_for_character(cm:char_lookup_str(frozen_general))
+			end
+			end
+			if cm:turn_number() >= 4 then
+			core:remove_listener("Glottkin_Start_Lock_Naglfarling_Target")
+			end
+		end,
+		true
+	)
+end
 
 function add_debug_listeners()
 	core:add_listener(

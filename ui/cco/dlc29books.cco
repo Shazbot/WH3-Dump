@@ -1,0 +1,43 @@
+Books
+{
+    ToggleCharacterListForBookTransferVisibility()
+    {
+        Do(Component("owned_info_panel").ChildContext("list_box").ToggleVisibility, Component("owned_info_panel").ChildContext("list_box_characters_for_transfer").ToggleVisibility)
+    }
+
+    CanTransferBook(CcoCampaignRitual book_ritual, CcoCampaignBookOfNagash book)
+    {
+        book_ritual.CanPerformRitualWithAnyValidTarget && 
+        book.GetForcesAvailableForBookTransfer.IsEmpty == false
+    }
+
+    IsFactionAllowedToTransferBook(CcoCampaignFaction faction)
+    {
+        faction.EntitySharedStateReadBool("banned_from_transferring_to_own_armies") == false ||
+        (CampaignRoot.IsMultiplayer &&
+         CampaignRoot.NetworkPlayerList.Any(
+             TeamId == faction.NetworkPlayerContext.TeamId &&
+             CurrentGameCampaignFactionContext != faction &&
+             CanUseUiFeature("BOOKS_OF_NAGASH", CurrentGameCampaignFactionContext.FactionRecordContext)))
+    }
+
+    IsBookSlotUnlocked(CcoInitiativeSetRecord initiative_set_record)
+    {
+        GetBooksOfNagash.Filter(BookRecordContext.Key == "wh2_dlc09_books_of_nagash_" + initiative_set_record.SortOrder).FirstContext.IsOwnedByPlayer
+    }
+
+    BookKeyToSlotInitiativeSet(CcoBooksOfNagashDetailsRecord book)
+	{
+		GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_1", "wh3_dlc29_book_of_nagash_slot_1",
+		GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_2", "wh3_dlc29_book_of_nagash_slot_2",
+		GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_3", "wh3_dlc29_book_of_nagash_slot_3",
+        GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_4", "wh3_dlc29_book_of_nagash_slot_4",
+        GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_5", "wh3_dlc29_book_of_nagash_slot_5",
+        GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_6", "wh3_dlc29_book_of_nagash_slot_6",
+        GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_7", "wh3_dlc29_book_of_nagash_slot_7",
+        GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_8", "wh3_dlc29_book_of_nagash_slot_8",
+		GetIfElse(book.Key == "wh2_dlc09_books_of_nagash_9", "wh3_dlc29_book_of_nagash_slot_9",
+		""
+		)))))))))
+	}
+}

@@ -22,10 +22,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -40,7 +37,6 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_d
 gb:set_objective_on_message("reinforce", "wh_main_qb_emp_balthasar_gelt_cloak_of_molten_metal_stage_5_secondary_objective", 36000);
 
 -------HINTS-------
-gb:play_sound_on_message("reinforce", Orc_Horn, v(-300, 100, -660), 3000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_balthasar_gelt_cloak_of_molten_metal_stage_5_hint_objective", 4000, 2000, 1000);
 gb:queue_help_on_message("reinforce", "wh_main_qb_emp_balthasar_gelt_cloak_of_molten_metal_stage_5_hint_reinforcments", 5000, 2000, 36000);
 

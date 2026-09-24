@@ -3341,6 +3341,7 @@ monster_hunt =
 
 		cm:remove_script_state(faction, monster_hunt.config.teleported_character_override_shared_state_name)
 		cm:remove_script_state(faction, monster_hunt.config.teleported_character_override_mission_shared_state_name .. hunt_config_data.quest_battle)
+
 	end,
 
 	clear_scripted_bonus_values = function(faction_key)

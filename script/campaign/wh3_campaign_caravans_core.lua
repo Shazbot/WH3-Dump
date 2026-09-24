@@ -477,6 +477,8 @@ caravans.traits_to_units = {
 	}		
 }
 
+caravans.no_ancillary_reward_incident_key = { wh3_main_cth_cathay = "wh3_main_cth_caravan_completed", wh3_dlc23_chd_chaos_dwarfs = "wh3_dlc29_chd_convoy_completed" }
+
 caravans.reward_list = {
 	wh3_main_cth_cathay = {
 		wh3_main_chaos_region_frozen_landing     	= {"wh3_main_anc_caravan_frost_wyrm_skull", "wh3_main_cth_caravan_completed_frozen_landing", "wh3_main_ksl_mon_snow_leopard_0"},
@@ -653,7 +655,8 @@ caravans.journey_durations = {
 caravans.payload_iron_favor = {
 	key = "wh3_cp1_cth_iron_favour",
 	factor = "caravan_escort",
-	amount = 150
+	amount = 150,
+	previously_completed_destination_amount_multiplier = 0,
 }
 
 ------------------
@@ -813,7 +816,7 @@ function caravans:initialise()
 			core:trigger_event("ScriptEventCaravanCompleted", context);
 			
 			if faction:is_human() then
-				self:reward_item_check(faction, region_name, context:caravan_master())
+				self:grant_human_rewards(faction, region_name, context:caravan_master())
 			end
 			
 			-- faction has tech that grants extra trade tariffs bonus after every caravan - create scripted bundle
@@ -1561,7 +1564,7 @@ function caravans:build_list_of_nodes()
 	return all_nodes
 end
 
-function caravans:reward_item_check(faction, region_key, caravan_master)
+function caravans:grant_human_rewards(faction, region_key, caravan_master)
 	local culture = faction:culture()
 	local faction_name = faction:name()
 	local reward = self.reward_list[culture][region_key]
@@ -1571,46 +1574,71 @@ function caravans:reward_item_check(faction, region_key, caravan_master)
 		reward = self.reward_list[faction_name][region_key]
 	end
 
+	local previously_completed_destination = false
+	local has_reward = false
+	local ancillary_reward = nil
+
+	-- NOTE: Here the check that the reward ancillary is present for the faction is also used as an indicator that the destinaton has already been visited.
 	-- get a different ancillary if the faction already owns it
 	if faction:ancillary_exists(reward[1]) then
+		previously_completed_destination = true
 		if cm:random_number(5) == 1 then
 			local campaign_key = cm:model():campaign_name_key()
-			local item_list = self.special_reward_list[campaign_key][culture]
+			local special_item_list = self.special_reward_list[campaign_key][culture]
 
 			-- faction specific override.
 			if self.special_reward_list[campaign_key] and self.special_reward_list[campaign_key][faction_name] then
-				item_list = self.special_reward_list[campaign_key][faction_name]
+				special_item_list = self.special_reward_list[campaign_key][faction_name]
 			end
 
-			if item_list then
-				reward = item_list[cm:random_number(#item_list)]
-
-				if faction:ancillary_exists(reward[1]) then return end
-			else
-				return
+			if special_item_list then
+				local special_item_reward = special_item_list[cm:random_number(#special_item_list)]
+				if not faction:ancillary_exists(special_item_reward[1]) then
+					ancillary_reward = { key = special_item_reward[1], incident = special_item_reward[2], }
+				end
 			end
-		else
-			return
 		end
+	else
+		ancillary_reward = { key = reward[1], incident = reward[2], }
 	end
 	
 	local character = caravan_master:character()
 	local payload_builder = cm:create_payload()
 	local iron_favor = self.payload_iron_favor;
 	
-	payload_builder:character_ancillary_gain(character, reward[1], false)
+	if ancillary_reward then
+		payload_builder:character_ancillary_gain(character, ancillary_reward.key, false)
+		has_reward = true
+	end
 	
-	if reward[3] then
-		payload_builder:add_unit(character:military_force(), reward[3], 1 + cm:get_factions_bonus_value(faction, "chd_convoy_additional_unit_reward_scripted"), 0)
+	local unit_reward_key = reward[3]
+	if unit_reward_key then
+		local military_force = character:military_force()
+		local military_force_units_list = military_force:unit_list()
+		local available_units_space = military_force:unit_count_limit() - military_force_units_list:num_items()
+		if available_units_space > 0 and not military_force_units_list:has_unit(unit_reward_key) then
+			local num_units_to_receive = math.min(available_units_space, 1 + cm:get_factions_bonus_value(faction, "chd_convoy_additional_unit_reward_scripted"))
+			payload_builder:add_unit(military_force, unit_reward_key, num_units_to_receive, 0)
+			has_reward = true
+		end
 	end
 	
 	if reward[4] then
-		payload_builder:faction_pooled_resource_transaction(iron_favor.key, iron_favor.factor, iron_favor.amount, false)
+		local iron_favour_reward_amount_multiplier = previously_completed_destination and iron_favor.previously_completed_destination_amount_multiplier or 1
+		local iron_favour_reward_amount = math.round(iron_favor.amount * iron_favour_reward_amount_multiplier)
+		if iron_favour_reward_amount ~= 0 then
+			payload_builder:faction_pooled_resource_transaction(iron_favor.key, iron_favor.factor, iron_favour_reward_amount, false)
+			has_reward = true
+		end
+	end
+
+	if not has_reward then
+		return
 	end
 
 	cm:trigger_custom_incident_with_targets(
 		faction:command_queue_index(),
-		reward[2],
+		ancillary_reward and ancillary_reward.incident or caravans.no_ancillary_reward_incident_key[culture],
 		true,
 		payload_builder,
 		0,

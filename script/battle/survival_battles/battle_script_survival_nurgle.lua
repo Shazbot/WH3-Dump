@@ -23,8 +23,6 @@ required_waves_kills = 10;
 
 local sm = get_messager();
 
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------ARMY SETUP-------
 ga_ai_def_01 = gb:get_army(gb:get_non_player_alliance_num(), "ai_def_01");
 
@@ -54,7 +52,6 @@ ga_ai_att_10 = gb:get_army(gb:get_non_player_alliance_num(), "ai_wave_10");
 
 -------WAVE 1-------
 ga_ai_def_01:message_on_rout_proportion("wave_1", 0.7);
-gb:play_sound_on_message("wave_1", Orc_Horn, nil, 3000);
 ga_ai_att_01:deploy_at_random_intervals_on_message("wave_1", 1, 3, 5000, 15000, nil, false--[[, true]]);
 ga_ai_att_01:attack_on_message("wave_1");
 ga_ai_att_01:message_on_proximity_to_enemy("wave_1_close", 10);
@@ -62,74 +59,62 @@ ga_ai_att_01:release_on_message("wave_1_close");
 
 -------WAVE 2-------
 ga_ai_att_01:message_on_rout_proportion("wave_2", 0.7); 
-gb:play_sound_on_message("wave_2", Orc_Horn, nil, 3000);
 ga_ai_att_02:deploy_at_random_intervals_on_message("wave_2", 1, 3, 5000, 15000, nil, false--[[, true]]);
 ga_ai_att_02:attack_on_message("wave_2");
 
 -------WAVE 3-------
 ga_ai_att_02:message_on_rout_proportion("wave_3", 0.7); 
-gb:play_sound_on_message("wave_3", Orc_Horn, nil, 3000);
 ga_ai_att_03:deploy_at_random_intervals_on_message("wave_3", 1, 3, 5000, 15000, nil, false--[[, true]]);
 ga_ai_att_03:attack_on_message("wave_3");
 
 -------BOSS WAVE 1-------
 --ga_ai_att_03:message_on_rout_proportion("boss_01", 0.35);
---gb:play_sound_on_message("boss_01", Orc_Horn, nil, 3000);
 --ga_ai_boss_01:deploy_at_random_intervals_on_message("boss_01", 1, 3, 10000, 50000, nil, false, true);
 --ga_ai_boss_01:attack_on_message("boss_01");
 
 -------WAVE 4-------
 ga_ai_att_03:message_on_rout_proportion("wave_4", 0.7); 
-gb:play_sound_on_message("wave_4", Orc_Horn, nil, 3000);
 --ga_ai_att_04:reinforce_on_message("wave_4", 10000);
 ga_ai_att_04:deploy_at_random_intervals_on_message("wave_4", 1, 3, 5000, 15000, nil, false, true);
 ga_ai_att_04:attack_on_message("wave_4");
 
 -------WAVE 5-------
 ga_ai_att_04:message_on_rout_proportion("wave_5", 0.7); 
-gb:play_sound_on_message("wave_5", Orc_Horn, nil, 3000);
 ga_ai_att_05:deploy_at_random_intervals_on_message("wave_5", 1, 3, 5000, 15000, nil, false, true);
 ga_ai_att_05:attack_on_message("wave_5");
 
 -------WAVE 6-------
 ga_ai_att_05:message_on_rout_proportion("wave_6", 0.75); 
-gb:play_sound_on_message("wave_6", Orc_Horn, nil, 3000);
 ga_ai_att_06:deploy_at_random_intervals_on_message("wave_6", 1, 3, 5000, 20000, nil, false, true);
 ga_ai_att_06:attack_on_message("wave_6");
 
 -------BOSS WAVE 2-------
 --ga_ai_att_06:message_on_rout_proportion("boss_02", 0.35); 
---gb:play_sound_on_message("boss_02", Orc_Horn, nil, 3000);
 --ga_ai_boss_02:deploy_at_random_intervals_on_message("boss_02", 1, 1, 10000, 30000, nil, false, true);
 --ga_ai_boss_02:attack_on_message("boss_02");
 
 -------WAVE 7-------
 ga_ai_att_06:message_on_rout_proportion("wave_7", 0.75); 
-gb:play_sound_on_message("wave_7", Orc_Horn, nil, 3000);
 ga_ai_att_07:deploy_at_random_intervals_on_message("wave_7", 1, 3, 5000, 20000, nil, false, true);
 ga_ai_att_07:attack_on_message("wave_7");
 
 -------WAVE 8-------
 ga_ai_att_07:message_on_rout_proportion("wave_8", 0.75); 
-gb:play_sound_on_message("wave_8", Orc_Horn, nil, 3000);
 ga_ai_att_08:deploy_at_random_intervals_on_message("wave_8", 1, 3, 5000, 20000, nil, false, true);
 ga_ai_att_08:attack_on_message("wave_8");
 
 -------WAVE 9-------
 ga_ai_att_08:message_on_rout_proportion("wave_9", 0.75); 
-gb:play_sound_on_message("wave_9", Orc_Horn, nil, 3000);
 ga_ai_att_09:deploy_at_random_intervals_on_message("wave_9", 1, 3, 5000, 20000, nil, false, true);
 ga_ai_att_09:attack_on_message("wave_9");
 
 -------BOSS WAVE 3-------
 --ga_ai_att_09:message_on_rout_proportion("boss_03", 0.35); 
---gb:play_sound_on_message("boss_03", Orc_Horn, nil, 3000);
 --ga_ai_boss_03:deploy_at_random_intervals_on_message("boss_03", 1, 1, 10000, 30000, nil, false, true);
 --ga_ai_boss_03:attack_on_message("boss_03");
 
 -------WAVE 10-------
 ga_ai_att_09:message_on_rout_proportion("wave_10", 0.75); 
-gb:play_sound_on_message("wave_10", Orc_Horn, nil, 3000);
 ga_ai_att_10:deploy_at_random_intervals_on_message("wave_10", 1, 3, 5000, 20000, nil, false, true);
 ga_ai_att_10:attack_on_message("wave_10");
 
@@ -150,8 +135,6 @@ gb:queue_help_on_message("wave_7", "wh3_survival_hint_01");
 gb:queue_help_on_message("wave_8", "wh3_survival_hint_01");
 gb:queue_help_on_message("wave_9", "wh3_survival_hint_01");
 gb:queue_help_on_message("wave_10", "wh3_survival_hint_01");
-
---gb:play_sound_on_message("wave_10", Orc_Horn, v(-25, 70, -1000), 0, nil,  3000);
 
 -------VICTORY CONDITIONS-------
 ga_ai_att_01:message_on_rout_proportion("enemy_wave_defeated", 1);

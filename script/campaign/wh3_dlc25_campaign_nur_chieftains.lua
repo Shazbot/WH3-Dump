@@ -4,6 +4,7 @@ nur_chieftains = {
 	number_of_nurgle_techs = 50,
 	pr_dominance = "wh3_dlc25_chieftain_dominance",
 	pr_dominance_factor = "wh3_dlc25_dominance_gain",
+	pr_dominance_post_battle_gain = 1,
 	
 	disable_panel_button = "disable_chieftains_button",
 	dominance_req_to_unlock = 7,
@@ -398,8 +399,35 @@ function nur_chieftains:start_dominance_listeners()
 		function(context)
 			return cm:pending_battle_cache_faction_won_battle(self.faction)
 		end,
-		function(context)	
-			cm:faction_add_pooled_resource(self.faction, self.pr_dominance, self.pr_dominance_factor, 1)
+		function(context)
+			local dominance_gain_after_battle = self.pr_dominance_post_battle_gain
+
+			-- Short victory reward
+			if cm:pending_battle_cache_faction_is_attacker(self.faction) and cm:pending_battle_cache_num_attackers() >= 1 then
+				for i = 1, cm:pending_battle_cache_num_attackers() do
+					local _, mf_cqi, _ = cm:pending_battle_cache_get_attacker(i)
+					if mf_cqi then
+						local mf_obj = cm:get_military_force_by_cqi(mf_cqi)
+						if mf_obj and not mf_obj:is_null_interface() then
+							local bonus_dominance = cm:get_forces_bonus_value(mf_obj, "wh3_dlc29_nur_tamurkhan_added_post_battle_dominance") or 0
+							dominance_gain_after_battle = dominance_gain_after_battle + bonus_dominance
+						end
+					end
+				end
+			elseif cm:pending_battle_cache_faction_is_defender(self.faction) and cm:pending_battle_cache_num_defenders() >= 1 then
+				for i = 1, cm:pending_battle_cache_num_defenders() do
+					local _, mf_cqi, _ = cm:pending_battle_cache_get_defender(i)
+					if mf_cqi then
+						local mf_obj = cm:get_military_force_by_cqi(mf_cqi)
+						if mf_obj and not mf_obj:is_null_interface() then
+							local bonus_dominance = cm:get_forces_bonus_value(mf_obj, "wh3_dlc29_nur_tamurkhan_added_post_battle_dominance") or 0
+							dominance_gain_after_battle = dominance_gain_after_battle + bonus_dominance
+						end
+					end
+				end
+			end
+
+			cm:faction_add_pooled_resource(self.faction, self.pr_dominance, self.pr_dominance_factor, dominance_gain_after_battle)
 		end,
 		true
 	)

@@ -118,7 +118,17 @@ function setup_tomb_king_difficulty_modifiers()
 		
 		if faction:culture() == "wh2_dlc09_tmb_tomb_kings" then
 			local fac_type = "AI";
-			local difficulty_str = cm:get_difficulty(true);
+			-- HACK: remove when get_difficulty and combined_difficulty_level are fixed to be consistent in autoruns
+			local difficulty = cm:model():combined_difficulty_level()
+			local combined_difficulty_to_str = {
+				[0] = "normal",
+				[1] = "easy",
+				[-1] = "hard",
+				[-2] = "very hard",
+				[-3] = "legendary"
+			}
+			local difficulty_str = combined_difficulty_to_str[difficulty]
+
 			
 			if faction:is_human() then
 				fac_type = "HUMAN";

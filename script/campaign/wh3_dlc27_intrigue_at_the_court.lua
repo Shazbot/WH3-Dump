@@ -400,6 +400,9 @@ function hef_intrigue_at_the_court:initialise()
 			elseif ritual_category == self.config.court_ritual_categories.swap_lord then
 				self:swap_lord_for_patronage_slot(performing_character_interface, target_province_interface, slot_data)
 			end
+
+			-- Victory condition event firing after all Court states get updated
+			core:trigger_event("ScriptEventIEIntrigueAtTheCourtUpdate")
 		end,
 		true
 	)
@@ -487,6 +490,9 @@ function hef_intrigue_at_the_court:initialise()
 					end
 				end
 			end
+
+			-- Victory condition event firing after all Court states get updated
+			core:trigger_event("ScriptEventIEIntrigueAtTheCourtUpdate")
 		end,
 		true
 	)
@@ -503,6 +509,9 @@ function hef_intrigue_at_the_court:initialise()
 		end,
 		function(context)
 			self:handle_lord_death_event(context:character():family_member():command_queue_index())
+
+			-- Victory condition event firing after all Court states get updated
+			core:trigger_event("ScriptEventIEIntrigueAtTheCourtUpdate")
 		end,
 		true
 	);
@@ -536,6 +545,8 @@ function hef_intrigue_at_the_court:initialise()
 				cm:faction_add_pooled_resource(winner_faction_key, self.config.favour_pooled_resource_key, "battles", setup.winning_vs_hef_config.favour_loss_amount)
 			end
 
+			-- Victory condition event firing after all Court states get updated
+			core:trigger_event("ScriptEventIEIntrigueAtTheCourtUpdate")
 		end,
 		true
 	)
@@ -564,6 +575,8 @@ function hef_intrigue_at_the_court:initialise()
 				cm:faction_add_pooled_resource(faction_key, self.config.favour_pooled_resource_key, "battles", setup.losing_defensive_battles_config.favour_loss_amount)
 			end
 
+			-- Victory condition event firing after all Court states get updated
+			core:trigger_event("ScriptEventIEIntrigueAtTheCourtUpdate")
 		end,
 		true
 	)
@@ -648,6 +661,9 @@ function hef_intrigue_at_the_court:initialise()
 			end
 
 			self:handle_character_faction_change_event(character)
+
+			-- Victory condition event firing after all Court states get updated
+			core:trigger_event("ScriptEventIEIntrigueAtTheCourtUpdate")
 		end,
 		true
 	)
@@ -673,6 +689,9 @@ function hef_intrigue_at_the_court:initialise()
 				end
 			end
 			self.config.protect_patronage_dilemma_current_target_province_key = ""
+
+			-- Victory condition event firing after all Court states get updated
+			core:trigger_event("ScriptEventIEIntrigueAtTheCourtUpdate")
 		end,
 		true
 	)

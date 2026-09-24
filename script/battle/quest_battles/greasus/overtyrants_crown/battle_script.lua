@@ -239,7 +239,7 @@ ga_reinforcements_01:message_on_casualties("reinforce_2", 0.2);
 --Enemy Reinforcements (North - Small Force)
 ga_reinforcements_02:reinforce_on_message("reinforce_2");
 ga_reinforcements_02:message_on_deployed("reinforcements_deployed_3");
-ga_reinforcements_02:attack_on_message("reinforcements_deployed_3");
+ga_reinforcements_02:rush_on_message("reinforcements_deployed_3");
 
 ------------------------------------------- OBJECTIVES ------------------------------------------
 -------------------------------------------------------------------------------------------------

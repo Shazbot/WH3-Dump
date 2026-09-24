@@ -57,6 +57,7 @@ nemesis_crown = {
 		["wh_main_sc_vmp_vampire_counts"] 	=  "_vmp",
 		["wh_main_sc_chs_chaos"] 			=  "_chs",
 		["wh_dlc05_sc_wef_wood_elves"] 		=  "_wef",
+		["wh3_dlc29_sc_nag_undead_legions"]	=  "_nag"
 	},
 	faction_bundle_suffixes = {
 		["wh3_dlc27_sla_the_tormentors"] 	=  "_dechala",
@@ -231,9 +232,8 @@ function nemesis_crown:get_closest_legendary_lord_from_position(x,y)
 	for i = 0,  faction_list:num_items() - 1 do
 		local current_faction = faction_list:item_at(i);
 		if current_faction:can_be_human() and current_faction:is_human() == false and current_faction:is_dead() == false then
-		
 			local current_faction_leader = current_faction:faction_leader()
-			if current_faction_leader:has_military_force() then
+			if not current_faction_leader:is_null_interface() and current_faction_leader:has_military_force() then
 				local current_distance = distance_squared(x, y, current_faction_leader:logical_position_x(), current_faction_leader:logical_position_y());
 				if closest_distance == false or current_distance < closest_distance then
 					closest_distance = current_distance;
@@ -384,9 +384,18 @@ function nemesis_crown:crown_owner_loses_battle(new_owner_cqi)
 	end
 	
 	--character must be alive, not a garrison, must be a general but not a caravan master
-	if new_crown_faction:is_rebel() or not (not new_crown_character:is_null_interface() and new_crown_character:is_wounded() == false and new_crown_character:military_force():is_armed_citizenry() == false 
-	and new_crown_character:character_type("general") and not (new_crown_character:character_subtype("wh3_dlc23_chd_lord_convoy_overseer") or new_crown_character:character_subtype("wh3_main_cth_lord_caravan_master"))) then				
-		
+	if new_crown_faction:is_rebel() 
+		or not (not new_crown_character:is_null_interface() 
+			and new_crown_character:is_wounded() == false 
+			and new_crown_character:military_force():is_armed_citizenry() == false 
+			and new_crown_character:military_force():force_type():key() ~= "CONVOY"
+			and new_crown_character:military_force():force_type():key() ~= "CARAVAN"
+			and new_crown_character:character_type("general") 
+			and not (new_crown_character:character_subtype("wh3_dlc23_chd_lord_convoy_overseer") 
+				or new_crown_character:character_subtype("wh3_main_cth_lord_caravan_master")
+			)
+		) 
+	then
 		nemesis_crown:set_crown_lost(self.lost_event)
 	else
 		crown.battles_to_advance = crown.current_level + 3
@@ -400,7 +409,6 @@ function nemesis_crown:crown_owner_loses_battle(new_owner_cqi)
 		else
 			self:ai_crown_choice()
 		end
-	
 	end
 	
 	self:update_context_values()
@@ -661,14 +669,25 @@ function nemesis_crown:marker_and_battle_listeners(human_factions)
 			cm:force_diplomacy("faction:"..self.nemesis_crown_faction_key, "all", "all", false, false, true)
 			cm:force_diplomacy("faction:"..self.nemesis_crown_faction_key, "all", "war", true, true, true)
 			cm:force_diplomacy("faction:"..self.nemesis_crown_faction_key, "all", "peace", true, false, false)
-			for j = 0, faction_list:num_items() - 1 do
-				local current_faction = faction_list:item_at(j):name()
 
-				if current_faction ~= self.nemesis_crown_faction_key then
-					cm:force_declare_war(self.nemesis_crown_faction_key, faction_list:item_at(j):name(), false, false)
+			cm:postpone_cai_analysis()
+			-- if you postpone the cai analysis you MUST call resume_cai_analysis later!!
+
+			for j = 0, faction_list:num_items() - 1 do
+				local current_faction_obj = faction_list:item_at(j)
+				local current_faction_name = current_faction_obj:name()
+
+				-- declaring wars on vassals and overlords at the same time causes problems
+				-- so we don't declare wars on the vassals. 
+				-- the script will declare war on the overlords, and this will drag the vassals into the war automatically
+				if current_faction_name ~= self.nemesis_crown_faction_key 
+					and current_faction_obj:is_vassal() == false
+				then
+					cm:force_declare_war(self.nemesis_crown_faction_key, current_faction_name, false, false)
 				end
 			end
 			
+			cm:resume_cai_analysis()
 			crown.owner_faction_key = self.nemesis_crown_faction_key
 			self:update_context_values()
 			self:update_shared_state_values()

@@ -4665,6 +4665,7 @@
 			uniqueguid="7FACC54B-2672-4430-B5CD1144CE119D24"
 			dimensions="38.00,38.00"
 			dock_point="Top Right"
+			tooltips_localised="false"
 			priority="60"
 			sound_category="UI_GBL_TMP_Round_Small_Button">
 			<state_uniqueguids>
@@ -8163,32 +8164,19 @@
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextTextLabel"
-					context_function_id="RoundFloat(PlayersFaction().EntitySharedStateReadFloat(&quot;shared_state_hunt_cooldown_end_turn&quot;) - CampaignRoot.TurnNumber)">
-					<child_m_user_properties>
-						<property
-							name="event0"
-							value="SharedStateChanged"/>
-						<property
-							name="event1"
-							value="CampaignTurnEnd"/>
-						<property
-							name="event2"
-							value="CampaignTurnStart"/>
-					</child_m_user_properties>
-				</callback_with_context>
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RemainingCooldown"/>
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
-					context_function_id="PlayersFaction().EntitySharedStateValueExists(&quot;shared_state_hunt_cooldown_end_turn&quot;) &amp;&amp; PlayersFaction().EntitySharedStateReadFloat(&quot;shared_state_hunt_cooldown_end_turn&quot;) &gt; CampaignRoot.TurnNumber">
+					context_object_id="CcoCampaignRitual"
+					context_function_id="RemainingCooldown &gt; 0 &amp;&amp; IsScriptLocked == false">
 					<child_m_user_properties>
 						<property
 							name="event0"
-							value="SharedStateChanged"/>
+							value="RitualStarted"/>
 						<property
 							name="event1"
-							value="CampaignTurnEnd"/>
-						<property
-							name="event2"
-							value="CampaignTurnStart"/>
+							value="PooledResourceTransaction"/>
 					</child_m_user_properties>
 				</callback_with_context>
 			</callbackwithcontextlist>
@@ -22021,7 +22009,7 @@
 			id="stage_holder"
 			priority="60"
 			uniqueguid="B54B2F62-C6A9-4DFA-8676519C0665069D"
-			currentstate="F669B93F-1E02-4863-B40DD661D1DA3809"
+			currentstate="2529625C-B554-493E-8BE6D4D7787A5B84"
 			defaultstate="2529625C-B554-493E-8BE6D4D7787A5B84">
 			<states>
 				<active

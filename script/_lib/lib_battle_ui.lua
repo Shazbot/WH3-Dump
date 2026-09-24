@@ -844,6 +844,33 @@ function battle_ui_manager:highlight_supplies(value, pulse_strength, force_highl
 	return false;
 end;
 
+--- @function highlight_survival_battle_specific_ui
+--- @desc Pulse-highlights the supplies.
+--- @p boolean enable highlight, Set to true to enable the highlight, false to disable
+--- @p [opt=nil] number pulse strength, Override pulse strength
+--- @p [opt=false] boolean force, Enable the highlight even if highlighting has been disabled with @battle_ui_manager:set_help_page_link_highlighting_permitted.
+function battle_ui_manager:highlight_survival_battle_specific_ui(value, pulse_strength, force_highlight)
+	if not self.help_page_link_highlighting_permitted and not force_highlight then
+		return;
+	end;
+
+	local upgrades_panel = find_uicomponent(core:get_ui_root(), "hud_battle", "battle_orders", "battle_orders_pane", "orders_parent", "upgrades_list_parent");
+	local reinfrorcements_panel = find_uicomponent(core:get_ui_root(), "hud_battle", "battle_orders", "battle_orders_pane", "orders_parent", "reinforcement_hud_parent");
+	
+	if upgrades_panel and reinfrorcements_panel and upgrades_panel:Visible(true) and reinfrorcements_panel:Visible(true) then
+		pulse_uicomponent(upgrades_panel, value, pulse_strength or self.panel_pulse_strength, true);
+		pulse_uicomponent(reinfrorcements_panel, value, pulse_strength or self.panel_pulse_strength, true);
+
+		if value then
+			table.insert(self.unhighlight_action_list, function() self:highlight_supplies(false, pulse_strength, force_highlight) end);
+		end;
+		return true;
+	end;
+
+	return false;
+end;
+
+
 
 --- @function highlight_tactical_map_button
 --- @desc Pulse-highlights the tactical map button.

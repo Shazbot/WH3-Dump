@@ -69,6 +69,12 @@
 						<eye_left this="1512EEA5-4BED-4CB3-AAE8AAA0CF0C98F6"/>
 						<title this="43FC81FB-EFCA-4D11-BDB77D441DC3FEE4"/>
 					</dlc_credits>
+					<voice_credits this="63880EAB-E555-447D-882DC0251DC8B6A9">
+						<button_flame this="158AC2B1-17BB-4027-B5BC5033EB7BC2A7"/>
+						<eye_right this="ED8C0A19-8CBC-40A0-A3AA86FFDC112114"/>
+						<eye_left this="5F62EC15-733B-4DF3-A990FA4294907A41"/>
+						<title this="CAFE7E26-849A-4F07-94A0FE05391D0C69"/>
+					</voice_credits>
 				</credits_button_holder>
 			</credits>
 		</root>
@@ -380,6 +386,53 @@
 				<property
 					name="disable_override"
 					value="callbacks"/>
+			</user_properties>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="default"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value=""/>
+			</override_images>
+		</button_flame>
+		<button_flame
+			this="158AC2B1-17BB-4027-B5BC5033EB7BC2A7"
+			id="button_flame"
+			part_of_template="true"
+			uniqueguid_in_template="38F2919D-A92B-47B9-A64143C61404A0F8"
+			uniqueguid="158AC2B1-17BB-4027-B5BC5033EB7BC2A7"
+			dimensions="236.00,28.00"
+			dock_point="Top Center"
+			is_visible="false"
+			layout_transition="Common UI/load_save_game"
+			offset="0.00,11.00"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="default"
+					uniqueguid="9A2D1B28-51DC-48DF-B70E67BD50C237FC"/>
+			</state_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context
+					callback_id="ContextVisibilitySetter"
+					context_object_id="CcoStaticObject"
+					context_function_id="self.ParentContext.IsMouseOver &amp;&amp; self.ParentContext.IsDisabled == false &amp;&amp; self.ParentContext.IsSelected == false">
+					<child_m_user_properties>
+						<property
+							name="update_constant"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<user_properties>
+				<property
+					name="disable_override"
+					value="callbacks"/>
+				<property
+					name="disable_override1"
+					value="position"/>
 			</user_properties>
 			<localised_texts>
 				<localised_text/>
@@ -1440,10 +1493,10 @@
 		<credits_button_holder
 			this="DA106E53-4E0D-4B7A-B7588F6055EA7719"
 			id="credits_button_holder"
-			offset="979.00,67.00"
-			docking="Top Right"
-			dock_offset="-1.00,67.00"
-			component_anchor_point="1.00,0.00"
+			offset="335.00,68.00"
+			docking="Top Center"
+			dock_offset="0.00,68.00"
+			component_anchor_point="0.50,0.00"
 			tooltipslocalised="true"
 			uniqueguid="DA106E53-4E0D-4B7A-B7588F6055EA7719"
 			currentstate="9029BA1D-260A-4F5A-98BBC6C447F4922E"
@@ -1461,7 +1514,7 @@
 				<default
 					this="9029BA1D-260A-4F5A-98BBC6C447F4922E"
 					name="default"
-					width="620"
+					width="930"
 					height="51"
 					uniqueguid="9029BA1D-260A-4F5A-98BBC6C447F4922E"/>
 			</states>
@@ -1573,6 +1626,65 @@
 				<element value="ui/skins/default/fe_tab_text_selected_underlay.png"/>
 			</override_images>
 		</dlc_credits>
+		<eye_left
+			this="5F62EC15-733B-4DF3-A990FA4294907A41"
+			id="eye_left"
+			part_of_template="true"
+			uniqueguid_in_template="A4095177-97A3-4D7D-83E1951E4F9723A4"
+			uniqueguid="5F62EC15-733B-4DF3-A990FA4294907A41"
+			dimensions="30.00,51.00"
+			dock_point="Center Left"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="B561074B-3150-4DF6-9C0E420583DAF5A7"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="B49A8AAC-2EA7-4A4A-89F983C3EF1AB966"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="2BF37E0E-1F68-47CE-B49E95349E790D10"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="958BA980-11B7-4EC0-A21FBF5F501DB1D6"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="58E0AA92-A49D-44B6-AA59C75FF69978C1"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="6809664D-C36B-4C6B-9CDAADA04241D1EC"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_eye.png"
+					uniqueguid="EDBEB2B3-C316-4D31-AD7AF90215BAB918"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_tab_text_eye.png"/>
+			</override_images>
+		</eye_left>
 		<eye_left
 			this="1512EEA5-4BED-4CB3-AAE8AAA0CF0C98F6"
 			id="eye_left"
@@ -1724,6 +1836,65 @@
 				<component_image_uniqueguid
 					name="ui/skins/default/fe_tab_text_eye.png"
 					uniqueguid="1D18596E-0CCA-4147-8ABF9B800E4790CF"/>
+			</component_image_uniqueguids>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_tab_text_eye.png"/>
+			</override_images>
+		</eye_right>
+		<eye_right
+			this="ED8C0A19-8CBC-40A0-A3AA86FFDC112114"
+			id="eye_right"
+			part_of_template="true"
+			uniqueguid_in_template="98E63C53-8532-46E4-A9F539ED9B57E015"
+			uniqueguid="ED8C0A19-8CBC-40A0-A3AA86FFDC112114"
+			dimensions="30.00,51.00"
+			dock_point="Center Right"
+			priority="100">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="6736217D-B5DE-482D-A21573F4324E68D8"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="9DD2F138-4E54-4EB2-88E16D30BDDC2282"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="11E1FF86-7250-419B-BADF402CBD412006"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="FA026682-D350-4697-96C21B5D3019054E"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="4E726E0B-70D3-4182-B1B93D82F3DE3FF0"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="DCE452B5-B19B-4490-8E980E1ED71402CA"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_eye.png"
+					uniqueguid="C0772DD5-64DF-4E2A-969CB960DC6EEEF5"/>
 			</component_image_uniqueguids>
 			<localised_texts>
 				<localised_text/>
@@ -2870,6 +3041,70 @@
 			</states>
 		</title>
 		<title
+			this="CAFE7E26-849A-4F07-94A0FE05391D0C69"
+			id="title"
+			offset="36.00,6.00"
+			allowverticalresize="false"
+			docking="Center"
+			dock_offset="0.00,1.00"
+			component_anchor_point="0.50,0.50"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="CAFE7E26-849A-4F07-94A0FE05391D0C69"
+			currentstate="75B9CE5C-7454-43A8-88C99381215E293E"
+			defaultstate="75B9CE5C-7454-43A8-88C99381215E293E">
+			<userproperties>
+				<property
+					name="dynamic_child"
+					value="1"/>
+				<property
+					name="dynamic_child_parent"
+					value="button_tab_armies"/>
+			</userproperties>
+			<states>
+				<active
+					this="75B9CE5C-7454-43A8-88C99381215E293E"
+					name="active"
+					width="238"
+					height="40"
+					uniqueguid="75B9CE5C-7454-43A8-88C99381215E293E">
+					<component_text
+						text="{{tr:uied_component_texts_localised_string_dlc29_voice_actor_credits_title_tx}}"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_5d72a1d2"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16"
+						text_shader_name="drop_shadow_t0"
+						textshadervars="-1.00,-1.00,1.00,0.00"/>
+				</active>
+				<inactive
+					this="6AB1FBAB-C378-4922-AC6FE05D13E14690"
+					name="inactive"
+					width="238"
+					height="40"
+					uniqueguid="6AB1FBAB-C378-4922-AC6FE05D13E14690">
+					<component_text
+						text="{{tr:uied_component_texts_localised_string_dlc29_voice_actor_credits_title_tx}}"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="StateText_12d596bb"
+						font_m_font_name="brand_header"
+						font_m_size="16"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="header_16"
+						font_colour_override_preset_key="ui_font_inactive_grey"
+						textshadervars="0.00,1.00,2.00,0.00"/>
+				</inactive>
+			</states>
+		</title>
+		<title
 			this="DDBEABD1-4095-4D3F-802A11A9A88F09FC"
 			id="title"
 			offset="0.00,6.00"
@@ -2976,5 +3211,109 @@
 				</newstate>
 			</states>
 		</tx_credits>
+		<voice_credits
+			this="63880EAB-E555-447D-882DC0251DC8B6A9"
+			id="voice_credits"
+			template_id="fe_square_large_text_tab_toggle"
+			part_of_template="true"
+			uniqueguid_in_template="528B2929-90BF-41F1-8BFA429B5D453BFF"
+			uniqueguid="63880EAB-E555-447D-882DC0251DC8B6A9"
+			dimensions="310.00,51.00"
+			dock_point="Center Right External"
+			priority="10"
+			sound_category="UI_GBL_TMP_Square_Large_Text_Tab_Toggle">
+			<state_uniqueguids>
+				<state_uniqueguid
+					name="active"
+					uniqueguid="876A0018-4E91-4C3C-A566CF5F6CD5CCF9"/>
+				<state_uniqueguid
+					name="down"
+					uniqueguid="B74E4F87-7942-41AB-AB7AFC6B1734B770"/>
+				<state_uniqueguid
+					name="down_off"
+					uniqueguid="D1FA2E98-75E0-4920-962C25E105CED920"/>
+				<state_uniqueguid
+					name="hover"
+					uniqueguid="D8A00E6D-1BF6-45C6-BE526615C06114A0"/>
+				<state_uniqueguid
+					name="inactive"
+					uniqueguid="B3A64B57-DA3C-4037-9F0664846697994C"/>
+				<state_uniqueguid
+					name="selected"
+					uniqueguid="0C546CA8-E5E0-48F5-92F848C52B18DFB4"/>
+				<state_uniqueguid
+					name="selected_hover"
+					uniqueguid="9CD36107-9B6C-46AE-AF3C0FCE86C9F0C4"/>
+			</state_uniqueguids>
+			<component_image_uniqueguids>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_pressed.png"
+					uniqueguid="51D00599-4688-4A4B-AE4AA1709633B10C"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_active.png"
+					uniqueguid="D8669A63-17B8-4985-93C6028A89949322"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_hover.png"
+					uniqueguid="31858A7C-CA59-4C53-837B76A117E6247B"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_inactive.png"
+					uniqueguid="B6ED6C2D-5F10-44C5-97EB0A3F9FB7F118"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_selected.png"
+					uniqueguid="4150E17B-5AF9-4464-A5E8E6DAE3CA4EB0"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_selected_hover.png"
+					uniqueguid="36C7581D-9E92-47D1-8FDCE1098BC58626"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_underlay.png"
+					uniqueguid="52ED3970-4B87-4360-A8A05B88C46DCA2E"/>
+				<component_image_uniqueguid
+					name="ui/skins/default/fe_tab_text_selected_underlay.png"
+					uniqueguid="F2017252-9FC9-4E3B-B6AF065D6F5DEAAB"/>
+			</component_image_uniqueguids>
+			<callbacks_with_context>
+				<callback_with_context callback_id="ButtonGroupButton">
+					<child_m_user_properties>
+						<property
+							name="button_group"
+							value="^1"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbacks_with_context>
+			<localised_texts>
+				<localised_text/>
+				<localised_text
+					state="active"
+					is_text_localised="false"/>
+				<localised_text
+					state="down"
+					is_text_localised="false"/>
+				<localised_text
+					state="down_off"
+					is_text_localised="false"/>
+				<localised_text
+					state="hover"
+					is_text_localised="false"/>
+				<localised_text
+					state="inactive"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected"
+					is_text_localised="false"/>
+				<localised_text
+					state="selected_hover"
+					is_text_localised="false"/>
+			</localised_texts>
+			<override_images>
+				<element value="ui/skins/default/fe_tab_text_pressed.png"/>
+				<element value="ui/skins/default/fe_tab_text_active.png"/>
+				<element value="ui/skins/default/fe_tab_text_hover.png"/>
+				<element value="ui/skins/default/fe_tab_text_inactive.png"/>
+				<element value="ui/skins/default/fe_tab_text_selected.png"/>
+				<element value="ui/skins/default/fe_tab_text_selected_hover.png"/>
+				<element value="ui/skins/default/fe_tab_text_underlay.png"/>
+				<element value="ui/skins/default/fe_tab_text_selected_underlay.png"/>
+			</override_images>
+		</voice_credits>
 	</components>
 </layout>

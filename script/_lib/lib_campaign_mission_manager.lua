@@ -133,10 +133,10 @@ function mission_manager:new(faction_name, mission_key, success_callback, failur
 		return false;
 	end;
 	
-	if not faction:is_human() then
-		script_error("ERROR: mission_manager:new() called but faction with supplied name [" .. faction_name .. "] is not human");
-		return false;
-	end;
+	--if not faction:is_human() then
+		--script_error("ERROR: mission_manager:new() called but faction with supplied name [" .. faction_name .. "] is not human");
+		--return false;
+	--end;
 
 	if not is_string(mission_key) then
 		script_error("ERROR: mission_manager:new() called but supplied mission key [" .. tostring(mission_key) .. "] is not a string");
@@ -1270,6 +1270,14 @@ function mission_manager:trigger(dismiss_callback, delay)
 
 	-- call first-time/each-time trigger callbacks - this should be done after the mission itself is triggered
 	self:call_trigger_callbacks(true);
+
+	for i, objective in ipairs(self.objectives) do
+		if not self.is_registered then
+			if objective.objective_type == "SCRIPTED" then
+				self:register()
+			end
+		end
+	end
 end;
 
 
@@ -1547,6 +1555,7 @@ function mission_manager:construct_all_primary_objectives_mission_string()
 	
 	return mission_string;
 end
+
 
 -- internal function to trigger from a constructed string
 function mission_manager:trigger_from_string()
@@ -2709,6 +2718,17 @@ function payload.iron_favour(amount)
 	return payload.pooled_resource_mission_payload("wh3_cp1_cth_iron_favour", "missions", amount);
 end;
 
+--- @function Warpstone
+--- @desc Returns a payload string which defines a Warpstone reward for a Thanquol (Skaven) string mission definition. No kind of equivalence is looked up.
+--- @p @number amount
+--- @r @string payload string
+function payload.warpstone(amount)
+	if not validate.is_positive_number(amount) then
+		return false;
+	end;
+	
+	return payload.pooled_resource_mission_payload("wh3_dlc29_skv_warpstone", "other", amount);
+end;
 
 
 

@@ -65,6 +65,7 @@ merc_contracts = {
 		rewards = {
 			treasury = 10, -- per 1 contract point
 			bonus_treasury = 5, -- per 1 contract point earned over the original target.
+			bonus_treasury_scripted_bonus = "merc_contracts_treasury_payload_modifier",
 			meat = 2, -- per 1 contract point
 			effect_bundles = {
 				prefix = "wh3_dlc26_golgfag_contracts_reward_",
@@ -444,22 +445,31 @@ function merc_contracts:initialise()
 			local gained_cp = context:amount()
 			local cp_total = context:resource():value()
 			local wc = cm:model():world():war_contracts_system():get_active_war_contract(faction_key)
+			local scripted_bonus_treasury = cm:get_factions_bonus_value(faction_key, self.contract_data.rewards.bonus_treasury_scripted_bonus)
 			local target
 
 			if wc:is_null_interface() == false then
 				target = wc:target_points()
 
 				if cp_total > target then
+					local surplus_reward = 0
+
 					if cp_total - gained_cp > target then
 						-- player was already above the cp target, grant full bonus reward
-						cm:treasury_mod(faction_key, gained_cp * self.contract_data.rewards.bonus_treasury)
+						surplus_reward = gained_cp * self.contract_data.rewards.bonus_treasury
+						surplus_reward = surplus_reward + (surplus_reward * scripted_bonus_treasury / 100)
+						cm:treasury_mod(faction_key, surplus_reward)
 					else
 						-- player only just crossed the cp value, so only grant the remainder bonus reward
 						local partial_reward = cp_total - target
-						cm:treasury_mod(faction_key, partial_reward * self.contract_data.rewards.bonus_treasury)
+						surplus_reward = partial_reward * self.contract_data.rewards.bonus_treasury
+						surplus_reward = surplus_reward + (surplus_reward * scripted_bonus_treasury / 100)
+						cm:treasury_mod(faction_key, surplus_reward)
 						-- launch an incident to let the player know they can now safely end their contract and gain the main rewards.
 						cm:trigger_incident(faction_key, self.incidents.client_satisfied, true, true)
 					end
+
+					core:trigger_event("ScriptEventSurplusTreasuryFromWarContractAwarded", faction_key, surplus_reward)
 				end
 			end	
 		end,
@@ -809,8 +819,10 @@ end
 function merc_contracts:generate_treasury_reward(point_target)
 	local treasury = point_target * self.contract_data.rewards.treasury
 	local treasury_reward_mod = cm:random_number(120, 80) -- We apply a +/- % vairence to rewards
+	local treasury_scripted_bonus = cm:get_factions_bonus_value(self.golgfag_faction_key, self.contract_data.rewards.bonus_treasury_scripted_bonus)
 
 	treasury = (treasury_reward_mod / 100) * treasury
+	treasury = treasury + (treasury * treasury_scripted_bonus / 100)
 
 	return treasury
 end

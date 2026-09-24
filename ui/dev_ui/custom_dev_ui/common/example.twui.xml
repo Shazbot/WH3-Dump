@@ -28,6 +28,10 @@
 					</list_with_selection_example>
 					<info_panel_for_selected_unit this="2274A2C8-507F-452F-B1D34AE6A18E6776">
 						<label_unit_name this="0BAA88E3-ECED-4635-9F1B0B2F5B4B45FE"/>
+						<extra_ability_keys_input this="95FC3492-86BB-4C03-B251-E450983F5549">
+							<highlight this="DD1AD69E-D953-4124-B918-15157AD41160"/>
+							<paste_extra_ability_keys_button this="934A4901-F7CA-4974-A0FD-94462B925390"/>
+						</extra_ability_keys_input>
 						<ability_list this="0DFA3188-E3F4-46FA-92B4FAA39A2098CA">
 							<template_ability_with_custom_tooltip this="B92DE093-54A4-49EE-BF959E887A691B22"/>
 						</ability_list>
@@ -46,12 +50,18 @@
 			uniqueguid="0DFA3188-E3F4-46FA-92B4FAA39A2098CA"
 			currentstate="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
 			defaultstate="9B1CB084-024F-4197-862F7BFB0FF2E0A0"
-			comment="Creates list of abilities for units">
+			comment="Creates list of abilities for units. Also appends comma-separated unit ability keys entered in extra_ability_keys_input.">
 			<callbackwithcontextlist>
 				<callback_with_context
 					callback_id="ContextList"
 					context_object_id="CcoBattleUnit"
-					context_function_id="AbilityList"/>
+					context_function_id="AbilityList + Component(&quot;extra_ability_keys_input&quot;).CurrentText.Replace(&quot; &quot;, &quot;&quot;).Split(&quot;,&quot;).Filter(IsEmpty == false).Transform((key) =&gt; UnitAbilityContextFromString(key)).Filter(IsContextValid(this))">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="DevUIExtraAbilityKeysChanged"/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<default
@@ -70,6 +80,188 @@
 				</columnwidths>
 			</LayoutEngine>
 		</ability_list>
+		<extra_ability_keys_input
+			this="95FC3492-86BB-4C03-B251-E450983F5549"
+			id="extra_ability_keys_input"
+			allowhorizontalresize="false"
+			allowverticalresize="false"
+			dimensions="520.00,33.00"
+			max_length="1000"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="95FC3492-86BB-4C03-B251-E450983F5549"
+			currentstate="EFD479E7-766D-4E67-9DE0-85467B74E280"
+			defaultstate="EFD479E7-766D-4E67-9DE0-85467B74E280"
+			comment="Enter comma-separated unit_abilities keys to append them to the selected unit ability list. Ctrl+V works up to the long text-input cap; right-click or the Paste button paste the full clipboard string directly.">
+			<callbackwithcontextlist>
+				<callback_with_context callback_id="TextInput">
+					<child_m_user_properties>
+						<property
+							name="select_all_on_select"
+							value=""/>
+						<property
+							name="use_long_validator"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandTextInputChanged"
+					context_object_id="CcoStaticObject"
+					context_function_id="UiMsg(&quot;DevUIExtraAbilityKeysChanged&quot;)">
+					<child_m_user_properties>
+						<property
+							name="issue_as_type"
+							value=""/>
+						<property
+							name="suppress_format_assert"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
+				<callback_with_context
+					callback_id="ContextCommandRightClick"
+					context_object_id="CcoStaticObject"
+					context_function_id="Do(self.InputSetText(PasteStringFromClipboard), UiMsg(&quot;DevUIExtraAbilityKeysChanged&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="94C8871F-F508-4438-B4DD-27298FD4EC8B"
+					uniqueguid="94C8871F-F508-4438-B4DD-27298FD4EC8B"
+					imagepath="ui/skins/default/dev/black_frame_2px.png"/>
+				<component_image
+					this="58677235-D120-421A-BE03-78D59B03D5E0"
+					uniqueguid="58677235-D120-421A-BE03-78D59B03D5E0"/>
+			</componentimages>
+			<states>
+				<active
+					this="EFD479E7-766D-4E67-9DE0-85467B74E280"
+					name="active"
+					width="520"
+					height="33"
+					focustype="Active"
+					interactive="true"
+					uniqueguid="EFD479E7-766D-4E67-9DE0-85467B74E280">
+					<imagemetrics>
+						<image
+							this="E6B0F94B-9B0C-4797-8C57-776349646DF7"
+							uniqueguid="E6B0F94B-9B0C-4797-8C57-776349646DF7"
+							componentimage="58677235-D120-421A-BE03-78D59B03D5E0"
+							width="520"
+							height="33"
+							colour="#282828FF"/>
+						<image
+							this="3F52B6F8-0B51-40BC-8285-A05DF2D3FA0F"
+							uniqueguid="3F52B6F8-0B51-40BC-8285-A05DF2D3FA0F"
+							componentimage="94C8871F-F508-4438-B4DD-27298FD4EC8B"
+							width="520"
+							height="33"
+							margin="10.00,10.00,10.00,10.00"/>
+					</imagemetrics>
+					<component_text
+						text="wh2_dlc09_army_abilities_barrage_of_the_legion,wh2_dlc09_army_abilities_realm_of_souls_ushabti"
+						textvalign="Center"
+						textxoffset="5.00,0.00"
+						texthbehaviour="Never split"
+						textlabel="extra_ability_keys_input_active_Text"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</active>
+			</states>
+		</extra_ability_keys_input>
+		<highlight
+			this="DD1AD69E-D953-4124-B918-15157AD41160"
+			id="highlight"
+			allowverticalresize="false"
+			priority="1000"
+			tooltipslocalised="true"
+			uniqueguid="DD1AD69E-D953-4124-B918-15157AD41160"
+			currentstate="3E6AB500-C690-4845-9235-214DA583C29E"
+			defaultstate="3E6AB500-C690-4845-9235-214DA583C29E">
+			<componentimages>
+				<component_image
+					this="F71CE9E3-A288-4382-A887-F56760947DAF"
+					uniqueguid="F71CE9E3-A288-4382-A887-F56760947DAF"/>
+			</componentimages>
+			<states>
+				<newstate
+					this="3E6AB500-C690-4845-9235-214DA583C29E"
+					name="NewState"
+					width="2"
+					height="27"
+					uniqueguid="3E6AB500-C690-4845-9235-214DA583C29E">
+					<imagemetrics>
+						<image
+							this="6801E217-5288-4B09-A230-F7E82EF8AA67"
+							uniqueguid="6801E217-5288-4B09-A230-F7E82EF8AA67"
+							componentimage="F71CE9E3-A288-4382-A887-F56760947DAF"
+							width="2"
+							height="27"
+							colour="#FFFFFF64"/>
+					</imagemetrics>
+					<component_text
+						texthbehaviour="Never split"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="3"
+						fontcat_name="body_12"/>
+				</newstate>
+			</states>
+		</highlight>
+		<paste_extra_ability_keys_button
+			this="934A4901-F7CA-4974-A0FD-94462B925390"
+			id="paste_extra_ability_keys_button"
+			dock_point="Center Right External"
+			offset="4.00,0.00"
+			priority="100"
+			tooltipslocalised="true"
+			uniqueguid="934A4901-F7CA-4974-A0FD-94462B925390"
+			currentstate="B97EE056-7A5D-4562-8CDA-16AF87760776"
+			defaultstate="B97EE056-7A5D-4562-8CDA-16AF87760776"
+			comment="Paste the full clipboard contents into extra_ability_keys_input and refresh the appended ability list.">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextCommandLeftClick"
+					context_object_id="CcoStaticObject"
+					context_function_id="Do(self.ParentContext.InputSetText(PasteStringFromClipboard), UiMsg(&quot;DevUIExtraAbilityKeysChanged&quot;))"/>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="8E26E34A-A990-490A-A602-1566E780876E"
+					uniqueguid="8E26E34A-A990-490A-A602-1566E780876E"/>
+			</componentimages>
+			<states>
+				<default
+					this="B97EE056-7A5D-4562-8CDA-16AF87760776"
+					name="default"
+					width="54"
+					height="28"
+					interactive="true"
+					uniqueguid="B97EE056-7A5D-4562-8CDA-16AF87760776">
+					<imagemetrics>
+						<image
+							this="53D115A7-28C2-4810-BBFC-A588597BF726"
+							uniqueguid="53D115A7-28C2-4810-BBFC-A588597BF726"
+							componentimage="8E26E34A-A990-490A-A602-1566E780876E"
+							width="54"
+							height="28"
+							colour="#282828FF"/>
+					</imagemetrics>
+					<component_text
+						text="Paste"
+						textvalign="Center"
+						texthalign="Center"
+						texthbehaviour="Never split"
+						textlabel="paste_extra_ability_keys_button_default_Text"
+						font_m_font_name="dev_font"
+						font_m_size="12"
+						font_m_colour="#FFF8D7FF"
+						font_m_leading="1"
+						fontcat_name="dev_text"/>
+				</default>
+			</states>
+		</paste_extra_ability_keys_button>
 		<button_find_context_and_perform_action_example
 			this="9583F05D-E565-4DD1-BBB0480A26C43CB4"
 			id="button_find_context_and_perform_action_example"
@@ -446,16 +638,16 @@
 				<default
 					this="E61C1BFC-3191-4741-A3820D5C7E7681A7"
 					name="default"
-					width="180"
-					height="95"
+					width="540"
+					height="128"
 					uniqueguid="E61C1BFC-3191-4741-A3820D5C7E7681A7">
 					<imagemetrics>
 						<image
 							this="814474D0-7FB8-423A-A4CAD8440FC5BB27"
 							uniqueguid="814474D0-7FB8-423A-A4CAD8440FC5BB27"
 							componentimage="AE785EBC-74C1-49A8-B3D02060A05483B1"
-							width="180"
-							height="95"
+							width="540"
+							height="128"
 							colour="#00000080"/>
 					</imagemetrics>
 				</default>

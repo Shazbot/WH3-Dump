@@ -20615,7 +20615,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoStaticObject"
-					context_function_id="Ceiling(ToNumber(FrontendRoot.IngameMessagingContext.FilteredNewsItems.Size) / 3) &gt; 1">
+					context_function_id="Ceiling(ToNumber(FrontendRoot.IngameMessagingContext.FilteredNewsItems.Size) / 3) &gt; 1 &amp;&amp; FrontendRoot.IngameMessagingContext.Enabled">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -20728,7 +20728,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoStaticObject"
-					context_function_id="FrontendRoot.IngameMessagingContext.CanGetAnyNews == false">
+					context_function_id="FrontendRoot.IngameMessagingContext.CanGetAnyNews == false &amp;&amp; FrontendRoot.IngameMessagingContext.Enabled">
 					<child_m_user_properties>
 						<property
 							name="update_constant"
@@ -20738,7 +20738,7 @@
 				<callback_with_context
 					callback_id="ContextCommandGiverOnVisibilityChanged"
 					context_object_id="CcoStaticObject"
-					context_function_id="Try( Component(&quot;09CA97F7-F6D3-4978-A75ED4722479E3C0&quot;).SetVisible(!self.IsVisible))"/>
+					context_function_id="Try( Component(&quot;09CA97F7-F6D3-4978-A75ED4722479E3C0&quot;).SetVisible(!self.IsVisible &amp;&amp; FrontendRoot.IngameMessagingContext.Enabled))"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate
@@ -20790,7 +20790,7 @@
 				<callback_with_context
 					callback_id="ContextVisibilitySetter"
 					context_object_id="CcoStaticObject"
-					context_function_id="FrontendRoot.IngameMessagingContext.CanGetAnyNews"/>
+					context_function_id="FrontendRoot.IngameMessagingContext.CanGetAnyNews &amp;&amp; FrontendRoot.IngameMessagingContext.Enabled"/>
 			</callbackwithcontextlist>
 			<states>
 				<newstate

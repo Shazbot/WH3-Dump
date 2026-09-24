@@ -238,7 +238,7 @@ function add_under_empire_listeners()
 		"underempire_ForeignSlotManagerRemovedEvent",
 		"ForeignSlotManagerRemovedEvent",
 		function(context)
-			return context:owner():culture() == skaven_culture;
+			return context:owner():culture() == skaven_culture and (context:slot_set_key():starts_with("wh2_dlc12_slot_set_underempire") or context:slot_set_key():starts_with("wh2_dlc29_slot_set_underempire"));
 		end,
 		function(context)
 			local owner_key = context:owner():name();
@@ -274,17 +274,19 @@ function add_under_empire_listeners()
 					124
 				);
 				
-				-- Tell the region owner they removed an Under-City
-				cm:show_message_event_located(
-					remover:name(),
-					"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_destroyed_title",
-					"regions_onscreen_" .. region_key,
-					"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_destroyed_remover_description",
-					settlement_x,
-					settlement_y,
-					false,
-					124
-				);
+				if not owner_key == remover:name() then
+					-- Tell the region owner they removed an Under-City
+					cm:show_message_event_located(
+						remover:name(),
+						"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_destroyed_title",
+						"regions_onscreen_" .. region_key,
+						"event_feed_strings_text_wh2_dlc12_event_feed_string_scripted_event_under_empire_destroyed_remover_description",
+						settlement_x,
+						settlement_y,
+						false,
+						124
+					);
+				end
 			end
 			
 			if remover:is_human() and not cause_was_razing then
@@ -371,7 +373,30 @@ function add_under_empire_listeners()
 			else
 				script_error("WARNING: attempting to adjust Clan Mors foreign slots at the start of a new game but no foreign slot managers were found");
 			end;
+			-- Under-city - Nuln - Clan Scruten
+			local clan_scruten = cm:get_faction("wh3_dlc29_skv_clan_scruten");
 			
+			cm:add_foreign_slot_set_to_region_for_faction(clan_scruten:command_queue_index(), cm:get_region("wh3_main_combi_region_nuln"):cqi(), "wh2_dlc12_slot_set_underempire");
+			cm:make_region_visible_in_shroud("wh3_dlc29_skv_clan_scruten", "wh3_main_combi_region_nuln");
+			
+			local fsm_clan_scruten = clan_scruten:foreign_slot_managers();
+			
+			if fsm_clan_scruten:num_items() > 0 then
+				local first_fsm_slots_scruten = fsm_clan_scruten:item_at(0):slots();
+				
+				if first_fsm_slots_scruten:num_items() > 0 then
+					if clan_scruten:is_human() then
+						cm:foreign_slot_instantly_upgrade_building(first_fsm_slots_scruten:item_at(0), "wh2_dlc12_under_empire_money_crafting_1");
+					else
+						cm:foreign_slot_instantly_upgrade_building(first_fsm_slots_scruten:item_at(0), "wh2_dlc12_under_empire_discovery_deeper_tunnels_1");
+					end;
+				else
+					script_error("WARNING: attempting to adjust Clan Scruten foreign slots at the start of a new game but first foreign slot manager has no slots");
+				end;
+			else
+				script_error("WARNING: attempting to adjust Clan Scruten foreign slots at the start of a new game but no foreign slot managers were found");
+			end;
+
 			if cm:model():random_percent(35) then
 				-- Under-City - Altdorf - Clan Moulder
 				local altdorf = cm:get_region("wh3_main_combi_region_altdorf");

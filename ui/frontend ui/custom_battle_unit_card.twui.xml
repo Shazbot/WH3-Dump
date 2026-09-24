@@ -6,6 +6,7 @@
 	<hierarchy>
 		<root this="3B1C199B-DBD5-42A9-B5EC9E3A671F33AF">
 			<custom_battle_unit_card this="EFC985C5-A78C-48B4-AD62D2CBCF8E3A6E">
+				<unit_cap_change_frame this="C4D34C7A-6899-4759-B3E9E078977399E6"/>
 				<label_cost_parent this="BF5517E8-4662-4ECC-8F70362FFE1E207B">
 					<label_cost this="616BBAA5-BFEC-48C0-875A0525E6D4C3C7"/>
 				</label_cost_parent>
@@ -977,6 +978,14 @@
 					context_object_id="CcoCustomBattleUnit"
 					context_function_id="CustomBattleUnitRecordContext.FactionContext.FactionSkin"/>
 				<callback_with_context callback_id="TopmostWhenDraggingCallback"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOn"
+					context_object_id="CcoCustomBattleUnit"
+					context_function_id="PlayerSlotContext.OnMouseOn(this.UnitRecordContext)"/>
+				<callback_with_context
+					callback_id="ContextCommandMouseOff"
+					context_object_id="CcoCustomBattleUnit"
+					context_function_id="PlayerSlotContext.OnMouseOff()"/>
 			</callbackwithcontextlist>
 			<userproperties>
 				<property
@@ -2672,6 +2681,83 @@
 				</renown>
 			</states>
 		</train_cat_frame>
+		<unit_cap_change_frame
+			this="C4D34C7A-6899-4759-B3E9E078977399E6"
+			id="unit_cap_change_frame"
+			docking="Center"
+			component_anchor_point="0.50,0.50"
+			tooltipslocalised="true"
+			uniqueguid="C4D34C7A-6899-4759-B3E9E078977399E6"
+			currentstate="92CA93E0-F634-4EB9-91E6BEBF906F5BA3"
+			defaultstate="0E765770-1960-4474-992BD46E1C19D588">
+			<callbackwithcontextlist>
+				<callback_with_context
+					callback_id="ContextStateSetter"
+					context_object_id="CcoCustomBattlePlayerSlot slot, CcoMainUnitRecord record"
+					context_function_id="(unit_cap_delta = slot.AffectedByAnyUnitCap(record)) =&gt; {&#10;GetIfElse(unit_cap_delta &gt; 0, &quot;positive&quot;, GetIfElse(unit_cap_delta &lt; 0, &quot;negative&quot;, &quot;not_affected&quot;))&#10;}">
+					<child_m_user_properties>
+						<property
+							name="event0"
+							value="CustomBattleOnUnitCardMouseOn"/>
+						<property
+							name="event1"
+							value="CustomBattleOnUnitCardMouseOff"/>
+					</child_m_user_properties>
+				</callback_with_context>
+			</callbackwithcontextlist>
+			<componentimages>
+				<component_image
+					this="089CC8D1-8A13-48A6-889F08654A3920D6"
+					uniqueguid="089CC8D1-8A13-48A6-889F08654A3920D6"
+					imagepath="ui/skins/default/dlc27_sla_decadence/corrupt_units_unit_card_mask.png"/>
+			</componentimages>
+			<states>
+				<negative
+					this="92CA93E0-F634-4EB9-91E6BEBF906F5BA3"
+					name="negative"
+					width="60"
+					height="130"
+					uniqueguid="92CA93E0-F634-4EB9-91E6BEBF906F5BA3">
+					<imagemetrics>
+						<image
+							this="C7DEAF92-829A-439D-9854C84B302DA332"
+							uniqueguid="C7DEAF92-829A-439D-9854C84B302DA332"
+							componentimage="089CC8D1-8A13-48A6-889F08654A3920D6"
+							width="60"
+							height="130"
+							colour="#FF2D2DC8"
+							shadertechnique_vars="1.00,2.00,2.00,0.00"
+							ui_colour_preset_type_key="red"
+							shader_name="glow_pulse_t0"/>
+					</imagemetrics>
+				</negative>
+				<not_affected
+					this="0E765770-1960-4474-992BD46E1C19D588"
+					name="not_affected"
+					width="60"
+					height="130"
+					uniqueguid="0E765770-1960-4474-992BD46E1C19D588"/>
+				<positive
+					this="EBA7C867-6021-4AB7-B673388B21FE1D6D"
+					name="positive"
+					width="60"
+					height="130"
+					uniqueguid="EBA7C867-6021-4AB7-B673388B21FE1D6D">
+					<imagemetrics>
+						<image
+							this="FD7C6ABD-5EC0-489F-8090CB45BC4A651C"
+							uniqueguid="FD7C6ABD-5EC0-489F-8090CB45BC4A651C"
+							componentimage="089CC8D1-8A13-48A6-889F08654A3920D6"
+							width="60"
+							height="130"
+							colour="#A0FF3778"
+							shadertechnique_vars="1.00,2.00,2.00,0.00"
+							ui_colour_preset_type_key="green"
+							shader_name="glow_pulse_t0"/>
+					</imagemetrics>
+				</positive>
+			</states>
+		</unit_cap_change_frame>
 		<unit_category_icon
 			this="75C4D9DB-9301-480E-82436AF5C6C99EF5"
 			id="unit_category_icon"

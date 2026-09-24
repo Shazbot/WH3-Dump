@@ -83,6 +83,8 @@ function Forced_Battle_Manager:trigger_forced_battle_with_generated_army(
 	local x,y = cm:find_valid_spawn_location_for_character_from_character(generated_force_faction,"character_cqi:"..player_force_general_cqi,true, 6)
 
 	forced_battle:trigger_battle(attacker, defender, x, y, is_ambush)
+
+	return forced_battle
 end
 
 --- the battle will persist so you can call the same battle several times.

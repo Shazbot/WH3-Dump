@@ -1,0 +1,211 @@
+ChaoticPlans
+{
+	ResourceGuards
+	{
+		"wh3_dlc29_chaotic_plans_guards"
+	}
+
+	ResourceEliteElites
+	{
+		"wh3_dlc29_chaotic_plans_elites"
+	}
+
+	ResourceMagicPower
+	{
+		"wh3_dlc29_chaotic_plans_magic_power"
+	}
+
+	MilitaryPlanKey
+	{
+		"wh3_dlc29_military_plan"
+	}
+
+	EconomicPlanKey
+	{
+		"wh3_dlc29_economic_plan"
+	}
+
+	MagicPlanKey
+	{
+		"wh3_dlc29_magic_plan"
+	}
+
+	MilitaryPlanRecord
+	{
+		DatabaseRecordContext("CcoChaoticPlanRecord", MilitaryPlanKey)
+	}
+
+	EconomicPlanRecord
+	{
+		DatabaseRecordContext("CcoChaoticPlanRecord", EconomicPlanKey)
+	}
+
+	MagicPlanRecord
+	{
+		DatabaseRecordContext("CcoChaoticPlanRecord", MagicPlanKey)
+	}
+
+	IsMilitaryPlanUnlocked(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.IsChaoticPlanUnlocked(MilitaryPlanRecord)
+	}
+
+	IsEconomicPlanUnlocked(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.IsChaoticPlanUnlocked(EconomicPlanRecord)
+	}
+
+	IsMagicPlanUnlocked(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.IsChaoticPlanUnlocked(MagicPlanRecord)
+	}
+
+	SelectMilitaryPlan(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.SelectChaoticPlanRecordType("wh3_dlc29_military_plan")
+	}
+	
+	SelectEconomicPlan(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.SelectChaoticPlanRecordType("wh3_dlc29_economic_plan")
+	}
+	
+	SelectMagicPlan(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.SelectChaoticPlanRecordType("wh3_dlc29_magic_plan")
+	}
+	
+	GetSelectedChaoticPlanRecord(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		GetIfElse(IsMilitaryPlanSelected(plans_manager), MilitaryPlanRecord, 
+			GetIfElse(IsEconomicPlanSelected(plans_manager), EconomicPlanRecord, 
+				GetIf(IsMagicPlanSelected(plans_manager), MagicPlanRecord)))
+	}
+	
+	IsMilitaryPlanSelected(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.GetSelectedChaoticPlanTypeFromSetup() == "military"
+	}
+	
+	IsEconomicPlanSelected(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.GetSelectedChaoticPlanTypeFromSetup() == "economic"
+	}
+	
+	IsMagicPlanSelected(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		plans_manager.GetSelectedChaoticPlanTypeFromSetup() == "magic"
+	}
+
+	RitualSelectionHolder
+	{
+		Component("ritual_selection_holder")
+	}
+
+	CanProceedPlanSetup(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		GetIfElse(
+			IsMagicPlanSelected(plans_manager),
+			plans_manager.CanSelectTokensForSetup,
+			plans_manager.CanStartChaoticPlanFromSetup)
+	}
+
+	ProceedPlanSetup(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		DoIfElse(
+			IsMagicPlanSelected(plans_manager),
+			Do(RitualSelectionHolder.SetVisible(true), Component("bottom_bar").SetVisible(false),Component("target_holder").SetVisible(false), Component("plan_type_holder").SetVisible(false)),
+			CreatePlanFromSetup(plans_manager))
+	}
+
+	CreatePlanFromSetup(CcoCampaignChaoticPlansManager plans_manager)
+	{
+		Do
+		(
+			DoIf(
+				IsHUDPanelOpen("character_panel"),
+				CloseCurrentHUDPanel),
+			plans_manager.CreateChaoticPlanFromSetup(Component("text_input", "plan_setup_holder").GetText),
+			TargettingContext.EnableTargetting(false),
+			Component("plans_board_holder").SetContext(plans_manager.GetPlanForSchemer(plans_manager.GetSelectedSchemerSpecialInfoFromSetup().CharacterContext()))
+		)
+	}
+		
+	ToggleTokenPinned(CcoCampaignChaoticPlanToken token)
+	{
+		(inventory_token = self.ParentContext("chaotic_plans_plan_board").StoredContext("CcoCampaignChaoticPlanInventoryToken"),
+		plan = self.ParentContext().StoredContext("CcoCampaignChaoticPlan")) =>
+		{
+			DoIf(token.IsPinned() || (self.ParentContext("chaotic_plans_plan_board").ChildContext("confirm_action_button").IsVisible()
+				&& (plan.GetPinnedTokensSize() < plan.GetMaxPinnedTokensSize(Get(inventory_token)))
+				&& plan.AbilityAllowsPinningTokenOfType(Get(inventory_token), token.TokenRecordContext())) 
+				, token.TogglePinned())
+		}
+	}
+
+	GetCurrentGuards(CcoCampaignChaoticPlan plan)
+	{
+		plan
+			.PlanPayloadsManagerContext
+			.AccumulatedPooledResource(ResourceGuards)
+	}
+
+	GetCurrentElites(CcoCampaignChaoticPlan plan)
+	{
+		plan
+			.PlanPayloadsManagerContext
+			.AccumulatedPooledResource(ResourceEliteElites)
+	}
+
+	GetCurrentMagicPower(CcoCampaignChaoticPlan plan)
+	{
+		plan
+			.PlanPayloadsManagerContext
+			.AccumulatedPooledResource(ResourceMagicPower)
+	}
+	
+	PlanExecutionAnimationHolder
+	{
+		Component("animation_plan_trigger")
+	}
+	
+	TriggerPlanExecutionPromptWithAnimation()
+	{
+		Do(PlanExecutionAnimationHolder.SetVisible(true), PlanExecutionAnimationHolder.TriggerAnimation("show"))
+	}
+	
+	GetAllPositivePoolDesignsByAvailability(CcoCampaignChaoticPlan plan)
+	{
+		Join(plan.GetPositivePoolTokensAvailableForDraw, plan.GetPositivePoolTokensUnavailableForDraw)
+	}
+	
+	GetAllAvailableTokens(CcoCampaignChaoticPlan plan)
+	{
+		Join(plan.GetNegativeTokens, ChaoticPlans.GetAllPositivePoolDesignsByAvailability(plan))
+	}
+	
+	ClearPlansTargetSelection(CcoCampaignChaoticPlansManager manager)
+	{
+		Do(self.ParentContext.ClearSelection,
+			TargettingContext.ClearTarget,
+			manager.CleanupChaoticPlanFromSetup())
+	}
+	
+	CloseChaoticPlansMenu(CcoCampaignChaoticPlansManager manager)
+	{
+		Do(ClearPlansTargetSelection(manager),
+			manager.RemoveShopFilters(),
+			ClosePanel("dlc29_skv_chaotic_plans"))
+	}
+	
+	CloseChaoticPlansSubmenu(CcoCampaignChaoticPlansManager manager)
+	{
+		DoIfElse(manager.ChaoticPlanInteractionContext.IsTargettingActive(),
+				Do(TargettingContext.EnableTargetting(false),ClearPlansTargetSelection(manager),Component("plan_board_holder").SetVisible(false), Component("plans").SetVisible(true)),
+				DoIfElse(Component("shop").IsVisible(),
+						Do(Component("shop").SetVisible(false), DoIfElse(Component("plan_board_holder").IsVisible(), Component("plans").SetVisible(false), Component("plans").SetVisible(true))),
+						DoIfElse(Component("plan_board_holder").IsVisible(),
+								DoIfElse(Component("plan_board_holder").CurrentAnimation().IsEmpty, Do(Component("plan_board_holder").TriggerAnimation("close_panel"), Component("plans_holder").ClearSelection(true)),   	Do(Component("plan_board_holder").FinishCurrentAnimationInstantly(), Component("plans_holder").ClearSelection(true))),
+								CloseChaoticPlansMenu(manager))))
+	}
+}

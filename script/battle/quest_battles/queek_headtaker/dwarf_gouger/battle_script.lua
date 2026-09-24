@@ -88,19 +88,19 @@ function end_deployment_phase()
 	-- Voiceover and Subtitles --
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_01) end, 3000);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_01", "subtitle_with_frame", 7.5) end, 4000);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_01", "subtitle_with_frame", 0.1) end, 4000);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 12800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_02) end, 13300);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_02", "subtitle_with_frame", 10.5) end, 14300);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_02", "subtitle_with_frame", 0.1) end, 14300);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 26800);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_03) end, 27300);	
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_03", "subtitle_with_frame", 7.5) end, 28300);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_03", "subtitle_with_frame", 0.1) end, 28300);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 37000);
 	
 	cutscene_intro:action(function() cutscene_intro:play_sound(wh2_main_sfx_04) end, 37500);
-	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_04", "subtitle_with_frame", 3) end, 38500);	
+	cutscene_intro:action(function() cutscene_intro:show_custom_cutscene_subtitle("scripted_subtitles_localised_text_wh2_main_qb_skv_queek_headtaker_dwarfgouger_stage_4_gouger_gully_pt_04", "subtitle_with_frame", 0.1) end, 38500);	
 	cutscene_intro:action(function() cutscene_intro:hide_custom_cutscene_subtitles() end, 43900);
 	
 	
@@ -142,27 +142,19 @@ end
 ga_attacker_01:set_always_visible_on_message("01_intro_cutscene_end", true, false);
 ga_attacker_02:set_always_visible_on_message("01_intro_cutscene_end", true, false);
 
-gb:message_on_time_offset("move_forward_01", 44000);
-
-ga_attacker_01:release_on_message("move_forward_01");
-ga_attacker_02:release_on_message("move_forward_01");
-ga_attacker_01:attack_on_message("move_forward_01");
-ga_attacker_02:attack_on_message("move_forward_01");
-ga_attacker_01:release_on_message("01_intro_cutscene_end");
-ga_attacker_02:release_on_message("01_intro_cutscene_end");
-ga_attacker_01:attack_on_message("01_intro_cutscene_end");
-ga_attacker_02:attack_on_message("01_intro_cutscene_end");
+ga_attacker_01:rush_on_message("01_intro_cutscene_end");
 ga_attacker_01:message_on_casualties("reinforcements_1", 0.3);
-ga_attacker_02:message_on_casualties("reinforcements_1", 0.3);
 
+ga_attacker_02:rush_on_message("01_intro_cutscene_end");
+ga_attacker_02:message_on_casualties("reinforcements_1", 0.3);
 
 ga_ally_01:reinforce_on_message("reinforcements_1", 30000);
 ga_ally_02:reinforce_on_message("reinforcements_1", 30000);
 
 ga_ally_01:message_on_any_deployed("reinforcements_2")
 ga_ally_02:message_on_any_deployed("reinforcements_2")
-ga_ally_01:attack_on_message("reinforcements_2");
-ga_ally_02:attack_on_message("reinforcements_2");
+ga_ally_01:rush_on_message("reinforcements_2");
+ga_ally_02:rush_on_message("reinforcements_2");
 
 -------------------------------------------------------------------------------------------------
 ------------------------------------------- OBJECTIVES ------------------------------------------

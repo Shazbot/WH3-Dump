@@ -794,14 +794,20 @@ function eternal_dance:apply_tempo_penalty(target_force)
 end
 
 function eternal_dance:GetCurrentTempoLevel(mil_force)
-	local tempo = mil_force:pooled_resource_manager():resource(eternal_dance.pooled_resource_key)
+	if mil_force and mil_force:is_null_interface() == false then
+		local pr_manager = mil_force:pooled_resource_manager()
 
-	-- Pooled resource effect type are : 
-	-- 0 -> absolute value 
-	-- 1 -> percentage of capacity
-	for index, item in ipairs(eternal_dance.tempo_level_bundles) do
-		if not tempo:is_null_interface() and tempo:active_effect(0) == item then
-			return index
+		if pr_manager and pr_manager:is_null_interface() == false then
+			local tempo = pr_manager:resource(eternal_dance.pooled_resource_key)
+
+			-- Pooled resource effect type are : 
+			-- 0 -> absolute value 
+			-- 1 -> percentage of capacity
+			for index, item in ipairs(eternal_dance.tempo_level_bundles) do
+				if not tempo:is_null_interface() and tempo:active_effect(0) == item then
+					return index
+				end
+			end
 		end
 	end
 

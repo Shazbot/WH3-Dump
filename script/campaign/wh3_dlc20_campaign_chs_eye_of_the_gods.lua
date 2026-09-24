@@ -9,6 +9,7 @@ eye_of_the_gods = {
 		wh3_dlc20_chs_valkia = "wh3_dlc20_chs_eye_of_the_gods_kho",
 		wh3_dlc20_chs_festus = "wh3_dlc20_chs_eye_of_the_gods_nur",
 		wh3_dlc20_chs_azazel = "wh3_dlc20_chs_eye_of_the_gods_sla",
+		wh3_dlc20_chs_sigvald = "wh3_dlc20_chs_eye_of_the_gods_sla",
 		wh3_dlc20_chs_vilitch = "wh3_dlc20_chs_eye_of_the_gods_tze"
 
 	},
@@ -337,7 +338,31 @@ function eye_of_the_gods:generate_dilemma(faction_key)
 		dilemma_builder:add_choice_payload(choices[i], payload)
 	end
 
-	cm:launch_custom_dilemma_from_builder(dilemma_builder, cm:get_faction(faction_key))
+	if cm:is_multiplayer() then
+		cm:launch_custom_dilemma_from_builder(dilemma_builder, cm:get_faction(faction_key))
+	else
+		cm:trigger_transient_intervention(
+			"trigger_eye_of_the_gods_dilemma",
+			function(intervention)
+				local process_name = "dilemma_" .. faction_key .. "_" .. dilemma_key .. "_listeners";
+				cm:launch_custom_dilemma_from_builder(dilemma_builder, cm:get_faction(faction_key))
+
+				-- listen for the dilemma being issued
+				core:add_listener(
+					process_name,
+					"DilemmaIssuedEvent",
+					function(context) return context:dilemma() == dilemma_key end,
+					function()
+						cm:remove_callback(process_name);
+
+						-- dilemma has been issued, complete intervention
+						intervention:complete();
+					end,
+					false
+				);
+			end
+		)
+	end
 end
 
 function eye_of_the_gods:generate_payload(choice, faction_interface, dilemma)

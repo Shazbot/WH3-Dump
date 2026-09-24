@@ -909,7 +909,7 @@
 					context_function_id="self.SetVisible(false)"/>
 				<callback_with_context
 					callback_id="ContextCommandEvent"
-					context_function_id="self.SetVisible(false)">
+					context_function_id="DoIf(self.IsVisible, Component(&quot;button_twitch_unit_raffle&quot;).SimulateLClick)">
 					<child_m_user_properties>
 						<property
 							name="event0"
@@ -917,6 +917,9 @@
 						<property
 							name="event1"
 							value="CharacterMoveStartAny"/>
+						<property
+							name="event2"
+							value="warband_upgrades_opened"/>
 					</child_m_user_properties>
 				</callback_with_context>
 				<callback_with_context
@@ -933,6 +936,15 @@
 					callback_id="ContextPropagator"
 					context_object_id="CcoGameCore"
 					context_function_id="ServiceManagerContext"/>
+				<callback_with_context
+					callback_id="ContextCommandGiverOnVisibilityChanged"
+					context_function_id="DoIfElse(self.IsVisible, UiMsg(&quot;twitch_unit_name_raffle_panel_opened&quot;), UiMsg(&quot;twitch_unit_name_raffle_panel_closed&quot;))">
+					<child_m_user_properties>
+						<property
+							name="on_hide_and_show"
+							value=""/>
+					</child_m_user_properties>
+				</callback_with_context>
 			</callbackwithcontextlist>
 			<states>
 				<newstate

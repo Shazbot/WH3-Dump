@@ -15,4 +15,6 @@ else
 	bm:out("\tNot loading advice");
 end;
 
+require("wh_battle_collapse_composite_scenes");
+
 bm:load_scripted_tours();

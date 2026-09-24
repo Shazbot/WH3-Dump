@@ -46,10 +46,10 @@ end
 --- @p string force key, a unique key for this new force
 --- @r boolean Returns true if the force was created successfully
 function random_army_manager:new_force(key)
-	out.design("Random Army Manager: Creating New Force with key [" .. key .. "]");
+	output_ram("Random Army Manager: Creating New Force with key [" .. key .. "]");
 	
 	if self:get_force_by_key(key) then
-		out.design("\tForce with key [" .. key .. "] already exists!");
+		output_ram("\tForce with key [" .. key .. "] already exists!");
 		return false;
 	end;
 
@@ -60,7 +60,7 @@ function random_army_manager:new_force(key)
 		self.existing_force[i].units = {};
 		self.existing_force[i].mandatory_units = {};
 		self.existing_force[i].faction = "";
-		out.design("\tForce with key [" .. key .. "] already exists - resetting force!");
+		output_ram("\tForce with key [" .. key .. "] already exists - resetting force!");
 		return true;
 	end
 
@@ -70,7 +70,7 @@ function random_army_manager:new_force(key)
 	force.mandatory_units = {};
 	force.faction = "";
 	table.insert(self.force_list, force);
-	out.design("\tForce with key [" .. key .. "] created!");
+	output_ram("\tForce with key [" .. key .. "] created!");
 	return true;
 end;
 
@@ -80,7 +80,7 @@ end;
 --- @p string new force key, a unique key for this new force
 --- @r boolean Returns true if the force was cloned successfully
 function random_army_manager:clone_force(old_key, new_key)
-	out.design("Random Army Manager: Cloning Force with key [" .. new_key .. "] from force with key [" .. old_key .. "]");
+	output_ram("Random Army Manager: Cloning Force with key [" .. new_key .. "] from force with key [" .. old_key .. "]");
 	
 	local old_force_data = self:get_force_by_key(old_key);
 	
@@ -90,7 +90,7 @@ function random_army_manager:clone_force(old_key, new_key)
 	force.mandatory_units = table.copy(old_force_data.mandatory_units);
 	force.faction = old_force_data.faction;
 	table.insert(self.force_list, force);
-	out.design("\tForce with key [" .. new_key .. "] cloned from force with key [" .. old_key .. "]!");
+	output_ram("\tForce with key [" .. new_key .. "] cloned from force with key [" .. old_key .. "]!");
 	return true;
 end;
 
@@ -132,12 +132,12 @@ function random_army_manager:combine_forces(new_key, ...)
 	end
 	
 	table.insert(self.force_list, force);
-	out.design("\tForce with key [" .. new_key .. "] combined from forces with keys:");
+	output_ram("\tForce with key [" .. new_key .. "] combined from forces with keys:");
 	for i = 1, arg.n do
-		out.design("\t\t[" .. arg[i] .. "]");
+		output_ram("\t\t[" .. arg[i] .. "]");
 	end;
 	if not all_factions_identical then
-		out.design("\tNot all factions of these forces were equal, so the new merged force does not have a faction. You may want to specify a faction for this new force.");
+		output_ram("\tNot all factions of these forces were equal, so the new merged force does not have a faction. You may want to specify a faction for this new force.");
 	end;
 	return true;
 end;
@@ -153,7 +153,7 @@ function random_army_manager:add_unit(force_key, key, weight)
 	if force_data then
 		for i = 1, weight do
 			table.insert(force_data.units, key);
-			out.design("Random Army Manager: Adding Unit- [" .. key .. "] with weight: [" .. weight .. "] to force: [" .. force_key .. "]");
+			output_ram("Random Army Manager: Adding Unit- [" .. key .. "] with weight: [" .. weight .. "] to force: [" .. force_key .. "]");
 		end;
 		return;
 	end;
@@ -174,7 +174,7 @@ function random_army_manager:add_mandatory_unit(force_key, key, amount)
 	if force_data then
 		for i = 1, amount do
 			table.insert(force_data.mandatory_units, key);
-			out.design("Random Army Manager: Adding Mandatory Unit- [" .. key .. "] with amount: [" .. amount .. "] to force: [" .. force_key .. "]");
+			output_ram("Random Army Manager: Adding Mandatory Unit- [" .. key .. "] with amount: [" .. amount .. "] to force: [" .. force_key .. "]");
 		end;
 		return;
 	end;
@@ -217,7 +217,7 @@ function random_army_manager:generate_force(force_key, unit_count, return_as_tab
 	
 	unit_count = math.min(19, unit_count);
 	
-	out.design("Random Army Manager: Getting Random Force for army [" .. force_key .. "] with size [" .. unit_count .. "]");
+	output_ram("Random Army Manager: Getting Random Force for army [" .. force_key .. "] with size [" .. unit_count .. "]");
 	
 	local mandatory_units_added = 0;
 	
@@ -250,7 +250,7 @@ end;
 --- @desc Remove an existing force from the force list
 --- @p string key of the force
 function random_army_manager:remove_force(force_key)
-	out.design("Random Army Manager: Removing Force with key [" .. force_key .. "]");
+	output_ram("Random Army Manager: Removing Force with key [" .. force_key .. "]");
 
 	for i = 1, #self.force_list do
 		if force_key == self.force_list[i].key then
@@ -290,6 +290,6 @@ end;
 local show_debug_output_ram = false;
 function output_ram(text)
 	if show_debug_output_ram then
-		out(text);
-	end;
-end;
+		out.design(text);
+	end
+end

@@ -23,11 +23,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), 1);
@@ -39,10 +35,7 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_objective_attack_d
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_vmp_mannfred_von_carstein_armour_of_templehof_stage_3_hint_objective");
 
-gb:play_sound_on_message("battle_started", Orc_Horn, v(-300, 100, -660), 10000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_vmp_mannfred_von_carstein_armour_of_templehof_stage_3_hint_reinforcements", 13000, 2000, 12000);
 
-
 -------ORDERS-------
-
 ga_ai_02:reinforce_on_message("battle_started", 10000);

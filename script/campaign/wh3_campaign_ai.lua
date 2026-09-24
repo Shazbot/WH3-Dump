@@ -51,40 +51,43 @@ campaign_ai_script = {
 	FactionToCoordinates = {},
 	FactionToCoordinatesIterator = 1,
 
-	kislev_background_income_data = {
-		faction_setup = {
-			{
-				faction_key = "wh3_main_ksl_the_ice_court",
+	background_income_data = {
+		-- KISLEV --
+		-- KATARINA --
+		wh3_main_ksl_the_ice_court = {
 				effects = {
 					{
 						key = "wh3_main_effect_ksl_ice_court_support_faction",
 						amount = 10,
 						effect_scope = "faction_to_faction_own"
-					}
-				}
+				},
 			},
-			{
-				faction_key = "wh3_main_ksl_the_great_orthodoxy",
+			bundle_key = "wh3_main_ksl_background_support_income_hidden",
+			},
+		-- KOSTALTYN --
+		wh3_main_ksl_the_great_orthodoxy = {
 				effects = {
 					{
 						key = "wh3_main_effect_ksl_orthodoxy_support_faction",
 						amount = 10,
 						effect_scope = "faction_to_faction_own"
 					}
-				}
 			},
-			{
-				faction_key = "wh3_main_ksl_ursun_revivalists",
+			bundle_key = "wh3_main_ksl_background_support_income_hidden",
+			},
+		-- BORIS URSUS
+		wh3_main_ksl_ursun_revivalists = {
 				effects = {
 					{
 						key = "wh3_main_effect_ksl_orthodoxy_support_faction",
 						amount = 5,
 						effect_scope = "faction_to_faction_own"
-					}
-				}
+				},
 			},
-			{
-				faction_key = "wh3_dlc24_ksl_daughters_of_the_forest",
+			bundle_key = "wh3_main_ksl_background_support_income_hidden",
+			},
+		-- MOTHER OSTAMKYA --
+		wh3_dlc24_ksl_daughters_of_the_forest = {
 				effects = {
 					{
 						key = "wh3_main_effect_ksl_ice_court_support_faction",
@@ -96,14 +99,12 @@ campaign_ai_script = {
 						amount = 5,
 						effect_scope = "faction_to_faction_own"
 					},
-				}
-			},
 		},
 		bundle_key = "wh3_main_ksl_background_support_income_hidden",
 	},
-
-	aislinn_extra_background_resources_data = {
-		faction_key = "wh3_dlc27_hef_aislinn",
+		-- HIGH ELVES --
+		-- AISLINN --
+		wh3_dlc27_hef_aislinn = {
 		effects = {
 			{
 				key = "wh3_dlc27_effect_hef_aislinn_focus_ai_only",
@@ -123,9 +124,8 @@ campaign_ai_script = {
 		},
 		bundle_key = "wh3_dlc27_hef_aislinn_background_ai_extra_resources_hidden",
 	},
-
-	teclis_extra_background_resources_data = {
-		faction_key = "wh2_main_hef_order_of_loremasters",
+		-- TECLIS --
+		wh2_main_hef_order_of_loremasters = {
 		effects = {
 			{
 				key = "wh3_dlc27_effect_hef_teclis_scrolls_of_knowledge_ai_only",
@@ -135,9 +135,9 @@ campaign_ai_script = {
 		},
 		bundle_key = "wh3_dlc27_hef_teclis_background_ai_extra_resources_hidden",
 	},
-
-	throgg_extra_background_resource_data = {
-		faction_key = "wh_dlc08_nor_wintertooth",
+		-- NORSCA --
+		-- THROG --
+		wh_dlc08_nor_wintertooth = {
 		effects = {
 			{
 				key = "wh3_dlc27_effect_nor_throgg_kinfolk_ai_only", 
@@ -147,9 +147,9 @@ campaign_ai_script = {
 		},
 			bundle_key = "wh3_dlc27_nor_throgg_background_ai_extra_resources_hidden",
 	},
-
-	dechala_extra_background_resource_data = {
-		faction_key = "wh3_dlc27_sla_the_tormentors",
+		-- SLAANESH --
+		-- DECHALA --
+		wh3_dlc27_sla_the_tormentors = {
 		effects = {
 			{
 				key = "wh3_dlc27_effect_sla_dechala_thralls_ai_only", 
@@ -159,7 +159,60 @@ campaign_ai_script = {
 		},
 			bundle_key = "wh3_dlc27_sla_dechala_background_ai_extra_resources_hidden",
 	},
-	
+		-- EMPIRE --
+		-- BORIS TODBRINGER --
+		wh_main_emp_middenland = {
+			effects = {
+				{
+					key = "wh3_dlc29_effect_emp_boris_todbringer_fervour_income_ai_only", 
+					amount = 100,
+					effect_scope = "faction_to_faction_own"
+				},
+			},
+			bundle_key = "wh3_dlc29_emp_boris_todbringer_background_ai_extra_resources_hidden",
+		},
+		-- NAGASH --
+		wh3_dlc29_nag_host_of_nagash = {
+			effects = {
+				{
+					key = "wh3_dlc29_effect_nag_ritual_discount_ai_only",
+					amount = 100,
+					effect_scope = "faction_to_faction_own"
+				},
+			},
+			bundle_key = "wh3_dlc29_nag_background_ai_extra_bonuses_hidden",
+		},
+	},
+
+	-- background incomes whose amount scales with campaign difficulty, one entry per resource
+	difficulty_scaled_background_incomes = {
+		vmp_power = {
+			factions = {
+				"wh_main_vmp_schwartzhafen",			-- VLAD
+				"wh3_main_vmp_caravan_of_blue_roses",	-- GHORST
+				"wh3_dlc29_vmp_neferata",				-- NEFERATA
+				"wh2_dlc11_vmp_the_barrow_legion",		-- KEMLER
+				"wh_main_vmp_vampire_counts",			-- MANNFRED
+			},
+			effect_key = "wh3_dlc29_effect_vmp_power_ai_only",
+			effect_scope = "faction_to_faction_own",
+			bundle_key = "wh3_dlc29_vmp_background_ai_extra_resources_hidden",
+			-- keyed by combined_difficulty_level(): 1 = easy, 0 = normal, -1 = hard, -2 = very hard, -3 = legendary
+			amount_by_difficulty = {
+				[1] = 200,
+				[0] = 300,
+				[-1] = 400,
+				[-2] = 500,
+				[-3] = 600,
+			},
+			-- on top of the difficulty amount, the income grows as the campaign progresses
+			turn_scaling = {
+				turn_interval = 10,
+				amount_per_interval = 50,
+			},
+		},
+	},
+
 	ai_minor_faction_potential = {
 		target_potential_types = {
 			combi_minor_strong = 40,
@@ -193,7 +246,169 @@ campaign_ai_script = {
 				override_amount = 210
 			}
 		}
-	}
+	},
+	
+	nagash_background_income = {
+		factor = "buildings",
+		-- keyed by combined_difficulty_level(): 1 = easy, 0 = normal, -1 = hard, -2 = very hard, -3 = legendary
+		base_amount = {
+			[1] = 50,
+			[0] = 100,
+			[-1] = 150,
+			[-2] = 200,
+			[-3] = 250,
+		},
+		amount_per_bracket = 50,
+		turns_per_bracket = 10,
+	},
+	woc_upgrading_scaling = {
+		factions = {
+			wh_main_chs_chaos = true,
+			wh3_dlc20_chs_azazel = true,
+			wh3_main_chs_shadow_legion = true,
+			wh3_dlc20_chs_festus = true,
+			wh3_dlc20_chs_kholek = true,
+			wh3_dlc20_chs_sigvald = true,
+			wh3_dlc20_chs_valkia = true,
+			wh3_dlc20_chs_vilitch = true,
+			wh3_dlc29_chs_host_of_the_triplets = true,
+		},
+		turn_start = 5,
+		scaling_data  = {
+			-- keyed by combined_difficulty_level(): 1 = easy, 0 = normal, -1 = hard, -2 = very hard, -3 = legendary
+			-- (verified 2026-08-15 that autoruns return the same scale as player runs; cm:get_difficulty() does NOT, its autorun branch misreads this scale)
+			--LEGENDARY
+			[-3] = {
+				effects = {
+					{
+						key = "wh3_dlc20_effect_unit_upgrade_cost",
+						amount = -70,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+					{
+						key = "wh3_dlc20_effect_increased_rank_woc_recruitment_panel", 
+						amount = 7,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+				},
+				bundle_key = "wh3_dlc29_woc_ai_all_upgrade_scaling_hidden",
+			},
+			--VERY HARD
+			[-2] = {
+				effects = {
+					{
+						key = "wh3_dlc20_effect_unit_upgrade_cost",
+						amount = -60,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+					{
+						key = "wh3_dlc20_effect_increased_rank_woc_recruitment_panel", 
+						amount = 5,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+				},
+				bundle_key = "wh3_dlc29_woc_ai_all_upgrade_scaling_hidden",
+			},
+			--HARD
+			[-1] = {
+				effects = {
+					{
+						key = "wh3_dlc20_effect_unit_upgrade_cost",
+						amount = -50,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+					{
+						key = "wh3_dlc20_effect_increased_rank_woc_recruitment_panel", 
+						amount = 3,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+				},
+				bundle_key = "wh3_dlc29_woc_ai_all_upgrade_scaling_hidden",			
+			},
+			--NORMAL
+			[0] = {
+				effects = {
+					{
+						key = "wh3_dlc20_effect_unit_upgrade_cost",
+						amount = -40,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+					{
+						key = "wh3_dlc20_effect_increased_rank_woc_recruitment_panel", 
+						amount = 2,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+				},
+				bundle_key = "wh3_dlc29_woc_ai_all_upgrade_scaling_hidden",
+			},
+			--EASY
+			[1] = {
+				effects = {
+					{
+						key = "wh3_dlc20_effect_unit_upgrade_cost",
+						amount = -30,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+					{
+						key = "wh3_dlc20_effect_increased_rank_woc_recruitment_panel", 
+						amount = 1,
+						effect_scope = "faction_to_force_own_unseen"
+					},
+				},
+				bundle_key = "wh3_dlc29_woc_ai_all_upgrade_scaling_hidden",
+			},
+		},
+	},
+	woc_technology_auto_research = {
+		factions = {
+			wh_main_chs_chaos = true,
+			wh3_dlc20_chs_azazel = true,
+			wh3_main_chs_shadow_legion = true,
+			wh3_dlc20_chs_festus = true,
+			wh3_dlc20_chs_kholek = true,
+			wh3_dlc20_chs_sigvald = true,
+			wh3_dlc20_chs_valkia = true,
+			wh3_dlc20_chs_vilitch = true,
+			wh3_dlc29_chs_host_of_the_triplets = true,
+		},
+		technology_to_auto_research_turns = {
+			-- turn = {tech_1, tech_2 ...}
+			[7] = {
+				"wh3_dlc20_chs_und_shared_chariots",
+				"wh3_dlc20_chs_und_shared_chosen",
+				"wh3_dlc20_chs_und_shared_mutants",
+			},
+			[11] = {
+				"wh3_dlc20_chs_und_shared_daemonic_mounts",
+				"wh3_dlc20_chs_und_shared_knights",
+			},
+			[15] = {
+				"wh3_dlc20_chs_und_shared_marks_khorne",
+				"wh3_dlc20_chs_und_shared_marks_tzeentch",
+				"wh3_dlc20_chs_und_shared_marks_slaanesh",
+				"wh3_dlc20_chs_und_shared_marks_nurgle",
+
+			},
+			[19] = {
+				"wh3_dlc20_chs_kho_valkia_gift_slot_1",
+			},
+			[22] = {
+				"wh3_dlc29_chs_glottkin_festus_shared_upgrades"
+			},
+			[23] = {
+				"wh3_dlc20_chs_nur_warriors_gift_slot_1",
+				"wh3_dlc20_chs_kho_archaon_gift_slot_1",
+				"wh3_dlc20_chs_sla_warriors_gift_slot_1",
+				"wh3_main_chs_belakor_1",
+				"wh3_main_chs_belakor_2",
+				"wh3_main_chs_belakor_3",
+				"wh3_main_chs_belakor_4",
+			},
+			[24] = {
+				"wh3_dlc20_chs_sla_azazel_gift_slot_1",
+			},
+		}
+	},
 }
 
 function campaign_ai_script:setup_listeners()
@@ -322,6 +537,105 @@ function campaign_ai_script:setup_listeners()
 				cm:instantly_research_technology(dechala_daemonic_units.config.faction_key, dechala_daemonic_units.config.technology_key, false)
 				for _, unit_key in ipairs(dechala_daemonic_units.config.units) do
 					cm:remove_event_restricted_unit_record_for_faction(unit_key, dechala_daemonic_units.config.faction_key)
+				end
+			end,
+			true
+		)
+
+		core:add_listener(
+			"AIGlottkinTurnEndGardens",
+			"FactionTurnEnd",
+			function(context)
+				local faction = context:faction()
+				return faction:name() == glottkin_gardens_of_nurgle.config.faction_key and not faction:is_human()
+			end,
+			function(context)
+				local faction = context:faction()
+				-- we want to attempt to create a garden every turn
+				self:glottkin_garden_of_nurgle_create_garden(faction)
+				-- moving should occur once every 12 turns - this is enough time for a full cycle of the recruitment buildings
+				if cm:turn_number() % 12 == 0 then
+					self:glottkin_garden_of_nurgle_check_settlements_and_move_gardens(faction)
+				end
+			end,
+			true
+		)
+
+		core:add_listener(
+			"AINagashNecromanticEnergyIncome",
+			"FactionTurnStart",
+			function(context)
+				local faction_interface = context:faction()
+				return not faction_interface:is_human() and faction_interface:name() == land_of_the_dead.faction_key
+			end,
+			function(context)
+				local manager = cm:model():world():region_group_pooled_resource_managers_system():get_dynamic_manager_for_region_group_id(land_of_the_dead.region_group_id)
+				if manager and not manager:is_null_interface() then
+					local resource = manager:resource(land_of_the_dead.pooled_resource_key)
+					local config = self.nagash_background_income
+					-- combined_difficulty_level() returns the same scale in player runs and autoruns; do not switch to cm:get_difficulty(), whose autorun branch misreads it
+					local base = config.base_amount[cm:model():combined_difficulty_level()] or config.base_amount[0]
+					local brackets = math.floor((cm:turn_number() - 1) / config.turns_per_bracket)
+					cm:pooled_resource_factor_transaction(resource, config.factor, base + brackets * config.amount_per_bracket)
+				end
+			end,
+			true
+		)
+
+		core:add_listener(
+			"AIWoCFactionsUpgradeScalingOnTurnStart",
+			"FactionTurnStart",
+			function(context)
+				return self.woc_upgrading_scaling.factions[context:faction():name()]
+			end,
+			function(context)
+				local faction_interface = context:faction()
+				if faction_interface:is_human() then
+					-- the scaling is AI-only, so strip it if the faction has come under player control
+					for difficulty, data in dpairs(self.woc_upgrading_scaling.scaling_data) do
+						cm:remove_effect_bundle(data.bundle_key, faction_interface:name())
+					end
+				else
+					campaign_ai_script:apply_woc_upgrade_scaling(faction_interface)
+				end
+			end,
+			true
+		)
+
+		core:add_listener(
+			"AIWoCFactionsUpgradeScalingOnDifficultyChange",
+			"NominalDifficultyLevelChangedEvent", 
+			true,
+			function(context)
+				local factions_list = self.woc_upgrading_scaling.factions
+				for key, _ in dpairs(factions_list) do
+					local faction_interface = cm:get_faction(key)
+					if faction_interface and not faction_interface:is_human() then
+						-- remove any old bundles, cannot rely on all difficulties using the same bundle key and apply removing the old version
+						for difficulty, data in dpairs(self.woc_upgrading_scaling.scaling_data) do
+							cm:remove_effect_bundle(data.bundle_key, key)
+						end
+						campaign_ai_script:apply_woc_upgrade_scaling(faction_interface)
+					end
+				end
+			end,
+			true
+		)
+
+		core:add_listener(
+			"AIWoCFactionsTechnologies", 
+			"FactionTurnEnd",
+			function(context)
+				local faction_interface = context:faction()
+				return not faction_interface:is_human() and self.woc_technology_auto_research.factions[faction_interface:name()]
+			end, 
+			function(context)
+				local technologies_for_turn = self.woc_technology_auto_research.technology_to_auto_research_turns[cm:turn_number()]
+				if technologies_for_turn and not table.is_empty(technologies_for_turn) then
+					for i = 1, #technologies_for_turn do
+						local technology_key = technologies_for_turn[i]
+						cm:instantly_research_technology(context:faction():name(), technology_key, false)
+					end
 				end
 			end,
 			true
@@ -472,18 +786,21 @@ function campaign_ai_script:fight_starting_battles(faction)
 end
 
 function campaign_ai_script:find_correct_enemy_force(our_force, enemy_faction_list, x, y)
+	local enemy_force = nil
 	for i = 0, enemy_faction_list:num_items() - 1 do
 		enemy_force = cm:get_closest_military_force_from_faction(enemy_faction_list:item_at(i):name(), x, y, true)
-		if enemy_force:is_armed_citizenry() == false then
-			if cm:character_can_reach_character(our_force:general_character(), enemy_force:general_character()) == true then
-				if enemy_force:has_garrison_residence() == true then
-					self.script_triggered_settlement_attack = true
+		if is_militaryforce(enemy_force) then
+			if enemy_force:is_armed_citizenry() == false then
+				if cm:character_can_reach_character(our_force:general_character(), enemy_force:general_character()) == true then
+					if enemy_force:has_garrison_residence() == true then
+						self.script_triggered_settlement_attack = true
+					end
+					return enemy_force, true
 				end
+			elseif cm:character_can_reach_settlement(our_force:general_character(), enemy_force:garrison_residence():settlement_interface()) == true then
+				self.script_triggered_settlement_attack = true
 				return enemy_force, true
 			end
-		elseif cm:character_can_reach_settlement(our_force:general_character(), enemy_force:garrison_residence():settlement_interface()) == true then
-			self.script_triggered_settlement_attack = true
-			return enemy_force, true
 		end
 	end
 	return enemy_force, false
@@ -684,85 +1001,188 @@ function campaign_ai_script:nearby_diplomatic_contact(faction)
 	self.FactionToCoordinatesIterator = self.FactionToCoordinatesIterator + counter
 end
 
--- ========================================= KISLEV RELATED FUNCTIONS =========================== --
+-- ========================================= BACKGROUND INCOMES ========================================= --
 
-function campaign_ai_script:kislev_background_income()
-	local data_table = campaign_ai_script.kislev_background_income_data
-	for i, faction_data in ipairs(data_table.faction_setup) do
-		local faction = cm:get_faction(faction_data.faction_key)
+function campaign_ai_script:start_background_incomes()
+	local data_table = self.background_income_data
+	for faction_key, faction_data in dpairs(data_table) do
+		local faction = cm:get_faction(faction_key)
 		
 		if faction and not faction:is_human() then 
-			local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
-			if bundle then
-				for e, effect in ipairs(faction_data.effects) do
+			local bundle = cm:create_new_custom_effect_bundle(faction_data.bundle_key)
+			if bundle:is_null_interface() then
+				script_error("ERROR: campaign_ai_script:start_background_incomes failed to create custom effect bundle for faction with key [" .. faction_key .. "] and bundle key [" .. faction_data.bundle_key .. "]")
+			else
+				for _, effect in ipairs(faction_data.effects) do
 					bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
 				end
 				cm:apply_custom_effect_bundle_to_faction(bundle, faction)
 			end
 		end
 	end
+
+	for resource_key, income_data in dpairs(self.difficulty_scaled_background_incomes) do
+		self:apply_difficulty_scaled_background_income(resource_key, income_data)
+	end
 end
 
--- ========================================= AISLINN BACKGROUND INCOME =========================== --
+-- (Re)applies the background income bundle for one difficulty_scaled_background_incomes entry. The amount is the difficulty
+-- base plus, if turn_scaling is set, an increase of amount_per_interval for every turn_interval turns elapsed. Reapplying the
+-- custom bundle with the same key replaces the previous one, so this can be called again as the campaign progresses.
+function campaign_ai_script:apply_difficulty_scaled_background_income(resource_key, income_data)
+	local difficulty = cm:model():combined_difficulty_level()
+	local amount = income_data.amount_by_difficulty[difficulty]
+	if not amount then
+		script_error("ERROR: campaign_ai_script:apply_difficulty_scaled_background_income found no [" .. resource_key .. "] income amount for difficulty level [" .. tostring(difficulty) .. "]")
+		return
+	end
 
-function campaign_ai_script:aislinn_background_income()
-	local data_table = campaign_ai_script.aislinn_extra_background_resources_data
-	local faction = cm:get_faction(data_table.faction_key)	
-	if faction and not faction:is_human() then 
-		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
-		if bundle then
-			for e, effect in ipairs(data_table.effects) do
-				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+	local turn_scaling = income_data.turn_scaling
+	if turn_scaling then
+		amount = amount + math.floor(cm:turn_number() / turn_scaling.turn_interval) * turn_scaling.amount_per_interval
+	end
+
+	for _, faction_key in ipairs(income_data.factions) do
+		local faction = cm:get_faction(faction_key)
+
+		if faction and not faction:is_human() then
+			local bundle = cm:create_new_custom_effect_bundle(income_data.bundle_key)
+			if bundle:is_null_interface() then
+				script_error("ERROR: campaign_ai_script:apply_difficulty_scaled_background_income failed to create custom effect bundle for faction with key [" .. faction_key .. "] and bundle key [" .. income_data.bundle_key .. "]")
+			else
+				bundle:add_effect(income_data.effect_key, income_data.effect_scope, amount)
+				cm:apply_custom_effect_bundle_to_faction(bundle, faction)
 			end
-			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
 		end
 	end
 end
 
--- ========================================= TECLIS BACKGROUND INCOME =========================== --
+function campaign_ai_script:apply_woc_upgrade_scaling(faction)
+	-- the scaling is strictly AI-only, never apply it to a player-controlled faction
+	if faction:is_human() then
+		return
+	end
+	-- combined_difficulty_level() returns the same scale in player runs and autoruns; do not switch to cm:get_difficulty(), whose autorun branch misreads it
+	local difficulty = cm:model():combined_difficulty_level()
+	local scaling_data = self.woc_upgrading_scaling.scaling_data[difficulty]
+	if not scaling_data or self.woc_upgrading_scaling.turn_start > cm:turn_number() then
+		return
+	end
+	if faction:has_effect_bundle(scaling_data.bundle_key) then
+		return
+	end
+	local bundle = cm:create_new_custom_effect_bundle(scaling_data.bundle_key)
+	if bundle:is_null_interface() then
+		script_error("ERROR: campaign_ai_script:apply_woc_upgrade_scaling failed to create custom effect bundle for faction with key [" .. faction:name() .. "] and bundle key [" .. scaling_data.bundle_key .. "]")
+	else
+		for _, effect in ipairs(scaling_data.effects) do
+			bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+		end
+		cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+	end
+end
 
-function campaign_ai_script:teclis_background_income()
-	local data_table = campaign_ai_script.teclis_extra_background_resources_data
-	local faction = cm:get_faction(data_table.faction_key)	
-	if faction and not faction:is_human() then 
-		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
-		if bundle then
-			for e, effect in ipairs(data_table.effects) do
-				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+-- ========================================= GLOTTKIN GARDENS ==================================== --
+
+function campaign_ai_script:glottkin_garden_of_nurgle_score_region(region)
+	local score = 0
+	local settlement = region:settlement()
+	local settlement_type = settlement:settlement_type_key()
+	local building_level = settlement:primary_slot():building():building_level()
+
+	if settlement_type == glottkin_gardens_of_nurgle.config.dark_fortress_settlement_type_key then
+		-- we want to convert high level fortresses
+		score = score + (building_level * 100) 
+	else
+		-- if no fortresses are available we still want to convert, just less so
+		score = score + building_level * 10
+	end
+
+	-- we want to convert highly corrupted regions, so we increase the score based on corruption value
+	score = score + cm:get_corruption_value_in_province(region:province(), "wh3_main_corruption_nurgle")
+	
+	return score
+end
+
+function campaign_ai_script:glottkin_garden_of_nurgle_create_garden(faction)
+	local num_gardens = faction:num_settlements_of_owning_limit_group(glottkin_gardens_of_nurgle.config.owning_limit_group_key)
+	local gardens_limit = faction:max_settlements_of_owning_limit_group(glottkin_gardens_of_nurgle.config.owning_limit_group_key)
+	out("num settlements is " .. num_gardens .. " and limit is " .. gardens_limit)
+
+	if num_gardens < gardens_limit then
+		-- find the most suitable settlement to convert to garden
+		local best_region = nil
+		local best_region_score = 0
+		local region_list = faction:region_list()
+		for i = 0, region_list:num_items() - 1 do
+			local region = region_list:item_at(i)
+			local settlement_type = region:settlement():settlement_type_key()
+			
+			if settlement_type ~= glottkin_gardens_of_nurgle.config.major_garden_key and settlement_type ~= glottkin_gardens_of_nurgle.config.minor_garden_key then
+				local region_score = self:glottkin_garden_of_nurgle_score_region(region)
+				if region_score > best_region_score then
+					best_region_score = region_score
+					best_region = region
+				end
 			end
-			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+		end
+
+		if best_region then
+			local modify_ritual_setup = cm:create_new_ritual_setup(faction, glottkin_gardens_of_nurgle.config.garden_conversion_ritual_key)
+			if not modify_ritual_setup then
+				script_error("ERROR: Failed to create ritual setup for ritual with key [" .. glottkin_gardens_of_nurgle.config.garden_conversion_ritual_key .. "]")
+				return
+			end
+			local modify_ritual_target = modify_ritual_setup:target()
+			if modify_ritual_target:is_region_valid_target(best_region) then
+				modify_ritual_target:set_target_region(best_region)
+			end
+
+			if modify_ritual_target:valid() then
+				cm:perform_ritual_with_setup(modify_ritual_setup)
+			end
 		end
 	end
 end
 
--- ========================================= THROGG BACKGROUND INCOME =========================== --
-
-function campaign_ai_script:throgg_background_income()
-	local data_table = campaign_ai_script.throgg_extra_background_resource_data
-	local faction = cm:get_faction(data_table.faction_key)	
-	if faction and not faction:is_human() then 
-		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
-		if bundle then
-			for e, effect in ipairs(data_table.effects) do
-				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
+function campaign_ai_script:glottkin_garden_of_nurgle_check_settlements_and_move_gardens(faction)
+	local lowest_level_minor_garden = 6
+	local lowest_level_minor_garden_region = nil
+	local highest_level_fortress = 0
+	local highest_level_fortress_region = nil
+	local region_list = faction:region_list()
+	for i = 0, region_list:num_items() - 1 do
+		local region = region_list:item_at(i)
+		local settlement_type = region:settlement():settlement_type_key()
+		local building_level = region:settlement():primary_slot():building():building_level()
+		if settlement_type == glottkin_gardens_of_nurgle.config.dark_fortress_settlement_type_key then
+			if building_level > highest_level_fortress then
+				highest_level_fortress = building_level
+				highest_level_fortress_region = region
 			end
-			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+		elseif settlement_type == glottkin_gardens_of_nurgle.config.minor_garden_key then
+			if building_level < lowest_level_minor_garden then
+				lowest_level_minor_garden = building_level
+				lowest_level_minor_garden_region = region
+			end
 		end
 	end
-end
 
--- ========================================= DECHALA BACKGROUND INCOME =========================== --
+	if lowest_level_minor_garden_region and highest_level_fortress_region and (highest_level_fortress >= lowest_level_minor_garden) then
 
-function campaign_ai_script:dechala_background_income()
-	local data_table = campaign_ai_script.dechala_extra_background_resource_data
-	local faction = cm:get_faction(data_table.faction_key)	
-	if faction and not faction:is_human() then 
-		local bundle = cm:create_new_custom_effect_bundle(data_table.bundle_key)
-		if bundle then
-			for e, effect in ipairs(data_table.effects) do
-				bundle:add_effect(effect.key, effect.effect_scope, effect.amount)
-			end
-			cm:apply_custom_effect_bundle_to_faction(bundle, faction)
+		local modify_ritual_setup = cm:create_new_ritual_setup(faction, glottkin_gardens_of_nurgle.config.garden_conversion_ritual_key)
+		if not modify_ritual_setup then
+			script_error("ERROR: Failed to create ritual setup for ritual with key [" .. glottkin_gardens_of_nurgle.config.garden_conversion_ritual_key .. "]")
+			return
+		end
+		local modify_ritual_target = modify_ritual_setup:target()
+		if modify_ritual_target:is_region_valid_target(highest_level_fortress_region) then
+			modify_ritual_target:set_target_region(highest_level_fortress_region)
+		end
+
+		if modify_ritual_target:valid() then
+			cm:reset_settlement_type(lowest_level_minor_garden_region:settlement(), "wh3_dlc29_chs_altar", lowest_level_minor_garden)
+			cm:perform_ritual_with_setup(modify_ritual_setup)
 		end
 	end
 end
@@ -802,6 +1222,24 @@ cm:add_first_tick_callback(
 				end
 			end
 		end
+
+		-- grow the turn-scaled background incomes every turn_interval turns by reapplying their bundles with the new amount
+		core:add_listener(
+			"AITurnScaledBackgroundIncomes",
+			"WorldStartRound",
+			function()
+				return cm:turn_number() > 1
+			end,
+			function()
+				for resource_key, income_data in dpairs(campaign_ai_script.difficulty_scaled_background_incomes) do
+					local turn_scaling = income_data.turn_scaling
+					if turn_scaling and cm:turn_number() % turn_scaling.turn_interval == 0 then
+						campaign_ai_script:apply_difficulty_scaled_background_income(resource_key, income_data)
+					end
+				end
+			end,
+			true
+		)
 	end
 )
 --------------------------------------------------------------

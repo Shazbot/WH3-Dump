@@ -1,0 +1,277 @@
+VampireLairs
+{
+	Own
+	{
+		CcoSlotSetRecord("wh3_dlc29_slot_set_vampire_lair")
+	}
+	
+	Foreign
+	{
+		CcoSlotSetRecord("wh3_dlc29_slot_set_vampire_lair_foreign")
+	}
+	
+	Complete
+	{
+		CcoSlotSetRecord("wh3_dlc29_slot_set_vampire_lair_complete")
+	}
+	
+	OwnComplete
+	{
+		CcoSlotSetRecord("wh3_dlc29_slot_set_vampire_lair_complete_owned")
+	}
+	
+	IsAnyVampireLairBuildingSlot(CcoCampaignBuildingSlot slot)
+	{
+		slot.ForeignSlotSetKey == VampireLairs.Own.Key 
+			|| slot.ForeignSlotSetKey == VampireLairs.Foreign.Key
+			|| slot.ForeignSlotSetKey == VampireLairs.Complete.Key
+			|| slot.ForeignSlotSetKey == VampireLairs.OwnComplete.Key
+	}
+}
+
+CcoCampaignSettlement
+{	
+	ExVampireLairs_IsAwakened(CcoCampaignFaction faction)
+	{
+		HasHostileForeignSlotSet(faction, VampireLairs.Complete) || 
+			HasHostileForeignSlotSet(faction, VampireLairs.OwnComplete)
+	}
+
+	ExVampireLairs_HasNonLairHostileForeignSlots(CcoCampaignFaction faction)
+	{
+		HostileForeignSlotSetList(faction).Filter((set) => set != VampireLairs.Own && set != VampireLairs.Foreign && set != VampireLairs.Complete && set != VampireLairs.OwnComplete).Size > 0
+	}
+	
+	ExVampireLairs_HasVampireLair(CcoCampaignFaction faction)
+	{
+		HostileForeignSlotSetList(faction).Filter((set) => set == VampireLairs.Own || set == VampireLairs.Foreign || set == VampireLairs.Complete || set == VampireLairs.OwnComplete).Size > 0
+	}
+	
+	ExVampireLairs_HasAnyVampireLair(CcoCampaignFaction faction)
+	{
+		ExVampireLairs_HasVampireLair(faction)
+	}
+	
+	ExVampireLairs_AnyoneHasAnyVampireLair
+	{
+		ForeignSlotList.Any((slot) => VampireLairs.IsAnyVampireLairBuildingSlot(slot))
+	}
+	
+	ExVampireLairs_PlayerHasVampireLair
+	{
+		CanUseUiFeature("VAMPIRE_LAIRS") && ExVampireLairs_HasVampireLair(PlayersFaction)
+	}
+	
+	ExVampireLairs_GetLairSlotsForFaction(CcoCampaignFaction lair_owner)
+	{
+		GetIfElse(
+			HasHostileForeignSlotSet(lair_owner, VampireLairs.Own),
+			HostileForeignSlotList(lair_owner, VampireLairs.Own),
+			GetIfElse(
+				HasHostileForeignSlotSet(lair_owner, VampireLairs.Foreign),
+				HostileForeignSlotList(lair_owner, VampireLairs.Foreign),
+				GetIfElse(
+						HasHostileForeignSlotSet(lair_owner, VampireLairs.Complete),
+						HostileForeignSlotList(lair_owner, VampireLairs.Complete),
+						HostileForeignSlotList(lair_owner, VampireLairs.OwnComplete)
+				)
+			)
+		)
+	}
+	
+	ExVampireLairs_HasAnyLairDiscoveredByAnotherFaction(CcoCampaignFaction lair_owner, CcoCampaignFaction discoverer)
+	{
+		ExVampireLairs_GetLairSlotsForFaction(lair_owner)
+			.Filter((slot) => VampireLairs.IsAnyVampireLairBuildingSlot(slot))
+			.Any(ForeignSlotDiscoveredByFaction(discoverer))
+	}
+	
+	ExVampireLairs_HasAnyLairDiscoveredBySettlementOwner(CcoCampaignFaction faction)
+	{
+		ExVampireLairs_HasAnyLairDiscoveredByAnotherFaction(faction, FactionContext)
+	}
+	
+	ExVampireLairs_AnyoneHasAnyLairDiscoveredByAnotherFaction(CcoCampaignFaction discoverer)
+	{
+		ForeignSlotList
+			.Filter((slot) => VampireLairs.IsAnyVampireLairBuildingSlot(slot))
+			.Any(ForeignSlotDiscoveredByFaction(discoverer))
+	}
+	
+	ExVampireLairs_HostileSlots_Show
+	{
+		(settlement_view = self.ParentContext("settlement_view")) =>
+		{
+			DoIf(
+				CanUseUiFeature("VAMPIRE_LAIRS"),
+				DoIfElse(
+					Buildings.IsSettlementPlayerForeignViewButtonSelected,
+					settlement_view.ChildContext("wh3_dlc29_nef_vampire_covens").SetVisible(true),
+					settlement_view.ChildContext("wh3_dlc29_vmp_vampire_lair").SetVisible(true)
+				)
+			)
+		}
+	}
+	
+	ExVampireLairs_HostileSlots_Hide
+	{
+		(settlement_view = self.ParentContext("settlement_view")) =>
+		{
+			DoIf(
+				CanUseUiFeature("VAMPIRE_LAIRS"),
+				settlement_view.ChildContext("wh3_dlc29_nef_vampire_covens").SetVisible(false),
+				settlement_view.ChildContext("wh3_dlc29_vmp_vampire_lair").SetVisible(false)
+			)
+		}
+	}
+	
+	ExVampireLairs_LairView_LairPanelShown
+	{
+		(hostile_views_component = self.ParentContext.ChildContext("hostile_views"),
+			does_player_own_lair = ExVampireLairs_PlayerHasVampireLair) =>
+		{
+			DoIf(
+				does_player_own_lair && IsContextValid(hostile_views_component),
+				hostile_views_component.SetVisible(true),
+				self.ChildContext("dlc29_vmp_vampire_lair_popup").SetVisible(true)
+			)
+		}
+	}
+	
+	ExVampireLairs_LairView_LairPanelHidden
+	{
+		(hostile_views_component = self.ParentContext.ChildContext("hostile_views")) =>
+		{
+			DoIf(
+				IsContextValid(hostile_views_component),
+				DoIf(
+					Buildings.IsSettlementPlayerForeignViewButtonSelected || Buildings.IsSettlementDiscoveredSlotsButtonSelected || Buildings.IsSettlementDefaultSlotsButtonSelected,
+					hostile_views_component.ChildContext("wh3_dlc29_vmp_vampire_lair").SetVisible(false)
+				),
+				self.ChildContext("dlc29_vmp_vampire_lair_popup").SetVisible(false),
+				DoIfElse(
+					Buildings.IsSettlementPlayerForeignViewButtonSelected,
+					hostile_views_component.ChildContext("wh3_dlc29_nef_vampire_covens").SetVisible(true),
+					hostile_views_component.SetVisible(false)
+				)
+			)
+		}
+	}
+	
+	ExVampireLairs_GetPrimarySlot(CcoCampaignFaction faction)
+	{
+		ExVampireLairs_GetLairSlotsForFaction(faction).FirstContext(!SlotTemplateKey.Contains("secondary"))
+	}
+	
+	ExVampireLairs_GetSecondarySlots(CcoCampaignFaction faction)
+	{
+		ExVampireLairs_GetLairSlotsForFaction(faction).Filter(SlotTemplateKey.Contains("secondary"))
+	}
+}
+
+CcoCampaignBuildingSlot
+{
+	ExVampireLairSelectedPrimaryBuildingKey
+	{
+		SettlementContext.ModelRegionContext.EntitySharedStateReadString("vmp_lair_primary_building_selected")
+	}
+
+	ExVampireLairSelectedPrimaryBuilding
+	{
+		(lair_building_key_selected = ExVampireLairSelectedPrimaryBuildingKey) =>
+		{
+			GetIf(
+				!lair_building_key_selected.IsEmpty && FactionContext.HasRightToConstructBuilding(lair_building_key_selected),
+				DatabaseRecordContext("CcoBuildingLevelRecord", lair_building_key_selected)
+			)
+		}
+	}
+}
+
+CcoBuildingLevelRecord
+{
+	ExVampireLairs_ConstructTargetInSlot(CcoCampaignBuildingSlot slot)
+	{
+		(built = BuildingChainRecordContext.ExMaximumLevelBuiltInSlot(slot)) =>
+		{
+			GetIfElse(
+				IsContextValid(built),
+				BuildingChainRecordContext.NextBuildingLevelInChain(built),
+				this
+			)
+		}
+	}
+
+	ExVampireLairs_IsUnderConstructionInHostileForeignSlots(CcoCampaignSettlement settlement, CcoCampaignBuildingSlot slot)
+	{
+		(target = ExVampireLairs_ConstructTargetInSlot(slot)) =>
+		{
+			settlement.HostileForeignSlotList(PlayersFaction).Any(
+				ConstructionItemContext.BuildingLevelRecordContext == target
+			)
+		}
+	}
+
+	ExVampireLairs_CanIssueConstructInSlot(CcoCampaignSettlement settlement, CcoCampaignBuildingSlot slot)
+	{
+		(target = ExVampireLairs_ConstructTargetInSlot(slot)) =>
+		{
+			!slot.ExIsBusy
+				&& !ExVampireLairs_IsUnderConstructionInHostileForeignSlots(settlement, slot)
+				&& !target.IsBuiltInSlot(slot, true)
+				&& target.CanBuildInCurrentSlot(slot)
+		}
+	}
+
+	ExVampireLairs_IsChainBuiltInOtherHostileForeignSlot(CcoCampaignSettlement settlement, CcoCampaignBuildingSlot slot)
+	{
+		(chain = BuildingChainRecordContext) =>
+		{
+			settlement.HostileForeignSlotList(PlayersFaction).Any(
+				(other) => other != slot && IsContextValid(chain.ExMaximumLevelBuiltInSlot(other))
+			)
+		}
+	}
+
+	ExVampireLairs_ConstructButtonTooltip(CcoCampaignSettlement settlement, CcoCampaignBuildingSlot slot)
+	{
+		(target = ExVampireLairs_ConstructTargetInSlot(slot),
+		slot_occupied = IsContextValid(slot.ExCurrentBuiltOrUnderConstructionBuildingLevelRecordContext)
+			&& slot.ExCurrentBuiltOrUnderConstructionBuildingLevelRecordContext.BuildingChainRecordContext != BuildingChainRecordContext,
+		built_elsewhere = ExVampireLairs_IsChainBuiltInOtherHostileForeignSlot(settlement, slot),
+		can_afford = target.CanAfford(settlement, PlayersFaction) && target.CanAffordResourceCostForSlot(slot),
+		not_built_in_slot = IsContextValid(BuildingChainRecordContext.ExMaximumLevelBuiltInSlot(slot)) == false) =>
+		{
+			true
+				| slot_occupied => Loc("wh3_dlc29_vmp_lair_other_empowerment_in_slot_tooltip")
+				| built_elsewhere => Loc("wh3_dlc29_vmp_lair_empowerment_built_in_another_slot_tooltip")
+				| target.IsEpisodicRestricted(slot) => target.TooltipForCurrentSlot(slot)
+				| !can_afford => Loc("craft_tooltip_cannot_afford_cost")
+				| not_built_in_slot => Loc("wh3_dlc29_vmp_lair_activate_empowerment_tooltip")
+				| Loc("wh3_dlc29_vmp_lair_upgrade_empowerment_tooltip")
+		}
+	}
+}
+
+CcoCampaignProvince
+{
+	ExVampireLairs_HasVampireLair(CcoCampaignFaction faction)
+	{
+		SettlementList.Any(ExVampireLairs_HasVampireLair(faction))
+	}
+
+	ExVampireLairs_HasAnyVampireLair(CcoCampaignFaction faction)
+	{
+		SettlementList.Any(ExVampireLairs_HasAnyVampireLair(faction))
+	}
+
+	ExVampireLairs_AnyoneHasAnyVampireLair
+	{
+		SettlementList.Any(ExVampireLairs_AnyoneHasAnyVampireLair)
+	}
+	
+	ExVampireLairs_HasAnyLairDiscoveredBySettlementOwner(CcoCampaignFaction faction)
+	{
+		SettlementList.Any(ExVampireLairs_HasAnyLairDiscoveredBySettlementOwner(faction))
+	}
+}

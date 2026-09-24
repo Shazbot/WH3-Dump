@@ -1,0 +1,54 @@
+Settlements
+{
+	SettlementTypeNecropolisKey
+	{
+		"wh3_dlc29_nag_necropolis"
+	}
+
+	LandOfTheDeadOverlayMode
+	{
+		"land_of_the_dead"
+	}
+	
+	GetGardenOfNurgleRequiredCorruption
+	{
+		0
+	}
+}
+
+CcoCampaignSettlement
+{
+	ExLandOfTheDeadIsNecropolis
+	{
+		SettlementType == Settlements.SettlementTypeNecropolisKey
+	}
+
+	ExLandOfTheDeadLinkedNecropolisRegionKey
+	{
+		ModelRegionContext.EntitySharedStateReadString("land_of_the_dead_necropolis_region_key")
+	}
+
+	ExLandOfTheDeadLinkedNecropolisSettlementContext
+	{
+		SettlementForRegionKey(ExLandOfTheDeadLinkedNecropolisRegionKey)
+	}
+
+	ExLandOfTheDeadIsAffected
+	{
+		ExLandOfTheDeadLinkedNecropolisRegionKey.IsEmpty == false
+	}
+	
+	ExFactionDoesntOwnSettlementButHasHostileForeignSlots(CcoCampaignFaction faction)
+	{
+		FactionContext != faction && HasHostileForeignSlotSet(faction)
+	}
+	
+	ExShouldShowSettlementIncomeBreakdown
+	{
+		HasHostileForeignSlotSet(PlayersFaction)
+			|| (IsPlayerOwned
+				&& FactionProvinceManagerContext.IsWealthEnabled
+				&& IsContextValid(ResourceList.FirstContext(Key == "res_fortress" || Key == "res_empire_fort")) == false
+				&& RegionRecordKey != "wh3_main_combi_region_the_oak_of_ages")
+	}
+}

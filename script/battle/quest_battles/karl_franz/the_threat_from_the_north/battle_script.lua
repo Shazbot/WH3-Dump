@@ -23,11 +23,7 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 
-
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
-
 -------GENERALS SPEECH--------
-
 
 -------ARMY SETUP-------
 ga_ai_01 = gb:get_army(gb:get_non_player_alliance_num(), "defenders"); -- Initial Force
@@ -49,10 +45,10 @@ gb:queue_help_on_message("reinforcements_4", "wh_main_qb_emp_karl_franz_reikland
 -------ORDERS-------
 ga_ai_01:attack_on_message("battle_started");
 
-ga_ai_01:message_on_casualties("reinforcements_2", 0.7)
-ga_ai_02:message_on_casualties("reinforcements_3", 0.3)
-ga_ai_02:message_on_casualties("reinforcements_4", 0.7)
-ga_ai_03:message_on_casualties("reinforcements_5", 0.3)
+ga_ai_01:message_on_rout_proportion("reinforcements_2", 0.7)
+ga_ai_02:message_on_rout_proportion("reinforcements_3", 0.3)
+ga_ai_02:message_on_rout_proportion("reinforcements_4", 0.7)
+ga_ai_03:message_on_rout_proportion("reinforcements_5", 0.3)
 
 ga_ai_02:reinforce_on_message("reinforcements_2");	
 ga_ai_02_r1:reinforce_on_message("reinforcements_3");

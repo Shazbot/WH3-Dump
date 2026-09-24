@@ -20,7 +20,6 @@ gb = generated_battle:new(
 	false                                      	-- debug mode
 );
 gb:set_cutscene_during_deployment(true);
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 -- Azhag vs Empire with Mortar detachment and Steam Tank reinforcement
 
@@ -41,9 +40,7 @@ ga_ai_03:release_on_message("battle_started");
 ga_ai_03:reinforce_on_message("battle_started", 90000);
 
 -------HINTS-------
-gb:play_sound_on_message("battle_started", Orc_Horn, v(-600, 60, 200), 86000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_grn_azhag_the_slaughterer_slaggas_slashas_stage_2_hint_reinforcements", 13000, 2000, 87000);
-
 
 -------OBJECTIVES-------
 gb:set_objective_on_message("deployment_started", "wh_main_qb_grn_azhag_the_slaughterer_slaggas_slashas_stage_2_main_objective");

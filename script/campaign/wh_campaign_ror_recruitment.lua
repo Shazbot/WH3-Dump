@@ -30,7 +30,10 @@ regiments_of_renown = {
 		"wh2_dlc13_emp_veh_war_wagon_ror_0",
 		"wh3_dlc25_emp_inf_spearmen_shields_ror",
 		"wh3_dlc25_emp_veh_marienburg_land_ship_ror",
-		"wh3_dlc25_emp_inf_hochland_long_rifles_ror"
+		"wh3_dlc25_emp_inf_hochland_long_rifles_ror",
+		"wh3_dlc29_emp_cav_knights_of_the_white_wolf_ror",
+		"wh3_dlc29_emp_inf_teutogen_guard_ror",
+		"wh3_dlc29_emp_inf_hunting_hounds_ror"
 	},
 	------------------
 	---- VAMPIRES ----
@@ -107,7 +110,9 @@ regiments_of_renown = {
 		"wh2_dlc09_tmb_inf_tomb_guard_ror",
 		"wh2_dlc09_tmb_mon_necrosphinx_ror",
 		"wh2_dlc09_tmb_mon_sepulchral_stalkers_ror",
-		"wh2_dlc09_tmb_mon_ushabti_ror"
+		"wh2_dlc09_tmb_mon_ushabti_ror",
+		"wh3_dlc29_tmb_mon_ushabti_ror_sepulchrex",
+		"wh3_dlc29_tmb_mon_khemric_titan_ror"
 	},
 	--------------------
 	---- HIGH ELVES ----
@@ -221,7 +226,8 @@ regiments_of_renown = {
 		"wh_pro04_bst_inf_cygor_ror_0",
 		"wh2_dlc17_bst_inf_centigors_ror_1",
 		"wh2_dlc17_bst_mon_ghorgon_ror_0",
-		"wh2_dlc17_bst_mon_jabberslythe_ror_0"
+		"wh2_dlc17_bst_mon_jabberslythe_ror_0",
+		"wh3_dlc29_bst_mon_giant_spined_chaos_beast_ror"
 	},
 	----------------
 	---- NURGLE ----
@@ -384,7 +390,8 @@ regiments_of_renown = {
 		"wh3_twa10_tze_inf_blue_horrors_ror",
 		"wh3_dlc26_chs_inf_chosen_mkho_ror",
 		"wh3_dlc26_kho_inf_wrathmongers_ror",
-		"wh3_dlc26_kho_veh_skullcannon_ror"
+		"wh3_dlc26_kho_veh_skullcannon_ror",
+		"wh3_dlc29_chs_mon_giant_spined_chaos_beast_ror"
 	}
 };
 

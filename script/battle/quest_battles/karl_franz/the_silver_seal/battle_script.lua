@@ -23,7 +23,6 @@ gb = generated_battle:new(
 
 gb:set_cutscene_during_deployment(true);
 -- Karl vs Vampiress with reinforcements
-Orc_Horn = new_sfx("EGX_Orc_Reinforcements_Horn");
 
 -------ARMY SETUP-------
 ga_player_01 = gb:get_army(gb:get_player_alliance_num(), 1);
@@ -39,7 +38,6 @@ gb:set_objective_on_message("deployment_started", "wh_main_qb_emp_karl_franz_sil
 -------HINTS-------
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_karl_franz_silver_seal_hint_objective");
 
-gb:play_sound_on_message("battle_started", Orc_Horn, v(-100, 200, 400), 3000);
 gb:queue_help_on_message("battle_started", "wh_main_qb_emp_karl_franz_silver_seal_hint_reinforcements", 13000, 2000, 10000);
 
 -------ORDERS-------
